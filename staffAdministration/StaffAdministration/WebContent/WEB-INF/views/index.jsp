@@ -14,7 +14,34 @@
 <body>
 	<center>
 		<h1>Welcome!!!!</h1>
+		<div class="cotainer" role="main">
+			<div class="row">
+				<div class="col-sm-4 col-md-offset-1"
+					style="background-color: aqua;">Personal area</div>
+				<div class="col-sm-4 col-md-offset-2"
+					style="background-color: orange;">
+					Business area
+					<p>
+						<a href="addEmployee">
+							<button type="button" class="btn btn-success">Add new
+								Employee</button>
+						</a>
+					<p>
+						<a href="addDepartment">
+							<button type="button" class="btn btn-success">Add new
+								Department</button>
+						</a>
+				</div>
+				<div class="col-sm-4 col-md-offset-1"
+					style="background-color: yellow;">Time record</div>
+				<div class="col-sm-4 col-md-offset-2"
+					style="background-color: gray;">Calendar</div>
+			</div>
+		</div>
 	</center>
+
+
+
 	<jsp:include page="includes/bootstrapJs.jsp" />
 </body>
 </html>

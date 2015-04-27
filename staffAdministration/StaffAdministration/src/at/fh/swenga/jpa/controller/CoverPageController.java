@@ -11,9 +11,28 @@ import at.fh.swenga.jpa.constant.Constant;
 public class CoverPageController {
 	
 	
+	//Cover Page
 	@RequestMapping(value={"/","start"})
 	public String index(Model model){
 		return Constant.PAGE_INDEX;
 	}
-
+	
+	//From index.jsp add new Employee
+	@RequestMapping(value={"addEmployee"})
+	public String editEmployee(Model model){
+		return Constant.PAGE_EDIT_EMPLOYEE;
+	}
+	
+	
+	//From index.jsp add new Department
+	@RequestMapping(value={"addDepartment"})
+	public String editDepartment(Model model){
+		return Constant.PAGE_EDIT_DEPARTMENT;
+	}
+	
+	//From editEmployee.jsp submit button
+	@RequestMapping(value={"saveEmployee"})
+	public String saveEmployee(Model model){
+		return "forward:/start";
+	}
 }
