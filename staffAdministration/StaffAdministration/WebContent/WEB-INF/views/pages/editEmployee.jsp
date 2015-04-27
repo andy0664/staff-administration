@@ -35,7 +35,8 @@
 
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
-				<form class="form-horizontal" method="post" action="${formAction}">
+				<%-- <form class="form-horizontal" method="post" action="${formAction}"> --%>
+				<form class="form-horizontal" method="post" action="saveEmployee">
 					<fieldset>
 						<legend>${legend}</legend>
 
@@ -74,16 +75,7 @@
 							<div class="col-md-10">
 								<input class="form_datetime" id="inputDate" placeholder="Date"
 									type="text" readonly name="dayOfBirth"
-									value="<fmt:formatDate value="${employee.dayOfBirth}" pattern="dd.MM.yyyy"/>">
-							</div>
-						</div>
-						
-						<! ----------------  Country ---------------- -->
-						<div class="form-group">
-							<label for="inputCountry" class="col-md-2 control-label">Country</label>
-							<div class="col-md-10">
-								<input class="form-control" id="inputCountry" type="text"
-									name="country" value="<c:out value="${employee.address.country}"/>">
+									value="<fmt:formatDate value="${employee.dayOfBirth}" pattern="dd.MM.yyyy"/>" />
 							</div>
 						</div>
 
@@ -92,7 +84,8 @@
 							<label for="inputStreet" class="col-md-2 control-label">Street</label>
 							<div class="col-md-10">
 								<input class="form-control" id="inputStreet" type="text"
-									name="street" value="<c:out value="${employee.address.street}"/>">
+									name="street"
+									value="<c:out value="${employee.address.street}"/>">
 							</div>
 						</div>
 
@@ -102,6 +95,16 @@
 							<div class="col-md-10">
 								<input class="form-control" id="inputCity" type="text"
 									name="city" value="<c:out value="${employee.address.city}"/>">
+							</div>
+						</div>
+
+						<! ----------------  Country ---------------- -->
+						<div class="form-group">
+							<label for="inputCountry" class="col-md-2 control-label">Country</label>
+							<div class="col-md-10">
+								<input class="form-control" id="inputCountry" type="text"
+									name="country"
+									value="<c:out value="${employee.address.country}"/>">
 							</div>
 						</div>
 
@@ -117,7 +120,7 @@
 
 						<! ----------------  Berufsbezeichnung ---------------- -->
 						<div class="form-group">
-							<label for="inputDescribtion" class="col-md-2 control-label">Job
+							<label for="inputDescription" class="col-md-2 control-label">Job
 								Description</label>
 							<div class="col-md-10">
 								<input class="form-control" id="inputDescription"
@@ -135,14 +138,14 @@
 							</div>
 						</div>
 
-						<! ----------------  Arbeitsbeginn ---------------- -->
+						<! ----------------  EntryDate ---------------- -->
 						<div class="form-group">
 							<label for="inputDate" class="col-md-2 control-label">Day
 								of Entry</label>
 							<div class="col-md-10">
 								<input class="form_datetime" id="inputDate" placeholder="Date"
 									type="text" readonly name="dayOfEntry"
-									value="<fmt:formatDate value="${employee.dayOfEntry}" pattern="dd.MM.yyyy"/>">
+									value="<fmt:formatDate value="${employee.dayOfEntry}" pattern="dd.MM.yyyy"/>" />
 							</div>
 						</div>
 
@@ -161,10 +164,10 @@
 						<! ----------------  buttons ---------------- -->
 						<div class="form-group">
 							<div class="col-md-10 col-md-offset-2">
-								<a href="saveEmployee">
-									<button type="button" class="btn btn-primary">Submit</button></a>
+								<button type="Submit" class="btn btn-primary">Submit</button>
+								<a href="start">
 									<button type="button" class="btn btn-default">Cancel</button>
-								
+								</a>
 							</div>
 						</div>
 					</fieldset>
@@ -188,7 +191,6 @@
 
 	<script>
 		$(function() {
-
 			$(".form_datetime").datetimepicker({
 				format : "dd.mm.yyyy",
 				autoclose : true,
@@ -196,9 +198,7 @@
 				pickerPosition : "bottom-left",
 				minView : 2
 			});
-
 		});
 	</script>
-
 </body>
 </html>

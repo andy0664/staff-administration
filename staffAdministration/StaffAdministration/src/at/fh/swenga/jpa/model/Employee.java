@@ -1,5 +1,6 @@
 package at.fh.swenga.jpa.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -15,121 +18,175 @@ import javax.validation.constraints.Past;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-public class Employee {
-	
+public class Employee implements Serializable {
+
+	private static final long serialVersionUID = 6258273242561430139L;
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
-	@Column(nullable=false)
+
+	 @Column(nullable=false)
 	private int ssn;
-	
-	@Column(nullable=false, length=250)
+
+	 @Column(nullable=false, length=250)
 	private String firstName;
-	
-	@Column(nullable=false, length=250)
+
+	 @Column(nullable=false, length=250)
 	private String lastName;
-	
+
 	@NotNull(message = "{0} is required")
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
-    @Past(message = "{0} must be in the past")
+//	@Past(message = "{0} must be in the past")
+	@Temporal(TemporalType.DATE)
 	private Date dayOfBirth;
-	
+
 	@Embedded
 	private Address address;
-	
+
 	@Column(nullable=false, length=250)
 	private String jobDescription;
-	
+
 	@NotNull(message = "{0} is required")
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
-    @Past(message = "{0} must be in the past")
-	private Date entryDate;
-	
-	@NotNull
+	private float salary;
+
+	@NotNull(message = "{0} is required")
+//	@Past(message = "{0} must be in the past")
+	@Temporal(TemporalType.DATE)
+	private Date dayOfEntry;
+
+	@NotNull(message = "{0} is required")
 	private int role;
-	
+
 	@Version
 	private long version;
-	
+
 	public Employee() {
 	}
 
+	
+
 	public Employee(int ssn, String firstName, String lastName,
 			Date dayOfBirth, Address address, String jobDescription,
-			Date entryDate, int role) {
-		super();
+			float salary, Date dayOfEntry, int role) {
 		this.ssn = ssn;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dayOfBirth = dayOfBirth;
 		this.address = address;
 		this.jobDescription = jobDescription;
-		this.entryDate = entryDate;
+		this.salary = salary;
+		this.dayOfEntry = dayOfEntry;
 		this.role = role;
 	}
+
+
 
 	public int getSsn() {
 		return ssn;
 	}
 
+
+
 	public void setSsn(int ssn) {
 		this.ssn = ssn;
 	}
+
+
 
 	public String getFirstName() {
 		return firstName;
 	}
 
+
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
+
 
 	public String getLastName() {
 		return lastName;
 	}
 
+
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
+
 
 	public Date getDayOfBirth() {
 		return dayOfBirth;
 	}
 
+
+
 	public void setDayOfBirth(Date dayOfBirth) {
 		this.dayOfBirth = dayOfBirth;
 	}
+
+
 
 	public Address getAddress() {
 		return address;
 	}
 
+
+
 	public void setAddress(Address address) {
 		this.address = address;
 	}
+
+
 
 	public String getJobDescription() {
 		return jobDescription;
 	}
 
+
+
 	public void setJobDescription(String jobDescription) {
 		this.jobDescription = jobDescription;
 	}
 
-	public Date getEntryDate() {
-		return entryDate;
+
+
+	public float getSalary() {
+		return salary;
 	}
 
-	public void setEntryDate(Date entryDate) {
-		this.entryDate = entryDate;
+
+
+	public void setSalary(float salary) {
+		this.salary = salary;
 	}
+
+
+
+	public Date getDayOfEntry() {
+		return dayOfEntry;
+	}
+
+
+
+	public void setDayOfEntry(Date dayOfEntry) {
+		this.dayOfEntry = dayOfEntry;
+	}
+
+
 
 	public int getRole() {
 		return role;
 	}
 
+
+
 	public void setRole(int role) {
 		this.role = role;
 	}
+
+	
+	
 }

@@ -14,6 +14,9 @@
 <body>
 	<center>
 		<h1>Welcome!!!!</h1>
+		<c:if test="${not empty errorMessage}">
+			<div class="alert alert-danger" role="alert">${errorMessage}</div>
+		</c:if>
 		<div class="cotainer" role="main">
 			<div class="row">
 				<div class="col-sm-4 col-md-offset-1"
