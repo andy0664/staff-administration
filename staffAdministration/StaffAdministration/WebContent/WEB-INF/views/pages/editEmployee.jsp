@@ -77,13 +77,22 @@
 									value="<fmt:formatDate value="${employee.dayOfBirth}" pattern="dd.MM.yyyy"/>">
 							</div>
 						</div>
+						
+						<! ----------------  Country ---------------- -->
+						<div class="form-group">
+							<label for="inputCountry" class="col-md-2 control-label">Country</label>
+							<div class="col-md-10">
+								<input class="form-control" id="inputCountry" type="text"
+									name="country" value="<c:out value="${employee.address.country}"/>">
+							</div>
+						</div>
 
 						<! ----------------  Street ---------------- -->
 						<div class="form-group">
 							<label for="inputStreet" class="col-md-2 control-label">Street</label>
 							<div class="col-md-10">
 								<input class="form-control" id="inputStreet" type="text"
-									name="street" value="<c:out value="${employee.street}"/>">
+									name="street" value="<c:out value="${employee.address.street}"/>">
 							</div>
 						</div>
 
@@ -92,7 +101,7 @@
 							<label for="inputCity" class="col-md-2 control-label">City</label>
 							<div class="col-md-10">
 								<input class="form-control" id="inputCity" type="text"
-									name="city" value="<c:out value="${employee.city}"/>">
+									name="city" value="<c:out value="${employee.address.city}"/>">
 							</div>
 						</div>
 
@@ -102,18 +111,18 @@
 								Code</label>
 							<div class="col-md-10">
 								<input class="form-control" id="inputZIP" type="text" name="zip"
-									value="<c:out value="${employee.zip}"/>">
+									value="<c:out value="${employee.address.zip}"/>">
 							</div>
 						</div>
 
 						<! ----------------  Berufsbezeichnung ---------------- -->
 						<div class="form-group">
 							<label for="inputDescribtion" class="col-md-2 control-label">Job
-								Describtion</label>
+								Description</label>
 							<div class="col-md-10">
-								<input class="form-control" id="inputDescribtion"
-									type="jobDescribtion" name="jobDescribtion"
-									value="<c:out value="${employee.jobDescribtion}"/>">
+								<input class="form-control" id="inputDescription"
+									type="jobDescription" name="jobDescription"
+									value="<c:out value="${employee.jobDescription}"/>">
 							</div>
 						</div>
 
