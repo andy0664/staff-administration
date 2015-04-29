@@ -10,6 +10,7 @@ public class Constant {
 	public static final String PAGE_INDEX="index";
 	public static final String PAGE_EDIT_EMPLOYEE="/pages/editEmployee";
 	public static final String PAGE_EDIT_DEPARTMENT="/pages/editDepartment";
+	public static final String PAGE_MANAGE_EMPLOYEES="/pages/manageEmployees";
 	
 	
 	//Roles

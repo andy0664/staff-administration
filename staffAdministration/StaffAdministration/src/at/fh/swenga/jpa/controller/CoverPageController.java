@@ -4,8 +4,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
+import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -35,10 +37,10 @@ public class CoverPageController {
 	// For Binding Date
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-			dateFormat.setLenient(false);
-			binder.registerCustomEditor(Date.class, new CustomDateEditor(
-					dateFormat, false));
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+		dateFormat.setLenient(false);
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(
+				dateFormat, false));
 	}
 
 	// Cover Page
@@ -47,44 +49,51 @@ public class CoverPageController {
 		return Constant.PAGE_INDEX;
 	}
 
-	// From index.jsp add new Employee
-	@RequestMapping(value = { "addEmployee" })
-	public String editEmployee(Model model) {
-		return Constant.PAGE_EDIT_EMPLOYEE;
-	}
-
-	// From index.jsp add new Department
-	@RequestMapping(value = { "addDepartment" })
-	public String editDepartment(Model model) {
-		return Constant.PAGE_EDIT_DEPARTMENT;
+	// From index.jsp manageEmployees
+	@RequestMapping(value = { "manageEmployee" })
+	public String listAllEmployee(Model model) {
+		model.addAttribute(Constant.KEY_EMPLOYEE_LIST, employeeDao.findAll());
+		return Constant.PAGE_MANAGE_EMPLOYEES;
 	}
 
 	// ###########Edit Employee Department############
 
+	// From index.jsp add new Department
+	@RequestMapping(value = { "addEmployee" })
+	public String editEmployee(Model model) {
+		return Constant.PAGE_EDIT_EMPLOYEE;
+	}
+	
+	@RequestMapping(value = { "changeEmployee" })
+	public String changeEmployee(Model model) {
+		return Constant.PAGE_EDIT_EMPLOYEE;
+	}
+
 	// From editEmployee.jsp submit button
-//	@RequestMapping(value = { "saveEmployee" }, method = RequestMethod.POST)
-//	public String saveEmployee(
-//			@Valid @ModelAttribute("newEmployee") Employee newEmployee,
-//			BindingResult bindingResult, Model model) {
-//		if (bindingResult.hasErrors()) {
-//			String errorMessage = "";
-//			for (FieldError error : bindingResult.getFieldErrors()) {
-//				errorMessage += error.getField() + " is invalid<br>";
-//			}
-//			model.addAttribute(Constant.KEY_ERROR, errorMessage);
-//			return "forward:/start";
-//		} else {
-//			if (newEmployee == null) {
-//				System.out.println("Is null##########################");
-//			} else {
-//				model.addAttribute(Constant.KEY_EMPLOYEE_LIST,
-//						employeeDao.save(newEmployee));
-//			}
-//		}
-//		return "forward:/start";
-//	}
+	// @RequestMapping(value = { "saveEmployee" }, method = RequestMethod.POST)
+	// public String saveEmployee(
+	// @Valid @ModelAttribute("newEmployee") Employee newEmployee,
+	// BindingResult bindingResult, Model model) {
+	// if (bindingResult.hasErrors()) {
+	// String errorMessage = "";
+	// for (FieldError error : bindingResult.getFieldErrors()) {
+	// errorMessage += error.getField() + " is invalid<br>";
+	// }
+	// model.addAttribute(Constant.KEY_ERROR, errorMessage);
+	// return "forward:/start";
+	// } else {
+	// if (newEmployee == null) {
+	// System.out.println("Is null##########################");
+	// } else {
+	// model.addAttribute(Constant.KEY_EMPLOYEE_LIST,
+	// employeeDao.save(newEmployee));
+	// }
+	// }
+	// return "forward:/start";
+	// }
 
 	@RequestMapping(value = { "saveEmployee" }, method = RequestMethod.POST)
+	@Transactional
 	public String saveEmployee(@RequestParam int ssn,
 			@RequestParam String firstName, @RequestParam String lastName,
 			@RequestParam String dayOfBirth, @RequestParam String country,
@@ -94,13 +103,36 @@ public class CoverPageController {
 			@RequestParam int role, Model model) {
 
 		Address address = new Address(street, city, country, zip);
-		Employee employee = new Employee(ssn, firstName, lastName,Constant.parseToDate(dayOfBirth),
-				address, jobDescription, salary, Constant.parseToDate(dayOfEntry), role);
+		Employee employee = new Employee(ssn, firstName, lastName,
+				Constant.parseToDate(dayOfBirth), address, jobDescription,
+				salary, Constant.parseToDate(dayOfEntry), role);
 		employeeDao.save(employee);
 		return "forward:/start";
 	}
 
-	
+	// Zum füllen der Mitarbeiter Tabelle nur zum testen --> ende entfernen
+	@RequestMapping("fillEmployee")
+	@Transactional
+	public String fillData(Model model) {
+
+		DataFactory df = new DataFactory();
+
+		for (int i = 0; i < 10; i++) {
+			Address address = new Address(df.getStreetName(), df.getCity(),
+					df.getRandomWord(), 8052);
+			Employee p1 = new Employee(12345, df.getFirstName(),
+					df.getLastName(), df.getBirthDate(), address,
+					df.getRandomText(10, 20), 1234.5f, df.getBirthDate(), 1);
+			employeeDao.save(p1);
+		}
+		return "forward:manageEmployee";
+	}
+
+	// From index.jsp add new Department
+	@RequestMapping(value = { "addDepartment" })
+	public String editDepartment(Model model) {
+		return Constant.PAGE_EDIT_DEPARTMENT;
+	}
 
 	// @ExceptionHandler(Exception.class)
 	// public String handleAllException(Exception ex) {

@@ -79,6 +79,12 @@ public class Employee implements Serializable {
 		this.role = role;
 	}
 
+	
+
+	public int getId() {
+		return id;
+	}
+
 
 
 	public int getSsn() {
