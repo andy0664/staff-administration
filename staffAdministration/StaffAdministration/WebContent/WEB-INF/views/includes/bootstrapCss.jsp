@@ -1,7 +1,7 @@
 
     <!-- Bootstrap core CSS -->
   <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     
     <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
@@ -17,6 +17,18 @@
       .sidebar-nav {
         padding: 9px 0;
       }
+      
+      ul.unstyled {
+		list-style: none;
+		padding: 0;
+	  }
+	  
+	  footer {
+		background: #333;
+		color: #eee;
+		font-size: 11px;
+		padding: 20px;
+	  }
 
       @media (max-width: 980px) {
         /* Enable use of floated navbar text */
