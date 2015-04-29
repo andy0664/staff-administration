@@ -19,28 +19,28 @@
 	<div class="container" role="main">
 
 		<div class="page-header">
-			<h1>Manage Employees</h1>
+			<h1>Manage Departments</h1>
 		</div>
 
-		 <!--  Error message ----------------------------------------------------------- -->
+		<%-- <!--  Error message ----------------------------------------------------------- -->
 		<c:if test="${not empty errorMessage}">
 			<div class="alert alert-danger" role="alert">${errorMessage}</div>
 		</c:if>
 		<!--  Error message ----------------------------------------------------------- -->
 
-		<%-- <!--  Warning message ----------------------------------------------------------- -->
+		<!--  Warning message ----------------------------------------------------------- -->
 		<c:if test="${not empty warningMessage}">
 			<div class="alert alert-warning" role="warning">
 				${warningMessage}</div>
 		</c:if>
-		<!--  Warning message ----------------------------------------------------------- --> --%>
+		<!--  Warning message ----------------------------------------------------------- -->
 
 		<!--   message ----------------------------------------------------------- -->
-		<c:if test="${not empty updateEmployeeMessage}">
+		<c:if test="${not empty message}">
 			<div class="alert alert-success" role="warning">
 				${message}</div>
 		</c:if>
-		<!--   message ----------------------------------------------------------- --> 
+		<!--   message ----------------------------------------------------------- --> --%>
 
 
 		<!--  Search bar ----------------------------------------------------------- -->
@@ -53,8 +53,8 @@
 				<p>
 					<a href="addEmployee">
 						<button type="button" class="btn btn-success">Add new
-							Employee</button>
-					</a> <a href="fillEmployee">
+							Department</button>
+					</a> <a href="fillDepartments">
 						<button type="button" class="btn btn-success">Test: Fill</button>
 					</a>
 
@@ -103,12 +103,12 @@
 								<td><fmt:formatDate value="${employee.dayOfEntry}"
 										pattern="dd.MM.yyyy" /></td>
 								<td>${employee.role}</td>
-								<td><a href="changeEmployee?id=${employee.id}">
+								<td><a href="changeEmployee?ssn=${employee.id}">
 										<button type="button" class="btn btn-xs btn-success">
 											<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 											Edit
 										</button>
-								</a> <a href="deleteEmployee?id=${employee.id}">
+								</a> <a href="deleteEmployee?ssn=${employee.id}">
 										<button type="button" class="btn btn-xs btn-danger">
 											<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 											Delete

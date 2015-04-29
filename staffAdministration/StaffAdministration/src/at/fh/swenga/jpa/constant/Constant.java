@@ -11,7 +11,7 @@ public class Constant {
 	public static final String PAGE_EDIT_EMPLOYEE="/pages/editEmployee";
 	public static final String PAGE_EDIT_DEPARTMENT="/pages/editDepartment";
 	public static final String PAGE_MANAGE_EMPLOYEES="/pages/manageEmployees";
-	
+	public static final String PAGE_MANAGE_DEPARTMENTS="/pages/manageDepartments";
 	
 	//Roles
 	public static final int ROLE_ADMINISTRATOR=1;
@@ -20,7 +20,9 @@ public class Constant {
 	
 	//Model Key Attributes
 	public static final String KEY_EMPLOYEE_LIST="employeeList";
-	public static final String KEY_ERROR="errorMessage";
+	public static final String KEY_EMPLOYEE="employee";
+	public static final String KEY_ERROR_MESSAGE="errorMessage";
+	public static final String KEY_UPDATE_EMPLOYEE_MESSAGE="updateEmployeeMessage";
 	
 	//Methods
 	

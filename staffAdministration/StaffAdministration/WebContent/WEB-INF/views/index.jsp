@@ -26,11 +26,13 @@
 					Business area
 					<p>
 						<a href="manageEmployee">
-							<button type="button" class="btn btn-success">Manage Employees</button>
+							<button type="button" class="btn btn-success">Manage
+								Employees</button>
 						</a>
 					<p>
 						<a href="manageDepartment">
-							<button type="button" class="btn btn-success">Manage Departments</button>
+							<button type="button" class="btn btn-success">Manage
+								Departments</button>
 						</a>
 				</div>
 				<div class="col-sm-4 col-md-offset-1"

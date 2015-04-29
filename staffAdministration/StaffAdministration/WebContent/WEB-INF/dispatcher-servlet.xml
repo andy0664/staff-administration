@@ -35,13 +35,12 @@
 
 
 
-	<!-- Doesn't work 
-	<mvc:annotation-driven /> <bean class="org.springframework.data.web.config.SpringDataWebConfiguration" /> 
-	-->
+	<!-- Doesn't work <mvc:annotation-driven /> <bean class="org.springframework.data.web.config.SpringDataWebConfiguration" 
+		/> -->
 
 
 	<!-- This is a replacement -->
-	
+
 	<bean id="conversionService"
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
 
@@ -49,7 +48,7 @@
 		class="org.springframework.data.repository.support.DomainClassConverter">
 		<constructor-arg ref="conversionService" />
 	</bean>
-	
+
 	<mvc:annotation-driven conversion-service="conversionService">
 		<mvc:argument-resolvers>
 			<ref bean="sortResolver" />

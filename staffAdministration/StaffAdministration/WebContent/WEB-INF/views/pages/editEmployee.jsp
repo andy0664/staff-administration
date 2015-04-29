@@ -19,9 +19,9 @@
 	<div class="container" role="main">
 
 		<!--  add or edit?  ----------------------------------------------------------- -->
-		<%-- 	<c:choose>
-			<c:when test="${not empty employee}">
-				<c:set var="legend">Change Employee ${employee.ssn}</c:set>
+		<c:choose>
+			<c:when test="${not empty employeeList}">
+				<c:set var="legend">Change Employee: ${employee.firstName employee.lastName}</c:set>
 				<c:set var="formAction">changeEmployee</c:set>
 				<c:set var="readonly">readonly</c:set>
 			</c:when>
@@ -30,7 +30,7 @@
 				<c:set var="formAction">addEmployee</c:set>
 				<c:set var="readonly"></c:set>
 			</c:otherwise>
-		</c:choose> --%>
+		</c:choose>
 		<!--  add or edit?  ----------------------------------------------------------- -->
 
 		<div class="row">
