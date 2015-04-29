@@ -25,14 +25,12 @@
 					style="background-color: orange;">
 					Business area
 					<p>
-						<a href="addEmployee">
-							<button type="button" class="btn btn-success">Add new
-								Employee</button>
+						<a href="manageEmployee">
+							<button type="button" class="btn btn-success">Manage Employees</button>
 						</a>
 					<p>
-						<a href="addDepartment">
-							<button type="button" class="btn btn-success">Add new
-								Department</button>
+						<a href="manageDepartment">
+							<button type="button" class="btn btn-success">Manage Departments</button>
 						</a>
 				</div>
 				<div class="col-sm-4 col-md-offset-1"
