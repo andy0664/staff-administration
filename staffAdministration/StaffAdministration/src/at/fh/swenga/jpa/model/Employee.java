@@ -79,7 +79,6 @@ public class Employee implements Serializable {
 		this.role = role;
 	}
 
-	
 
 	public int getId() {
 		return id;
@@ -193,6 +192,18 @@ public class Employee implements Serializable {
 		this.role = role;
 	}
 
+	
+	public void updateEmployee(Employee emp){
+		this.ssn=emp.getSsn();
+		this.firstName=emp.firstName;
+		this.lastName=emp.lastName;
+		this.dayOfBirth=emp.getDayOfBirth();
+		this.address=emp.getAddress();
+		this.jobDescription=emp.getJobDescription();
+		this.dayOfEntry=emp.getDayOfEntry();
+		this.salary=emp.getSalary();
+		this.role=emp.getRole();
+	}
 	
 	
 }

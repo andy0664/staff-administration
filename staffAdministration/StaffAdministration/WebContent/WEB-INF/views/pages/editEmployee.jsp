@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -20,32 +21,32 @@
 
 		<!--  add or edit?  ----------------------------------------------------------- -->
 		<c:choose>
-			<c:when test="${not empty employeeList}">
-				<c:set var="legend">Change Employee: ${employee.firstName employee.lastName}</c:set>
+			<c:when test="${not empty employee}">
+				<c:set var="legend">Change Employee: ${employee.firstName} ${employee.lastName}</c:set>
 				<c:set var="formAction">changeEmployee</c:set>
-				<c:set var="readonly">readonly</c:set>
 			</c:when>
 			<c:otherwise>
 				<c:set var="legend">New Employee</c:set>
 				<c:set var="formAction">addEmployee</c:set>
-				<c:set var="readonly"></c:set>
 			</c:otherwise>
 		</c:choose>
 		<!--  add or edit?  ----------------------------------------------------------- -->
 
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
-				<%-- <form class="form-horizontal" method="post" action="${formAction}"> --%>
-				<form class="form-horizontal" method="post" action="saveEmployee">
+				<form class="form-horizontal" method="post" action="${formAction}">
+				<%-- <input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token }" /> --%>
 					<fieldset>
 						<legend>${legend}</legend>
-
+						<input type="hidden" name="id"
+							value="${employee.id }" />
 						<! ----------------  ssn ---------------- -->
 						<div class="form-group.required">
 							<label for="inputSSN" class="col-md-2 control-label">SSN</label>
 							<div class="col-md-10">
 								<input class="form-control" id="inputSSN" type="text" name="ssn"
-									${readonly} value="<c:out value="${employee.ssn}"/>">
+									value="<c:out value="${employee.ssn}"/>">
 							</div>
 						</div>
 
