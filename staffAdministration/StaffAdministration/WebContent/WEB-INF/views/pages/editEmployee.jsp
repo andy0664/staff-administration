@@ -17,6 +17,10 @@
 	rel="stylesheet">
 </head>
 <body>
+	<!--  Search bar ----------------------------------------------------------- -->
+	<jsp:include page="../includes/searchNav.jsp" />
+	<!--  Search bar ----------------------------------------------------------- -->
+
 	<div class="container" role="main">
 
 		<!--  add or edit?  ----------------------------------------------------------- -->
@@ -216,6 +220,9 @@
 	<!-- JS for Bootstrap -->
 	<%@include file="../includes/bootstrapJs.jsp"%>
 	<!-- JS for Bootstrap -->
+	
+	<!-- Footer -->
+	<jsp:include page="../includes/footer.jsp" />
 
 
 	<!-- JS for Datetime picker -->
