@@ -10,8 +10,8 @@
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#">Personal area<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="manageEmployee">Manage Employees</a></li>
-						<li><a href="manageDepartment">Manage Departments</a></li>
+						<li><a href="manageEmployees">Manage Employees</a></li>
+						<li><a href="manageDepartments">Manage Departments</a></li>
 					</ul></li>
 				<li><a href="#">Business area</a></li>
 				<li><a href="#">Time record</a></li>

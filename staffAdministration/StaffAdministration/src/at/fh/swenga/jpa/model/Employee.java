@@ -26,6 +26,7 @@ public class Employee implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
+	//add unique=true
 	 @Column(nullable=false)
 	private int ssn;
 

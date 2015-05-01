@@ -35,12 +35,11 @@
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
 				<form class="form-horizontal" method="post" action="${formAction}">
-				<%-- <input type="hidden" name="${_csrf.parameterName}"
+					<%-- <input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token }" /> --%>
 					<fieldset>
 						<legend>${legend}</legend>
-						<input type="hidden" name="id"
-							value="${employee.id }" />
+						<input type="hidden" name="id" value="${employee.id }" />
 						<! ----------------  ssn ---------------- -->
 						<div class="form-group.required">
 							<label for="inputSSN" class="col-md-2 control-label">SSN</label>
@@ -155,9 +154,23 @@
 							<label for="inputRole" class="col-md-2 control-label">Role</label>
 							<div class="col-md-10">
 								<select class="form-control" name="role">
-									<option value="1">Administrator</option>
-									<option value="2">Manager</option>
-									<option value="3" selected="selected">Employee</option>
+									<c:choose>
+										<c:when test="${employee.role==1}">
+											<option value="1" selected="selected">Administrator</option>
+											<option value="2">Manager</option>
+											<option value="3">Employee</option>
+										</c:when>
+										<c:when test="${employee.role==2}">
+											<option value="1">Administrator</option>
+											<option value="2" selected="selected">Manager</option>
+											<option value="3">Employee</option>
+										</c:when>
+										<c:otherwise>
+											<option value="1">Administrator</option>
+											<option value="2">Manager</option>
+											<option value="3" selected="selected">Employee</option>
+										</c:otherwise>
+									</c:choose>
 								</select>
 							</div>
 						</div>
@@ -166,7 +179,7 @@
 						<div class="form-group">
 							<div class="col-md-10 col-md-offset-2">
 								<button type="Submit" class="btn btn-primary">Submit</button>
-								<a href="start">
+								<a href="manageEmployee">
 									<button type="button" class="btn btn-default">Cancel</button>
 								</a>
 							</div>

@@ -21,11 +21,16 @@ public class Constant {
 	//Model Key Attributes
 	public static final String KEY_EMPLOYEE_LIST="employeeList";
 	public static final String KEY_EMPLOYEE="employee";
+	public static final String KEY_DEPARTMENT_LIST="departmentList";
+	public static final String KEY_DEPARTMENT="department";
 	public static final String KEY_ERROR_MESSAGE="errorMessage";
 	public static final String KEY_UPDATE_EMPLOYEE_MESSAGE="updateEmployeeMessage";
 	
-	//Methods
+	//Redirects
+	public static final String REDIRECT_MANAGE_EMPLOYEES="redirect:manageEmployees";
+	public static final String REDIRECT_MANAGE_DEPARTMENTS="redirect:manageDepartments";
 	
+	//Methods
 	public static Date parseToDate(String date) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 		try {

@@ -23,14 +23,14 @@
 			<h1>Manage Departments</h1>
 		</div>
 
-		<%-- <!--  Error message ----------------------------------------------------------- -->
+		 <!--  Error message ----------------------------------------------------------- -->
 		<c:if test="${not empty errorMessage}">
 			<div class="alert alert-danger" role="alert">${errorMessage}</div>
 		</c:if>
 		<!--  Error message ----------------------------------------------------------- -->
 
 		<!--  Warning message ----------------------------------------------------------- -->
-		<c:if test="${not empty warningMessage}">
+		<%--<c:if test="${not empty warningMessage}">
 			<div class="alert alert-warning" role="warning">
 				${warningMessage}</div>
 		</c:if>
@@ -52,10 +52,10 @@
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4">
 				<p>
-					<a href="addEmployee">
+					<a href="addDepartment">
 						<button type="button" class="btn btn-success">Add new
 							Department</button>
-					</a> <a href="fillDepartments">
+					</a> <a href="fillDepartment">
 						<button type="button" class="btn btn-success">Test: Fill</button>
 					</a>
 
@@ -71,45 +71,23 @@
 				<table data-toggle="table" class="table table-striped">
 					<thead>
 						<tr>
-							<th data-sortable="true">SSN</th>
-							<th data-sortable="true">First Name</th>
-							<th data-sortable="true">Last Name</th>
-							<th data-sortable="true">Day of birth</th>
-							<th data-sortable="true">Country</th>
-							<th data-sortable="true">Street</th>
-							<th data-sortable="true">ZIP</th>
-							<th data-sortable="true">City</th>
-							<th data-sortable="true">Job Description</th>
-							<th data-sortable="true">Salary</th>
-							<th data-sortable="true">Day of Entry</th>
-							<th data-sortable="true">Role</th>
+							<th data-sortable="true">Shortcut</th>
+							<th data-sortable="true">Name</th>
 							<th>Actions</th>
 						</tr>
 					</thead>
 					<tbody>
 						<!--  list all employees ----------------------------------------------------------- -->
-						<c:forEach items="${employeeList}" var="employee">
+						<c:forEach items="${departmentList}" var="department">
 							<tr>
-								<td>${employee.ssn}</td>
-								<td>${employee.firstName}</td>
-								<td>${employee.lastName}</td>
-								<td><fmt:formatDate value="${employee.dayOfBirth}"
-										pattern="dd.MM.yyyy" /></td>
-								<td>${employee.address.country}</td>
-								<td>${employee.address.street}</td>
-								<td>${employee.address.zip}</td>
-								<td>${employee.address.city}</td>
-								<td>${employee.jobDescription}</td>
-								<td>${employee.salary}</td>
-								<td><fmt:formatDate value="${employee.dayOfEntry}"
-										pattern="dd.MM.yyyy" /></td>
-								<td>${employee.role}</td>
-								<td><a href="changeEmployee?ssn=${employee.id}">
+								<td>${department.shortcut}</td>
+								<td>${department.name}</td>
+								<td><a href="changeDepartment?id=${department.id}">
 										<button type="button" class="btn btn-xs btn-success">
 											<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 											Edit
 										</button>
-								</a> <a href="deleteEmployee?ssn=${employee.id}">
+								</a> <a href="deleteDepartment?id=${department.id}">
 										<button type="button" class="btn btn-xs btn-danger">
 											<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 											Delete

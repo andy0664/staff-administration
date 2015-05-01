@@ -44,11 +44,11 @@
 						<img src="badge_html5.jpg" class="img-rounded">
 
 						<div class="list-group">
-							<a href="manageEmployee" class="list-group-item">
+							<a href="manageEmployees" class="list-group-item">
 								<h4 class="list-group-item-heading">Manage Employees</h4>
 								<p class="list-group-item-text">This is the area where you
 									can mangage your employees.</p>
-							</a> <a href="manageDepartment" class="list-group-item">
+							</a> <a href="manageDepartments" class="list-group-item">
 								<h4 class="list-group-item-heading">Manage Departments</h4>
 								<p class="list-group-item-text">This is the area where you
 									can mangage your departments.</p>
