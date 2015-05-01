@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import at.fh.swenga.jpa.constant.Constant;
 import at.fh.swenga.jpa.dao.SimpleDepartmentRepository;
 import at.fh.swenga.jpa.dao.SimpleEmployeeRepository;
+import at.fh.swenga.jpa.dto.EmployeeDTO;
 import at.fh.swenga.jpa.model.Address;
 import at.fh.swenga.jpa.model.Department;
 import at.fh.swenga.jpa.model.Employee;
@@ -78,12 +79,14 @@ public class CoverPageController {
 
 	@RequestMapping(value = { "addEmployee" }, method = RequestMethod.GET)
 	public String editEmployee(Model model) {
+		model.addAttribute(Constant.KEY_DEPARTMENT_LIST, departmentDao.findAll());
 		return Constant.PAGE_EDIT_EMPLOYEE;
 	}
 
 	@RequestMapping(value = { "changeEmployee" }, method = RequestMethod.GET)
 	public String changeEmployee(@RequestParam int id, Model model) {
 		try {
+			model.addAttribute(Constant.KEY_DEPARTMENT_LIST, departmentDao.findAll());
 			model.addAttribute(Constant.KEY_EMPLOYEE,
 					employeeDao.findEmployeeById(id));
 		} catch (Exception ex) {
@@ -128,8 +131,8 @@ public class CoverPageController {
 	 */
 
 	@RequestMapping(value = { "addEmployee" }, method = RequestMethod.POST)
-	public String saveEmployee(@Valid @ModelAttribute Employee newEmployee,
-			@Valid @ModelAttribute Address newAddress,
+	public String saveEmployee(@Valid @ModelAttribute EmployeeDTO newEmployee,
+			@Valid @ModelAttribute Address newAddress, @RequestParam int department,
 			BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
 			String errorMessage = "";
@@ -140,7 +143,11 @@ public class CoverPageController {
 			return "forward:/manageEmployees";
 		} else {
 			newEmployee.setAddress(newAddress);
-			employeeDao.save(newEmployee);
+			Department dep = departmentDao.findDepartmentById(department);
+			Employee emp = newEmployee.generateEmployee();
+			dep.addEmployee(emp);
+			emp.setDepartment(dep);
+			employeeDao.save(emp);
 		}
 		return Constant.REDIRECT_MANAGE_EMPLOYEES;
 	}

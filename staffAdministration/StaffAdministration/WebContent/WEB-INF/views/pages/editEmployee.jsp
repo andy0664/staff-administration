@@ -149,6 +149,26 @@
 							</div>
 						</div>
 
+						<! ---------------  Department ---------------- -->
+						<div class="form-group">
+							<label for="inputDepartment" class="col-md-2 control-label">Department</label>
+							<div class="col-md-10">
+								<select class="form-control" name="department">
+									<c:forEach items="${departmentList }" var="department">
+										<c:choose>
+											<c:when test="${employee.department.name==department.name}">
+												<option value="${department.id}"selected="selected">${department.name}</option>
+											</c:when>
+											<c:otherwise>
+												<option value="${department.id}">${department.name}</option>
+											</c:otherwise>
+										</c:choose>
+
+									</c:forEach>
+								</select>
+							</div>
+						</div>
+
 						<! ---------------  Role ---------------- -->
 						<div class="form-group">
 							<label for="inputRole" class="col-md-2 control-label">Role</label>
@@ -179,7 +199,7 @@
 						<div class="form-group">
 							<div class="col-md-10 col-md-offset-2">
 								<button type="Submit" class="btn btn-primary">Submit</button>
-								<a href="manageEmployee">
+								<a href="manageEmployees">
 									<button type="button" class="btn btn-default">Cancel</button>
 								</a>
 							</div>

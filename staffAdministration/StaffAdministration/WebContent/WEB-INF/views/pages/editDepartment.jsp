@@ -62,7 +62,7 @@
 						<div class="form-group">
 							<div class="col-md-10 col-md-offset-2">
 								<button type="Submit" class="btn btn-primary">Submit</button>
-								<a href="manageDepartment">
+								<a href="manageDepartments">
 									<button type="button" class="btn btn-default">Cancel</button>
 								</a>
 							</div>

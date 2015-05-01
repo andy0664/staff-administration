@@ -1,12 +1,16 @@
 package at.fh.swenga.jpa.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Version;
 
 
@@ -26,6 +30,9 @@ public class Department implements Serializable{
 	//add unique=true
 	@Column(nullable=false,length=5)
 	private String shortcut;
+	
+	@OneToMany(mappedBy="department", fetch=FetchType.EAGER)
+	private Set<Employee> employees;
 	
 	@Version
 	private long version;
@@ -59,6 +66,23 @@ public class Department implements Serializable{
 		this.shortcut = shortcut;
 	}
 	
+	
+	
+	public Set<Employee> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(Set<Employee> employees) {
+		this.employees = employees;
+	}
+	
+	public void addEmployee(Employee employee){
+		if(employees==null){
+			employees=new HashSet<Employee>();
+		}
+		employees.add(employee);
+	}
+
 	public void updateDepartment(Department dep){
 		this.name=dep.getName();
 		this.shortcut=dep.shortcut;
