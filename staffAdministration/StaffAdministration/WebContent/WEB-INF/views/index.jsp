@@ -16,8 +16,7 @@
 <script src="includes/js/modernizr-2.6.2.min.js"></script>
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="includes/js/jquery.bootstrap.newsbox.min.js"
-	type="text/javascript"></script>
+
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 </head>
@@ -69,7 +68,7 @@
 						<h3 class="panel-title">Personal area</h3>
 					</div>
 					<!-- end panel-heading -->
-					<img src="badge_css3.jpg" alt="CSS3" class="img-rounded">
+					<!-- 					<img src="badge_css3.jpg" alt="CSS3" class="img-rounded"> -->
 
 					<div class="list-group">
 						<a href="#" class="list-group-item">
@@ -99,7 +98,7 @@
 						<h3 class="panel-title">Business area</h3>
 					</div>
 					<!-- end panel-heading -->
-					<img src="badge_css3.jpg" alt="CSS3" class="img-rounded">
+					<!-- 					<img src="badge_css3.jpg" alt="CSS3" class="img-rounded"> -->
 
 					<div class="list-group">
 						<a href="#" class="list-group-item">
@@ -131,7 +130,7 @@
 						<h3 class="panel-title">Time Record</h3>
 					</div>
 					<!-- end panel-heading -->
-					<img src="badge_css3.jpg" alt="CSS3" class="img-rounded">
+					<!-- 					<img src="badge_css3.jpg" alt="CSS3" class="img-rounded"> -->
 
 					<div class="list-group">
 						<a href="newTimeRecord" class="list-group-item">
@@ -161,7 +160,7 @@
 						<h3 class="panel-title">Calendar</h3>
 					</div>
 					<!-- end panel-heading -->
-					<img src="badge_css3.jpg" alt="CSS3" class="img-rounded">
+					<!-- 					<img src="badge_css3.jpg" alt="CSS3" class="img-rounded"> -->
 
 					<div class="list-group">
 						<a href="#" class="list-group-item">
@@ -186,28 +185,28 @@
 
 
 		<div class="col-md-4">
-		
-					<div class="panel panel-announcements">
-						<div class="panel-heading">
-							<div class="row">
-								<div class="col-xs-3">
-									<i class="fa fa-comments fa-5x"></i>
-								</div>
-								<div class="col-xs-9 text-right">
-									<div class="huge">26</div>
-									<div><h4>New Announcements</h4></div>
-								</div>
-							</div>
+
+			<div class="panel panel-announcements">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-xs-3">
+							<i class="fa fa-comments fa-5x"></i>
 						</div>
-						<a href="#">
-							<div class="panel-footer">
-								<span class="pull-left">View Details</span> <span
-									class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-								<div class="clearfix"></div>
-							</div>
-						</a>
+						<div class="col-xs-9 text-right">
+							<div class="huge">26</div>
+							<div>New Announcements!</div>
+						</div>
 					</div>
-		
+				</div>
+				<a href="#">
+					<div class="panel-footer">
+						<span class="pull-left">View Details</span> <span
+							class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+						<div class="clearfix"></div>
+					</div>
+				</a>
+			</div>
+
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<span class="glyphicon glyphicon-list-alt"></span><b>News</b>
@@ -220,7 +219,9 @@
 								<li class="news-item">
 									<table cellpadding="4">
 										<tr>
-											<td><img src="../StaffAdministration/WebContent/WEB-INF/views/includes/images/1.png" width="60" class="img-circle" /></td>
+											<td><img
+												src="includes/images/1.png"
+												width="60" class="img-circle" /></td>
 											<td>Lorem ipsum dolor sit amet, consectetur adipiscing
 												elit. Nullam in venenatis enim... <a href="#">Read
 													more...</a>
@@ -299,13 +300,14 @@
 											</td>
 										</tr>
 									</table>
-								</li> ...
-
 							</ul>
 						</div>
 					</div>
 				</div>
 				<div class="panel-footer">
+					<a href="#">
+						<button type="button" class="btn btn-primary">New entry</button>
+					</a>
 					<ul class="pagination pull-right" style="margin: 0px;">
 						<li><a href="#" class="prev"><span
 								class="glyphicon glyphicon-chevron-down"></span></a></li>
@@ -330,17 +332,18 @@
 
 
 	<script type="text/javascript">
-    $(function () {
-        $(".demo1").bootstrapNews({
-            newsPerPage: 3,
-            autoplay: true,
-			pauseOnHover:true,
-            direction: 'up',
-            newsTickerInterval: 4000,
-            onToDo: function () {
-                //console.log(this);
-            } 
-        });
+		$(function() {
+			$(".demo1").bootstrapNews({
+				newsPerPage : 3,
+				autoplay : true,
+				pauseOnHover : true,
+				direction : 'up',
+				newsTickerInterval : 4000,
+				onToDo : function() {
+					//console.log(this);
+				}
+			});
+		})
 	</script>
 
 
