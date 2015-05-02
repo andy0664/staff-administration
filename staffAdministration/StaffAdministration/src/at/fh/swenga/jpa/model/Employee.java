@@ -2,6 +2,8 @@ package at.fh.swenga.jpa.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,12 +13,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import at.fh.swenga.jpa.dto.EmployeeDTO;
 
 @Entity
 public class Employee implements Serializable {
@@ -61,6 +66,9 @@ public class Employee implements Serializable {
 	
 	@ManyToOne(cascade=CascadeType.MERGE)
 	private Department department;
+	
+	@OneToMany(mappedBy="employee")
+	private Set<TimeRecord> timeRecords;
 
 	@Version
 	private long version;
@@ -221,11 +229,25 @@ public class Employee implements Serializable {
 		this.department = department;
 	}
 
+	public Set<TimeRecord> getTimeRecords() {
+		return timeRecords;
+	}
 
-	public void updateEmployee(Employee emp){
+	public void setTimeRecords(Set<TimeRecord> timeRecords) {
+		this.timeRecords = timeRecords;
+	}
+	
+	public void addTimeRecord(TimeRecord record){
+		if(timeRecords==null){
+			timeRecords=new HashSet<TimeRecord>();
+		}
+		timeRecords.add(record);
+	}
+
+	public void updateEmployee(EmployeeDTO emp){
 		this.ssn=emp.getSsn();
-		this.firstName=emp.firstName;
-		this.lastName=emp.lastName;
+		this.firstName=emp.getFirstName();
+		this.lastName=emp.getLastName();
 		this.dayOfBirth=emp.getDayOfBirth();
 		this.address=emp.getAddress();
 		this.jobDescription=emp.getJobDescription();

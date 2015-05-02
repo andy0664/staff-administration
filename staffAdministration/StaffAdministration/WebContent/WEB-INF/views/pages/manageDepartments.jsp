@@ -73,6 +73,7 @@
 						<tr>
 							<th data-sortable="true">Shortcut</th>
 							<th data-sortable="true">Name</th>
+							<th data-sortable="true">Manager</th>
 							<th>Actions</th>
 						</tr>
 					</thead>
@@ -82,6 +83,7 @@
 							<tr>
 								<td>${department.shortcut}</td>
 								<td>${department.name}</td>
+								<td>${department.manager.firstName} ${department.manager.lastName}</td>
 								<td><a href="changeDepartment?id=${department.id}">
 										<button type="button" class="btn btn-xs btn-success">
 											<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>

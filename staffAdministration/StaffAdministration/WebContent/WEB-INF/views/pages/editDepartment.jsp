@@ -53,10 +53,34 @@
 						<div class="form-group">
 							<label for="inputShortcut" class="col-md-2 control-label">Shortcut</label>
 							<div class="col-md-10">
-								<input class="form-control" id="inputShortcut" type="text" maxlength="5"
-									name="shortcut" value="<c:out value="${department.shortcut}"/>">
+								<input class="form-control" id="inputShortcut" type="text"
+									maxlength="5" name="shortcut"
+									value="<c:out value="${department.shortcut}"/>">
 							</div>
 						</div>
+
+						<! ----------------  manager ---------------- -->
+						<div class="form-group">
+							<label for="inputManager" class="col-md-2 control-label">Manager</label>
+							<div class="col-md-10">
+								<select class="form-control" name="manager">
+									<c:forEach items="${employeeList }" var="employee">
+										<c:choose>
+											<c:when test="${employee.id == department.manager.id }">
+												<option value="${employee.id}" selected="selected">${ employee.firstName}
+													${employee.lastName }</option>
+											</c:when>
+											<c:otherwise>
+												<option value="${employee.id}">${ employee.firstName}
+													${employee.lastName }</option>
+											</c:otherwise>
+										</c:choose>
+
+									</c:forEach>
+								</select>
+							</div>
+						</div>
+
 
 						<! ----------------  buttons ---------------- -->
 						<div class="form-group">

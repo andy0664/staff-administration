@@ -160,6 +160,7 @@
 							<label for="inputDepartment" class="col-md-2 control-label">Department</label>
 							<div class="col-md-10">
 								<select class="form-control" name="department">
+									<option value="-1" selected="selected">No Department</option>
 									<c:forEach items="${departmentList }" var="department">
 										<c:choose>
 											<c:when test="${employee.department.name==department.name}">

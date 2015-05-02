@@ -8,6 +8,7 @@ import at.fh.swenga.jpa.model.Employee;
 
 public class EmployeeDTO {
 
+	private int id;
 	private int ssn;
 
 	private String firstName;
@@ -51,6 +52,17 @@ public class EmployeeDTO {
 		this.salary = salary;
 		this.dayOfEntry = dayOfEntry;
 		this.role = role;
+	}
+	
+	
+	public EmployeeDTO(int id, String firstName, String lastName) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public int getSsn() {

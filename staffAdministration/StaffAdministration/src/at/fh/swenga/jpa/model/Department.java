@@ -11,7 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Version;
+
+import at.fh.swenga.jpa.dto.DepartmentDTO;
 
 
 
@@ -31,8 +35,11 @@ public class Department implements Serializable{
 	@Column(nullable=false,length=5)
 	private String shortcut;
 	
-	@OneToMany(mappedBy="department", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="department")
 	private Set<Employee> employees;
+	
+	@OneToOne
+	private Employee manager;
 	
 	@Version
 	private long version;
@@ -43,6 +50,13 @@ public class Department implements Serializable{
 	public Department(String name, String shortcut) {
 		this.name = name;
 		this.shortcut = shortcut;
+	}
+	
+	
+	public Department(String name, String shortcut, Employee manager) {
+		this.name = name;
+		this.shortcut = shortcut;
+		this.manager = manager;
 	}
 
 	public int getId() {
@@ -66,8 +80,14 @@ public class Department implements Serializable{
 		this.shortcut = shortcut;
 	}
 	
-	
-	
+	public Employee getManager() {
+		return manager;
+	}
+
+	public void setManager(Employee manager) {
+		this.manager = manager;
+	}
+
 	public Set<Employee> getEmployees() {
 		return employees;
 	}
@@ -83,8 +103,8 @@ public class Department implements Serializable{
 		employees.add(employee);
 	}
 
-	public void updateDepartment(Department dep){
+	public void updateDepartment(DepartmentDTO dep){
 		this.name=dep.getName();
-		this.shortcut=dep.shortcut;
+		this.shortcut=dep.getShortcut();
 	}
 }

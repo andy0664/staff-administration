@@ -3,6 +3,7 @@ package at.fh.swenga.jpa.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import at.fh.swenga.jpa.constant.Constant;
 import at.fh.swenga.jpa.dao.SimpleDepartmentRepository;
 import at.fh.swenga.jpa.dao.SimpleEmployeeRepository;
+import at.fh.swenga.jpa.dto.DepartmentDTO;
 import at.fh.swenga.jpa.dto.EmployeeDTO;
 import at.fh.swenga.jpa.model.Address;
 import at.fh.swenga.jpa.model.Department;
@@ -72,6 +74,11 @@ public class CoverPageController {
 				departmentDao.findAll());
 		return Constant.PAGE_MANAGE_DEPARTMENTS;
 	}
+	
+	@RequestMapping(value={"newTimeRecord"})
+	public String newTimeRecord(Model model){
+		return Constant.PAGE_NEW_TIME_RECORD;
+	}
 
 	/*
 	 * ########### manageEmployees.jsp ############
@@ -79,14 +86,16 @@ public class CoverPageController {
 
 	@RequestMapping(value = { "addEmployee" }, method = RequestMethod.GET)
 	public String editEmployee(Model model) {
-		model.addAttribute(Constant.KEY_DEPARTMENT_LIST, departmentDao.findAll());
+		model.addAttribute(Constant.KEY_DEPARTMENT_LIST,
+				departmentDao.findAll());
 		return Constant.PAGE_EDIT_EMPLOYEE;
 	}
 
 	@RequestMapping(value = { "changeEmployee" }, method = RequestMethod.GET)
 	public String changeEmployee(@RequestParam int id, Model model) {
 		try {
-			model.addAttribute(Constant.KEY_DEPARTMENT_LIST, departmentDao.findAll());
+			model.addAttribute(Constant.KEY_DEPARTMENT_LIST,
+					departmentDao.findAll());
 			model.addAttribute(Constant.KEY_EMPLOYEE,
 					employeeDao.findEmployeeById(id));
 		} catch (Exception ex) {
@@ -131,9 +140,10 @@ public class CoverPageController {
 	 */
 
 	@RequestMapping(value = { "addEmployee" }, method = RequestMethod.POST)
-	public String saveEmployee(@Valid @ModelAttribute EmployeeDTO newEmployee,
-			@Valid @ModelAttribute Address newAddress, @RequestParam int department,
-			BindingResult bindingResult, Model model) {
+	public String addEmployee(@Valid @ModelAttribute EmployeeDTO newEmployee,
+			@Valid @ModelAttribute Address newAddress,
+			@RequestParam int department, BindingResult bindingResult,
+			Model model) {
 		if (bindingResult.hasErrors()) {
 			String errorMessage = "";
 			for (FieldError error : bindingResult.getFieldErrors()) {
@@ -143,19 +153,18 @@ public class CoverPageController {
 			return "forward:/manageEmployees";
 		} else {
 			newEmployee.setAddress(newAddress);
-			Department dep = departmentDao.findDepartmentById(department);
 			Employee emp = newEmployee.generateEmployee();
-			dep.addEmployee(emp);
-			emp.setDepartment(dep);
-			employeeDao.save(emp);
+			saveEmployee(emp, department);
 		}
 		return Constant.REDIRECT_MANAGE_EMPLOYEES;
 	}
 
 	@RequestMapping(value = { "changeEmployee" }, method = RequestMethod.POST)
-	public String updateEmployee(@Valid @ModelAttribute Employee newEmployee,
+	public String updateEmployee(
+			@Valid @ModelAttribute EmployeeDTO newEmployee,
 			@Valid @ModelAttribute Address newAddress, @RequestParam int id,
-			BindingResult bindingResult, Model model) {
+			@RequestParam int department, BindingResult bindingResult,
+			Model model) {
 		if (bindingResult.hasErrors()) {
 			String errorMessage = "";
 			for (FieldError error : bindingResult.getFieldErrors()) {
@@ -167,7 +176,7 @@ public class CoverPageController {
 			Employee emp = employeeDao.findEmployeeById(id);
 			newEmployee.setAddress(newAddress);
 			emp.updateEmployee(newEmployee);
-			employeeDao.save(emp);
+			saveEmployee(emp, department);
 		}
 		return Constant.REDIRECT_MANAGE_EMPLOYEES;
 	}
@@ -189,12 +198,17 @@ public class CoverPageController {
 
 	@RequestMapping(value = { "changeDepartment" }, method = RequestMethod.GET)
 	public String editDepartment(@RequestParam int id, Model model) {
-		model.addAttribute(Constant.KEY_DEPARTMENT, departmentDao.findDepartmentById(id));
+		model.addAttribute(Constant.KEY_DEPARTMENT,
+				departmentDao.findDepartmentById(id));
+		model.addAttribute(Constant.KEY_EMPLOYEE_LIST,
+				employeeDao.findEmployeeByDepartmentId(id));
 		return Constant.PAGE_EDIT_DEPARTMENT;
 	}
-	
-	@RequestMapping(value={"addDepartment"}, method=RequestMethod.GET)
-	public String addDepartment(Model model){
+
+	@RequestMapping(value = { "addDepartment" }, method = RequestMethod.GET)
+	public String addDepartment(Model model) {
+		model.addAttribute(Constant.KEY_EMPLOYEE_LIST,
+				employeeDao.findEmployeeWithNoDepartment());
 		return Constant.PAGE_EDIT_DEPARTMENT;
 	}
 
@@ -217,10 +231,11 @@ public class CoverPageController {
 	 * ########### editDepartment.jsp ############
 	 */
 
-	@RequestMapping(value={"changeDepartment"}, method=RequestMethod.POST)
+	@RequestMapping(value = { "changeDepartment" }, method = RequestMethod.POST)
 	public String updateDepartment(
-			@Valid @ModelAttribute Department newDepartment,
-			@RequestParam int id, Model model, BindingResult bindingResult) {
+			@Valid @ModelAttribute DepartmentDTO newDepartment,
+			@RequestParam int id, @RequestParam int manager, Model model,
+			BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			String errorMessage = "";
 			for (FieldError error : bindingResult.getFieldErrors()) {
@@ -231,14 +246,18 @@ public class CoverPageController {
 		} else {
 			Department dep = departmentDao.findDepartmentById(id);
 			dep.updateDepartment(newDepartment);
+			if(dep.getManager().getId()!=manager){
+				dep.setManager(employeeDao.findEmployeeById(manager));
+			}
 			departmentDao.save(dep);
 		}
 		return Constant.REDIRECT_MANAGE_DEPARTMENTS;
 	}
-	
+
 	@RequestMapping(value = { "addDepartment" }, method = RequestMethod.POST)
-	public String saveDepartment(@Valid @ModelAttribute Department newDepartment,
-			BindingResult bindingResult, Model model) {
+	public String saveDepartment(
+			@Valid @ModelAttribute DepartmentDTO newDepartment,
+			@RequestParam int manager, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
 			String errorMessage = "";
 			for (FieldError error : bindingResult.getFieldErrors()) {
@@ -247,7 +266,12 @@ public class CoverPageController {
 			model.addAttribute(Constant.KEY_ERROR_MESSAGE, errorMessage);
 			return "forward:/manageDepartments";
 		} else {
-			departmentDao.save(newDepartment);
+			Employee emp = employeeDao.findEmployeeById(manager);
+			Department dep = newDepartment.generateDepartment();
+			emp.setDepartment(dep);
+			dep.setManager(emp);
+			departmentDao.save(dep);
+			employeeDao.save(emp);
 		}
 		return Constant.REDIRECT_MANAGE_DEPARTMENTS;
 	}
@@ -256,4 +280,11 @@ public class CoverPageController {
 	// public String handleAllException(Exception ex) {
 	// return "showError";
 	// }
+
+	private void saveEmployee(Employee emp, int department) {
+		if (department != Constant.NO_DEPARTMENT) {
+			emp.setDepartment(departmentDao.findDepartmentById(department));
+		}
+		employeeDao.save(emp);
+	}
 }

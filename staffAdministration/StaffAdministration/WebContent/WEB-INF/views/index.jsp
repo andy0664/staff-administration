@@ -134,7 +134,7 @@
 					<img src="badge_css3.jpg" alt="CSS3" class="img-rounded">
 
 					<div class="list-group">
-						<a href="#" class="list-group-item">
+						<a href="newTimeRecord" class="list-group-item">
 							<h4 class="list-group-item-heading">create new time record</h4>
 							<p class="list-group-item-text">This is the area where you
 								can list all employees.</p>
