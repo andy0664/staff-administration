@@ -4,6 +4,9 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+<script src="includes/js/jquery.bootstrap.newsbox.min.js"
+	type="text/javascript"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>

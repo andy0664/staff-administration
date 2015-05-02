@@ -18,8 +18,6 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
-
-
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.6.0/bootstrap-table.min.css">
@@ -28,7 +26,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.6.0/bootstrap-table.min.css">
 
-
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
 <!-- Glyphicons CSS -->
 <link href="includes/css/bootstrap-glyphicons.css" rel="stylesheet">
@@ -162,18 +160,6 @@ footer {
 	padding: 13px 15px;
 }
 
-#features {
-	text-align: center;
-}
-
-#features img {
-	margin: 0 0 20px;
-}
-
-ul.unstyled {
-	list-style: none;
-	padding: 0;
-}
 
 .my-inner {
 	padding: 10px;
