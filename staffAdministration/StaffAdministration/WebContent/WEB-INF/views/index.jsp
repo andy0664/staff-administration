@@ -23,7 +23,7 @@
 </head>
 <body>
 	<!--  Search bar ----------------------------------------------------------- -->
-	<jsp:include page="includes/searchNav.jsp" />
+	<jsp:include page="includes/template/navigationBar.jsp" />
 	<!--  Search bar ----------------------------------------------------------- -->
 	<div class="container" id="main">
 		<div class="row" id="bigCallout">
@@ -38,14 +38,14 @@
 				<div class="well">
 					<div class="page-header">
 						<h1>
-							Welcome!<small>Staff Administration is the optimal tool for your needs.</small>
+							Welcome!<small> Staff Administration is the optimal tool
+								for your needs.</small>
 						</h1>
 					</div>
 					<!-- end page-header -->
 
 					<p class="lead">Some solid leading copy will help get your
-						users engaged. Use this area to come up with something real nice.
-						Know what I'm sayin?</p>
+						users engaged. Use this area to come up with something real nice.</p>
 
 				</div>
 				<!-- end well -->
@@ -60,13 +60,13 @@
 		<!-- end featuresHeading -->
 
 		<div class="row-fluid" id="features">
+
 			<div class="col-md-4">
-				<div class="panel panel-default">
+
+				<div class="panel panel-green">
 					<div class="panel-heading">
 
 						<h3 class="panel-title">Personal area</h3>
-
-
 					</div>
 					<!-- end panel-heading -->
 					<img src="badge_css3.jpg" alt="CSS3" class="img-rounded">
@@ -94,7 +94,7 @@
 				<!-- end feature -->
 
 
-				<div class="panel panel-default">
+				<div class="panel panel-blue">
 					<div class="panel-heading">
 						<h3 class="panel-title">Business area</h3>
 					</div>
@@ -122,70 +122,92 @@
 			<!-- end panel -->
 		</div>
 
-		
+
 		<div class="row-fluid" id="features">
-		<!-- end feature -->
-		<div class="col-md-4 feature">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Time Record</h3>
-				</div>
-				<!-- end panel-heading -->
-				<img src="badge_css3.jpg" alt="CSS3" class="img-rounded">
+			<!-- end feature -->
+			<div class="col-md-4 feature">
+				<div class="panel panel-red">
+					<div class="panel-heading">
+						<h3 class="panel-title">Time Record</h3>
+					</div>
+					<!-- end panel-heading -->
+					<img src="badge_css3.jpg" alt="CSS3" class="img-rounded">
 
-				<div class="list-group">
-					<a href="#" class="list-group-item">
-						<h4 class="list-group-item-heading">create new time record</h4>
-						<p class="list-group-item-text">This is the area where you can
-							list all employees.</p>
-					</a> <a href="#" class="list-group-item">
-						<h4 class="list-group-item-heading">personal time statistic</h4>
-						<p class="list-group-item-text">This is the area where you can
-							mangage your employees.</p>
-					</a> <a href="#" class="list-group-item">
-						<h4 class="list-group-item-heading">Employee time statistic</h4>
-						<p class="list-group-item-text">This is the area where you can
-							mangage your departments.</p>
-					</a>
+					<div class="list-group">
+						<a href="#" class="list-group-item">
+							<h4 class="list-group-item-heading">create new time record</h4>
+							<p class="list-group-item-text">This is the area where you
+								can list all employees.</p>
+						</a> <a href="#" class="list-group-item">
+							<h4 class="list-group-item-heading">personal time statistic</h4>
+							<p class="list-group-item-text">This is the area where you
+								can mangage your employees.</p>
+						</a> <a href="#" class="list-group-item">
+							<h4 class="list-group-item-heading">Employee time statistic</h4>
+							<p class="list-group-item-text">This is the area where you
+								can mangage your departments.</p>
+						</a>
+					</div>
+				</div>
+
+				<!-- end panel -->
+
+				<!-- end feature -->
+
+
+
+				<div class="panel panel-yellow">
+					<div class="panel-heading">
+						<h3 class="panel-title">Calendar</h3>
+					</div>
+					<!-- end panel-heading -->
+					<img src="badge_css3.jpg" alt="CSS3" class="img-rounded">
+
+					<div class="list-group">
+						<a href="#" class="list-group-item">
+							<h4 class="list-group-item-heading">My calendar</h4>
+							<p class="list-group-item-text">This is the area where you
+								can list all employees.</p>
+						</a> <a href="#" class="list-group-item">
+							<h4 class="list-group-item-heading">Shared calendar</h4>
+							<p class="list-group-item-text">This is the area where you
+								can mangage your employees.</p>
+						</a> <a href="#" class="list-group-item">
+							<h4 class="list-group-item-heading">Feature events</h4>
+							<p class="list-group-item-text">This is the area where you
+								can mangage your departments.</p>
+						</a>
+					</div>
 				</div>
 			</div>
-
-			<!-- end panel -->
-
-		<!-- end feature -->
-
-
-
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Calendar</h3>
-				</div>
-				<!-- end panel-heading -->
-				<img src="badge_css3.jpg" alt="CSS3" class="img-rounded">
-
-				<div class="list-group">
-					<a href="#" class="list-group-item">
-						<h4 class="list-group-item-heading">My calendar</h4>
-						<p class="list-group-item-text">This is the area where you can
-							list all employees.</p>
-					</a> <a href="#" class="list-group-item">
-						<h4 class="list-group-item-heading">Shared calendar</h4>
-						<p class="list-group-item-text">This is the area where you can
-							mangage your employees.</p>
-					</a> <a href="#" class="list-group-item">
-						<h4 class="list-group-item-heading">Feature events</h4>
-						<p class="list-group-item-text">This is the area where you can
-							mangage your departments.</p>
-					</a>
-				</div>
-			</div>
-	       </div>
 
 			<!-- end panel -->
 		</div>
-		
-		
+
+
 		<div class="col-md-4">
+		
+					<div class="panel panel-announcements">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-xs-3">
+									<i class="fa fa-comments fa-5x"></i>
+								</div>
+								<div class="col-xs-9 text-right">
+									<div class="huge">26</div>
+									<div><h4>New Announcements</h4></div>
+								</div>
+							</div>
+						</div>
+						<a href="#">
+							<div class="panel-footer">
+								<span class="pull-left">View Details</span> <span
+									class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+								<div class="clearfix"></div>
+							</div>
+						</a>
+					</div>
+		
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<span class="glyphicon glyphicon-list-alt"></span><b>News</b>
@@ -198,7 +220,7 @@
 								<li class="news-item">
 									<table cellpadding="4">
 										<tr>
-											<td><img src="1.png" width="60" class="img-circle" /></td>
+											<td><img src="../StaffAdministration/WebContent/WEB-INF/views/includes/images/1.png" width="60" class="img-circle" /></td>
 											<td>Lorem ipsum dolor sit amet, consectetur adipiscing
 												elit. Nullam in venenatis enim... <a href="#">Read
 													more...</a>
@@ -230,7 +252,7 @@
 										</tr>
 									</table>
 								</li>
-								
+
 								<li class="news-item">
 									<table cellpadding="4">
 										<tr>
@@ -242,7 +264,7 @@
 										</tr>
 									</table>
 								</li>
-								
+
 								<li class="news-item">
 									<table cellpadding="4">
 										<tr>
@@ -303,7 +325,7 @@
 	</div>
 
 	<!-- Footer -->
-	<jsp:include page="includes/footer.jsp" />
+	<jsp:include page="includes/template/footer.jsp" />
 
 
 

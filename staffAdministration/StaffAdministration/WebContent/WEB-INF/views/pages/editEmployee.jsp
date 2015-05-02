@@ -18,7 +18,7 @@
 </head>
 <body>
 	<!--  Search bar ----------------------------------------------------------- -->
-	<jsp:include page="../includes/searchNav.jsp" />
+	<jsp:include page="../includes/template/navigationBar.jsp" />
 	<!--  Search bar ----------------------------------------------------------- -->
 
 	<div class="container" role="main">
@@ -80,6 +80,7 @@
 								<input class="form_datetime" id="inputDate" placeholder="Date"
 									type="text" readonly name="dayOfBirth"
 									value="<fmt:formatDate value="${employee.dayOfBirth}" pattern="dd.MM.yyyy"/>" />
+									<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 							</div>
 						</div>
 
@@ -150,6 +151,7 @@
 								<input class="form_datetime" id="inputDate" placeholder="Date"
 									type="text" readonly name="dayOfEntry"
 									value="<fmt:formatDate value="${employee.dayOfEntry}" pattern="dd.MM.yyyy"/>" />
+									<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 							</div>
 						</div>
 
@@ -222,7 +224,7 @@
 	<!-- JS for Bootstrap -->
 	
 	<!-- Footer -->
-	<jsp:include page="../includes/footer.jsp" />
+	<jsp:include page="../includes/template/footer.jsp" />
 
 
 	<!-- JS for Datetime picker -->

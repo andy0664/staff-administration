@@ -58,7 +58,65 @@ body {
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
 }
+
+.panel-announcements {
+  border-color: #337ab7;
+}
+
+.panel-announcements>.panel-heading {
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #337ab7;
+}
+
+
+.panel-green {
+  border-color: #5cb85c;
+}
+
+.panel-green > .panel-heading {
+    border-color: #5cb85c;
+    color: #fff;
+    background-color: #5cb85c;
+}
+
+.panel-blue {
+  border-color: #337ab7;
+}
+
+.panel-blue > .panel-heading {
+    border-color: #337ab7;
+    color: #fff;
+    background-color: #337ab7;
+}
+
+.panel-yellow {
+  border-color: #f0ad4e;
+}
+
+.panel-yellow > .panel-heading {
+  border-color: #f0ad4e;
+  color: #fff;
+  background-color: #f0ad4e;
+}
+
+.panel-red {
+  border-color: #d9534f;
+}
+
+.panel-red > .panel-heading {
+  border-color: #d9534f;
+  color: #fff;
+  background-color: #d9534f;
+}
 /* Panel end */
+
+/* Fonts start */
+.huge {
+  font-size: 40px;
+}
+
+/* Fonts end */
 
 .sidebar-nav {
 	padding: 9px 0;

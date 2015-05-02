@@ -16,7 +16,10 @@
 </head>
 <body>
 
-
+	<!--  Search bar ----------------------------------------------------------- -->
+	<jsp:include page="../includes/template/navigationBar.jsp" />
+	<!--  Search bar ----------------------------------------------------------- -->
+	
 	<div class="container" role="main">
 
 		<div class="page-header">
@@ -50,7 +53,7 @@
 
 		<!--  New Employee buttons ----------------------------------------------------------- -->
 		<div class="row">
-			<div class="col-md-4 col-md-offset-4">
+			<div class="col-md-4">
 				<p>
 					<a href="addEmployee">
 						<button type="button" class="btn btn-success">Add new
@@ -66,7 +69,7 @@
 
 
 		<div class="row">
-			<div class="col-md-10 col-md-offset-1">
+			<div class="col-md-12">
 
 				<table data-toggle="table" class="table table-striped">
 					<thead>
@@ -128,6 +131,9 @@
 
 	</div>
 	<!--  End of container -->
+	
+		<!-- Footer -->
+	<jsp:include page="../includes/template/footer.jsp" />
 
 	<jsp:include page="../includes/bootstrapJs.jsp" />
 </body>
