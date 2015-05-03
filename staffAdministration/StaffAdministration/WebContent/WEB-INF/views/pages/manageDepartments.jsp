@@ -15,7 +15,9 @@
 <jsp:include page="../includes/bootstrapCss.jsp" />
 </head>
 <body>
-
+	<!--  Search bar ----------------------------------------------------------- -->
+	<jsp:include page="../includes/template/navigationBar.jsp" />
+	<!--  Search bar ----------------------------------------------------------- -->
 
 	<div class="container" role="main">
 
