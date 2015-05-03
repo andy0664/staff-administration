@@ -58,7 +58,7 @@
 							<div class="col-md-10">
 								<input class="form_datetime" id="inputStartDate"
 									placeholder="Date" type="text" readonly name="startDate"
-									value="<fmt:formatDate value="${timeRecord.startDate}" pattern="dd.MM.yyyy"/>" />
+									value="<fmt:formatDate value="${timeRecord.startDate}" pattern="dd.MM.yyyy"/>" required/>
 								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 							</div>
 						</div>
@@ -70,7 +70,7 @@
 							<div class="col-md-10">
 								<input class="form_datetime" id="inputEndDate"
 									placeholder="Date" type="text" readonly name="endDate"
-									value="<fmt:formatDate value="${timeRecord.endDate}" pattern="dd.MM.yyyy"/>" />
+									value="<fmt:formatDate value="${timeRecord.endDate}" pattern="dd.MM.yyyy"/>" required/>
 
 								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 							</div>
@@ -86,7 +86,7 @@
 							<div class="col-md-10">
 								<input class="form-control" id="inputStartTime" type="text"
 									name="startTime"
-									value="<c:out value="${timeRecord.startTime}"/>">
+									value="<c:out value="${timeRecord.startTime}"/>"required>
 							</div>
 						</div>
 
@@ -96,7 +96,7 @@
 								to</label>
 							<div class="col-md-10">
 								<input class="form-control" id="inputEndTime" type="text"
-									name="endTime" value="<c:out value="${timeRecord.endTime}"/>">
+									name="endTime" value="<c:out value="${timeRecord.endTime}"/>"required>
 							</div>
 						</div>
 
