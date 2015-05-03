@@ -27,11 +27,14 @@ import org.springframework.web.servlet.ModelAndView;
 import at.fh.swenga.jpa.constant.Constant;
 import at.fh.swenga.jpa.dao.SimpleDepartmentRepository;
 import at.fh.swenga.jpa.dao.SimpleEmployeeRepository;
+import at.fh.swenga.jpa.dao.SimpleTimeRecordRepository;
 import at.fh.swenga.jpa.dto.DepartmentDTO;
 import at.fh.swenga.jpa.dto.EmployeeDTO;
+import at.fh.swenga.jpa.dto.TimeRecordDTO;
 import at.fh.swenga.jpa.model.Address;
 import at.fh.swenga.jpa.model.Department;
 import at.fh.swenga.jpa.model.Employee;
+import at.fh.swenga.jpa.model.TimeRecord;
 
 @Controller
 public class CoverPageController {
@@ -41,14 +44,21 @@ public class CoverPageController {
 
 	@Autowired
 	private SimpleDepartmentRepository departmentDao;
+	
+	@Autowired
+	private SimpleTimeRecordRepository timeRecordDao;
 
 	// For Binding Date
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+//		SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 		dateFormat.setLenient(false);
+//		timeFormat.setLenient(false);
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(
 				dateFormat, false));
+//		binder.registerCustomEditor(Date.class, new CustomDateEditor(
+//				timeFormat, false));
 	}
 
 	/*
@@ -74,12 +84,19 @@ public class CoverPageController {
 				departmentDao.findAll());
 		return Constant.PAGE_MANAGE_DEPARTMENTS;
 	}
-	
-	@RequestMapping(value={"newTimeRecord"})
-	public String newTimeRecord(Model model){
+
+	@RequestMapping(value = { "newTimeRecord" })
+	public String newTimeRecord(Model model) {
+		model.addAttribute(Constant.KEY_EMPLOYEE_LIST, employeeDao.findAll());
 		return Constant.PAGE_NEW_TIME_RECORD;
 	}
 
+	@RequestMapping(value={"showTimeRecords"})
+	public String showTimeRecords(Model model){
+		model.addAttribute(Constant.KEY_EMPLOYEE_LIST,employeeDao.findAll());
+		return Constant.PAGE_LIST_TIME_RECORDS;
+	}
+	
 	/*
 	 * ########### manageEmployees.jsp ############
 	 */
@@ -243,14 +260,14 @@ public class CoverPageController {
 			}
 			model.addAttribute(Constant.KEY_ERROR_MESSAGE, errorMessage);
 			return "forward:/manageDepartments";
-		} else {
-			Department dep = departmentDao.findDepartmentById(id);
-			dep.updateDepartment(newDepartment);
-			if(dep.getManager().getId()!=manager){
-				dep.setManager(employeeDao.findEmployeeById(manager));
-			}
-			departmentDao.save(dep);
 		}
+		Department dep = departmentDao.findDepartmentById(id);
+		dep.updateDepartment(newDepartment);
+		if (dep.getManager().getId() != manager) {
+			dep.setManager(employeeDao.findEmployeeById(manager));
+		}
+		departmentDao.save(dep);
+
 		return Constant.REDIRECT_MANAGE_DEPARTMENTS;
 	}
 
@@ -265,17 +282,52 @@ public class CoverPageController {
 			}
 			model.addAttribute(Constant.KEY_ERROR_MESSAGE, errorMessage);
 			return "forward:/manageDepartments";
-		} else {
-			Employee emp = employeeDao.findEmployeeById(manager);
-			Department dep = newDepartment.generateDepartment();
-			emp.setDepartment(dep);
-			dep.setManager(emp);
-			departmentDao.save(dep);
-			employeeDao.save(emp);
 		}
+		Employee emp = employeeDao.findEmployeeById(manager);
+		Department dep = newDepartment.generateDepartment();
+		emp.setDepartment(dep);
+		dep.setManager(emp);
+		departmentDao.save(dep);
+		employeeDao.save(emp);
+
 		return Constant.REDIRECT_MANAGE_DEPARTMENTS;
 	}
 
+	/*
+	 * ########### editTimeRecord.jsp ############
+	 */
+
+	@RequestMapping(value = { "addTimeRecord" }, method=RequestMethod.POST)
+	public String addTimeRecord(@Valid @ModelAttribute TimeRecordDTO newRecord,
+			@RequestParam int employee, Model model, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			String errorMessage = "";
+			for (FieldError error : bindingResult.getFieldErrors()) {
+				errorMessage += error.getField() + " is invalid<br>";
+			}
+			model.addAttribute(Constant.KEY_ERROR_MESSAGE, errorMessage);
+			return "forward:/start";
+		}
+		Employee emp = employeeDao.findEmployeeById(employee);
+		TimeRecord record = newRecord.generateTimeRecord();
+		record.setEmployee(emp);
+		timeRecordDao.save(record);
+		return Constant.PAGE_INDEX;
+	}
+
+	
+	/*
+	 * ########### listTimeRecords.jsp ############
+	 */
+	@RequestMapping(value={"timeRecordEmployee"})
+	public String timeRecordChangeEmployee(@RequestParam int employee, Model model){
+		model.addAttribute(Constant.KEY_TIME_RECORD_LIST, timeRecordDao.findRecordsByEmployeeId(employee));
+		model.addAttribute(Constant.KEY_EMPLOYEE_LIST, employeeDao.findAll());
+//		model.addAttribute(Constant.KEY_EMPLOYEE, employeeDao.findEmployeeById(employee));
+		return Constant.PAGE_LIST_TIME_RECORDS;
+	}
+	
+	
 	// @ExceptionHandler(Exception.class)
 	// public String handleAllException(Exception ex) {
 	// return "showError";

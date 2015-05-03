@@ -46,6 +46,9 @@ public class TimeRecord {
 	@Version
 	private long version;
 
+	public TimeRecord() {
+	}
+	
 	public TimeRecord(Date startDate, Date endDate, Date startTime,
 			Date endTime, String typ) {
 		this.startDate = startDate;
@@ -102,5 +105,12 @@ public class TimeRecord {
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
+
+	public int getId() {
+		return id;
+	}
+	
+	
+	
 	
 }

@@ -167,7 +167,7 @@
 							<h4 class="list-group-item-heading">create new time record</h4>
 							<p class="list-group-item-text">This is the area where you
 								can list all employees.</p>
-						</a> <a href="#" class="list-group-item">
+						</a> <a href="showTimeRecords" class="list-group-item">
 							<h4 class="list-group-item-heading">personal time statistic</h4>
 							<p class="list-group-item-text">This is the area where you
 								can mangage your employees.</p>

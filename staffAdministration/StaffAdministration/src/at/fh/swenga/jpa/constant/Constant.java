@@ -13,6 +13,7 @@ public class Constant {
 	public static final String PAGE_MANAGE_EMPLOYEES="/pages/manageEmployees";
 	public static final String PAGE_MANAGE_DEPARTMENTS="/pages/manageDepartments";
 	public static final String PAGE_NEW_TIME_RECORD = "/pages/editTimeRecord";
+	public static final String PAGE_LIST_TIME_RECORDS = "/pages/listTimeRecords";
 	
 	//Roles
 	public static final int ROLE_ADMINISTRATOR=1;
@@ -26,6 +27,7 @@ public class Constant {
 	public static final String KEY_EMPLOYEE="employee";
 	public static final String KEY_DEPARTMENT_LIST="departmentList";
 	public static final String KEY_DEPARTMENT="department";
+	public static final String KEY_TIME_RECORD_LIST="timeRecordList";
 	public static final String KEY_ERROR_MESSAGE="errorMessage";
 	public static final String KEY_UPDATE_EMPLOYEE_MESSAGE="updateEmployeeMessage";
 	

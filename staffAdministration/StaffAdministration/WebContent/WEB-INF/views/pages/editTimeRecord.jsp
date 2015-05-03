@@ -24,8 +24,8 @@
 	<!--  Search bar ----------------------------------------------------------- -->
 	<jsp:include page="../includes/template/navigationBar.jsp" />
 	<!--  Search bar ----------------------------------------------------------- -->
-		
-	<jsp:include page="../includes/template/dateTimePicker.jsp" />
+
+	<%-- <jsp:include page="../includes/template/dateTimePicker.jsp" /> --%>
 
 	<div class="container" role="main">
 
@@ -49,7 +49,7 @@
 				value="${_csrf.token }" /> --%>
 					<fieldset>
 						<legend>${legend}</legend>
-						<input type="hidden" name="id" value="${employee.id }" />
+				<%-- 		<input type="hidden" name="id" value="${employee.id }" /> --%>
 
 						<! ----------------  startDate ---------------- -->
 						<div class="form-group">
@@ -75,9 +75,9 @@
 								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 							</div>
 						</div>
-						
-														<!-- Datetime -->
-								<jsp:include page="../includes/template/dateTimePicker.jsp" />
+
+						<!-- Datetime -->
+						<%-- <jsp:include page="../includes/template/dateTimePicker.jsp" /> --%>
 
 						<! ----------------  startTime ---------------- -->
 						<div class="form-group">
@@ -101,7 +101,7 @@
 						</div>
 
 
-						<! ---------------  Department ---------------- -->
+						<! ---------------  Typ ---------------- -->
 						<div class="form-group">
 							<label for="inputTyp" class="col-md-2 control-label">Typ</label>
 							<div class="col-md-10">
@@ -110,6 +110,19 @@
 										time</option>
 									<option value="sick leave">sick leave</option>
 									<option value="vacation">vacation</option>
+								</select>
+							</div>
+						</div>
+
+						<! ----------------  Employee For testing Remove ---------------- -->
+						<div class="form-group">
+							<label for="inputManager" class="col-md-2 control-label">Employee</label>
+							<div class="col-md-10">
+								<select class="form-control" name="employee">
+									<c:forEach items="${employeeList }" var="employee">
+										<option value="${employee.id}">${ employee.firstName}
+											${employee.lastName }</option>
+									</c:forEach>
 								</select>
 							</div>
 						</div>
