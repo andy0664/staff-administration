@@ -16,6 +16,8 @@
 <link
 	href="http://www.malot.fr/bootstrap-datetimepicker/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"
 	rel="stylesheet">
+
+
 </head>
 <body>
 	<!--  Search bar ----------------------------------------------------------- -->
@@ -70,7 +72,7 @@
 							</div>
 						</div>
 
-						<! ----------------  startTime ---------------- -->
+						<! ----------------  startTime ---------------- --> 
 						<div class="form-group">
 							<label for="inputStartTime" class="col-md-2 control-label">Time
 								from</label>
@@ -78,24 +80,26 @@
 								<input class="form-control" id="inputStartTime" type="text"
 									name="startTime" value="<c:out value="${timeRecord.startTime}"/>">
 							</div>
-						</div>
-
-						<! ----------------  endTime ---------------- -->
+						</div> 
+						
+							class="time_element" /> <! ----------------  endTime ---------------- -->
 						<div class="form-group">
-							<label for="inputEndTime" class="col-md-2 control-label">Time to</label>
+							<label for="inputEndTime" class="col-md-2 control-label">Time
+								to</label>
 							<div class="col-md-10">
-								<input class="form-control" id="inputEndTime" type="text" 
+								<input class="form-control" id="inputEndTime" type="text"
 									name="endTime" value="<c:out value="${timeRecord.endTime}"/>">
 							</div>
-						</div> 
+						</div>
 
 
-						<! ---------------  Department ---------------- -->
+						<! ---------------  Reason ---------------- -->
 						<div class="form-group">
 							<label for="inputTyp" class="col-md-2 control-label">Typ</label>
 							<div class="col-md-10">
 								<select class="form-control" name="typ">
-									<option value="working time" selected="selected">working time</option>
+									<option value="working time" selected="selected">working
+										time</option>
 									<option value="sick leave">sick leave</option>
 									<option value="vacation">vacation</option>
 								</select>
@@ -143,6 +147,6 @@
 				minView : 2
 			});
 		});
-	</script>	
+	</script>
 </body>
 </html>
