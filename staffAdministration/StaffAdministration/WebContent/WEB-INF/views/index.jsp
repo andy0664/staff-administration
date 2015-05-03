@@ -14,27 +14,18 @@
 
 <!-- Include Modernizr in the head, before any other Javascript -->
 <script src="includes/js/modernizr-2.6.2.min.js"></script>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 
 <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-
 
 <!-- DateTimePicker -->
 <script type="text/javascript"
 	src="/bower_components/moment/min/moment.min.js"></script>
 
-<script type="text/javascript"
-	src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-
-<link rel="stylesheet"
-	href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
-
 <link rel="stylesheet"
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<link href="./css/prettify-1.0.css" rel="stylesheet">
-<link href="./css/base.css" rel="stylesheet">
 <link
 	href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/d004434a5ff76e7b97c8b07c01f34ca69e635d97/build/css/bootstrap-datetimepicker.css"
 	rel="stylesheet">
@@ -43,18 +34,23 @@
 	src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
 <script
 	src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/d004434a5ff76e7b97c8b07c01f34ca69e635d97/src/js/bootstrap-datetimepicker.js"></script>
-
 </head>
 <body>
+
+
 
 	<!--  Search bar ----------------------------------------------------------- -->
 	<jsp:include page="includes/template/navigationBar.jsp" />
 	<!--  Search bar ----------------------------------------------------------- -->
-	
+
+
 	<jsp:include page="includes/template/dateTimePicker.jsp" />
 
-	
 	<div class="container" id="main">
+		<script type="text/javascript">
+			$('#timepicker1').timepicker();
+		</script>
+		<jsp:include page="includes/template/dateTimePicker.jsp" />
 		<div class="row" id="bigCallout">
 			<div class="col-12">
 				<!-- Visible only on small devices -->
@@ -249,9 +245,8 @@
 								<li class="news-item">
 									<table cellpadding="4">
 										<tr>
-											<td><img
-												src="${pageContext.request.contextPath}/includes/images/1.png"
-												width="60" class="img-circle" /></td>
+											<td><img src="images/1.png" width="60"
+												class="img-circle" /></td>
 											<td>Lorem ipsum dolor sit amet, consectetur adipiscing
 												elit. Nullam in venenatis enim... <a href="#">Read
 													more...</a>
@@ -336,7 +331,8 @@
 				</div>
 				<div class="panel-footer">
 					<a href="#">
-						<button type="button" class="btn btn-primary">New entry</button>
+						<button type="button" class="btn btn-primary" id="myBtn"
+							data-toggle="modal" data-target="#basicModal">New entry</button>
 					</a>
 					<ul class="pagination pull-right" style="margin: 0px;">
 						<li><a href="#" class="prev"><span
@@ -349,34 +345,42 @@
 			</div>
 		</div>
 		<!-- end feature -->
+	</div>
+	<!-- end features -->
 
-		<a href="#" class="btn btn-lg btn-success" data-toggle="modal"
-			data-target="#basicModal">Click to open Modal</a>
-
-		<div class="modal fade" id="basicModal" tabindex="-1" role="dialog"
-			aria-labelledby="basicModal" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">&amp;times;</button>
-						<h4 class="modal-title" id="myModalLabel">Modal title</h4>
-					</div>
-					<div class="modal-body">
-						<h3>Modal Body</h3>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save
-							changes</button>
-					</div>
+	<!-- Modal -->
+	<div class="modal fade" id="basicModal" role="dialog"
+		aria-labelledby="basicModal" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">New Entry</h4>
+				</div>
+				<div class="modal-body">
+					<form role="form">
+						<div class="form-group">
+							<label for="usr">Heading:</label> <input type="text"
+								class="form-control" id="usr">
+						</div>
+						<div class="form-group">
+							<label for="comment">Content</label>
+							<textarea class="form-control" rows="5" id="comment"></textarea>
+						</div>
+						<div class="form-group">
+							<label for="usr">Link:</label> <input type="text"
+								class="form-control" id="usr">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- end features -->
-
-
 
 	<!-- Footer -->
 	<jsp:include page="includes/template/footer.jsp" />
@@ -396,6 +400,16 @@
 				}
 			});
 		})
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			$("#myBtn").click(function() {
+				$("#basicModal").modal({
+					backdrop : "static"
+				});
+			});
+		});
 	</script>
 
 
