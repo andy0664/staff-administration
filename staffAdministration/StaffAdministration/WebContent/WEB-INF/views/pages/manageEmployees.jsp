@@ -131,8 +131,8 @@
 
 	</div>
 	<!--  End of container -->
-	
-		<!-- Footer -->
+
+	<!-- Footer -->
 	<jsp:include page="../includes/template/footer.jsp" />
 
 	<jsp:include page="../includes/bootstrapJs.jsp" />

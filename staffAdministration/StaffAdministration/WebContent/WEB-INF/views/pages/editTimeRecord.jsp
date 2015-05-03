@@ -13,14 +13,19 @@
 <jsp:include page="../includes/bootstrapMeta.jsp" />
 <title>Edit TimeRecord</title>
 <jsp:include page="../includes/bootstrapCss.jsp" />
+<jsp:include page="../includes/bootstrapJs.jsp" />
 <link
 	href="http://www.malot.fr/bootstrap-datetimepicker/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"
 	rel="stylesheet">
+
 </head>
 <body>
+
 	<!--  Search bar ----------------------------------------------------------- -->
 	<jsp:include page="../includes/template/navigationBar.jsp" />
 	<!--  Search bar ----------------------------------------------------------- -->
+		
+	<jsp:include page="../includes/template/dateTimePicker.jsp" />
 
 	<div class="container" role="main">
 
@@ -66,9 +71,13 @@
 								<input class="form_datetime" id="inputEndDate"
 									placeholder="Date" type="text" readonly name="endDate"
 									value="<fmt:formatDate value="${timeRecord.endDate}" pattern="dd.MM.yyyy"/>" />
+
 								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 							</div>
 						</div>
+						
+														<!-- Datetime -->
+								<jsp:include page="../includes/template/dateTimePicker.jsp" />
 
 						<! ----------------  startTime ---------------- -->
 						<div class="form-group">
@@ -76,18 +85,20 @@
 								from</label>
 							<div class="col-md-10">
 								<input class="form-control" id="inputStartTime" type="text"
-									name="startTime" value="<c:out value="${timeRecord.startTime}"/>">
+									name="startTime"
+									value="<c:out value="${timeRecord.startTime}"/>">
 							</div>
 						</div>
 
 						<! ----------------  endTime ---------------- -->
 						<div class="form-group">
-							<label for="inputEndTime" class="col-md-2 control-label">Time to</label>
+							<label for="inputEndTime" class="col-md-2 control-label">Time
+								to</label>
 							<div class="col-md-10">
-								<input class="form-control" id="inputEndTime" type="text" 
+								<input class="form-control" id="inputEndTime" type="text"
 									name="endTime" value="<c:out value="${timeRecord.endTime}"/>">
 							</div>
-						</div> 
+						</div>
 
 
 						<! ---------------  Department ---------------- -->
@@ -95,7 +106,8 @@
 							<label for="inputTyp" class="col-md-2 control-label">Typ</label>
 							<div class="col-md-10">
 								<select class="form-control" name="typ">
-									<option value="working time" selected="selected">working time</option>
+									<option value="working time" selected="selected">working
+										time</option>
 									<option value="sick leave">sick leave</option>
 									<option value="vacation">vacation</option>
 								</select>
@@ -125,7 +137,7 @@
 	<!-- JS for Bootstrap -->
 
 	<!-- Footer -->
-	<jsp:include page="../includes/template/footer.jsp" />
+	<jsp:include page="../includes/template/fixedFooter.jsp" />
 
 
 	<!-- JS for Datetime picker -->
@@ -143,6 +155,6 @@
 				minView : 2
 			});
 		});
-	</script>	
+	</script>
 </body>
 </html>

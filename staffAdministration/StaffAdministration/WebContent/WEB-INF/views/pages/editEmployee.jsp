@@ -15,6 +15,7 @@
 <link
 	href="http://www.malot.fr/bootstrap-datetimepicker/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"
 	rel="stylesheet">
+
 </head>
 <body>
 	<!--  Search bar ----------------------------------------------------------- -->
@@ -80,7 +81,7 @@
 								<input class="form_datetime" id="inputDate" placeholder="Date"
 									type="text" readonly name="dayOfBirth"
 									value="<fmt:formatDate value="${employee.dayOfBirth}" pattern="dd.MM.yyyy"/>" />
-									<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 							</div>
 						</div>
 
@@ -151,7 +152,7 @@
 								<input class="form_datetime" id="inputDate" placeholder="Date"
 									type="text" readonly name="dayOfEntry"
 									value="<fmt:formatDate value="${employee.dayOfEntry}" pattern="dd.MM.yyyy"/>" />
-									<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 							</div>
 						</div>
 
@@ -164,7 +165,7 @@
 									<c:forEach items="${departmentList }" var="department">
 										<c:choose>
 											<c:when test="${employee.department.name==department.name}">
-												<option value="${department.id}"selected="selected">${department.name}</option>
+												<option value="${department.id}" selected="selected">${department.name}</option>
 											</c:when>
 											<c:otherwise>
 												<option value="${department.id}">${department.name}</option>
@@ -223,9 +224,9 @@
 	<!-- JS for Bootstrap -->
 	<%@include file="../includes/bootstrapJs.jsp"%>
 	<!-- JS for Bootstrap -->
-	
+
 	<!-- Footer -->
-	<jsp:include page="../includes/template/footer.jsp" />
+	<jsp:include page="../includes/template/fixedFooter.jsp" />
 
 
 	<!-- JS for Datetime picker -->

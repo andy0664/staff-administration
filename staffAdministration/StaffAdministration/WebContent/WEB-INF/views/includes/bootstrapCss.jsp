@@ -1,28 +1,15 @@
-
-
 <!-- Bootstrap core CSS -->
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
-<!--Bootstrap core CSS â-->
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-
-
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="../js/jquery.bootstrap.newsbox.min.js"
+	type="text/javascript"></script>
 
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.6.0/bootstrap-table.min.css">
-
-
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.6.0/bootstrap-table.min.css">
 
@@ -36,6 +23,7 @@ body {
 /* 	padding-top: 10px; */
 /* 	padding-bottom: 10px; */
 }
+
 
 /* Panel start */
 .panel {
@@ -141,12 +129,22 @@ ul.unstyled {
 	padding: 0;
 }
 
+/* Footer */
 footer {
 	background: #333;
 	color: #eee;
 	font-size: 11px;
-	padding-top: 20px;
 }
+
+.navbar-fixed-bottom
+{
+	background: #333;
+	color: #eee;
+	font-size: 11px;
+
+}
+
+/* Footer end */
 
 .sidebar-nav {
 	padding: 9px 0;
@@ -217,10 +215,6 @@ footer {
 
 <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-
-</style>
-
-
 
 <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
