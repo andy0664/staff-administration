@@ -46,11 +46,11 @@
 						<legend>${legend}</legend>
 						<input type="hidden" name="id" value="${employee.id }" />
 						<! ----------------  ssn ---------------- -->
-						<div class="form-group.required">
+						<div class="form-group">
 							<label for="inputSSN" class="col-md-2 control-label">SSN</label>
 							<div class="col-md-10">
 								<input class="form-control" id="inputSSN" type="text" name="ssn"
-									value="<c:out value="${employee.ssn}"/>">
+									value="<c:out value="${employee.ssn}"/>" required>
 							</div>
 						</div>
 
@@ -60,7 +60,7 @@
 								Name</label>
 							<div class="col-md-10">
 								<input class="form-control" id="inputFirstName" type="text"
-									name="firstName" value="<c:out value="${employee.firstName}"/>">
+									name="firstName" value="<c:out value="${employee.firstName}"/>"required>
 							</div>
 						</div>
 						<! ----------------  last Name ---------------- -->
@@ -69,7 +69,7 @@
 								Name</label>
 							<div class="col-md-10">
 								<input class="form-control" id="inputLastName" type="text"
-									name="lastName" value="<c:out value="${employee.lastName}"/>">
+									name="lastName" value="<c:out value="${employee.lastName}"/>"required>
 							</div>
 						</div>
 
@@ -80,7 +80,7 @@
 							<div class="col-md-10">
 								<input class="form_datetime" id="inputDate" placeholder="Date"
 									type="text" readonly name="dayOfBirth"
-									value="<fmt:formatDate value="${employee.dayOfBirth}" pattern="dd.MM.yyyy"/>" />
+									value="<fmt:formatDate value="${employee.dayOfBirth}" pattern="dd.MM.yyyy"/>" /required>
 								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 							</div>
 						</div>
@@ -91,7 +91,7 @@
 							<div class="col-md-10">
 								<input class="form-control" id="inputStreet" type="text"
 									name="street"
-									value="<c:out value="${employee.address.street}"/>">
+									value="<c:out value="${employee.address.street}"/>"required>
 							</div>
 						</div>
 
@@ -100,7 +100,7 @@
 							<label for="inputCity" class="col-md-2 control-label">City</label>
 							<div class="col-md-10">
 								<input class="form-control" id="inputCity" type="text"
-									name="city" value="<c:out value="${employee.address.city}"/>">
+									name="city" value="<c:out value="${employee.address.city}"/>"required>
 							</div>
 						</div>
 
@@ -110,7 +110,7 @@
 							<div class="col-md-10">
 								<input class="form-control" id="inputCountry" type="text"
 									name="country"
-									value="<c:out value="${employee.address.country}"/>">
+									value="<c:out value="${employee.address.country}"/>"required>
 							</div>
 						</div>
 
@@ -120,7 +120,7 @@
 								Code</label>
 							<div class="col-md-10">
 								<input class="form-control" id="inputZIP" type="text" name="zip"
-									value="<c:out value="${employee.address.zip}"/>">
+									value="<c:out value="${employee.address.zip}"/>"required>
 							</div>
 						</div>
 
@@ -131,7 +131,7 @@
 							<div class="col-md-10">
 								<input class="form-control" id="inputDescription"
 									type="jobDescription" name="jobDescription"
-									value="<c:out value="${employee.jobDescription}"/>">
+									value="<c:out value="${employee.jobDescription}"/>"required>
 							</div>
 						</div>
 
@@ -140,7 +140,7 @@
 							<label for="inputSalary" class="col-md-2 control-label">Salary</label>
 							<div class="col-md-10">
 								<input class="form-control" id="inputSalary" type="text"
-									name="salary" value="<c:out value="${employee.salary}"/>">
+									name="salary" value="<c:out value="${employee.salary}"/>"required>
 							</div>
 						</div>
 
@@ -151,7 +151,7 @@
 							<div class="col-md-10">
 								<input class="form_datetime" id="inputDate" placeholder="Date"
 									type="text" readonly name="dayOfEntry"
-									value="<fmt:formatDate value="${employee.dayOfEntry}" pattern="dd.MM.yyyy"/>" />
+									value="<fmt:formatDate value="${employee.dayOfEntry}" pattern="dd.MM.yyyy"/>" /required>
 								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 							</div>
 						</div>
