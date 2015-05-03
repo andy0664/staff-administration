@@ -16,6 +16,9 @@
 <jsp:include page="../includes/bootstrapCss.jsp" />
 </head>
 <body>
+	<!--  Search bar ----------------------------------------------------------- -->
+	<jsp:include page="../includes/template/navigationBar.jsp" />
+	<!--  Search bar ----------------------------------------------------------- -->
 	<div class="container" role="main">
 
 		<!--  add or edit?  ----------------------------------------------------------- -->
@@ -41,11 +44,11 @@
 						<input type="hidden" name="id" value="${department.id }" />
 
 						<! ----------------  name ---------------- -->
-						<div class="form-group.required">
+						<div class="form-group">
 							<label for="inputName" class="col-md-2 control-label">Name</label>
 							<div class="col-md-10">
 								<input class="form-control" id="inputName" type="text"
-									name="name" value="<c:out value="${department.name}"/>">
+									name="name" value="<c:out value="${department.name}"/>"required>
 							</div>
 						</div>
 
@@ -55,7 +58,7 @@
 							<div class="col-md-10">
 								<input class="form-control" id="inputShortcut" type="text"
 									maxlength="5" name="shortcut"
-									value="<c:out value="${department.shortcut}"/>">
+									value="<c:out value="${department.shortcut}"/>"required>
 							</div>
 						</div>
 
