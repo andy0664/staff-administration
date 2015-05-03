@@ -17,13 +17,43 @@
 <script
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
-<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+
+<!-- DateTimePicker -->
+<script type="text/javascript"
+	src="/bower_components/moment/min/moment.min.js"></script>
+
+<script type="text/javascript"
+	src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+<link rel="stylesheet"
+	href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+
+<link rel="stylesheet"
+	href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link href="./css/prettify-1.0.css" rel="stylesheet">
+<link href="./css/base.css" rel="stylesheet">
+<link
+	href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/d004434a5ff76e7b97c8b07c01f34ca69e635d97/build/css/bootstrap-datetimepicker.css"
+	rel="stylesheet">
+
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+<script
+	src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/d004434a5ff76e7b97c8b07c01f34ca69e635d97/src/js/bootstrap-datetimepicker.js"></script>
+
 </head>
 <body>
+
 	<!--  Search bar ----------------------------------------------------------- -->
 	<jsp:include page="includes/template/navigationBar.jsp" />
 	<!--  Search bar ----------------------------------------------------------- -->
+	
+	<jsp:include page="includes/template/dateTimePicker.jsp" />
+
+	
 	<div class="container" id="main">
 		<div class="row" id="bigCallout">
 			<div class="col-12">
@@ -220,7 +250,7 @@
 									<table cellpadding="4">
 										<tr>
 											<td><img
-												src="includes/images/1.png"
+												src="${pageContext.request.contextPath}/includes/images/1.png"
 												width="60" class="img-circle" /></td>
 											<td>Lorem ipsum dolor sit amet, consectetur adipiscing
 												elit. Nullam in venenatis enim... <a href="#">Read
@@ -320,11 +350,33 @@
 		</div>
 		<!-- end feature -->
 
+		<a href="#" class="btn btn-lg btn-success" data-toggle="modal"
+			data-target="#basicModal">Click to open Modal</a>
+
+		<div class="modal fade" id="basicModal" tabindex="-1" role="dialog"
+			aria-labelledby="basicModal" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&amp;times;</button>
+						<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+					</div>
+					<div class="modal-body">
+						<h3>Modal Body</h3>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Save
+							changes</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<!-- end features -->
 
 
-	</div>
 
 	<!-- Footer -->
 	<jsp:include page="includes/template/footer.jsp" />
