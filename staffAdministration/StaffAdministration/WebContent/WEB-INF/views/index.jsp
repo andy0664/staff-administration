@@ -209,7 +209,7 @@
 			<!-- end panel -->
 		</div>
 
-
+<!-- 		Announcements -->
 		<div class="col-md-4">
 
 			<div class="panel panel-announcements">
@@ -233,6 +233,7 @@
 				</a>
 			</div>
 
+<!-- News -->
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<span class="glyphicon glyphicon-list-alt"></span><b>News</b>
