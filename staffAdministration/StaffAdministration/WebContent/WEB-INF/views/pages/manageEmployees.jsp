@@ -5,7 +5,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-
+<%-- --%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -19,14 +19,15 @@
 	<!--  Search bar ----------------------------------------------------------- -->
 	<jsp:include page="../includes/template/navigationBar.jsp" />
 	<!--  Search bar ----------------------------------------------------------- -->
-	
+
 	<div class="container" role="main">
 
+		<c:set var="lastDepartment">""</c:set>
 		<div class="page-header">
 			<h1>Manage Employees</h1>
 		</div>
 
-		 <!--  Error message ----------------------------------------------------------- -->
+		<!--  Error message ----------------------------------------------------------- -->
 		<c:if test="${not empty errorMessage}">
 			<div class="alert alert-danger" role="alert">${errorMessage}</div>
 		</c:if>
@@ -41,10 +42,9 @@
 
 		<!--   message ----------------------------------------------------------- -->
 		<c:if test="${not empty updateEmployeeMessage}">
-			<div class="alert alert-success" role="warning">
-				${message}</div>
+			<div class="alert alert-success" role="warning">${message}</div>
 		</c:if>
-		<!--   message ----------------------------------------------------------- --> 
+		<!--   message ----------------------------------------------------------- -->
 
 
 		<!--  Search bar ----------------------------------------------------------- -->

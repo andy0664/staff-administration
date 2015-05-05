@@ -17,6 +17,7 @@ public interface SimpleEmployeeRepository extends
 	//@Query("select new at.fh.swenga.jpa.dto.EmployeeDTO(e.id, e.firstname,e.lastname) from Employee e where e.department is null")
 	@Query("select e from Employee e where e.department is null")
 	public List<Employee> findEmployeeWithNoDepartment();
+	public List<Employee> findEmployeeByOrderByDepartmentId();
 	public List<Employee> findEmployeeByDepartmentId(int depId);
 
 }

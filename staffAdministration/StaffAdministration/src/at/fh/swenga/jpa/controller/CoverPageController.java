@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -51,14 +52,15 @@ public class CoverPageController {
 	// For Binding Date
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-//		SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-		dateFormat.setLenient(false);
-//		timeFormat.setLenient(false);
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(
-				dateFormat, false));
+//		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+////		SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+//		dateFormat.setLenient(false);
+////		timeFormat.setLenient(false);
 //		binder.registerCustomEditor(Date.class, new CustomDateEditor(
-//				timeFormat, false));
+//				dateFormat, false));
+////		binder.registerCustomEditor(Date.class, new CustomDateEditor(
+////				timeFormat, false));
+		binder.registerCustomEditor(Date.class, new DateTimeEditor());
 	}
 
 	/*
@@ -74,7 +76,7 @@ public class CoverPageController {
 	// From index.jsp manageEmployees
 	@RequestMapping(value = { "manageEmployees" })
 	public String listAllEmployee(Model model) {
-		model.addAttribute(Constant.KEY_EMPLOYEE_LIST, employeeDao.findAll());
+		model.addAttribute(Constant.KEY_EMPLOYEE_LIST, employeeDao.findEmployeeByOrderByDepartmentId());
 		return Constant.PAGE_MANAGE_EMPLOYEES;
 	}
 
@@ -320,11 +322,24 @@ public class CoverPageController {
 	 * ########### listTimeRecords.jsp ############
 	 */
 	@RequestMapping(value={"timeRecordEmployee"})
-	public String timeRecordChangeEmployee(@RequestParam int employee, Model model){
-		model.addAttribute(Constant.KEY_TIME_RECORD_LIST, timeRecordDao.findRecordsByEmployeeId(employee));
-		model.addAttribute(Constant.KEY_EMPLOYEE_LIST, employeeDao.findAll());
-//		model.addAttribute(Constant.KEY_EMPLOYEE, employeeDao.findEmployeeById(employee));
-		return Constant.PAGE_LIST_TIME_RECORDS;
+	public String timeRecordManagerView(@RequestParam int employee, Model model){
+		return prepareTimeRecordManager(employee,model);
+	}
+	
+	@RequestMapping(value={"timeRecordEmployeeDelete"})
+	public String timeRecordManagerView(@RequestParam int timerecord, @RequestParam int id, Model model){
+		return prepareTimeRecordManager(id,model);
+	}
+	
+	@RequestMapping(value={"deleteTimeRecord"})
+	public String deleteTimeRecord(@RequestParam int timerecord,int id, Model model){
+		try{
+			timeRecordDao.delete(timerecord);
+		}catch(Exception ex){
+			ex.printStackTrace();
+			model.addAttribute(Constant.KEY_ERROR_MESSAGE, "Couldn't delete timerecord");
+		}
+		return "forward:timeRecordEmployeeDelete";
 	}
 	
 	
@@ -338,5 +353,12 @@ public class CoverPageController {
 			emp.setDepartment(departmentDao.findDepartmentById(department));
 		}
 		employeeDao.save(emp);
+	}
+	
+	private String prepareTimeRecordManager(int employee,Model model){
+		model.addAttribute(Constant.KEY_TIME_RECORD_LIST, timeRecordDao.findRecordsByEmployeeId(employee));
+		model.addAttribute(Constant.KEY_EMPLOYEE_LIST, employeeDao.findAll());
+		model.addAttribute(Constant.KEY_EMPLOYEE, employeeDao.findEmployeeById(employee));
+		return Constant.PAGE_LIST_TIME_RECORDS;
 	}
 }

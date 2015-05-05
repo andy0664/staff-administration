@@ -108,12 +108,12 @@
 								<td>${timeRecord.startTime}</td>
 								<td>${timeRecord.endTime}</td>
 								<td>${timeRecord.typ}</td>
-								<td><a href="changeDepartment?id=${timeRecord.id}">
+								<td><a href="changeTimeRecord?id=${timeRecord.id}">
 										<button type="button" class="btn btn-xs btn-success">
 											<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 											Edit
 										</button>
-								</a> <a href="deleteDepartment?id=${timeRecord.id}">
+								</a> <a href="deleteTimeRecord?timerecord=${timeRecord.id}&id=${employee.id}">
 										<button type="button" class="btn btn-xs btn-danger">
 											<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 											Delete

@@ -6,60 +6,28 @@ import java.util.Date;
 import at.fh.swenga.jpa.model.TimeRecord;
 
 public class TimeRecordDTO {
-	
 
 	private Date startDate;
-	
+
 	private Date endDate;
 
-	private String startTime;
-	
+	private Date startTime;
 
-	private String endTime;
+	private Date endTime;
 
 	private String typ;
-	
+
 	public TimeRecordDTO() {
 	}
 	
-//	public TimeRecordDTO(Date startDate, Date endDate, Date startTime,
-//			Date endTime, String typ) {
-//		this.startDate = startDate;
-//		this.endDate = endDate;
-//		this.startTime = startTime;
-//		this.endTime = endTime;
-//		this.typ = typ;
-//	}
-	
-	public TimeRecordDTO(Date startDate, Date endDate, String startTime,
-			String endTime, String typ) {
+	public TimeRecordDTO(Date startDate, Date endDate, Date startTime,
+			Date endTime, String typ) {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.typ = typ;
 	}
-
-	
-//
-//	public Date getStartTime() {
-//		return startTime;
-//	}
-//
-//	public void setStartTime(Date startTime) {
-//		this.startTime = startTime;
-//	}
-//
-//	public Date getEndTime() {
-//		return endTime;
-//	}
-//
-//	public void setEndTime(Date endTime) {
-//		this.endTime = endTime;
-//	}
-	
-	
-
 
 
 	public Date getStartDate() {
@@ -78,19 +46,19 @@ public class TimeRecordDTO {
 		this.endDate = endDate;
 	}
 
-	public String getStartTime() {
+	public Date getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(String startTime) {
+	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
 
-	public String getEndTime() {
+	public Date getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(String endTime) {
+	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
 
@@ -102,18 +70,8 @@ public class TimeRecordDTO {
 		this.typ = typ;
 	}
 
-	public TimeRecord generateTimeRecord(){
-		return new TimeRecord(startDate,endDate, parseTime(startTime),parseTime(endTime),typ);
+	public TimeRecord generateTimeRecord() {
+		return new TimeRecord(startDate, endDate, startTime,
+				endTime, typ);
 	}
-	
-	private Date parseTime(String time){
-		SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-		try {
-			return timeFormat.parse(time);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			return null;
-		}
-	}
-
 }
