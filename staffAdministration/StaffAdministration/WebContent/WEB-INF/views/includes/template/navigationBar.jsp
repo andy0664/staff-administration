@@ -7,25 +7,35 @@
 		<div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="./">Home</a></li>
-				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Personal area<span class="caret"></span></a>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">Personal area<span
+						class="caret"></span></a>
 					<ul class="dropdown-menu">
+						<li><a href="#">View Profile</a></li>
+						<li><a href="#">Account Settings</a></li>
+						<li><a href="#">Set Status</a></li>
+					</ul></li>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">Business area<span
+						class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">List Employees</a></li>
 						<li><a href="manageEmployees">Manage Employees</a></li>
 						<li><a href="manageDepartments">Manage Departments</a></li>
 					</ul></li>
-				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Business area<span class="caret"></span></a>
-				<ul class="dropdown-menu">
-						<li><a href="manageEmployees">Manage Employees</a></li>
-						<li><a href="manageDepartments">Manage Departments</a></li>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">Time record<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="newTimeRecord">New Time Record</a></li>
+						<li><a href="showTimeRecords">Personal Time Statistic</a></li>
+						<li><a href="#">Employee Time Statistic</a></li>
 					</ul></li>
-				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Time record<span class="caret"></span></a>
-				<ul class="dropdown-menu">
-						<li><a href="manageEmployees">Manage Employees</a></li>
-						<li><a href="manageDepartments">Manage Departments</a></li>
-					</ul></li>
-				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Calendar<span class="caret"></span></a>
-				<ul class="dropdown-menu">
-						<li><a href="manageEmployees">Manage Employees</a></li>
-						<li><a href="manageDepartments">Manage Departments</a></li>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">Calendar<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">My Calendar</a></li>
+						<li><a href="#">Shared Calendar</a></li>
+						<li><a href="#">Feature Events</a></li>
 					</ul></li>
 			</ul>
 

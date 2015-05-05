@@ -16,6 +16,9 @@
 </head>
 <body>
 
+	<!--  Search bar ----------------------------------------------------------- -->
+	<jsp:include page="../includes/template/navigationBar.jsp" />
+	<!--  Search bar ----------------------------------------------------------- -->
 
 	<div class="container" role="main">
 
@@ -130,6 +133,9 @@
 
 	</div>
 	<!--  End of container -->
+	
+	<!-- Footer -->
+	<jsp:include page="../includes/template/fixedFooter.jsp" />
 
 	<jsp:include page="../includes/bootstrapJs.jsp" />
 </body>

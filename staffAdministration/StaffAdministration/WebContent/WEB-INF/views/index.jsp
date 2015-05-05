@@ -44,13 +44,13 @@
 	<!--  Search bar ----------------------------------------------------------- -->
 
 
-	<jsp:include page="includes/template/dateTimePicker.jsp" />
+<%-- 	<jsp:include page="includes/template/dateTimePicker.jsp" /> --%>
 
 	<div class="container" id="main">
 		<script type="text/javascript">
 			$('#timepicker1').timepicker();
 		</script>
-		<jsp:include page="includes/template/dateTimePicker.jsp" />
+<%-- 		<jsp:include page="includes/template/dateTimePicker.jsp" /> --%>
 		<div class="row" id="bigCallout">
 			<div class="col-12">
 				<!-- Visible only on small devices -->
