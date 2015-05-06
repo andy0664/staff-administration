@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import at.fh.swenga.jpa.constant.Constant;
 import at.fh.swenga.jpa.dao.SimpleDepartmentRepository;
 import at.fh.swenga.jpa.dao.SimpleEmployeeRepository;
+import at.fh.swenga.jpa.dao.SimpleNewsRepository;
 import at.fh.swenga.jpa.dao.SimpleTimeRecordRepository;
 import at.fh.swenga.jpa.dto.DepartmentDTO;
 import at.fh.swenga.jpa.dto.EmployeeDTO;
@@ -35,6 +36,7 @@ import at.fh.swenga.jpa.dto.TimeRecordDTO;
 import at.fh.swenga.jpa.model.Address;
 import at.fh.swenga.jpa.model.Department;
 import at.fh.swenga.jpa.model.Employee;
+import at.fh.swenga.jpa.model.News;
 import at.fh.swenga.jpa.model.TimeRecord;
 
 @Controller
@@ -45,21 +47,16 @@ public class CoverPageController {
 
 	@Autowired
 	private SimpleDepartmentRepository departmentDao;
-	
+
 	@Autowired
 	private SimpleTimeRecordRepository timeRecordDao;
+	
+	@Autowired
+	private SimpleNewsRepository newsRepository;
 
-	// For Binding Date
+	// For Binding Date and Time
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
-//		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-////		SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-//		dateFormat.setLenient(false);
-////		timeFormat.setLenient(false);
-//		binder.registerCustomEditor(Date.class, new CustomDateEditor(
-//				dateFormat, false));
-////		binder.registerCustomEditor(Date.class, new CustomDateEditor(
-////				timeFormat, false));
 		binder.registerCustomEditor(Date.class, new DateTimeEditor());
 	}
 
@@ -70,13 +67,15 @@ public class CoverPageController {
 	// Cover Page
 	@RequestMapping(value = { "/", "start" })
 	public String index(Model model) {
+		model.addAttribute(Constant.KEY_NEWS_LIST, newsRepository.findAll());
 		return Constant.PAGE_INDEX;
 	}
 
 	// From index.jsp manageEmployees
 	@RequestMapping(value = { "manageEmployees" })
 	public String listAllEmployee(Model model) {
-		model.addAttribute(Constant.KEY_EMPLOYEE_LIST, employeeDao.findEmployeeByOrderByDepartmentId());
+		model.addAttribute(Constant.KEY_EMPLOYEE_LIST,
+				employeeDao.findEmployeeByOrderByDepartmentId());
 		return Constant.PAGE_MANAGE_EMPLOYEES;
 	}
 
@@ -93,12 +92,33 @@ public class CoverPageController {
 		return Constant.PAGE_NEW_TIME_RECORD;
 	}
 
-	@RequestMapping(value={"showTimeRecords"})
-	public String showTimeRecords(Model model){
-		model.addAttribute(Constant.KEY_EMPLOYEE_LIST,employeeDao.findAll());
+	@RequestMapping(value = { "showTimeRecords" })
+	public String showTimeRecords(Model model) {
+		model.addAttribute(Constant.KEY_EMPLOYEE_LIST, employeeDao.findAll());
 		return Constant.PAGE_LIST_TIME_RECORDS;
 	}
+
+	@RequestMapping(value = { "newNews" })
+	public String newNews(@Valid @ModelAttribute News newNews,
+			BindingResult bindingResult, Model model) {
+		if (checkBinding(bindingResult, model)) {
+			return "forward:/start";
+		}
+		newsRepository.save(newNews);
+		return "forward:/start";
+	}
 	
+	@RequestMapping(value={"removeNews"}, method=RequestMethod.GET)
+	public String removeNews(@RequestParam int id, Model model){
+		try{
+			newsRepository.delete(id);
+		}catch(Exception ex){
+			ex.printStackTrace();
+			model.addAttribute(Constant.KEY_ERROR_MESSAGE, "Couldn't delete news");
+		}
+		return "forward:/start";
+	}
+
 	/*
 	 * ########### manageEmployees.jsp ############
 	 */
@@ -163,18 +183,12 @@ public class CoverPageController {
 			@Valid @ModelAttribute Address newAddress,
 			@RequestParam int department, BindingResult bindingResult,
 			Model model) {
-		if (bindingResult.hasErrors()) {
-			String errorMessage = "";
-			for (FieldError error : bindingResult.getFieldErrors()) {
-				errorMessage += error.getField() + " is invalid<br>";
-			}
-			model.addAttribute(Constant.KEY_ERROR_MESSAGE, errorMessage);
+		if (checkBinding(bindingResult, model)) {
 			return "forward:/manageEmployees";
-		} else {
-			newEmployee.setAddress(newAddress);
-			Employee emp = newEmployee.generateEmployee();
-			saveEmployee(emp, department);
 		}
+		newEmployee.setAddress(newAddress);
+		Employee emp = newEmployee.generateEmployee();
+		saveEmployee(emp, department);
 		return Constant.REDIRECT_MANAGE_EMPLOYEES;
 	}
 
@@ -184,19 +198,13 @@ public class CoverPageController {
 			@Valid @ModelAttribute Address newAddress, @RequestParam int id,
 			@RequestParam int department, BindingResult bindingResult,
 			Model model) {
-		if (bindingResult.hasErrors()) {
-			String errorMessage = "";
-			for (FieldError error : bindingResult.getFieldErrors()) {
-				errorMessage += error.getField() + " is invalid<br>";
-			}
-			model.addAttribute(Constant.KEY_ERROR_MESSAGE, errorMessage);
+		if (checkBinding(bindingResult, model)) {
 			return "forward:/manageEmployees";
-		} else {
-			Employee emp = employeeDao.findEmployeeById(id);
-			newEmployee.setAddress(newAddress);
-			emp.updateEmployee(newEmployee);
-			saveEmployee(emp, department);
 		}
+		Employee emp = employeeDao.findEmployeeById(id);
+		newEmployee.setAddress(newAddress);
+		emp.updateEmployee(newEmployee);
+		saveEmployee(emp, department);
 		return Constant.REDIRECT_MANAGE_EMPLOYEES;
 	}
 
@@ -255,12 +263,7 @@ public class CoverPageController {
 			@Valid @ModelAttribute DepartmentDTO newDepartment,
 			@RequestParam int id, @RequestParam int manager, Model model,
 			BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
-			String errorMessage = "";
-			for (FieldError error : bindingResult.getFieldErrors()) {
-				errorMessage += error.getField() + " is invalid<br>";
-			}
-			model.addAttribute(Constant.KEY_ERROR_MESSAGE, errorMessage);
+		if (checkBinding(bindingResult, model)) {
 			return "forward:/manageDepartments";
 		}
 		Department dep = departmentDao.findDepartmentById(id);
@@ -269,7 +272,6 @@ public class CoverPageController {
 			dep.setManager(employeeDao.findEmployeeById(manager));
 		}
 		departmentDao.save(dep);
-
 		return Constant.REDIRECT_MANAGE_DEPARTMENTS;
 	}
 
@@ -277,12 +279,7 @@ public class CoverPageController {
 	public String saveDepartment(
 			@Valid @ModelAttribute DepartmentDTO newDepartment,
 			@RequestParam int manager, BindingResult bindingResult, Model model) {
-		if (bindingResult.hasErrors()) {
-			String errorMessage = "";
-			for (FieldError error : bindingResult.getFieldErrors()) {
-				errorMessage += error.getField() + " is invalid<br>";
-			}
-			model.addAttribute(Constant.KEY_ERROR_MESSAGE, errorMessage);
+		if (checkBinding(bindingResult, model)) {
 			return "forward:/manageDepartments";
 		}
 		Employee emp = employeeDao.findEmployeeById(manager);
@@ -299,15 +296,10 @@ public class CoverPageController {
 	 * ########### editTimeRecord.jsp ############
 	 */
 
-	@RequestMapping(value = { "addTimeRecord" }, method=RequestMethod.POST)
+	@RequestMapping(value = { "addTimeRecord" }, method = RequestMethod.POST)
 	public String addTimeRecord(@Valid @ModelAttribute TimeRecordDTO newRecord,
 			@RequestParam int employee, Model model, BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
-			String errorMessage = "";
-			for (FieldError error : bindingResult.getFieldErrors()) {
-				errorMessage += error.getField() + " is invalid<br>";
-			}
-			model.addAttribute(Constant.KEY_ERROR_MESSAGE, errorMessage);
+		if (checkBinding(bindingResult, model)) {
 			return "forward:/start";
 		}
 		Employee emp = employeeDao.findEmployeeById(employee);
@@ -317,32 +309,33 @@ public class CoverPageController {
 		return Constant.PAGE_INDEX;
 	}
 
-	
 	/*
 	 * ########### listTimeRecords.jsp ############
 	 */
-	@RequestMapping(value={"timeRecordEmployee"})
-	public String timeRecordManagerView(@RequestParam int employee, Model model){
-		return prepareTimeRecordManager(employee,model);
+	@RequestMapping(value = { "timeRecordEmployee" })
+	public String timeRecordManagerView(@RequestParam int employee, Model model) {
+		return prepareTimeRecordManager(employee, model);
 	}
-	
-	@RequestMapping(value={"timeRecordEmployeeDelete"})
-	public String timeRecordManagerView(@RequestParam int timerecord, @RequestParam int id, Model model){
-		return prepareTimeRecordManager(id,model);
+
+	@RequestMapping(value = { "timeRecordEmployeeDelete" })
+	public String timeRecordManagerView(@RequestParam int timerecord,
+			@RequestParam int id, Model model) {
+		return prepareTimeRecordManager(id, model);
 	}
-	
-	@RequestMapping(value={"deleteTimeRecord"})
-	public String deleteTimeRecord(@RequestParam int timerecord,int id, Model model){
-		try{
+
+	@RequestMapping(value = { "deleteTimeRecord" })
+	public String deleteTimeRecord(@RequestParam int timerecord, int id,
+			Model model) {
+		try {
 			timeRecordDao.delete(timerecord);
-		}catch(Exception ex){
+		} catch (Exception ex) {
 			ex.printStackTrace();
-			model.addAttribute(Constant.KEY_ERROR_MESSAGE, "Couldn't delete timerecord");
+			model.addAttribute(Constant.KEY_ERROR_MESSAGE,
+					"Couldn't delete timerecord");
 		}
 		return "forward:timeRecordEmployeeDelete";
 	}
-	
-	
+
 	// @ExceptionHandler(Exception.class)
 	// public String handleAllException(Exception ex) {
 	// return "showError";
@@ -354,11 +347,25 @@ public class CoverPageController {
 		}
 		employeeDao.save(emp);
 	}
-	
-	private String prepareTimeRecordManager(int employee,Model model){
-		model.addAttribute(Constant.KEY_TIME_RECORD_LIST, timeRecordDao.findRecordsByEmployeeId(employee));
+
+	private String prepareTimeRecordManager(int employee, Model model) {
+		model.addAttribute(Constant.KEY_TIME_RECORD_LIST,
+				timeRecordDao.findRecordsByEmployeeId(employee));
 		model.addAttribute(Constant.KEY_EMPLOYEE_LIST, employeeDao.findAll());
-		model.addAttribute(Constant.KEY_EMPLOYEE, employeeDao.findEmployeeById(employee));
+		model.addAttribute(Constant.KEY_EMPLOYEE,
+				employeeDao.findEmployeeById(employee));
 		return Constant.PAGE_LIST_TIME_RECORDS;
+	}
+
+	private boolean checkBinding(BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			String errorMessage = "";
+			for (FieldError error : bindingResult.getFieldErrors()) {
+				errorMessage += error.getField() + " is invalid<br>";
+			}
+			model.addAttribute(Constant.KEY_ERROR_MESSAGE, errorMessage);
+			return true;
+		}
+		return false;
 	}
 }

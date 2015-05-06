@@ -44,13 +44,13 @@
 	<!--  Search bar ----------------------------------------------------------- -->
 
 
-<%-- 	<jsp:include page="includes/template/dateTimePicker.jsp" /> --%>
+	<%-- 	<jsp:include page="includes/template/dateTimePicker.jsp" /> --%>
 
 	<div class="container" id="main">
 		<script type="text/javascript">
 			$('#timepicker1').timepicker();
 		</script>
-<%-- 		<jsp:include page="includes/template/dateTimePicker.jsp" /> --%>
+		<%-- 		<jsp:include page="includes/template/dateTimePicker.jsp" /> --%>
 		<div class="row" id="bigCallout">
 			<div class="col-12">
 				<!-- Visible only on small devices -->
@@ -209,7 +209,7 @@
 			<!-- end panel -->
 		</div>
 
-<!-- 		Announcements -->
+		<!-- 		Announcements -->
 		<div class="col-md-4">
 
 			<div class="panel panel-announcements">
@@ -233,7 +233,7 @@
 				</a>
 			</div>
 
-<!-- News -->
+			<!-- News -->
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<span class="glyphicon glyphicon-list-alt"></span><b>News</b>
@@ -242,90 +242,20 @@
 					<div class="row">
 						<div class="col-xs-12">
 							<ul class="demo">
-
-								<li class="news-item">
-									<table cellpadding="4">
-										<tr>
-											<td><img src="images/1.png" width="60"
-												class="img-circle" /></td>
-											<td>Lorem ipsum dolor sit amet, consectetur adipiscing
-												elit. Nullam in venenatis enim... <a href="#">Read
-													more...</a>
-											</td>
-										</tr>
-									</table>
-								</li>
-
-								<li class="news-item">
-									<table cellpadding="4">
-										<tr>
-											<td><img src="1.png" width="60" class="img-circle" /></td>
-											<td>Lorem ipsum dolor sit amet, consectetur adipiscing
-												elit. Nullam in venenatis enim... <a href="#">Read
-													more...</a>
-											</td>
-										</tr>
-									</table>
-								</li>
-
-								<li class="news-item">
-									<table cellpadding="4">
-										<tr>
-											<td><img src="1.png" width="60" class="img-circle" /></td>
-											<td>Lorem ipsum dolor sit amet, consectetur adipiscing
-												elit. Nullam in venenatis enim... <a href="#">Read
-													more...</a>
-											</td>
-										</tr>
-									</table>
-								</li>
-
-								<li class="news-item">
-									<table cellpadding="4">
-										<tr>
-											<td><img src="1.png" width="60" class="img-circle" /></td>
-											<td>Lorem ipsum dolor sit amet, consectetur adipiscing
-												elit. Nullam in venenatis enim... <a href="#">Read
-													more...</a>
-											</td>
-										</tr>
-									</table>
-								</li>
-
-								<li class="news-item">
-									<table cellpadding="4">
-										<tr>
-											<td><img src="1.png" width="60" class="img-circle" /></td>
-											<td>Lorem ipsum dolor sit amet, consectetur adipiscing
-												elit. Nullam in venenatis enim... <a href="#">Read
-													more...</a>
-											</td>
-										</tr>
-									</table>
-								</li>
-
-								<li class="news-item">
-									<table cellpadding="4">
-										<tr>
-											<td><img src="1.png" width="60" class="img-circle" /></td>
-											<td>Lorem ipsum dolor sit amet, consectetur adipiscing
-												elit. Nullam in venenatis enim... <a href="#">Read
-													more...</a>
-											</td>
-										</tr>
-									</table>
-								</li>
-
-								<li class="news-item">
-									<table cellpadding="4">
-										<tr>
-											<td><img src="1.png" width="60" class="img-circle" /></td>
-											<td>Lorem ipsum dolor sit amet, consectetur adipiscing
-												elit. Nullam in venenatis enim... <a href="#">Read
-													more...</a>
-											</td>
-										</tr>
-									</table>
+								<c:forEach items="${newsList }" var="news">
+									<li class="news-item">
+										<table cellpadding="4">
+											<tr>
+												<td><img src="images/1.png" width="60"
+													class="img-circle" /></td>
+												<td><b>${news.title}</b>
+												<p>${news.message}</td>
+												<td><a href="removeNews?id=${news.id}">
+													<button type="button" class="btn btn-xs btn-danger">delete</button></a></td>
+											</tr>
+										</table>
+									</li>
+								</c:forEach>
 							</ul>
 						</div>
 					</div>
@@ -360,24 +290,27 @@
 					<h4 class="modal-title" id="myModalLabel">New Entry</h4>
 				</div>
 				<div class="modal-body">
-					<form role="form">
+					<form role="form" method="post" action="newNews">
 						<div class="form-group">
 							<label for="usr">Heading:</label> <input type="text"
-								class="form-control" id="usr">
+								class="form-control" id="inputTitle" name="title">
 						</div>
 						<div class="form-group">
 							<label for="comment">Content</label>
-							<textarea class="form-control" rows="5" id="comment"></textarea>
+							<textarea class="form-control" rows="5" id="inputMessage"
+								name="message"></textarea>
 						</div>
-						<div class="form-group">
+						<!-- <div class="form-group">
 							<label for="usr">Link:</label> <input type="text"
 								class="form-control" id="usr">
+						</div> -->
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Save
+								changes</button>
 						</div>
 					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
 				</div>
 			</div>
 		</div>

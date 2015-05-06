@@ -30,6 +30,7 @@ public class Constant {
 	public static final String KEY_TIME_RECORD_LIST="timeRecordList";
 	public static final String KEY_ERROR_MESSAGE="errorMessage";
 	public static final String KEY_UPDATE_EMPLOYEE_MESSAGE="updateEmployeeMessage";
+	public static final String KEY_NEWS_LIST="newsList";
 	
 	//Redirects
 	public static final String REDIRECT_MANAGE_EMPLOYEES="redirect:manageEmployees";
