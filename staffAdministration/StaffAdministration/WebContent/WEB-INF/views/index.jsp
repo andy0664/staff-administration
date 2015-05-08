@@ -20,6 +20,9 @@
 <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.0.0/metisMenu.js"></script>
+
 <!-- DateTimePicker -->
 <script type="text/javascript"
 	src="/bower_components/moment/min/moment.min.js"></script>
@@ -38,244 +41,268 @@
 <body>
 
 
-
-	<!--  Search bar ----------------------------------------------------------- -->
-	<jsp:include page="includes/template/navigationBar.jsp" />
-	<!--  Search bar ----------------------------------------------------------- -->
-
-
 	<%-- 	<jsp:include page="includes/template/dateTimePicker.jsp" /> --%>
 
-	<div class="container" id="main">
-		<script type="text/javascript">
-			$('#timepicker1').timepicker();
-		</script>
-		<%-- 		<jsp:include page="includes/template/dateTimePicker.jsp" /> --%>
-		<div class="row" id="bigCallout">
-			<div class="col-12">
-				<!-- Visible only on small devices -->
-				<div class="well well-small visible-sm">
-					<a href="" class="btn btn-large btn-block btn-default"><span
-						class="glyphicon glyphicon-phone"></span> Give us a call!</a>
-				</div>
-				<!-- end well-small -->
+	<div id="wrapper">
 
-				<div class="well">
-					<div class="page-header">
-						<h1>
-							Welcome!<small> Staff Administration is the optimal tool
-								for your needs.</small>
-						</h1>
+		<!--  Navbar Top ----------------------------------------------------------- -->
+		<jsp:include page="includes/template/navbarTop.jsp" />
+
+		<!--  Navbar Side ----------------------------------------------------------- -->
+		<jsp:include page="includes/template/navigationBar.jsp" />
+
+
+		<div id="page-wrapper">
+			<div id="page-inner">
+				<script type="text/javascript">
+					$('#timepicker1').timepicker();
+				</script>
+				<%-- 		<jsp:include page="includes/template/dateTimePicker.jsp" /> --%>
+				<div class="row" id="bigCallout">
+					<div class="col-12">
+						<!-- Visible only on small devices -->
+						<div class="well well-small visible-sm">
+							<a href="" class="btn btn-large btn-block btn-default"><span
+								class="glyphicon glyphicon-phone"></span> Give us a call!</a>
+						</div>
+
+						<div class="page-header page-header-hr" style="height: 100px">
+								<h1 style="margin-left:12px">Welcome to Staff Administration</h1>
+						</div>
+
 					</div>
-					<!-- end page-header -->
-
-					<p class="lead">Some solid leading copy will help get your
-						users engaged. Use this area to come up with something real nice.</p>
-
+					<!-- end col-12 -->
 				</div>
-				<!-- end well -->
 
-			</div>
-			<!-- end col-12 -->
-		</div>
+				<c:if test="${not empty errorMessage}">
+					<div class="alert alert-danger" role="alert">${errorMessage}</div>
+				</c:if>
+				<!-- end featuresHeading -->
 
-		<c:if test="${not empty errorMessage}">
-			<div class="alert alert-danger" role="alert">${errorMessage}</div>
-		</c:if>
-		<!-- end featuresHeading -->
+				<div class="row-fluid" id="features">
+					<div class="col-md-4">
 
-		<div class="row-fluid" id="features">
+						<a href="#">
+							<div class="panel panel-blue">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-user fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<font size="5">My Profile</font>
+										<div>See your own profile!</div>
+									</div>
+								</div>
+							</div>
+						</a> <a href="#">
+							<div class="panel panel-blue" data-toggle="collapse"
+								data-target="#collapseExample">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-user fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<font size="5">Set Status</font>
+										<div>Set your current status</div>
+									</div>
+								</div>
+								<div class="collapse" id="collapseExample">
+									<div class="row status-buttons">
+										<button type="button" class="btn btn-success">Available</button>
+										<button type="button" class="btn btn-warning">Busy</button>
+										<button type="button" class="btn btn-danger">Not
+											available</button>
+									</div>
+								</div>
+							</div>
+						</a> <a href="#">
+							<div class="panel panel-blue">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-wrench fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<font size="5">My Account</font>
+										<div>Settings for your Account</div>
+									</div>
+								</div>
+							</div>
+						</a>
 
-			<div class="col-md-4">
+						<!-- end panel -->
 
-				<div class="panel panel-green">
-					<div class="panel-heading">
+						<!-- end feature -->
 
-						<h3 class="panel-title">Personal area</h3>
-					</div>
-					<!-- end panel-heading -->
-					<!-- 					<img src="badge_css3.jpg" alt="CSS3" class="img-rounded"> -->
 
-					<div class="list-group">
-						<a href="#" class="list-group-item">
-							<h4 class="list-group-item-heading">View Profile</h4>
-							<p class="list-group-item-text">See your own prifle Data</p>
-						</a> <a href="#" class="list-group-item">
-							<h4 class="list-group-item-heading">Account Settings</h4>
-							<p class="list-group-item-text">This is the area where you
-								can cange your Passwort</p>
-						</a> <a href="#" class="list-group-item">
-							<h4 class="list-group-item-heading">Set status</h4>
-							<p class="list-group-item-text">There you can set your
-								current status</p>
+						<a href="#">
+							<div class="panel panel-red">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-users fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<font size="5">All Employees</font>
+										<div>Get a list of all employees</div>
+									</div>
+								</div>
+							</div>
+						</a> <a href="manageEmployees">
+							<div class="panel panel-red">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-sitemap fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<font size="5">Manage Employees</font>
+										<div>Add, edit or remove employees</div>
+									</div>
+								</div>
+							</div>
+						</a> <a href="manageDepartments">
+							<div class="panel panel-red">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-university fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<font size="5">Manage Departments</font>
+										<div>Add, edit or remove departments</div>
+									</div>
+								</div>
+							</div>
 						</a>
 					</div>
 
-
+					<!-- end panel -->
 				</div>
 
-				<!-- end panel -->
 
+				<div class="row-fluid" id="features">
+					<!-- end feature -->
+					<div class="col-md-4 feature">
+
+						<!-- Announcements -->
+						<a href="newTimeRecord">
+							<div class="panel panel-blue">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-comments fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<font size="6">25</font>
+										<div>
+											<font size="3">Announcements</font>
+										</div>
+									</div>
+								</div>
+							</div>
+						</a>
+						<!-- 			Time Records -->
+						<a href="newTimeRecord">
+							<div class="panel panel-green">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-user fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<font size="5">New Time Record</font>
+										<div>Create a new Time Record</div>
+									</div>
+								</div>
+							</div>
+						</a> <a href="showTimeRecords">
+							<div class="panel panel-green">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-area-chart fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<font size="5">My Time Records</font>
+										<div>Get a statistic of your Time Records</div>
+									</div>
+								</div>
+							</div>
+						</a> <a href="showTimeRecords">
+							<div class="panel panel-green">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-area-chart fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<font size="5">All Time Records</font>
+										<div>Get a statistic of all Time Records</div>
+									</div>
+								</div>
+							</div>
+						</a>
+
+						<!-- end panel -->
+
+						<!-- end feature -->
+
+
+						<!-- Calendar -->
+
+						<a href="manageDepartments">
+							<div class="panel panel-yellow">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-calendar fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<font size="5">My Calendar</font>
+										<div>See your own Calendar</div>
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+
+					<!-- end panel -->
+				</div>
+
+				<div class="col-md-4">
+					<!-- News -->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<span class="glyphicon glyphicon-list-alt"></span><b>News</b>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-xs-12">
+									<ul class="demo">
+										<c:forEach items="${newsList }" var="news">
+											<li class="news-item">
+												<table cellpadding="4">
+													<tr>
+														<td><img src="images/1.png" width="60"
+															class="img-circle" /></td>
+														<td><b>${news.title}</b>
+															<p>${news.message}</td>
+														<td><a href="removeNews?id=${news.id}">
+																<button type="button" class="btn btn-xs btn-danger">delete</button>
+														</a></td>
+													</tr>
+												</table>
+											</li>
+										</c:forEach>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="panel-footer">
+							<a href="#">
+								<button type="button" class="btn btn-primary" id="myBtn"
+									data-toggle="modal" data-target="#basicModal">New
+									entry</button>
+							</a>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
 				<!-- end feature -->
-
-
-				<div class="panel panel-blue">
-					<div class="panel-heading">
-						<h3 class="panel-title">Business area</h3>
-					</div>
-					<!-- end panel-heading -->
-					<!-- 					<img src="badge_css3.jpg" alt="CSS3" class="img-rounded"> -->
-
-					<div class="list-group">
-						<a href="#" class="list-group-item">
-							<h4 class="list-group-item-heading">List all employees</h4>
-							<p class="list-group-item-text">This is the area where you
-								can list all employees.</p>
-						</a> <a href="manageEmployees" class="list-group-item">
-							<h4 class="list-group-item-heading">Manage Employees</h4>
-							<p class="list-group-item-text">This is the area where you
-								can mangage your employees.</p>
-						</a> <a href="manageDepartments" class="list-group-item">
-							<h4 class="list-group-item-heading">Manage Departments</h4>
-							<p class="list-group-item-text">This is the area where you
-								can mangage your departments.</p>
-						</a>
-					</div>
-				</div>
-			</div>
-
-			<!-- end panel -->
-		</div>
-
-
-		<div class="row-fluid" id="features">
-			<!-- end feature -->
-			<div class="col-md-4 feature">
-				<div class="panel panel-red">
-					<div class="panel-heading">
-						<h3 class="panel-title">Time Record</h3>
-					</div>
-					<!-- end panel-heading -->
-					<!-- 					<img src="badge_css3.jpg" alt="CSS3" class="img-rounded"> -->
-
-					<div class="list-group">
-						<a href="newTimeRecord" class="list-group-item">
-							<h4 class="list-group-item-heading">create new time record</h4>
-							<p class="list-group-item-text">This is the area where you
-								can list all employees.</p>
-						</a> <a href="showTimeRecords" class="list-group-item">
-							<h4 class="list-group-item-heading">personal time statistic</h4>
-							<p class="list-group-item-text">This is the area where you
-								can mangage your employees.</p>
-						</a> <a href="#" class="list-group-item">
-							<h4 class="list-group-item-heading">Employee time statistic</h4>
-							<p class="list-group-item-text">This is the area where you
-								can mangage your departments.</p>
-						</a>
-					</div>
-				</div>
-
-				<!-- end panel -->
-
-				<!-- end feature -->
-
-
-
-				<div class="panel panel-yellow">
-					<div class="panel-heading">
-						<h3 class="panel-title">Calendar</h3>
-					</div>
-					<!-- end panel-heading -->
-					<!-- 					<img src="badge_css3.jpg" alt="CSS3" class="img-rounded"> -->
-
-					<div class="list-group">
-						<a href="#" class="list-group-item">
-							<h4 class="list-group-item-heading">My calendar</h4>
-							<p class="list-group-item-text">This is the area where you
-								can list all employees.</p>
-						</a> <a href="#" class="list-group-item">
-							<h4 class="list-group-item-heading">Shared calendar</h4>
-							<p class="list-group-item-text">This is the area where you
-								can mangage your employees.</p>
-						</a> <a href="#" class="list-group-item">
-							<h4 class="list-group-item-heading">Feature events</h4>
-							<p class="list-group-item-text">This is the area where you
-								can mangage your departments.</p>
-						</a>
-					</div>
-				</div>
-			</div>
-
-			<!-- end panel -->
-		</div>
-
-		<!-- 		Announcements -->
-		<div class="col-md-4">
-
-			<div class="panel panel-announcements">
-				<div class="panel-heading">
-					<div class="row">
-						<div class="col-xs-3">
-							<i class="fa fa-comments fa-5x"></i>
-						</div>
-						<div class="col-xs-9 text-right">
-							<div class="huge">26</div>
-							<div>New Announcements!</div>
-						</div>
-					</div>
-				</div>
-				<a href="#">
-					<div class="panel-footer">
-						<span class="pull-left">View Details</span> <span
-							class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-						<div class="clearfix"></div>
-					</div>
-				</a>
-			</div>
-
-			<!-- News -->
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<span class="glyphicon glyphicon-list-alt"></span><b>News</b>
-				</div>
-				<div class="panel-body">
-					<div class="row">
-						<div class="col-xs-12">
-							<ul class="demo">
-								<c:forEach items="${newsList }" var="news">
-									<li class="news-item">
-										<table cellpadding="4">
-											<tr>
-												<td><img src="images/1.png" width="60"
-													class="img-circle" /></td>
-												<td><b>${news.title}</b>
-												<p>${news.message}</td>
-												<td><a href="removeNews?id=${news.id}">
-													<button type="button" class="btn btn-xs btn-danger">delete</button></a></td>
-											</tr>
-										</table>
-									</li>
-								</c:forEach>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="panel-footer">
-					<a href="#">
-						<button type="button" class="btn btn-primary" id="myBtn"
-							data-toggle="modal" data-target="#basicModal">New entry</button>
-					</a>
-					<ul class="pagination pull-right" style="margin: 0px;">
-						<li><a href="#" class="prev"><span
-								class="glyphicon glyphicon-chevron-down"></span></a></li>
-						<li><a href="#" class="next"><span
-								class="glyphicon glyphicon-chevron-up"></span></a></li>
-					</ul>
-					<div class="clearfix"></div>
-				</div>
 			</div>
 		</div>
-		<!-- end feature -->
 	</div>
 	<!-- end features -->
 
@@ -318,8 +345,6 @@
 
 	<!-- Footer -->
 	<jsp:include page="includes/template/footer.jsp" />
-
-
 
 	<script type="text/javascript">
 		$(function() {
