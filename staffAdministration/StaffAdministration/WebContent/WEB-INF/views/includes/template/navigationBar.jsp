@@ -1,66 +1,65 @@
-<nav class="navbar navbar-default navbar-static-top">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="./"><img src="logo.png"
-				alt="Your Logo"></a>
-		</div>
-		<div>
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="./">Home</a></li>
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Personal area<span
-						class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">View Profile</a></li>
-						<li><a href="#">Account Settings</a></li>
-						<li><a href="#">Set Status</a></li>
-					</ul></li>
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Business area<span
-						class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">List Employees</a></li>
-						<li><a href="manageEmployees">Manage Employees</a></li>
-						<li><a href="manageDepartments">Manage Departments</a></li>
-					</ul></li>
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Time record<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="newTimeRecord">New Time Record</a></li>
-						<li><a href="showTimeRecords">Personal Time Statistic</a></li>
-						<li><a href="#">Employee Time Statistic</a></li>
-					</ul></li>
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Calendar<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">My Calendar</a></li>
-						<li><a href="#">Shared Calendar</a></li>
-						<li><a href="#">Feature Events</a></li>
-					</ul></li>
-			</ul>
+<nav class="navbar-default navbar-side" role="navigation">
+	<div class="sidebar-collapse">
+		<ul class="nav" id="main-menu">
 
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>
-						My Account <strong class="caret"></strong></a>
+			<li><a class="" href="./"><i class="fa fa-dashboard"></i>
+					Dashboard</a></li>
 
-					<ul class="dropdown-menu">
-						<li><a href="#"><span class="glyphicon glyphicon-wrench"></span>
-								Settings</a></li>
+			<li class=""><a href="#"><i class="fa fa-user"></i> Personal
+					Area<span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level collapse" aria-expanded="false"
+					style="">
+					<li><a href="#"><i class="fa fa-user"></i>My Profile</a></li>
+					<li><a href="#"><i class="fa fa-wrench"></i>My Account</a></li>
+					<li class="active"><a href="#"><i class="fa fa-user"></i>Set
+							Status<span class="fa arrow"></span></a>
+						<ul class="nav nav-third-level collapse in" aria-expanded="true"
+							style="">
+							<li><a href="#"><i class="fa fa-check-circle"
+									style="color: green"></i>Available</a></li>
+							<li><a href="#"><i class="fa fa-circle-o"
+									style="color: yellow"></i>Busy</a></li>
+							<li><a href="#"><i class="fa fa-times-circle"
+									style="color: red"></i>Not available</a></li>
 
-						<li><a href="#"><span class="glyphicon glyphicon-refresh"></span>
-								Update Profile</a></li>
-
-						<li><a href="#"><span
-								class="glyphicon glyphicon-briefcase"></span> Billing</a></li>
-
-						<li class="divider"></li>
-
-						<li><a href="#"><span class="glyphicon glyphicon-off"></span>
-								Sign out</a></li>
-					</ul></li>
-			</ul>
-			<!-- end nav pull-right -->
-		</div>
+						</ul></li>
+				</ul></li>
+			<li class=""><a href="#"> <i class="fa fa-university"></i>Business
+					Area<span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level collapse" aria-expanded="false"
+					style="">
+					<li><a href="#"><i class="fa fa-users"></i>All Employees</a></li>
+					<li><a href="manageEmployees"><i class="fa fa-sitemap"></i>Manage
+							Employees</a></li>
+					<li><a href="manageDepartments"><i
+							class="fa fa-university"></i>Manage Departments</a></li>
+				</ul></li>
+			<li class=""><a href="#"><i class="fa fa-clock-o"></i> Time
+					Records<span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level collapse" aria-expanded="false"
+					style="">
+					<li><a href="newTimeRecord"><i class="fa fa-clock-o"></i>New
+							Time Record</a></li>
+					<li><a href="showTimeRecords"><i class="fa fa-area-chart"></i>My
+							Time Records</a></li>
+					<li><a href="showTimeRecords"><i class="fa fa-area-chart"></i>All
+							Time Records</a></li>
+				</ul></li>
+			<li class=""><a href="#"><i class="fa fa-calendar"></i>
+					Business Area<span class="fa arrow"></span></a>
+				<ul class="nav nav-second-level collapse" aria-expanded="false"
+					style="">
+					<li><a href="#"><i class="fa fa-calendar"></i>My Calendar</a></li>
+				</ul></li>
+		</ul>
 	</div>
 </nav>
+
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.0.0/metisMenu.js"></script>
+<script>
+	$(function() {
+		$('#main-menu').metisMenu();
+	});
+</script>
