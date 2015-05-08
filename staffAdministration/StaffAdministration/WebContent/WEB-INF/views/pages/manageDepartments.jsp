@@ -13,26 +13,35 @@
 <jsp:include page="../includes/bootstrapMeta.jsp" />
 <title>Employees</title>
 <jsp:include page="../includes/bootstrapCss.jsp" />
+<jsp:include page="../includes/bootstrapJs.jsp" />
 </head>
 <body>
-	<!--  Search bar ----------------------------------------------------------- -->
-	<jsp:include page="../includes/template/navigationBar.jsp" />
-	<!--  Search bar ----------------------------------------------------------- -->
 
-	<div class="container" role="main">
+	<div id="wrapper">
+		<!--  Navbar Top ----------------------------------------------------------- -->
+		<jsp:include page="../includes/template/navbarTop.jsp" />
 
-		<div class="page-header">
-			<h1>Manage Departments</h1>
-		</div>
+		<!--  Navbar Side ----------------------------------------------------------- -->
+		<jsp:include page="../includes/template/navigationBar.jsp" />
 
-		 <!--  Error message ----------------------------------------------------------- -->
-		<c:if test="${not empty errorMessage}">
-			<div class="alert alert-danger" role="alert">${errorMessage}</div>
-		</c:if>
-		<!--  Error message ----------------------------------------------------------- -->
+		<div id="page-wrapper">
+			<div id="page-inner">
+				<c:set var="lastDepartment">""</c:set>
+				<div class="page-header page-header-hr" style="height: 100px">
+					<div class="container" role="main">
+						<h1>Manage Departments</h1>
+					</div>
+				</div>
 
-		<!--  Warning message ----------------------------------------------------------- -->
-		<%--<c:if test="${not empty warningMessage}">
+
+				<!--  Error message ----------------------------------------------------------- -->
+				<c:if test="${not empty errorMessage}">
+					<div class="alert alert-danger" role="alert">${errorMessage}</div>
+				</c:if>
+				<!--  Error message ----------------------------------------------------------- -->
+
+				<!--  Warning message ----------------------------------------------------------- -->
+				<%--<c:if test="${not empty warningMessage}">
 			<div class="alert alert-warning" role="warning">
 				${warningMessage}</div>
 		</c:if>
@@ -46,62 +55,66 @@
 		<!--   message ----------------------------------------------------------- --> --%>
 
 
-		<!--  Search bar ----------------------------------------------------------- -->
-		<jsp:include page="../includes/template/searchNav.jsp" />
-		<!--  Search bar ----------------------------------------------------------- -->
+				<!--  Search bar ----------------------------------------------------------- -->
+				<jsp:include page="../includes/template/searchNav.jsp" />
+				<!--  Search bar ----------------------------------------------------------- -->
 
-		<!--  New Employee buttons ----------------------------------------------------------- -->
-		<div class="row">
-			<div class="col-md-4 col-md-offset-4">
-				<p>
-					<a href="addDepartment">
-						<button type="button" class="btn btn-success">Add new
-							Department</button>
-					</a> <a href="fillDepartment">
-						<button type="button" class="btn btn-success">Test: Fill</button>
-					</a>
+				<!--  New Employee buttons ----------------------------------------------------------- -->
+				<div class="row">
+					<div class="col-md-4 col-md-offset-4">
+						<p>
+							<a href="addDepartment">
+								<button type="button" class="btn btn-success">Add new
+									Department</button>
+							</a> <a href="fillDepartment">
+								<button type="button" class="btn btn-success">Test:
+									Fill</button>
+							</a>
 
-				</p>
-			</div>
-		</div>
-		<!--  New Employee buttons ----------------------------------------------------------- -->
+						</p>
+					</div>
+				</div>
+				<!--  New Employee buttons ----------------------------------------------------------- -->
 
 
-		<div class="row">
-			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1">
 
-				<table data-toggle="table" class="table table-striped">
-					<thead>
-						<tr>
-							<th data-sortable="true">Shortcut</th>
-							<th data-sortable="true">Name</th>
-							<th data-sortable="true">Manager</th>
-							<th>Actions</th>
-						</tr>
-					</thead>
-					<tbody>
-						<!--  list all employees ----------------------------------------------------------- -->
-						<c:forEach items="${departmentList}" var="department">
-							<tr>
-								<td>${department.shortcut}</td>
-								<td>${department.name}</td>
-								<td>${department.manager.firstName} ${department.manager.lastName}</td>
-								<td><a href="changeDepartment?id=${department.id}">
-										<button type="button" class="btn btn-xs btn-success">
-											<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-											Edit
-										</button>
-								</a> <a href="deleteDepartment?id=${department.id}">
-										<button type="button" class="btn btn-xs btn-danger">
-											<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-											Delete
-										</button>
-								</a></td>
-							</tr>
-						</c:forEach>
-						<!--  list all employees ----------------------------------------------------------- -->
-					</tbody>
-				</table>
+						<table data-toggle="table" class="table table-striped">
+							<thead>
+								<tr>
+									<th data-sortable="true">Shortcut</th>
+									<th data-sortable="true">Name</th>
+									<th data-sortable="true">Manager</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!--  list all employees ----------------------------------------------------------- -->
+								<c:forEach items="${departmentList}" var="department">
+									<tr>
+										<td>${department.shortcut}</td>
+										<td>${department.name}</td>
+										<td>${department.manager.firstName}
+											${department.manager.lastName}</td>
+										<td><a href="changeDepartment?id=${department.id}">
+												<button type="button" class="btn btn-xs btn-success">
+													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+													Edit
+												</button>
+										</a> <a href="deleteDepartment?id=${department.id}">
+												<button type="button" class="btn btn-xs btn-danger">
+													<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+													Delete
+												</button>
+										</a></td>
+									</tr>
+								</c:forEach>
+								<!--  list all employees ----------------------------------------------------------- -->
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
 
