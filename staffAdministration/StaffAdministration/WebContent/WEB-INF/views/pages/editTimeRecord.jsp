@@ -21,123 +21,129 @@
 </head>
 <body>
 
-	<!--  Search bar ----------------------------------------------------------- -->
-	<jsp:include page="../includes/template/navigationBar.jsp" />
-	<!--  Search bar ----------------------------------------------------------- -->
+	<div id="wrapper">
 
-	<%-- <jsp:include page="../includes/template/dateTimePicker.jsp" /> --%>
+		<!--  Navbar Top ----------------------------------------------------------- -->
+		<jsp:include page="../includes/template/navbarTop.jsp" />
 
-	<div class="container" role="main">
+		<!--  Navbar Side ----------------------------------------------------------- -->
+		<jsp:include page="../includes/template/navigationBar.jsp" />
 
-		<!--  add or edit?  ----------------------------------------------------------- -->
-		<c:choose>
-			<c:when test="${not empty timeRecord}">
-				<c:set var="legend">Change Timerecord:</c:set>
-				<c:set var="formAction">changeTimeRecord</c:set>
-			</c:when>
-			<c:otherwise>
-				<c:set var="legend">New Timerecord</c:set>
-				<c:set var="formAction">addTimeRecord</c:set>
-			</c:otherwise>
-		</c:choose>
-		<!--  add or edit?  ----------------------------------------------------------- -->
 
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2">
-				<form class="form-horizontal" method="post" action="${formAction}">
-					<%-- <input type="hidden" name="${_csrf.parameterName}"
+		<div id="page-wrapper">
+			<div id="page-inner">
+
+				<!--  add or edit?  ----------------------------------------------------------- -->
+				<c:choose>
+					<c:when test="${not empty timeRecord}">
+						<c:set var="legend">Change Timerecord:</c:set>
+						<c:set var="formAction">changeTimeRecord</c:set>
+					</c:when>
+					<c:otherwise>
+						<c:set var="legend">New Timerecord</c:set>
+						<c:set var="formAction">addTimeRecord</c:set>
+					</c:otherwise>
+				</c:choose>
+				<!--  add or edit?  ----------------------------------------------------------- -->
+
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<form class="form-horizontal" method="post" action="${formAction}">
+							<%-- <input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token }" /> --%>
-					<fieldset>
-						<legend>${legend}</legend>
-				<%-- 		<input type="hidden" name="id" value="${employee.id }" /> --%>
+							<fieldset>
+								<legend>${legend}</legend>
+								<%-- 		<input type="hidden" name="id" value="${employee.id }" /> --%>
 
-						<! ----------------  startDate ---------------- -->
-						<div class="form-group">
-							<label for="inputStartDate" class="col-md-2 control-label">Date
-								from</label>
-							<div class="col-md-10">
-								<input class="form_datetime" id="inputStartDate"
-									placeholder="Date" type="text" readonly name="startDate"
-									value="<fmt:formatDate value="${timeRecord.startDate}" pattern="dd.MM.yyyy"/>" required/>
-								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-							</div>
-						</div>
+								<! ----------------  startDate ---------------- -->
+								<div class="form-group">
+									<label for="inputStartDate" class="col-md-2 control-label">Date
+										from</label>
+									<div class="col-md-10">
+										<input class="form_datetime" id="inputStartDate"
+											placeholder="Date" type="text" readonly name="startDate"
+											value="<fmt:formatDate value="${timeRecord.startDate}" pattern="dd.MM.yyyy"/>"
+											required /> <i class="fa fa-calendar"></i>
+									</div>
+								</div>
 
-						<! ----------------  endDate ---------------- -->
-						<div class="form-group">
-							<label for="inputEndDate" class="col-md-2 control-label">Date
-								to</label>
-							<div class="col-md-10">
-								<input class="form_datetime" id="inputEndDate"
-									placeholder="Date" type="text" readonly name="endDate"
-									value="<fmt:formatDate value="${timeRecord.endDate}" pattern="dd.MM.yyyy"/>" required/>
+								<! ----------------  endDate ---------------- -->
+								<div class="form-group">
+									<label for="inputEndDate" class="col-md-2 control-label">Date
+										to</label>
+									<div class="col-md-10">
+										<input class="form_datetime" id="inputEndDate"
+											placeholder="Date" type="text" readonly name="endDate"
+											value="<fmt:formatDate value="${timeRecord.endDate}" pattern="dd.MM.yyyy"/>"
+											required /> <i class="fa fa-calendar"></i>
+									</div>
+								</div>
 
-								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-							</div>
-						</div>
+								<!-- Datetime -->
+								<%-- <jsp:include page="../includes/template/dateTimePicker.jsp" /> --%>
 
-						<!-- Datetime -->
-						<%-- <jsp:include page="../includes/template/dateTimePicker.jsp" /> --%>
+								<! ----------------  startTime ---------------- -->
+								<div class="form-group">
+									<label for="inputStartTime" class="col-md-2 control-label">Time
+										from</label>
+									<div class="col-md-10">
+										<input class="form-control" id="inputStartTime" type="text"
+											name="startTime"
+											value="<c:out value="${timeRecord.startTime}"/>" required>
+									</div>
+								</div>
 
-						<! ----------------  startTime ---------------- -->
-						<div class="form-group">
-							<label for="inputStartTime" class="col-md-2 control-label">Time
-								from</label>
-							<div class="col-md-10">
-								<input class="form-control" id="inputStartTime" type="text"
-									name="startTime"
-									value="<c:out value="${timeRecord.startTime}"/>"required>
-							</div>
-						</div>
-
-						<! ----------------  endTime ---------------- -->
-						<div class="form-group">
-							<label for="inputEndTime" class="col-md-2 control-label">Time
-								to</label>
-							<div class="col-md-10">
-								<input class="form-control" id="inputEndTime" type="text"
-									name="endTime" value="<c:out value="${timeRecord.endTime}"/>"required>
-							</div>
-						</div>
+								<! ----------------  endTime ---------------- -->
+								<div class="form-group">
+									<label for="inputEndTime" class="col-md-2 control-label">Time
+										to</label>
+									<div class="col-md-10">
+										<input class="form-control" id="inputEndTime" type="text"
+											name="endTime" value="<c:out value="${timeRecord.endTime}"/>"
+											required>
+									</div>
+								</div>
 
 
-						<! ---------------  Typ ---------------- -->
-						<div class="form-group">
-							<label for="inputTyp" class="col-md-2 control-label">Typ</label>
-							<div class="col-md-10">
-								<select class="form-control" name="typ">
-									<option value="working time" selected="selected">working
-										time</option>
-									<option value="sick leave">sick leave</option>
-									<option value="vacation">vacation</option>
-								</select>
-							</div>
-						</div>
+								<! ---------------  Typ ---------------- -->
+								<div class="form-group">
+									<label for="inputTyp" class="col-md-2 control-label">Typ</label>
+									<div class="col-md-10">
+										<select class="form-control" name="typ">
+											<option value="working time" selected="selected">working
+												time</option>
+											<option value="sick leave">sick leave</option>
+											<option value="vacation">vacation</option>
+										</select>
+									</div>
+								</div>
 
-						<! ----------------  Employee For testing Remove ---------------- -->
-						<div class="form-group">
-							<label for="inputManager" class="col-md-2 control-label">Employee</label>
-							<div class="col-md-10">
-								<select class="form-control" name="employee">
-									<c:forEach items="${employeeList }" var="employee">
-										<option value="${employee.id}">${ employee.firstName}
-											${employee.lastName }</option>
-									</c:forEach>
-								</select>
-							</div>
-						</div>
+								<! ----------------  Employee For testing Remove ---------------- -->
+								<div class="form-group">
+									<label for="inputManager" class="col-md-2 control-label">Employee</label>
+									<div class="col-md-10">
+										<select class="form-control" name="employee">
+											<c:forEach items="${employeeList }" var="employee">
+												<option value="${employee.id}">${ employee.firstName}
+													${employee.lastName }</option>
+											</c:forEach>
+										</select>
+									</div>
+								</div>
 
-						<! ----------------  buttons ---------------- -->
-						<div class="form-group">
-							<div class="col-md-10 col-md-offset-2">
-								<button type="Submit" class="btn btn-primary">Submit</button>
-								<a href="manageEmployees">
-									<button type="button" class="btn btn-default">Cancel</button>
-								</a>
-							</div>
-						</div>
-					</fieldset>
-				</form>
+								<! ----------------  buttons ---------------- -->
+								<div class="form-group">
+									<div class="col-md-10 col-md-offset-2">
+										<button type="Submit" class="btn btn-primary">Submit</button>
+										<a href="manageEmployees">
+											<button type="button" class="btn btn-default">Cancel</button>
+										</a>
+									</div>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 
