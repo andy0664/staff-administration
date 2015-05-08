@@ -350,6 +350,27 @@ ul.nav.nav-second-level.collapse.in {
 	color: #fff;
 	background-color: #d9534f;
 }
+
+.panel-anncouncement {
+	border-color: #774177;
+	color: #fff;
+	background-color: #fff;
+		border-radius: 4px;
+	
+}
+
+.panel-anncouncement>.panel-heading {
+	border-color: #774177;
+	color: #fff;
+	background-color: #774177;
+
+}
+
+.panel-anncouncement>.panel-body {
+	border-color: #774177;
+	color: black;
+	background-color: #fff;
+}
 /* Panel end */
 
 /* Fonts start */
@@ -413,6 +434,12 @@ ul.unstyled {
 	border: 1px solid #ddd;
 	background-color: rgba(86, 61, 124, .15);
 	border: 1px solid rgba(86, 61, 124, .2);
+}
+
+.request-conainer {
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	width: 560px;
 }
 
 /* New feed */
