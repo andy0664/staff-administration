@@ -13,99 +13,359 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.6.0/bootstrap-table.min.css">
 
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
 <!-- Glyphicons CSS -->
 <link href="includes/css/bootstrap-glyphicons.css" rel="stylesheet">
 
 <style type="text/css">
 body {
-/* 	padding-top: 10px; */
-/* 	padding-bottom: 10px; */
+	/* 	padding-top: 10px; */
+	/* 	padding-bottom: 10px; */
+	
 }
 
+#wrapper {
+	width: 100%;
+	background: #2b2e33;
+}
+
+#page-wrapper {
+	margin: 0 0 0 260px;
+	padding: 15px 0px;
+	min-height: 1200px;
+	position: relative;
+	background: #f2f2f2;
+}
+
+#page-inner {
+	width: 100%;
+	margin: 0px 20px 10px 15px;
+	background-color: transparent;
+	min-height: 1200px;
+}
+
+/*----------------------------------------------
+    MENU STYLES    
+------------------------------------------------*/
+.top-navbar {
+	margin: 0px;
+}
+
+.navbar-side {
+	z-index: 1;
+	width: 260px;
+	position: fixed;
+	background-color: transparent;
+	top: 60px;
+}
+
+.top-navbar .navbar-brand {
+	color: #fff;
+	width: 260px;
+	text-align: left;
+	height: 60px;
+	font-size: 30px;
+	font-weight: 700;
+	text-transform: uppercase;
+	line-height: 30px;
+	background: #32323a;
+	position: fixed;
+}
+
+.navbar-brand b {
+	color: #2DAFCB;
+}
+
+.top-navbar .nav>li {
+	position: relative;
+	display: inline-block;
+	margin: 0px;
+	padding: 0px;
+}
+
+.top-navbar .nav>li>a {
+	position: relative;
+	display: block;
+	padding: 20px;
+	color: #FFFFFF;
+	margin: 0px;
+}
+
+.top-navbar .nav>li>a:hover, .top-navbar .nav>li>a:focus {
+	text-decoration: none;
+	color: #319DB5 !important;
+	background: transparent;
+}
+
+.top-navbar .dropdown-menu {
+	min-width: 230px;
+	border-radius: 0 0 4px 4px;
+}
+
+.top-navbar .dropdown-menu>li>a:hover, .top-navbar .dropdown-menu>li>a:focus
+	{
+	color: #225081;
+	background: none;
+}
+
+.dropdown-tasks {
+	width: 255px;
+}
+
+.dropdown-tasks .progress {
+	height: 8px;
+	margin-bottom: 8px;
+	overflow: hidden;
+	background-color: #f5f5f5;
+	border-radius: 0px;
+}
+
+.dropdown-tasks>li>a {
+	padding: 0px 15px;
+}
+
+.dropdown-tasks p {
+	font-size: 13px;
+	line-height: 21px;
+	padding-top: 4px;
+}
+
+.active-menu {
+	background-color: #2DAFCB !important;
+	color: #fff !important;
+}
+
+.active-menu i {
+	color: #fff !important;
+}
+
+.arrow {
+	float: right;
+	margin-top: 8px;
+}
+
+.fa.arrow:before {
+	content: "\f104";
+}
+
+.active>a>.fa.arrow:before {
+	content: "\f107";
+}
+
+.nav-second-level li, .nav-third-level li {
+	border-bottom: none !important;
+}
+
+.nav-second-level li a {
+	padding-left: 37px;
+}
+
+.nav-third-level li a {
+	padding-left: 55px;
+}
+
+.sidebar-collapse, .sidebar-collapse .nav {
+	background: none;
+}
+
+.sidebar-collapse .nav {
+	padding: 0;
+}
+
+.sidebar-collapse .nav>li>a {
+	color: #B5B5B5;
+	background: transparent;
+	text-shadow: none;
+}
+
+.sidebar-collapse>.nav>li>a {
+	padding: 12px 10px;
+}
+
+.sidebar-collapse>.nav>li {
+	border-bottom: 1px solid rgba(107, 108, 109, 0.19);
+}
+
+ul.nav.nav-second-level.collapse.in {
+	background: #17191B;
+}
+
+.sidebar-collapse .nav>li>a:hover, .sidebar-collapse .nav>li>a:focus {
+	outline: 0;
+}
+
+.navbar-side {
+	border: none;
+	background-color: transparent;
+}
+
+.top-navbar {
+	background: #fff;
+	border-bottom: none;
+}
+
+.top-navbar .nav>li>a>i {
+	margin-right: 2px;
+}
+
+.top-navbar .navbar-brand:hover {
+	color: #2DAFCB;
+	background-color: rgb(43, 46, 51);
+}
+
+.dropdown-user li {
+	margin: 8px 0;
+}
+
+.navbar-default {
+	border: 0px solid black;
+}
+
+.navbar-header {
+	background: transparent;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus
+	{
+	background-color: #B40101;
+}
+
+.navbar-default .navbar-toggle {
+	border-color: #fff;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+	background-color: #FFF;
+}
+
+.nav>li>a>i {
+	margin-right: 10px;
+	color: #666;
+}
+
+.page-header-hr {
+	padding: 9px;
+	margin: -15px 0px 20px 0px;
+	border-bottom: 1px solid #eee;
+	background-color: #2DAFCB;
+	color: #ffffff;
+	width: 100%;
+}
 
 /* Panel start */
 .panel {
-  padding: 15px;
-  margin-bottom: 20px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.05);
-  box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+	padding: 15px;
+	margin-bottom: 10px;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 0px;
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
 .panel-heading {
-  padding: 10px 15px;
-  margin: -15px -15px 15px;
-  background-color: #f5f5f5;
-  border-bottom: 1px solid #ddd;
-  border-top-right-radius: 3px;
-  border-top-left-radius: 3px;
+	padding: 10px 15px;
+	margin: -15px -15px 5px;
+	background-color: #f5f5f5;
+	border-bottom: 1px solid #ddd;
+	border-top-right-radius: 3px;
+	border-top-left-radius: 3px;
+}
+
+.panel-news {
+	padding: 15px;
+	margin-bottom: 20px;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.panel-news>.panel-heading {
+	padding: 10px 15px;
+	margin: -15px -15px;
+	background-color: #f5f5f5;
+	border-bottom: 1px solid #ddd;
+	border-top-right-radius: 3px;
+	border-top-left-radius: 3px;
 }
 
 .panel-announcements {
-  border-color: #337ab7;
+	border-color: #337ab7;
 }
 
 .panel-announcements>.panel-heading {
-  color: #fff;
-  background-color: #337ab7;
-  border-color: #337ab7;
+	color: #fff;
+	background-color: #337ab7;
+	border-color: #337ab7;
 }
-
 
 .panel-green {
-  border-color: #5cb85c;
+	border-color: #5cb85c;
+	color: #fff;
+	background-color: #5cb85c;
 }
 
-.panel-green > .panel-heading {
-    border-color: #5cb85c;
-    color: #fff;
-    background-color: #5cb85c;
+.panel-green>.panel-heading {
+	border-color: #5cb85c;
+	color: #fff;
+	background-color: #5cb85c;
 }
 
 .panel-blue {
-  border-color: #337ab7;
+	border-color: #337ab7;
+	color: #fff;
+	background-color: #337ab7;
 }
 
-.panel-blue > .panel-heading {
-    border-color: #337ab7;
-    color: #fff;
-    background-color: #337ab7;
+.panel-blue>.panel-heading {
+	border-color: #337ab7;
+	color: #fff;
+	background-color: #337ab7;
 }
 
 .panel-yellow {
-  border-color: #f0ad4e;
+	border-color: #f0ad4e;
+	color: #fff;
+	background-color: #f0ad4e;
 }
 
-.panel-yellow > .panel-heading {
-  border-color: #f0ad4e;
-  color: #fff;
-  background-color: #f0ad4e;
+.panel-yellow>.panel-heading {
+	border-color: #f0ad4e;
+	color: #fff;
+	background-color: #f0ad4e;
 }
 
 .panel-red {
-  border-color: #d9534f;
+	border-color: #d9534f;
+	color: #fff;
+	background-color: #d9534f;
 }
 
-.panel-red > .panel-heading {
-  border-color: #d9534f;
-  color: #fff;
-  background-color: #d9534f;
+.panel-red>.panel-heading {
+	border-color: #d9534f;
+	color: #fff;
+	background-color: #d9534f;
 }
 /* Panel end */
 
 /* Fonts start */
 .huge {
-  font-size: 40px;
+	font-size: 40px;
 }
 
 /* Fonts end */
+.navbar-hr {
+	position: relative;
+	border: 1px solid transparent;
+	background-color: #333
+}
 
-.sidebar-nav {
-	padding: 9px 0;
+.navbar-static-top {
+	border-width: 0 0 1px;
 }
 
 #features {
@@ -130,34 +390,22 @@ ul.unstyled {
 }
 
 /* Footer */
-footer {
-	background: #333;
+.footer-hr {
+	background: #2b2e33;
 	color: #eee;
 	font-size: 11px;
 }
 
-.navbar-fixed-bottom
-{
-	background: #333;
+.navbar-fixed-bottom {
+	background: #2b2e33;
 	color: #eee;
 	font-size: 11px;
-
 }
 
 /* Footer end */
-
-.sidebar-nav {
-	padding: 9px 0;
+.status-buttons {
+	margin-top: 15px;
 }
-
-#searchInput {
-	width: 200px;
-}
-
-.navbar-brand {
-	padding: 13px 15px;
-}
-
 
 .my-inner {
 	padding: 10px;
@@ -200,13 +448,13 @@ footer {
 	border-bottom-left-radius: 3px;
 }
 
-/* New feed end*/
+/* News feed end*/
 @media ( max-width : 980px) {
 	/* Enable use of floated navbar text */
 	.navbar-text.pull-right {
 		float: none;
-/* 		padding-left: 5px; */
-/* 		padding-right: 5px; */
+		/* 		padding-left: 5px; */
+		/* 		padding-right: 5px; */
 	}
 }
 </style>
