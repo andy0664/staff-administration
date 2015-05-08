@@ -13,27 +13,33 @@
 <jsp:include page="../includes/bootstrapMeta.jsp" />
 <title>Timerecord</title>
 <jsp:include page="../includes/bootstrapCss.jsp" />
+<jsp:include page="../includes/bootstrapJs.jsp" />
 </head>
 <body>
 
-	<!--  Search bar ----------------------------------------------------------- -->
-	<jsp:include page="../includes/template/navigationBar.jsp" />
-	<!--  Search bar ----------------------------------------------------------- -->
+	<div id="wrapper">
+		<!--  Navbar Top ----------------------------------------------------------- -->
+		<jsp:include page="../includes/template/navbarTop.jsp" />
 
-	<div class="container" role="main">
+		<!--  Navbar Side ----------------------------------------------------------- -->
+		<jsp:include page="../includes/template/navigationBar.jsp" />
 
-		<div class="page-header">
-			<h1>Timerecords ${employee.firstName} ${employee.lastName}</h1>
-		</div>
+		<div id="page-wrapper">
+			<div id="page-inner">
+				<div class="page-header page-header-hr" style="height: 100px">
+					<div class="container" role="main">
+						<h1>Timerecords ${employee.firstName} ${employee.lastName}</h1>
+					</div>
+				</div>
 
-		<!--  Error message ----------------------------------------------------------- -->
-		<c:if test="${not empty errorMessage}">
-			<div class="alert alert-danger" role="alert">${errorMessage}</div>
-		</c:if>
-		<!--  Error message ----------------------------------------------------------- -->
+				<!--  Error message ----------------------------------------------------------- -->
+				<c:if test="${not empty errorMessage}">
+					<div class="alert alert-danger" role="alert">${errorMessage}</div>
+				</c:if>
+				<!--  Error message ----------------------------------------------------------- -->
 
-		<!--  Warning message ----------------------------------------------------------- -->
-		<%--<c:if test="${not empty warningMessage}">
+				<!--  Warning message ----------------------------------------------------------- -->
+				<%--<c:if test="${not empty warningMessage}">
 			<div class="alert alert-warning" role="warning">
 				${warningMessage}</div>
 		</c:if>
@@ -47,93 +53,95 @@
 		<!--   message ----------------------------------------------------------- --> --%>
 
 
-		<!--  Search bar ----------------------------------------------------------- -->
-		<jsp:include page="../includes/template/searchNav.jsp" />
-		<!--  Search bar ----------------------------------------------------------- -->
+				<!--  Search bar ----------------------------------------------------------- -->
+				<jsp:include page="../includes/template/searchNav.jsp" />
+				<!--  Search bar ----------------------------------------------------------- -->
 
-		<!--  New Employee buttons ----------------------------------------------------------- -->
-		<div class="row">
-			<div class="col-md-4 col-md-offset-4">
-				<p>
-					<a href="newTimeRecord">
-						<button type="button" class="btn btn-success">Add new
-							Timerecord</button>
-					</a>
-				</p>
-				<label for="inputManager" class="col-md-2 control-label">Employee</label>
-				<form class="form-horizontal" method="post"
-					action="timeRecordEmployee">
-					<div class="col-md-10">
-						<select class="form-control" name="employee">
-							<c:forEach items="${employeeList }" var="employee">
-								<option value="${employee.id}">${ employee.firstName}
-									${employee.lastName }</option>
-							</c:forEach>
-						</select>
-					</div>
+				<!--  New Employee buttons ----------------------------------------------------------- -->
+				<div class="row">
+					<div class="col-md-4 col-md-offset-4">
+						<p>
+							<a href="newTimeRecord">
+								<button type="button" class="btn btn-success">Add new
+									Timerecord</button>
+							</a>
+						</p>
+						<label for="inputManager" class="col-md-2 control-label">Employee</label>
+						<form class="form-horizontal" method="post"
+							action="timeRecordEmployee">
+							<div class="col-md-10">
+								<select class="form-control" name="employee">
+									<c:forEach items="${employeeList }" var="employee">
+										<option value="${employee.id}">${ employee.firstName}
+											${employee.lastName }</option>
+									</c:forEach>
+								</select>
+							</div>
 
 
-					<div class="form-group">
-						<div class="col-md-10 col-md-offset-2">
-							<button type="Submit" class="btn btn-primary">Submit</button>
-						</div>
-					</div>
-				</form>
-				<!-- </a> <a href="fillDepartment">
+							<div class="form-group">
+								<div class="col-md-10 col-md-offset-2">
+									<button type="Submit" class="btn btn-primary">Submit</button>
+								</div>
+							</div>
+						</form>
+						<!-- </a> <a href="fillDepartment">
 						<button type="button" class="btn btn-success">Test: Fill</button>
 					 -->
 
+					</div>
+				</div>
+				<!--  New Employee buttons ----------------------------------------------------------- -->
+
+
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1">
+
+						<table data-toggle="table" class="table table-striped">
+							<thead>
+								<tr>
+									<th data-sortable="true">Date From</th>
+									<th data-sortable="true">Date To</th>
+									<th data-sortable="true">Time From</th>
+									<th data-sortable="true">Time To</th>
+									<th data-sortable="true">Typ</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!--  list all employees ----------------------------------------------------------- -->
+								<c:forEach items="${timeRecordList}" var="timeRecord">
+									<tr>
+										<td>${timeRecord.startDate}</td>
+										<td>${timeRecord.endDate}</td>
+										<td>${timeRecord.startTime}</td>
+										<td>${timeRecord.endTime}</td>
+										<td>${timeRecord.typ}</td>
+										<td><a href="changeTimeRecord?id=${timeRecord.id}">
+												<button type="button" class="btn btn-xs btn-success">
+													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+													Edit
+												</button>
+										</a> <a
+											href="deleteTimeRecord?timerecord=${timeRecord.id}&id=${employee.id}">
+												<button type="button" class="btn btn-xs btn-danger">
+													<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+													Delete
+												</button>
+										</a></td>
+									</tr>
+								</c:forEach>
+								<!--  list all employees ----------------------------------------------------------- -->
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
-		<!--  New Employee buttons ----------------------------------------------------------- -->
-
-
-		<div class="row">
-			<div class="col-md-10 col-md-offset-1">
-
-				<table data-toggle="table" class="table table-striped">
-					<thead>
-						<tr>
-							<th data-sortable="true">Date From</th>
-							<th data-sortable="true">Date To</th>
-							<th data-sortable="true">Time From</th>
-							<th data-sortable="true">Time To</th>
-							<th data-sortable="true">Typ</th>
-							<th>Actions</th>
-						</tr>
-					</thead>
-					<tbody>
-						<!--  list all employees ----------------------------------------------------------- -->
-						<c:forEach items="${timeRecordList}" var="timeRecord">
-							<tr>
-								<td>${timeRecord.startDate}</td>
-								<td>${timeRecord.endDate}</td>
-								<td>${timeRecord.startTime}</td>
-								<td>${timeRecord.endTime}</td>
-								<td>${timeRecord.typ}</td>
-								<td><a href="changeTimeRecord?id=${timeRecord.id}">
-										<button type="button" class="btn btn-xs btn-success">
-											<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-											Edit
-										</button>
-								</a> <a href="deleteTimeRecord?timerecord=${timeRecord.id}&id=${employee.id}">
-										<button type="button" class="btn btn-xs btn-danger">
-											<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-											Delete
-										</button>
-								</a></td>
-							</tr>
-						</c:forEach>
-						<!--  list all employees ----------------------------------------------------------- -->
-					</tbody>
-				</table>
-			</div>
-		</div>
-
 
 	</div>
 	<!--  End of container -->
-	
+
 	<!-- Footer -->
 	<jsp:include page="../includes/template/fixedFooter.jsp" />
 
