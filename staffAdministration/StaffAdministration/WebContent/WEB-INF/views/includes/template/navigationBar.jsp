@@ -20,7 +20,7 @@
 							<li><a href="#"><i class="fa fa-circle-o"
 									style="color: yellow"></i>Busy</a></li>
 							<li><a href="#"><i class="fa fa-times-circle"
-									style="color: red"></i>Not available</a></li>
+									style="color: #d9534f"></i>Not available</a></li>
 
 						</ul></li>
 				</ul></li>

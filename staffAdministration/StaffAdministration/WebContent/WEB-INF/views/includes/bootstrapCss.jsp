@@ -41,7 +41,8 @@ body {
 
 #page-inner {
 	width: 100%;
-	margin: 0px 20px 10px 15px;
+	margin: 0px 0px 10px 15px;
+	padding-right: 30px;
 	background-color: transparent;
 	min-height: 1200px;
 }
@@ -51,6 +52,7 @@ body {
 ------------------------------------------------*/
 .top-navbar {
 	margin: 0px;
+	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
 }
 
 .navbar-side {
@@ -247,8 +249,7 @@ ul.nav.nav-second-level.collapse.in {
 
 .page-header-hr {
 	padding: 9px;
-	margin: -15px 0px 20px 0px;
-	border-bottom: 1px solid #eee;
+	margin: -15px 150px 20px 0px;
 	background-color: #2DAFCB;
 	color: #ffffff;
 	width: 100%;
@@ -257,7 +258,7 @@ ul.nav.nav-second-level.collapse.in {
 /* Panel start */
 .panel {
 	padding: 15px;
-	margin-bottom: 10px;
+	margin-bottom: 27px;
 	background-color: #fff;
 	border: 1px solid #ddd;
 	border-radius: 0px;
@@ -274,33 +275,36 @@ ul.nav.nav-second-level.collapse.in {
 	border-top-left-radius: 3px;
 }
 
+.panel-violet {
+	border-color: #774177;
+	color: #fff;
+	background-color: #774177;
+	
+}
+
+.panel-violet>.panel-heading {
+	color: #fff;
+	background-color: #774177;
+	border-color: #337ab7;
+	border:0px;
+}
+
 .panel-news {
-	padding: 15px;
-	margin-bottom: 20px;
-	background-color: #fff;
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+	color: black;
+	border-color: #708090;
 }
 
 .panel-news>.panel-heading {
-	padding: 10px 15px;
-	margin: -15px -15px;
-	background-color: #f5f5f5;
-	border-bottom: 1px solid #ddd;
-	border-top-right-radius: 3px;
-	border-top-left-radius: 3px;
-}
-
-.panel-announcements {
-	border-color: #337ab7;
-}
-
-.panel-announcements>.panel-heading {
 	color: #fff;
-	background-color: #337ab7;
-	border-color: #337ab7;
+	background-color: #708090;
+	border-color: #708090;
+	border-radius: 0px;
+}
+
+.panel-news>.footer-news {
+	color: #fff;
+	background-color: #708090;
+	border-color: #708090;
 }
 
 .panel-green {
@@ -325,6 +329,12 @@ ul.nav.nav-second-level.collapse.in {
 	border-color: #337ab7;
 	color: #fff;
 	background-color: #337ab7;
+}
+
+.panel-blue>.panel-body {
+	border-color: #337ab7;
+	color: #fff;
+	background-color: #fff;
 }
 
 .panel-yellow {
@@ -424,6 +434,12 @@ ul.unstyled {
 }
 
 /* Footer end */
+
+.status-field{
+	margin-top: 10px;
+	padding-bottom: 5px;
+	border-top: 2px solid #fff;
+}
 .status-buttons {
 	margin-top: 15px;
 }
