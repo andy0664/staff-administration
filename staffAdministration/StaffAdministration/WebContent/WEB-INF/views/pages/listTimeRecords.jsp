@@ -55,55 +55,50 @@
 		</c:if>
 		<!--   message ----------------------------------------------------------- --> --%>
 
-
-				<!--  Search bar ----------------------------------------------------------- -->
-				<jsp:include page="../includes/template/searchNav.jsp" />
-				<!--  Search bar ----------------------------------------------------------- -->
-
-				<!--  New Employee buttons ----------------------------------------------------------- -->
 				<div class="row">
-					<div class="col-md-4 col-md-offset-4">
+					<div class="col-md-4 col-md-offset-1">
 						<p>
 							<a href="newTimeRecord">
 								<button type="button" class="btn btn-success">Add new
 									Timerecord</button>
 							</a>
 						</p>
-						<label for="inputManager" class="col-md-2 control-label">Employee</label>
+
 						<!-- <form class="form-horizontal" method="post"
 							action="timeRecordEmployee"> -->
 						<form class="form-horizontal" method="post">
 							<%-- <input type="hidden" name="${_csrf.parameterName}"
 									value="${_csrf.token }" /> --%>
 							<! ----------------  Choose Employee ---------------- -->
-							<div class="col-md-10">
-								<select class="form-control" name="employee">
-									<c:forEach items="${employeeList }" var="employee">
-										<option value="${employee.id}">${ employee.firstName}
-											${employee.lastName }</option>
-									</c:forEach>
-								</select>
+							<div class="form-group">
+								<label for="inputManager" class="col-md-2 control-label">Employee</label>
+								<div class="col-md-7">
+									<select class="form-control" name="employee">
+										<c:forEach items="${employeeList }" var="employee">
+											<option value="${employee.id}">${ employee.firstName}
+												${employee.lastName }</option>
+										</c:forEach>
+									</select>
+								</div>
 							</div>
 
 							<! ----------------  DateFrom ---------------- -->
 							<div class="form-group">
 								<label for="inputDate" class="col-md-2 control-label">From</label>
-								<div class="col-md-10">
-									<input class="form_datetime" id="inputDateFrom"
+								<div class="col-md-7">
+									<input class="form_datetime form-control" id="inputDateFrom"
 										placeholder="Date" type="text" readonly name="dateFrom"
 										value="<fmt:formatDate value="${dateFrom}" pattern="dd.MM.yyyy"/>" />
-									<i class="fa fa-calendar"></i>
 								</div>
 							</div>
 
 							<! ----------------  DateTo ---------------- -->
 							<div class="form-group">
 								<label for="inputDate" class="col-md-2 control-label">To</label>
-								<div class="col-md-10">
-									<input class="form_datetime" id="inputDateFrom"
+								<div class="col-md-7">
+									<input class="form_datetime form-control" id="inputDateFrom"
 										placeholder="Date" type="text" readonly name="dateTo"
 										value="<fmt:formatDate value="${dateTo}" pattern="dd.MM.yyyy"/>" />
-									<i class="fa fa-calendar"></i>
 								</div>
 							</div>
 
@@ -131,7 +126,12 @@
 
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
-
+						<a href="timeRecordExcelExport">
+							<button type="button" class="btn btn-xs btn-success pull-right" style="margin-bottom:5px">
+								<i class="fa fa-table"></i>
+								Excel Export
+							</button>
+						</a>
 						<table data-toggle="table" class="table table-striped">
 							<thead>
 								<tr>
