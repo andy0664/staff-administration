@@ -33,6 +33,7 @@ import at.fh.swenga.jpa.dao.SimpleTimeRecordRepository;
 import at.fh.swenga.jpa.dto.DepartmentDTO;
 import at.fh.swenga.jpa.dto.EmployeeDTO;
 import at.fh.swenga.jpa.dto.TimeRecordDTO;
+import at.fh.swenga.jpa.dto.TimeRecordRequestDTO;
 import at.fh.swenga.jpa.model.Address;
 import at.fh.swenga.jpa.model.Department;
 import at.fh.swenga.jpa.model.Employee;
@@ -50,7 +51,7 @@ public class CoverPageController {
 
 	@Autowired
 	private SimpleTimeRecordRepository timeRecordDao;
-	
+
 	@Autowired
 	private SimpleNewsRepository newsRepository;
 
@@ -107,14 +108,15 @@ public class CoverPageController {
 		newsRepository.save(newNews);
 		return "forward:/start";
 	}
-	
-	@RequestMapping(value={"removeNews"}, method=RequestMethod.GET)
-	public String removeNews(@RequestParam int id, Model model){
-		try{
+
+	@RequestMapping(value = { "removeNews" }, method = RequestMethod.GET)
+	public String removeNews(@RequestParam int id, Model model) {
+		try {
 			newsRepository.delete(id);
-		}catch(Exception ex){
+		} catch (Exception ex) {
 			ex.printStackTrace();
-			model.addAttribute(Constant.KEY_ERROR_MESSAGE, "Couldn't delete news");
+			model.addAttribute(Constant.KEY_ERROR_MESSAGE,
+					"Couldn't delete news");
 		}
 		return "forward:/start";
 	}
@@ -313,19 +315,30 @@ public class CoverPageController {
 	 * ########### listTimeRecords.jsp ############
 	 */
 	@RequestMapping(value = { "timeRecordEmployee" })
-	public String timeRecordManagerView(@RequestParam int employee, Model model) {
-		return prepareTimeRecordManager(employee, model);
+	public String timeRecordManagerView(
+			@Valid @ModelAttribute TimeRecordRequestDTO request,
+			BindingResult bindingResult, Model model) {
+		checkBinding(bindingResult, model);
+		return prepareTimeRecordManager(request, model);
 	}
-
-	@RequestMapping(value = { "timeRecordEmployeeDelete" })
-	public String timeRecordManagerView(@RequestParam int timerecord,
-			@RequestParam int id, Model model) {
-		return prepareTimeRecordManager(id, model);
-	}
-
+//
+//	@RequestMapping(value = { "deleteTimeRecord" })
+//	public String deleteTimeRecord(@RequestParam int timerecord,
+//			@Valid @ModelAttribute TimeRecordRequestDTO request,
+//			BindingResult bindingResult, Model model) {
+//		try {
+//			timeRecordDao.delete(timerecord);
+//		} catch (Exception ex) {
+//			ex.printStackTrace();
+//			model.addAttribute(Constant.KEY_ERROR_MESSAGE,
+//					"Couldn't delete timerecord");
+//		}
+//		return prepareTimeRecordManager(request, model);
+//	}
+	
 	@RequestMapping(value = { "deleteTimeRecord" })
-	public String deleteTimeRecord(@RequestParam int timerecord, int id,
-			Model model) {
+	public String deleteTimeRecord(@RequestParam int timerecord,
+			@RequestParam int id, @RequestParam Date dateFrom, @RequestParam Date dateTo, Model model) {
 		try {
 			timeRecordDao.delete(timerecord);
 		} catch (Exception ex) {
@@ -333,9 +346,14 @@ public class CoverPageController {
 			model.addAttribute(Constant.KEY_ERROR_MESSAGE,
 					"Couldn't delete timerecord");
 		}
-		return "forward:timeRecordEmployeeDelete";
+		return prepareTimeRecordManager(new TimeRecordRequestDTO(id,dateFrom,dateTo), model);
 	}
-
+	
+	@RequestMapping(value={"timeRecordExcelExport"})
+	public String timeRecordExcelExport(Model model){
+		return "timeRecordExcelExport";
+	}
+	
 	// @ExceptionHandler(Exception.class)
 	// public String handleAllException(Exception ex) {
 	// return "showError";
@@ -348,12 +366,23 @@ public class CoverPageController {
 		employeeDao.save(emp);
 	}
 
-	private String prepareTimeRecordManager(int employee, Model model) {
-		model.addAttribute(Constant.KEY_TIME_RECORD_LIST,
-				timeRecordDao.findRecordsByEmployeeId(employee));
+	private String prepareTimeRecordManager(TimeRecordRequestDTO request,
+			Model model) {
+		List<TimeRecord> list = timeRecordDao
+				.findRecordsByEmployeeIdAndStartDateGreaterThanEqualAndEndDateLessThanEqual(
+						request.getEmployee(), request.getDateFrom(),
+						request.getDateTo());
+		System.out.println("Size list="+list.size()+"##########################################################");
+		model.addAttribute(
+				Constant.KEY_TIME_RECORD_LIST,list
+				);
+		model.addAttribute(Constant.KEY_TIME_RECORD_DATE_FROM,
+				request.getDateFrom());
+		model.addAttribute(Constant.KEY_TIME_RECORD_DATE_TO,
+				request.getDateTo());
 		model.addAttribute(Constant.KEY_EMPLOYEE_LIST, employeeDao.findAll());
 		model.addAttribute(Constant.KEY_EMPLOYEE,
-				employeeDao.findEmployeeById(employee));
+				employeeDao.findEmployeeById(request.getEmployee()));
 		return Constant.PAGE_LIST_TIME_RECORDS;
 	}
 

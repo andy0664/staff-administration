@@ -89,7 +89,7 @@
 										<input class="form_datetime" id="inputDate" placeholder="Date"
 											type="text" readonly name="dayOfBirth"
 											value="<fmt:formatDate value="${employee.dayOfBirth}" pattern="dd.MM.yyyy"/>"
-											/required> <i class="fa fa-calendar"></i>
+											required/> <i class="fa fa-calendar"></i>
 									</div>
 								</div>
 

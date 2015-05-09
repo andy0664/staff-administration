@@ -55,8 +55,17 @@
 		can handle it, otherwise return 404 -->
 	<mvc:default-servlet-handler />
 
+	<bean class="org.springframework.web.servlet.view.XmlViewResolver">
+		<property name="order" value="1" />
+		<property name="location">
+			<value>/WEB-INF/spring-excel-views.xml</value>
+		</property>
+	</bean>
+
+
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="order" value="2" />
 		<property name="prefix">
 			<value>/WEB-INF/views/</value>
 		</property>
@@ -64,8 +73,6 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
-
-
 
 
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
@@ -90,7 +97,8 @@
 				<!-- validate: validate the schema, makes no changes to the database. 
 					update: update the schema. create: creates the schema, destroying previous 
 					data. create-drop: drop the schema at the end of the session. -->
-				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+				<!-- <prop key="hibernate.hbm2ddl.auto">create-drop</prop> -->
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 			</props>

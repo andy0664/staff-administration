@@ -14,6 +14,9 @@
 <title>Timerecord</title>
 <jsp:include page="../includes/bootstrapCss.jsp" />
 <jsp:include page="../includes/bootstrapJs.jsp" />
+<link
+	href="http://www.malot.fr/bootstrap-datetimepicker/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"
+	rel="stylesheet">
 </head>
 <body>
 
@@ -69,6 +72,9 @@
 						<label for="inputManager" class="col-md-2 control-label">Employee</label>
 						<form class="form-horizontal" method="post"
 							action="timeRecordEmployee">
+							<%-- <input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token }" /> --%>
+							<! ----------------  Choose Employee ---------------- -->
 							<div class="col-md-10">
 								<select class="form-control" name="employee">
 									<c:forEach items="${employeeList }" var="employee">
@@ -78,6 +84,27 @@
 								</select>
 							</div>
 
+							<! ----------------  DateFrom ---------------- -->
+							<div class="form-group">
+								<label for="inputDate" class="col-md-2 control-label">From</label>
+								<div class="col-md-10">
+									<input class="form_datetime" id="inputDateFrom"
+										placeholder="Date" type="text" readonly name="dateFrom"
+										value="<fmt:formatDate value="${dateFrom}" pattern="dd.MM.yyyy"/>" />
+									<i class="fa fa-calendar"></i>
+								</div>
+							</div>
+
+							<! ----------------  DateTo ---------------- -->
+							<div class="form-group">
+								<label for="inputDate" class="col-md-2 control-label">To</label>
+								<div class="col-md-10">
+									<input class="form_datetime" id="inputDateFrom"
+										placeholder="Date" type="text" readonly name="dateTo"
+										value="<fmt:formatDate value="${dateTo}" pattern="dd.MM.yyyy"/>" />
+									<i class="fa fa-calendar"></i>
+								</div>
+							</div>
 
 							<div class="form-group">
 								<div class="col-md-10 col-md-offset-2">
@@ -88,7 +115,12 @@
 						<!-- </a> <a href="fillDepartment">
 						<button type="button" class="btn btn-success">Test: Fill</button>
 					 -->
-
+						<a href="timeRecordExcelExport">
+							<button type="button" class="btn btn-xs btn-success">
+								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+								Excel Export
+							</button>
+						</a>
 					</div>
 				</div>
 				<!--  New Employee buttons ----------------------------------------------------------- -->
@@ -112,18 +144,16 @@
 								<!--  list all employees ----------------------------------------------------------- -->
 								<c:forEach items="${timeRecordList}" var="timeRecord">
 									<tr>
-										<td>${timeRecord.startDate}</td>
-										<td>${timeRecord.endDate}</td>
+
+										<td><fmt:formatDate value="${timeRecord.startDate}"
+												pattern="dd.MM.yyyy" /></td>
+										<td><fmt:formatDate value="${timeRecord.endDate}"
+												pattern="dd.MM.yyyy" /></td>
 										<td>${timeRecord.startTime}</td>
 										<td>${timeRecord.endTime}</td>
 										<td>${timeRecord.typ}</td>
-										<td><a href="changeTimeRecord?id=${timeRecord.id}">
-												<button type="button" class="btn btn-xs btn-success">
-													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-													Edit
-												</button>
-										</a> <a
-											href="deleteTimeRecord?timerecord=${timeRecord.id}&id=${employee.id}">
+										<td><a
+											href="deleteTimeRecord?timerecord=${timeRecord.id}&id=${employee.id}&dateFrom=<fmt:formatDate value="${dateFrom}" pattern="dd.MM.yyyy"/>&dateTo=<fmt:formatDate value="${dateTo}" pattern="dd.MM.yyyy"/>">
 												<button type="button" class="btn btn-xs btn-danger">
 													<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 													Delete
@@ -142,9 +172,28 @@
 	</div>
 	<!--  End of container -->
 
+
+
+
+
 	<!-- Footer -->
 	<jsp:include page="../includes/template/fixedFooter.jsp" />
 
 	<jsp:include page="../includes/bootstrapJs.jsp" />
+
+	<script type="text/javascript"
+		src="http://www.malot.fr/bootstrap-datetimepicker/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+
+	<script>
+		$(function() {
+			$(".form_datetime").datetimepicker({
+				format : "dd.mm.yyyy",
+				autoclose : true,
+				todayBtn : true,
+				pickerPosition : "bottom-left",
+				minView : 2
+			});
+		});
+	</script>
 </body>
 </html>
