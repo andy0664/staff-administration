@@ -59,20 +59,10 @@
 				</script>
 				<%-- 		<jsp:include page="includes/template/dateTimePicker.jsp" /> --%>
 				<div class="row" id="bigCallout">
-					<div class="col-12">
-						<!-- Visible only on small devices -->
-						<div class="well well-small visible-sm">
-							<a href="" class="btn btn-large btn-block btn-default"><span
-								class="glyphicon glyphicon-phone"></span> Give us a call!</a>
-						</div>
-
 						<div class="page-header page-header-hr" style="height: 100px">
 							<h1 style="margin-left: 12px">Welcome to Staff
 								Administration</h1>
 						</div>
-
-					</div>
-					<!-- end col-12 -->
 				</div>
 
 				<c:if test="${not empty errorMessage}">
@@ -100,19 +90,21 @@
 								data-target="#collapseExample">
 								<div class="row">
 									<div class="col-xs-3">
-										<i class="fa fa-user fa-5x"></i>
+										<i class="fa fa-info-circle fa-5x"></i>
 									</div>
 									<div class="col-xs-9 text-right">
 										<font size="5">Set Status</font>
 										<div>Set your current status</div>
 									</div>
 								</div>
-								<div class="collapse" id="collapseExample">
-									<div class="row status-buttons">
-										<button type="button" class="btn btn-success">Available</button>
-										<button type="button" class="btn btn-warning">Busy</button>
-										<button type="button" class="btn btn-danger">Not
-											available</button>
+								<div class="collapse " id="collapseExample">
+									<div class="status-field">
+										<div class="row status-buttons">
+											<button type="button" class="btn btn-success" style="width:130px"><i class="fa fa-check-circle"></i> Available</button>
+											<button type="button" class="btn btn-warning" style="width:130px"><i class="fa fa-circle-o"></i> Busy</button>
+											<button type="button" class="btn btn-danger" style="width:130px"><i class="fa fa-times-circle"></i> Not
+												available</button>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -184,7 +176,7 @@
 
 						<!-- Announcements -->
 						<a href="#">
-							<div class="panel panel-blue" data-toggle="modal"
+							<div class="panel panel-violet" data-toggle="modal"
 								data-target="#announcementModal">
 								<div class="row">
 									<div class="col-xs-3">
@@ -204,7 +196,7 @@
 							<div class="panel panel-green">
 								<div class="row">
 									<div class="col-xs-3">
-										<i class="fa fa-user fa-5x"></i>
+										<i class="fa fa-clock-o fa-5x"></i>
 									</div>
 									<div class="col-xs-9 text-right">
 										<font size="5">New Time Record</font>
@@ -265,35 +257,34 @@
 
 				<div class="col-md-4">
 					<!-- News -->
-					<div class="panel panel-default">
+					<div class="panel panel-news">
 						<div class="panel-heading">
 							<span class="glyphicon glyphicon-list-alt"></span><b>News</b>
 						</div>
 						<div class="panel-body">
-							<div class="row">
-								<div class="col-xs-12">
-									<ul class="demo">
-										<c:forEach items="${newsList }" var="news">
-											<li class="news-item">
-												<table cellpadding="4">
-													<tr>
-														<td><i class="fa fa-newspaper-o fa-4x"></i></td>
-														<td><b style="margin-left: 10px">${news.title}</b>
-															<p style="margin-left: 10px">${news.message}</td>
-														<td><a href="removeNews?id=${news.id}">
-																<button type="button" class="btn btn-xs btn-danger">delete</button>
-														</a></td>
-													</tr>
-												</table>
-											</li>
-										</c:forEach>
-									</ul>
+							<c:forEach items="${newsList }" var="news">
+								<div class="row">
+									<div class="col-xs-12 news-item">
+										<div class="col-xs-3" style="margin-left: -15px">
+											<i class="fa fa-newspaper-o fa-5x"></i>
+										</div>
+										<div class="col-xs-8" style="margin-left: -15px">
+											<b>${news.title}</b>
+											<p>${news.message}</p>
+										</div>
+										<div class="col-xs-1">
+											<a href="removeNews?id=${news.id}">
+												<button type="button" class="btn btn-xs btn-danger">delete</button>
+											</a>
+										</div>
+									</div>
 								</div>
-							</div>
+							</c:forEach>
 						</div>
-						<div class="panel-footer">
+						<div class="panel-footer footer-news">
 							<a href="#">
-								<button type="button" class="btn btn-primary" id="myBtn"
+								<button type="button" class="btn btn-info id="
+									myBtn"
 									data-toggle="modal" data-target="#basicModal">New
 									entry</button>
 							</a>
@@ -380,10 +371,13 @@
 
 					<div class="panel panel-anncouncement">
 						<div class="panel-heading">
-						<div class="row" style="margin-right: 0px; margin-left: 0px">
-							<font size="5"><i class="fa fa-birthday-cake" style="margin-right: 5px"></i>Birthday!!</font>
-							<button type="button" class="btn pull-right btn-success"
-									style="width: 60px; background-color: transparent; border:0px"><i class="fa fa-check-circle-o fa-2x"></i></button>
+							<div class="row" style="margin-right: 0px; margin-left: 0px">
+								<font size="5"><i class="fa fa-birthday-cake"
+									style="margin-right: 5px"></i>Birthday!!</font>
+								<button type="button" class="btn pull-right btn-success"
+									style="width: 60px; background-color: transparent; border: 0px">
+									<i class="fa fa-check-circle-o fa-2x"></i>
+								</button>
 							</div>
 						</div>
 						<div class="panel-body">
