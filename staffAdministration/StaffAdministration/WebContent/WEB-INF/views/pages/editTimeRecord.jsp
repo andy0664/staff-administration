@@ -59,11 +59,11 @@
 								<div class="form-group">
 									<label for="inputStartDate" class="col-md-2 control-label">Date
 										from</label>
-									<div class="col-md-10">
-										<input class="form_datetime" id="inputStartDate"
+									<div class="col-md-5">
+										<input class="form_datetime form-control" id="inputStartDate"
 											placeholder="Date" type="text" readonly name="startDate"
 											value="<fmt:formatDate value="${timeRecord.startDate}" pattern="dd.MM.yyyy"/>"
-											required /> <i class="fa fa-calendar"></i>
+											required />
 									</div>
 								</div>
 
@@ -71,11 +71,11 @@
 								<div class="form-group">
 									<label for="inputEndDate" class="col-md-2 control-label">Date
 										to</label>
-									<div class="col-md-10">
-										<input class="form_datetime" id="inputEndDate"
+									<div class="col-md-5">
+										<input class="form_datetime form-control" id="inputEndDate"
 											placeholder="Date" type="text" readonly name="endDate"
 											value="<fmt:formatDate value="${timeRecord.endDate}" pattern="dd.MM.yyyy"/>"
-											required /> <i class="fa fa-calendar"></i>
+											required />
 									</div>
 								</div>
 
@@ -86,7 +86,7 @@
 								<div class="form-group">
 									<label for="inputStartTime" class="col-md-2 control-label">Time
 										from</label>
-									<div class="col-md-10">
+									<div class="col-md-5">
 										<input class="form-control" id="inputStartTime" type="text"
 											name="startTime"
 											value="<c:out value="${timeRecord.startTime}"/>" required>
@@ -97,7 +97,7 @@
 								<div class="form-group">
 									<label for="inputEndTime" class="col-md-2 control-label">Time
 										to</label>
-									<div class="col-md-10">
+									<div class="col-md-5">
 										<input class="form-control" id="inputEndTime" type="text"
 											name="endTime" value="<c:out value="${timeRecord.endTime}"/>"
 											required>
@@ -108,7 +108,7 @@
 								<! ---------------  Typ ---------------- -->
 								<div class="form-group">
 									<label for="inputTyp" class="col-md-2 control-label">Typ</label>
-									<div class="col-md-10">
+									<div class="col-md-5">
 										<select class="form-control" name="typ">
 											<option value="working time" selected="selected">working
 												time</option>
@@ -121,7 +121,7 @@
 								<! ----------------  Employee For testing Remove ---------------- -->
 								<div class="form-group">
 									<label for="inputManager" class="col-md-2 control-label">Employee</label>
-									<div class="col-md-10">
+									<div class="col-md-5">
 										<select class="form-control" name="employee">
 											<c:forEach items="${employeeList }" var="employee">
 												<option value="${employee.id}">${ employee.firstName}
