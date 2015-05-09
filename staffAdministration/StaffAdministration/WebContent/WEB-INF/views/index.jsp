@@ -53,17 +53,14 @@
 
 
 		<div id="page-wrapper">
-			<div id="page-inner">
 				<script type="text/javascript">
 					$('#timepicker1').timepicker();
 				</script>
 				<%-- 		<jsp:include page="includes/template/dateTimePicker.jsp" /> --%>
-				<div class="row" id="bigCallout">
-						<div class="page-header page-header-hr" style="height: 100px">
-							<h1 style="margin-left: 12px">Welcome to Staff
+						<div class="page-header-hr" style="margin-left:15px">
+							<h1>Welcome to Staff
 								Administration</h1>
 						</div>
-				</div>
 
 				<c:if test="${not empty errorMessage}">
 					<div class="alert alert-danger" role="alert">${errorMessage}</div>
@@ -293,7 +290,6 @@
 					</div>
 				</div>
 				<!-- end feature -->
-			</div>
 		</div>
 	</div>
 	<!-- end features -->
