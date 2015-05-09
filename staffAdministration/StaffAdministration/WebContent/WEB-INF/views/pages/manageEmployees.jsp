@@ -25,7 +25,6 @@
 		<jsp:include page="../includes/template/navigationBar.jsp" />
 
 		<div id="page-wrapper">
-			<div id="page-inner">
 				<div class="page-header page-header-hr" style="height: 100px">
 					<div class="container" role="main">
 						<h1>Manage Employees</h1>
@@ -136,7 +135,6 @@
 						</table>
 					</div>
 				</div>
-			</div>
 		</div>
 
 
