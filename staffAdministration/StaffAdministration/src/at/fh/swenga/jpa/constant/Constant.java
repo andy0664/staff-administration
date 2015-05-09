@@ -15,6 +15,10 @@ public class Constant {
 	public static final String PAGE_NEW_TIME_RECORD = "/pages/editTimeRecord";
 	public static final String PAGE_LIST_TIME_RECORDS = "/pages/listTimeRecords";
 	
+	
+	//Export
+	public static final String CLASS_EXPORT_TIME_RECORD="timeRecordExcelExport";
+	
 	//Roles
 	public static final int ROLE_ADMINISTRATOR=1;
 	public static final int ROLE_MANAGER=2;
@@ -38,10 +42,10 @@ public class Constant {
 	public static final String REDIRECT_MANAGE_EMPLOYEES="redirect:manageEmployees";
 	public static final String REDIRECT_MANAGE_DEPARTMENTS="redirect:manageDepartments";
 	
-	
+	public static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+	public static final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
 	//Methods
-	public static Date parseToDate(String date) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+	public static Date parseToDate(String date) {	
 		try {
 			return dateFormat.parse(date);
 		} catch (ParseException e) {
@@ -49,5 +53,13 @@ public class Constant {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public static String parseDateToString(Date date){
+		return dateFormat.format(date);
+	}
+	
+	public static String parseTimeToString(Date time){
+		return timeFormat.format(time);
 	}
 }

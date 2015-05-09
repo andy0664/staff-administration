@@ -70,8 +70,9 @@
 							</a>
 						</p>
 						<label for="inputManager" class="col-md-2 control-label">Employee</label>
-						<form class="form-horizontal" method="post"
-							action="timeRecordEmployee">
+						<!-- <form class="form-horizontal" method="post"
+							action="timeRecordEmployee"> -->
+						<form class="form-horizontal" method="post">
 							<%-- <input type="hidden" name="${_csrf.parameterName}"
 									value="${_csrf.token }" /> --%>
 							<! ----------------  Choose Employee ---------------- -->
@@ -108,19 +109,21 @@
 
 							<div class="form-group">
 								<div class="col-md-10 col-md-offset-2">
-									<button type="Submit" class="btn btn-primary">Submit</button>
+									<button type="Submit" class="btn btn-primary" formaction="timeRecordEmployee">Show</button>
+									<button type="Submit" class="btn btn-primary" formaction="timeRecordExcelExport">Export</button>
 								</div>
 							</div>
+						</a>
 						</form>
 						<!-- </a> <a href="fillDepartment">
 						<button type="button" class="btn btn-success">Test: Fill</button>
 					 -->
-						<a href="timeRecordExcelExport">
+						<!-- <a href="timeRecordExcelExport">
 							<button type="button" class="btn btn-xs btn-success">
 								<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 								Excel Export
 							</button>
-						</a>
+						</a> -->
 					</div>
 				</div>
 				<!--  New Employee buttons ----------------------------------------------------------- -->

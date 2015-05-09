@@ -3,12 +3,16 @@ package at.fh.swenga.jpa.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
+import org.apache.commons.collections4.map.HashedMap;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -318,27 +322,31 @@ public class CoverPageController {
 	public String timeRecordManagerView(
 			@Valid @ModelAttribute TimeRecordRequestDTO request,
 			BindingResult bindingResult, Model model) {
-		checkBinding(bindingResult, model);
-		return prepareTimeRecordManager(request, model);
+		if (!checkBinding(bindingResult, model)) {
+			return prepareTimeRecordManager(request, model);
+		}
+		return Constant.PAGE_LIST_TIME_RECORDS;
 	}
-//
-//	@RequestMapping(value = { "deleteTimeRecord" })
-//	public String deleteTimeRecord(@RequestParam int timerecord,
-//			@Valid @ModelAttribute TimeRecordRequestDTO request,
-//			BindingResult bindingResult, Model model) {
-//		try {
-//			timeRecordDao.delete(timerecord);
-//		} catch (Exception ex) {
-//			ex.printStackTrace();
-//			model.addAttribute(Constant.KEY_ERROR_MESSAGE,
-//					"Couldn't delete timerecord");
-//		}
-//		return prepareTimeRecordManager(request, model);
-//	}
-	
+
+	//
+	// @RequestMapping(value = { "deleteTimeRecord" })
+	// public String deleteTimeRecord(@RequestParam int timerecord,
+	// @Valid @ModelAttribute TimeRecordRequestDTO request,
+	// BindingResult bindingResult, Model model) {
+	// try {
+	// timeRecordDao.delete(timerecord);
+	// } catch (Exception ex) {
+	// ex.printStackTrace();
+	// model.addAttribute(Constant.KEY_ERROR_MESSAGE,
+	// "Couldn't delete timerecord");
+	// }
+	// return prepareTimeRecordManager(request, model);
+	// }
+
 	@RequestMapping(value = { "deleteTimeRecord" })
 	public String deleteTimeRecord(@RequestParam int timerecord,
-			@RequestParam int id, @RequestParam Date dateFrom, @RequestParam Date dateTo, Model model) {
+			@RequestParam int id, @RequestParam Date dateFrom,
+			@RequestParam Date dateTo, Model model) {
 		try {
 			timeRecordDao.delete(timerecord);
 		} catch (Exception ex) {
@@ -346,14 +354,29 @@ public class CoverPageController {
 			model.addAttribute(Constant.KEY_ERROR_MESSAGE,
 					"Couldn't delete timerecord");
 		}
-		return prepareTimeRecordManager(new TimeRecordRequestDTO(id,dateFrom,dateTo), model);
+		return prepareTimeRecordManager(new TimeRecordRequestDTO(id, dateFrom,
+				dateTo), model);
 	}
-	
-	@RequestMapping(value={"timeRecordExcelExport"})
-	public String timeRecordExcelExport(Model model){
-		return "timeRecordExcelExport";
+
+	@RequestMapping(value = { "timeRecordExcelExport" })
+	public String timeRecordExcelExport(
+			@Valid @ModelAttribute TimeRecordRequestDTO request,
+			BindingResult bindingResult, Model model) {
+		if (!checkBinding(bindingResult, model)) {
+			Map<Employee, List<TimeRecord>> timeRecords = new HashedMap<Employee, List<TimeRecord>>();
+			Employee emp = employeeDao.findEmployeeById(request.getEmployee());
+			List<TimeRecord> records = timeRecordDao
+					.findRecordsByEmployeeIdAndStartDateGreaterThanEqualAndEndDateLessThanEqualOrderByStartDate(
+							request.getEmployee(), request.getDateFrom(),
+							request.getDateTo());
+			timeRecords.put(emp, records);
+			model.addAttribute(Constant.KEY_TIME_RECORD_LIST, timeRecords);
+			return Constant.CLASS_EXPORT_TIME_RECORD;
+		}
+		return Constant.PAGE_LIST_TIME_RECORDS;
+
 	}
-	
+
 	// @ExceptionHandler(Exception.class)
 	// public String handleAllException(Exception ex) {
 	// return "showError";
@@ -369,13 +392,12 @@ public class CoverPageController {
 	private String prepareTimeRecordManager(TimeRecordRequestDTO request,
 			Model model) {
 		List<TimeRecord> list = timeRecordDao
-				.findRecordsByEmployeeIdAndStartDateGreaterThanEqualAndEndDateLessThanEqual(
+				.findRecordsByEmployeeIdAndStartDateGreaterThanEqualAndEndDateLessThanEqualOrderByStartDate(
 						request.getEmployee(), request.getDateFrom(),
 						request.getDateTo());
-		System.out.println("Size list="+list.size()+"##########################################################");
-		model.addAttribute(
-				Constant.KEY_TIME_RECORD_LIST,list
-				);
+		System.out.println("Size list=" + list.size()
+				+ "##########################################################");
+		model.addAttribute(Constant.KEY_TIME_RECORD_LIST, list);
 		model.addAttribute(Constant.KEY_TIME_RECORD_DATE_FROM,
 				request.getDateFrom());
 		model.addAttribute(Constant.KEY_TIME_RECORD_DATE_TO,

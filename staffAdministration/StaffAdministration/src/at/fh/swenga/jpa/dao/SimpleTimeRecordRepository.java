@@ -10,6 +10,6 @@ import at.fh.swenga.jpa.model.TimeRecord;
 public interface SimpleTimeRecordRepository extends
 		JpaRepository<TimeRecord, Integer> {
 
-	public List<TimeRecord> findRecordsByEmployeeIdAndStartDateGreaterThanEqualAndEndDateLessThanEqual(
+	public List<TimeRecord> findRecordsByEmployeeIdAndStartDateGreaterThanEqualAndEndDateLessThanEqualOrderByStartDate(
 			int id, Date startDate, Date endDate);
 }
