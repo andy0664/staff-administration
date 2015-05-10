@@ -31,7 +31,7 @@
 
 
 		<div id="page-wrapper">
-			<div id="page-inner">
+			<div id="page-inner-subpages">
 
 				<!--  add or edit?  ----------------------------------------------------------- -->
 				<c:choose>
@@ -156,7 +156,7 @@
 	<!-- JS for Bootstrap -->
 
 	<!-- Footer -->
-	<jsp:include page="../includes/template/fixedFooter.jsp" />
+<%-- 	<jsp:include page="../includes/template/fixedFooter.jsp" /> --%>
 
 
 	<!-- JS for Datetime picker -->

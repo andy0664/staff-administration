@@ -28,11 +28,9 @@
 		<jsp:include page="../includes/template/navigationBar.jsp" />
 
 		<div id="page-wrapper">
-			<div id="page-inner">
-				<div class="page-header page-header-hr" style="height: 100px">
-					<div class="container" role="main">
+			<div id="page-inner-subpages">
+				<div class="page-header">
 						<h1>Timerecords ${employee.firstName} ${employee.lastName}</h1>
-					</div>
 				</div>
 
 				<!--  Error message ----------------------------------------------------------- -->
@@ -105,7 +103,7 @@
 							<div class="form-group">
 								<div class="col-md-10 col-md-offset-2">
 									<button type="Submit" class="btn btn-primary" formaction="timeRecordEmployee">Show</button>
-									<button type="Submit" class="btn btn-primary" formaction="timeRecordExcelExport">Export</button>
+									<button type="Submit" class="btn btn-success" formaction="timeRecordExcelExport"><i class="fa fa-table"></i> Excel Export</button>
 								</div>
 							</div>
 						</a>
@@ -126,12 +124,6 @@
 
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
-						<a href="timeRecordExcelExport">
-							<button type="button" class="btn btn-xs btn-success pull-right" style="margin-bottom:5px">
-								<i class="fa fa-table"></i>
-								Excel Export
-							</button>
-						</a>
 						<table data-toggle="table" class="table table-striped">
 							<thead>
 								<tr>
@@ -180,7 +172,7 @@
 
 
 	<!-- Footer -->
-	<jsp:include page="../includes/template/fixedFooter.jsp" />
+<%-- 	<jsp:include page="../includes/template/fixedFooter.jsp" /> --%>
 
 	<jsp:include page="../includes/bootstrapJs.jsp" />
 
