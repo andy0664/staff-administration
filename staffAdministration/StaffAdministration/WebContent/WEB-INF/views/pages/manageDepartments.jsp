@@ -25,12 +25,10 @@
 		<jsp:include page="../includes/template/navigationBar.jsp" />
 
 		<div id="page-wrapper">
-			<div id="page-inner">
+			<div id="page-inner-subpages">
 				<c:set var="lastDepartment">""</c:set>
-				<div class="page-header page-header-hr" style="height: 100px">
-					<div class="container" role="main">
-						<h1>Manage Departments</h1>
-					</div>
+				<div class="page-header">
+					<h1>Manage Departments</h1>
 				</div>
 
 
@@ -53,40 +51,50 @@
 				${message}</div>
 		</c:if>
 		<!--   message ----------------------------------------------------------- --> --%>
-
-
-				<!--  Search bar ----------------------------------------------------------- -->
-				<jsp:include page="../includes/template/searchNav.jsp" />
-				<!--  Search bar ----------------------------------------------------------- -->
-
-				<!--  New Employee buttons ----------------------------------------------------------- -->
-				<div class="row">
-					<div class="col-md-4 col-md-offset-4">
-						<p>
-							<a href="addDepartment">
-								<button type="button" class="btn btn-success">Add new
-									Department</button>
-							</a> <a href="fillDepartment">
-								<button type="button" class="btn btn-success">Test:
-									Fill</button>
-							</a>
-
-						</p>
-					</div>
-				</div>
-				<!--  New Employee buttons ----------------------------------------------------------- -->
-
+		
+		<table data-toggle="table"
+       data-url="/gh/get/response.json/wenzhixin/bootstrap-table/tree/master/docs/data/data1/"
+       data-show-columns="true">
+    <thead>
+    <tr>
+        <th data-field="name" data-switchable="false">Name</th>
+        <th data-field="stargazers_count">Stars</th>
+        <th data-field="forks_count">Forks</th>
+        <th data-field="description" data-visible="false">Description</th>
+    </tr>
+    </thead>
+</table>
 
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
+						<!--  Search bar ----------------------------------------------------------- -->
+						<jsp:include page="../includes/template/searchNav.jsp" />
+						<!--  Search bar ----------------------------------------------------------- -->
+
+						<!--  New Employee buttons ----------------------------------------------------------- -->
+						<div class="row">
+							<div class="col-md-4">
+								<p>
+									<a href="addDepartment">
+										<button type="button" class="btn btn-success">
+											<i class="fa fa-user-plus"></i> Add Department
+										</button>
+									</a> <a href="fillDepartment">
+										<button type="button" class="btn btn-success">Test:
+											Fill</button>
+									</a>
+
+								</p>
+							</div>
+						</div>
 
 						<table data-toggle="table" class="table table-striped">
 							<thead>
 								<tr>
-									<th data-sortable="true">Shortcut</th>
+									<th data-sortable="true" class="col-md-1">Shortcut</th>
 									<th data-sortable="true">Name</th>
 									<th data-sortable="true">Manager</th>
-									<th>Actions</th>
+									<th class="col-md-2">Actions</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -122,6 +130,6 @@
 	</div>
 	<!--  End of container -->
 
-	<jsp:include page="../includes/bootstrapJs.jsp" />
+	<%-- 	<jsp:include page="../includes/bootstrapJs.jsp" /> --%>
 </body>
 </html>
