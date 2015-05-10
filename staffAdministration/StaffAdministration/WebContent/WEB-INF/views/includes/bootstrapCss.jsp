@@ -34,15 +34,15 @@ body {
 #page-wrapper {
 	margin: 0 0 0 260px;
 	padding: 15px 0px;
-	min-height: 1200px;
+	min-height: 1000px;
 	position: relative;
 	background: #f2f2f2;
 }
 
-#page-inner {
+#page-inner-subpages {
 	width: 100%;
-	margin: 0px 0px 10px 15px;
-	padding-right: 30px;
+	padding-right: 25px;
+	padding-left: 25px;
 	background-color: transparent;
 	min-height: 1200px;
 }
@@ -247,12 +247,10 @@ ul.nav.nav-second-level.collapse.in {
 	color: #666;
 }
 
-.page-header-hr {
-	padding: 9px;
-	margin: -15px 150px 20px 0px;
-	background-color: #2DAFCB;
-	color: #ffffff;
-	width: 100%;
+
+.page-header {
+	margin-bottom: 30px;
+	border-bottom: 3px solid #2DAFCB;
 }
 
 /* Panel start */
@@ -279,14 +277,13 @@ ul.nav.nav-second-level.collapse.in {
 	border-color: #774177;
 	color: #fff;
 	background-color: #774177;
-	
 }
 
 .panel-violet>.panel-heading {
 	color: #fff;
 	background-color: #774177;
 	border-color: #337ab7;
-	border:0px;
+	border: 0px;
 }
 
 .panel-news {
@@ -365,15 +362,13 @@ ul.nav.nav-second-level.collapse.in {
 	border-color: #774177;
 	color: #fff;
 	background-color: #fff;
-		border-radius: 4px;
-	
+	border-radius: 4px;
 }
 
 .panel-anncouncement>.panel-heading {
 	border-color: #774177;
 	color: #fff;
 	background-color: #774177;
-
 }
 
 .panel-anncouncement>.panel-body {
@@ -434,12 +429,12 @@ ul.unstyled {
 }
 
 /* Footer end */
-
-.status-field{
+.status-field {
 	margin-top: 10px;
 	padding-bottom: 5px;
 	border-top: 2px solid #fff;
 }
+
 .status-buttons {
 	margin-top: 15px;
 }
@@ -509,4 +504,3 @@ ul.unstyled {
 
 <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-
