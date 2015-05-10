@@ -48,11 +48,6 @@
 				</c:if>
 				<!--   message ----------------------------------------------------------- -->
 
-
-				<!--  Search bar ----------------------------------------------------------- -->
-				<jsp:include page="../includes/template/searchNav.jsp" />
-				<!--  Search bar ----------------------------------------------------------- -->
-
 				<!--  New Employee buttons ----------------------------------------------------------- -->
 				<div class="row">
 					<div class="col-md-4">
@@ -77,7 +72,8 @@
 						<table data-toggle="table" class="table table-striped"
 							data-sort-name="name" data-sort-order="desc"
 							data-url="/gh/get/response.json/wenzhixin/bootstrap-table/tree/master/docs/data/data1/"
-							data-show-columns="true">
+							data-show-columns="true"
+							data-search="true">
 							<thead>
 								<tr>
 									<th data-sortable="true">SSN</th>
