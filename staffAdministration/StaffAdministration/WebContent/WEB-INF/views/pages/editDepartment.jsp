@@ -16,94 +16,104 @@
 <jsp:include page="../includes/bootstrapCss.jsp" />
 </head>
 <body>
-	<!--  Search bar ----------------------------------------------------------- -->
-	<jsp:include page="../includes/template/navigationBar.jsp" />
-	<!--  Search bar ----------------------------------------------------------- -->
-	<div class="container" role="main">
+	<div id="wrapper">
 
-		<!--  add or edit?  ----------------------------------------------------------- -->
-		<c:choose>
-			<c:when test="${not empty department}">
-				<c:set var="legend">Change Department: ${department.name}</c:set>
-				<c:set var="formAction">changeDepartment</c:set>
-			</c:when>
-			<c:otherwise>
-				<c:set var="legend">New Department</c:set>
-				<c:set var="formAction">addDepartment</c:set>
-			</c:otherwise>
-		</c:choose>
-		<!--  add or edit?  ----------------------------------------------------------- -->
+		<!--  Navbar Top ----------------------------------------------------------- -->
+		<jsp:include page="../includes/template/navbarTop.jsp" />
 
-		<div class="row">
-			<div class="col-md-8 col-md-offset-2">
-				<form class="form-horizontal" method="post" action="${formAction}">
-					<%-- <input type="hidden" name="${_csrf.parameterName}"
+		<!--  Navbar Side ----------------------------------------------------------- -->
+		<jsp:include page="../includes/template/navigationBar.jsp" />
+
+
+		<div id="page-wrapper">
+			<div id="page-inner-subpages">
+
+				<!--  add or edit?  ----------------------------------------------------------- -->
+				<c:choose>
+					<c:when test="${not empty department}">
+						<c:set var="legend">Change Department: ${department.name}</c:set>
+						<c:set var="formAction">changeDepartment</c:set>
+					</c:when>
+					<c:otherwise>
+						<c:set var="legend">New Department</c:set>
+						<c:set var="formAction">addDepartment</c:set>
+					</c:otherwise>
+				</c:choose>
+				<!--  add or edit?  ----------------------------------------------------------- -->
+
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<form class="form-horizontal" method="post" action="${formAction}">
+							<%-- <input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token }" /> --%>
-					<fieldset>
-						<legend>${legend}</legend>
-						<input type="hidden" name="id" value="${department.id }" />
+							<fieldset>
+								<legend>${legend}</legend>
+								<input type="hidden" name="id" value="${department.id }" />
 
-						<! ----------------  name ---------------- -->
-						<div class="form-group">
-							<label for="inputName" class="col-md-2 control-label">Name</label>
-							<div class="col-md-10">
-								<input class="form-control" id="inputName" type="text"
-									name="name" value="<c:out value="${department.name}"/>"required>
-							</div>
-						</div>
+								<! ----------------  name ---------------- -->
+								<div class="form-group">
+									<label for="inputName" class="col-md-2 control-label">Name</label>
+									<div class="col-md-10">
+										<input class="form-control" id="inputName" type="text"
+											name="name" value="<c:out value="${department.name}"/>"
+											required>
+									</div>
+								</div>
 
-						<! ----------------  shortcut ---------------- -->
-						<div class="form-group">
-							<label for="inputShortcut" class="col-md-2 control-label">Shortcut</label>
-							<div class="col-md-10">
-								<input class="form-control" id="inputShortcut" type="text"
-									maxlength="5" name="shortcut"
-									value="<c:out value="${department.shortcut}"/>"required>
-							</div>
-						</div>
+								<! ----------------  shortcut ---------------- -->
+								<div class="form-group">
+									<label for="inputShortcut" class="col-md-2 control-label">Shortcut</label>
+									<div class="col-md-10">
+										<input class="form-control" id="inputShortcut" type="text"
+											maxlength="5" name="shortcut"
+											value="<c:out value="${department.shortcut}"/>" required>
+									</div>
+								</div>
 
-						<! ----------------  manager ---------------- -->
-						<div class="form-group">
-							<label for="inputManager" class="col-md-2 control-label">Manager</label>
-							<div class="col-md-10">
-								<select class="form-control" name="manager">
-									<c:forEach items="${employeeList }" var="employee">
-										<c:choose>
-											<c:when test="${employee.id == department.manager.id }">
-												<option value="${employee.id}" selected="selected">${ employee.firstName}
-													${employee.lastName }</option>
-											</c:when>
-											<c:otherwise>
-												<option value="${employee.id}">${ employee.firstName}
-													${employee.lastName }</option>
-											</c:otherwise>
-										</c:choose>
+								<! ----------------  manager ---------------- -->
+								<div class="form-group">
+									<label for="inputManager" class="col-md-2 control-label">Manager</label>
+									<div class="col-md-10">
+										<select class="form-control" name="manager">
+											<c:forEach items="${employeeList }" var="employee">
+												<c:choose>
+													<c:when test="${employee.id == department.manager.id }">
+														<option value="${employee.id}" selected="selected">${ employee.firstName}
+															${employee.lastName }</option>
+													</c:when>
+													<c:otherwise>
+														<option value="${employee.id}">${ employee.firstName}
+															${employee.lastName }</option>
+													</c:otherwise>
+												</c:choose>
 
-									</c:forEach>
-								</select>
-							</div>
-						</div>
+											</c:forEach>
+										</select>
+									</div>
+								</div>
 
 
-						<! ----------------  buttons ---------------- -->
-						<div class="form-group">
-							<div class="col-md-10 col-md-offset-2">
-								<button type="Submit" class="btn btn-primary">Submit</button>
-								<a href="manageDepartments">
-									<button type="button" class="btn btn-default">Cancel</button>
-								</a>
-							</div>
-						</div>
-					</fieldset>
-				</form>
+								<! ----------------  buttons ---------------- -->
+								<div class="form-group">
+									<div class="col-md-10 col-md-offset-2">
+										<button type="Submit" class="btn btn-primary">Submit</button>
+										<a href="manageDepartments">
+											<button type="button" class="btn btn-default">Cancel</button>
+										</a>
+									</div>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 
 	</div>
 	<!--  End of container -->
-	
-		<!-- Footer -->
-	<jsp:include page="../includes/template/fixedFooter.jsp" />
+
+	<!-- Footer -->
+	<%-- 	<jsp:include page="../includes/template/fixedFooter.jsp" /> --%>
 
 
 	<!-- JS for Bootstrap -->
