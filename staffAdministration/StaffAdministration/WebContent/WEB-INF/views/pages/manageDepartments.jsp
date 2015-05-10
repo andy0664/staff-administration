@@ -52,19 +52,6 @@
 		</c:if>
 		<!--   message ----------------------------------------------------------- --> --%>
 		
-		<table data-toggle="table"
-       data-url="/gh/get/response.json/wenzhixin/bootstrap-table/tree/master/docs/data/data1/"
-       data-show-columns="true">
-    <thead>
-    <tr>
-        <th data-field="name" data-switchable="false">Name</th>
-        <th data-field="stargazers_count">Stars</th>
-        <th data-field="forks_count">Forks</th>
-        <th data-field="description" data-visible="false">Description</th>
-    </tr>
-    </thead>
-</table>
-
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
 						<!--  Search bar ----------------------------------------------------------- -->
