@@ -24,7 +24,7 @@
 		<!--  Navbar Side ----------------------------------------------------------- -->
 		<jsp:include page="../includes/template/navigationBar.jsp" />
 
-		<div id="page-wrapper">
+		<div id="page-wrapper-subpages">
 			<div id="page-inner-subpages">
 				<div class="page-header">
 					<h1>Manage Employees</h1>
@@ -48,10 +48,10 @@
 				</c:if>
 				<!--   message ----------------------------------------------------------- -->
 
-				<!--  New Employee buttons ----------------------------------------------------------- -->
 				<div class="row">
-					<div class="col-md-4">
-						<p>
+					<div class="col-md-12">
+
+						<div id="toolbar" class="btn-group">
 							<a href="addEmployee">
 								<button type="button" class="btn btn-success">
 									<i class="fa fa-user-plus"></i> Add Employee
@@ -60,20 +60,15 @@
 								<button type="button" class="btn btn-success">Test:
 									Fill</button>
 							</a>
-
-						</p>
-					</div>
-				</div>
-				<!--  New Employee buttons ----------------------------------------------------------- -->
-
-				<div class="row">
-					<div class="col-md-12">
+						</div>
 
 						<table data-toggle="table" class="table table-striped"
 							data-sort-name="name" data-sort-order="desc"
 							data-url="/gh/get/response.json/wenzhixin/bootstrap-table/tree/master/docs/data/data1/"
-							data-show-columns="true"
-							data-search="true">
+							data-show-columns="true" data-search="true"
+							data-toolbar="#toolbar"
+							data-height="755"
+							data-show-toggle="true">
 							<thead>
 								<tr>
 									<th data-sortable="true">SSN</th>
@@ -138,6 +133,7 @@
 
 	<!-- Footer -->
 	<%-- 	<jsp:include page="../includes/template/footer.jsp" /> --%>
+	
 
 
 </body>

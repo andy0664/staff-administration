@@ -27,10 +27,10 @@
 		<!--  Navbar Side ----------------------------------------------------------- -->
 		<jsp:include page="../includes/template/navigationBar.jsp" />
 
-		<div id="page-wrapper">
+		<div id="page-wrapper-subpages">
 			<div id="page-inner-subpages">
 				<div class="page-header">
-						<h1>Timerecords ${employee.firstName} ${employee.lastName}</h1>
+					<h1>Timerecords ${employee.firstName} ${employee.lastName}</h1>
 				</div>
 
 				<!--  Error message ----------------------------------------------------------- -->
@@ -102,11 +102,15 @@
 
 							<div class="form-group">
 								<div class="col-md-10 col-md-offset-2">
-									<button type="Submit" class="btn btn-primary" formaction="timeRecordEmployee">Show</button>
-									<button type="Submit" class="btn btn-success" formaction="timeRecordExcelExport"><i class="fa fa-table"></i> Excel Export</button>
+									<button type="Submit" class="btn btn-primary"
+										formaction="timeRecordEmployee">Show</button>
+									<button type="Submit" class="btn btn-success"
+										formaction="timeRecordExcelExport">
+										<i class="fa fa-table"></i> Excel Export
+									</button>
 								</div>
 							</div>
-						</a>
+							</a>
 						</form>
 						<!-- </a> <a href="fillDepartment">
 						<button type="button" class="btn btn-success">Test: Fill</button>
@@ -124,7 +128,8 @@
 
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
-						<table data-toggle="table" class="table table-striped">
+						<table data-toggle="table" class="table table-striped" data-sort-order="desc"
+							data-url="/gh/get/response.json/wenzhixin/bootstrap-table/tree/master/docs/data/data1/">
 							<thead>
 								<tr>
 									<th data-sortable="true">Date From</th>
@@ -156,7 +161,6 @@
 										</a></td>
 									</tr>
 								</c:forEach>
-								<!--  list all employees ----------------------------------------------------------- -->
 							</tbody>
 						</table>
 					</div>
@@ -172,7 +176,7 @@
 
 
 	<!-- Footer -->
-<%-- 	<jsp:include page="../includes/template/fixedFooter.jsp" /> --%>
+	<%-- 	<jsp:include page="../includes/template/fixedFooter.jsp" /> --%>
 
 	<jsp:include page="../includes/bootstrapJs.jsp" />
 

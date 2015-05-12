@@ -30,7 +30,7 @@
 		<jsp:include page="../includes/template/navigationBar.jsp" />
 
 
-		<div id="page-wrapper">
+		<div id="page-wrapper-subpages">
 			<div id="page-inner-subpages">
 
 				<!--  add or edit?  ----------------------------------------------------------- -->

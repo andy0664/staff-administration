@@ -24,7 +24,7 @@
 		<!--  Navbar Side ----------------------------------------------------------- -->
 		<jsp:include page="../includes/template/navigationBar.jsp" />
 
-		<div id="page-wrapper">
+		<div id="page-wrapper-subpages">
 			<div id="page-inner-subpages">
 				<c:set var="lastDepartment">""</c:set>
 				<div class="page-header">
@@ -51,31 +51,25 @@
 				${message}</div>
 		</c:if>
 		<!--   message ----------------------------------------------------------- --> --%>
-		
+
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
-						<!--  Search bar ----------------------------------------------------------- -->
-						<jsp:include page="../includes/template/searchNav.jsp" />
-						<!--  Search bar ----------------------------------------------------------- -->
-
-						<!--  New Employee buttons ----------------------------------------------------------- -->
-						<div class="row">
-							<div class="col-md-4">
-								<p>
-									<a href="addDepartment">
-										<button type="button" class="btn btn-success">
-											<i class="fa fa-user-plus"></i> Add Department
-										</button>
-									</a> <a href="fillDepartment">
-										<button type="button" class="btn btn-success">Test:
-											Fill</button>
-									</a>
-
-								</p>
-							</div>
+					
+						<div id="toolbar" class="btn-group">
+							<a href="addDepartment">
+								<button type="button" class="btn btn-success">
+									<i class="fa fa-user-plus"></i> Add Department
+								</button>
+							</a> <a href="fillDepartment">
+								<button type="button" class="btn btn-success">Test:
+									Fill</button>
+							</a>
 						</div>
 
-						<table data-toggle="table" class="table table-striped">
+						<table data-toggle="table" class="table table-striped"
+							data-sort-name="name" data-sort-order="desc"
+							data-url="/gh/get/response.json/wenzhixin/bootstrap-table/tree/master/docs/data/data1/"
+							data-search="true" data-toolbar="#toolbar" >
 							<thead>
 								<tr>
 									<th data-sortable="true" class="col-md-1">Shortcut</th>
