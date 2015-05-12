@@ -34,9 +34,17 @@ body {
 #page-wrapper {
 	margin: 0 0 0 260px;
 	padding: 15px 0px;
-	min-height: 1000px;
+	min-height: 919px;
 	position: relative;
-	background: #f2f2f2;
+	background: #fff;
+}
+
+#page-wrapper-subpages {
+	margin: 0 0 0 260px;
+	padding: 15px 0px;
+	min-height: 919px;
+	position: relative;
+	background: #fff;
 }
 
 #page-inner-subpages {
@@ -44,7 +52,6 @@ body {
 	padding-right: 25px;
 	padding-left: 25px;
 	background-color: transparent;
-	min-height: 1200px;
 }
 
 /*----------------------------------------------
@@ -250,6 +257,7 @@ ul.nav.nav-second-level.collapse.in {
 
 .page-header {
 	margin-bottom: 30px;
+	margin-top:0px;
 	border-bottom: 3px solid #2DAFCB;
 }
 
