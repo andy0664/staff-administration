@@ -31,4 +31,32 @@
 
 <!-- Latest compiled and minified Locales -->
 <script
-	src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.7.0/locale/bootstrap-table-zh-CN.min.js"></script>
+	src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.7.0/locale/bootstrap-table-en-US.min.js"></script>
+
+<script>
+	function buildTable($el, cells, rows) {
+		var i, j, row, columns = [], data = [];
+
+		for (i = 0; i < cells; i++) {
+			columns.push({
+				field : 'field' + i,
+				title : 'Cell' + i
+			});
+		}
+		for (i = 0; i < rows; i++) {
+			row = {};
+			for (j = 0; j < cells; j++) {
+				row['field' + j] = 'Row-' + i + '-' + j;
+			}
+			data.push(row);
+		}
+		$el.bootstrapTable('destroy').bootstrapTable({
+			columns : columns,
+			data : data
+		});
+	}
+
+	$(function() {
+		buildTable($('#table'), 50, 50);
+	});
+</script>
