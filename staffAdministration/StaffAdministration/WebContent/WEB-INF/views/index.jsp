@@ -80,7 +80,7 @@
 									</div>
 									<div class="col-xs-9 text-right">
 										<font size="5">My Profile</font>
-										<div>See your own profile!</div>
+										<div>View your own profile!</div>
 									</div>
 								</div>
 							</div>
@@ -115,19 +115,20 @@
 									</div>
 								</div>
 							</div>
-						</a> <a href="#">
-							<div class="panel panel-blue">
-								<div class="row">
-									<div class="col-xs-3">
-										<i class="fa fa-wrench fa-5x"></i>
-									</div>
-									<div class="col-xs-9 text-right">
-										<font size="5">My Account</font>
-										<div>Settings for your Account</div>
-									</div>
-								</div>
-							</div>
-						</a>
+						</a> 
+<!-- 						<a href="#"> -->
+<!-- 							<div class="panel panel-blue"> -->
+<!-- 								<div class="row"> -->
+<!-- 									<div class="col-xs-3"> -->
+<!-- 										<i class="fa fa-wrench fa-5x"></i> -->
+<!-- 									</div> -->
+<!-- 									<div class="col-xs-9 text-right"> -->
+<!-- 										<font size="5">My Account</font> -->
+<!-- 										<div>Settings for your Account</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</a> -->
 
 						<!-- end panel -->
 
@@ -245,14 +246,14 @@
 						<!-- Calendar -->
 
 						<a href="manageDepartments">
-							<div class="panel panel-yellow">
+							<div class="panel panel-yellow" style="height:102px">
 								<div class="row">
 									<div class="col-xs-3">
 										<i class="fa fa-calendar fa-5x"></i>
 									</div>
 									<div class="col-xs-9 text-right">
-										<font size="5">My Calendar</font>
-										<div>See your own Calendar</div>
+										<font size="5">Calendar</font>
+										<div>View your own Calander and<p> the Calendar of your Collegues</p></div>
 									</div>
 								</div>
 							</div>
@@ -278,7 +279,7 @@
 								<div class="row">
 									<div class="col-xs-12 news-item">
 										<div class="col-xs-3" style="margin-left: -15px">
-											<i class="fa fa-newspaper-o fa-5x"></i>
+											<i class="fa fa-newspaper-o fa-5x" style="color: #708090"></i>
 										</div>
 										<div class="col-xs-8" style="margin-left: -15px">
 											<b>${news.title}</b>
