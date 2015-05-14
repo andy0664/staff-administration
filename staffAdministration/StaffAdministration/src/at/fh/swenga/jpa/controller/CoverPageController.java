@@ -4,9 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
@@ -16,6 +16,8 @@ import org.apache.commons.collections4.map.HashedMap;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,6 +36,7 @@ import at.fh.swenga.jpa.dao.SimpleDepartmentRepository;
 import at.fh.swenga.jpa.dao.SimpleEmployeeRepository;
 import at.fh.swenga.jpa.dao.SimpleNewsRepository;
 import at.fh.swenga.jpa.dao.SimpleTimeRecordRepository;
+import at.fh.swenga.jpa.dao.SimpleUserRoleRepository;
 import at.fh.swenga.jpa.dto.DepartmentDTO;
 import at.fh.swenga.jpa.dto.EmployeeDTO;
 import at.fh.swenga.jpa.dto.TimeRecordDTO;
@@ -43,6 +46,7 @@ import at.fh.swenga.jpa.model.Department;
 import at.fh.swenga.jpa.model.Employee;
 import at.fh.swenga.jpa.model.News;
 import at.fh.swenga.jpa.model.TimeRecord;
+import at.fh.swenga.jpa.model.UserRole;
 
 @Controller
 public class CoverPageController {
@@ -59,10 +63,33 @@ public class CoverPageController {
 	@Autowired
 	private SimpleNewsRepository newsRepository;
 
+	@Autowired
+	private SimpleUserRoleRepository userRoleRepository;
+
 	// For Binding Date and Time
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(Date.class, new DateTimeEditor());
+	}
+
+	/*
+	 * ########### login ############
+	 */
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String handleLogin() {
+		DataFactory df = new DataFactory();
+		Address address = new Address(df.getStreetName(), df.getCity(),
+				df.getRandomWord(), 8052);
+		Employee p1 = new Employee(12345, df.getFirstName(), df.getLastName(),
+				df.getBirthDate(), address, df.getRandomText(10, 20), 1234.5f,
+				df.getBirthDate(), "admin",
+				"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC");
+		UserRole role = new UserRole(Constant.ROLE_ADMINISTRATOR,p1);
+		//UserRole role2 = new UserRole(Constant.ROLE_EMPLOYEE,p1);
+		p1.addUserRole(role);
+		//p1.addUserRole(role2);
+		employeeDao.save(p1);
+		return "login";
 	}
 
 	/*
@@ -72,6 +99,8 @@ public class CoverPageController {
 	// Cover Page
 	@RequestMapping(value = { "/", "start" })
 	public String index(Model model) {
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		System.out.println("Username========================"+user.getUsername());
 		model.addAttribute(Constant.KEY_NEWS_LIST, newsRepository.findAll());
 		return Constant.PAGE_INDEX;
 	}
@@ -174,7 +203,9 @@ public class CoverPageController {
 					df.getRandomWord(), 8052);
 			Employee p1 = new Employee(12345, df.getFirstName(),
 					df.getLastName(), df.getBirthDate(), address,
-					df.getRandomText(10, 20), 1234.5f, df.getBirthDate(), 1);
+					df.getRandomText(10, 20), 1234.5f, df.getBirthDate(),
+					"testUser",
+					"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC");
 			employeeDao.save(p1);
 		}
 		return Constant.REDIRECT_MANAGE_EMPLOYEES;
@@ -194,7 +225,7 @@ public class CoverPageController {
 		}
 		newEmployee.setAddress(newAddress);
 		Employee emp = newEmployee.generateEmployee();
-		saveEmployee(emp, department);
+		saveEmployee(emp, department, newEmployee.getRole());
 		return Constant.REDIRECT_MANAGE_EMPLOYEES;
 	}
 
@@ -209,8 +240,16 @@ public class CoverPageController {
 		}
 		Employee emp = employeeDao.findEmployeeById(id);
 		newEmployee.setAddress(newAddress);
-		emp.updateEmployee(newEmployee);
-		saveEmployee(emp, department);
+		if (emp.getRole().equals(newEmployee.getRole())) {
+			emp.updateEmployee(newEmployee);
+			saveEmployee(emp, department, "");
+		} else {
+			emp.updateEmployee(newEmployee);
+			emp.setUserRole(new HashSet<UserRole>());
+			// userRoleRepository.removeByUsername(emp.getId());
+			saveEmployee(emp, department, emp.getRole());
+		}
+
 		return Constant.REDIRECT_MANAGE_EMPLOYEES;
 	}
 
@@ -382,11 +421,28 @@ public class CoverPageController {
 	// return "showError";
 	// }
 
-	private void saveEmployee(Employee emp, int department) {
+	private void saveEmployee(Employee emp, int department, String role) {
 		if (department != Constant.NO_DEPARTMENT) {
 			emp.setDepartment(departmentDao.findDepartmentById(department));
 		}
+		if (Constant.ROLE_ADMINISTRATOR.equals(role)) {
+			emp.addUserRole(genereateUserRole(Constant.ROLE_ADMINISTRATOR, emp));
+			emp.addUserRole(genereateUserRole(Constant.ROLE_MANAGER, emp));
+			emp.addUserRole(genereateUserRole(Constant.ROLE_EMPLOYEE, emp));
+			emp.setRole(Constant.ROLE_ADMINISTRATOR);
+		} else if (Constant.ROLE_MANAGER.equals(role)) {
+			emp.addUserRole(genereateUserRole(Constant.ROLE_MANAGER, emp));
+			emp.addUserRole(genereateUserRole(Constant.ROLE_EMPLOYEE, emp));
+			emp.setRole(Constant.ROLE_MANAGER);
+		} else if (Constant.ROLE_EMPLOYEE.equals(role)) {
+			emp.addUserRole(genereateUserRole(Constant.ROLE_EMPLOYEE, emp));
+			emp.setRole(Constant.ROLE_EMPLOYEE);
+		}
 		employeeDao.save(emp);
+	}
+
+	private UserRole genereateUserRole(String role, Employee emp) {
+		return new UserRole(role, emp);
 	}
 
 	private String prepareTimeRecordManager(TimeRecordRequestDTO request,

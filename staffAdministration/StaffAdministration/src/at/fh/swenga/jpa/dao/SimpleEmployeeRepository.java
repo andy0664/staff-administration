@@ -20,4 +20,6 @@ public interface SimpleEmployeeRepository extends
 	public List<Employee> findEmployeeByOrderByDepartmentId();
 	public List<Employee> findEmployeeByDepartmentId(int depId);
 
+	public List<Employee> findByUserName(String username);
+
 }

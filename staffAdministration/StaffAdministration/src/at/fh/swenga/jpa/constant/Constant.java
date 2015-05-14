@@ -20,9 +20,9 @@ public class Constant {
 	public static final String CLASS_EXPORT_TIME_RECORD="timeRecordExcelExport";
 	
 	//Roles
-	public static final int ROLE_ADMINISTRATOR=1;
-	public static final int ROLE_MANAGER=2;
-	public static final int ROLE_EMPLOYEE=3;
+	public static final String ROLE_ADMINISTRATOR="ROLE_ADMIN";
+	public static final String ROLE_MANAGER="ROLE_MANAGER";
+	public static final String ROLE_EMPLOYEE="ROLE_EMPLOYEE";
 	
 	public static final int NO_DEPARTMENT=-1;
 	

@@ -187,6 +187,26 @@
 										</select>
 									</div>
 								</div>
+								
+								<! ----------------  User Name ---------------- -->
+								<div class="form-group">
+									<label for="inputUserName" class="col-md-2 control-label">Username</label>
+									<div class="col-md-5">
+										<input class="form-control" id="inputUserName" type="text"
+											name="userName" value="<c:out value="${employee.userName}"/>"
+											required>
+									</div>
+								</div>
+								
+								<! ----------------  Password ---------------- -->
+								<div class="form-group">
+									<label for="inputPassword" class="col-md-2 control-label">Password</label>
+									<div class="col-md-5">
+										<input class="form-control" id="inputPassword" type="text"
+											name="password" value=""
+											required>
+									</div>
+								</div>
 
 								<! ---------------  Role ---------------- -->
 								<div class="form-group">
@@ -194,20 +214,20 @@
 									<div class="col-md-5">
 										<select class="form-control" name="role">
 											<c:choose>
-												<c:when test="${employee.role==1}">
-													<option value="1" selected="selected">Administrator</option>
-													<option value="2">Manager</option>
-													<option value="3">Employee</option>
+												<c:when test="${employee.role=='Role-Admin'}">
+													<option value="ROLE_ADMIN" selected="selected">Administrator</option>
+													<option value="ROLE_MANAGER">Manager</option>
+													<option value="ROLE_EMPLOYEE">Employee</option>
 												</c:when>
-												<c:when test="${employee.role==2}">
-													<option value="1">Administrator</option>
-													<option value="2" selected="selected">Manager</option>
-													<option value="3">Employee</option>
+												<c:when test="${employee.role=='Role-Manager'}">
+													<option value="ROLE_ADMIN">Administrator</option>
+													<option value="ROLE_MANAGER" selected="selected">Manager</option>
+													<option value="ROLE_EMPLOYEE">Employee</option>
 												</c:when>
 												<c:otherwise>
-													<option value="1">Administrator</option>
-													<option value="2">Manager</option>
-													<option value="3" selected="selected">Employee</option>
+													<option value="ROLE_ADMIN">Administrator</option>
+													<option value="ROLE_MANAGER">Manager</option>
+													<option value="ROLE_EMPLOYEE" selected="selected">Employee</option>
 												</c:otherwise>
 											</c:choose>
 										</select>

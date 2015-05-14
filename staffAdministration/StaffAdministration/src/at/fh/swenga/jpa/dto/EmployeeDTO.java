@@ -14,20 +14,22 @@ public class EmployeeDTO {
 	private String firstName;
 
 	private String lastName;
+	private String userName;
 	private Date dayOfBirth;
 	private Address address;
 	private String jobDescription;
 	private float salary;
 	private Date dayOfEntry;
-	private int role;
+	private String role;
 	private int department;
+	private String password;
 
 	public EmployeeDTO() {
 	}
 
 	public EmployeeDTO(int ssn, String firstName, String lastName,
 			Date dayOfBirth, Address address, String jobDescription,
-			float salary, Date dayOfEntry, int role, int department) {
+			float salary, Date dayOfEntry, String role, int department) {
 		this.ssn = ssn;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -42,7 +44,7 @@ public class EmployeeDTO {
 
 	public EmployeeDTO(int ssn, String firstName, String lastName,
 			Date dayOfBirth, Address address, String jobDescription,
-			float salary, Date dayOfEntry, int role) {
+			float salary, Date dayOfEntry, String role,String password) {
 		this.ssn = ssn;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -129,11 +131,11 @@ public class EmployeeDTO {
 		this.dayOfEntry = dayOfEntry;
 	}
 
-	public int getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(int role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 
@@ -145,9 +147,27 @@ public class EmployeeDTO {
 		this.department = department;
 	}
 	
+	
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	public Employee generateEmployee() {
 		return new Employee(ssn, firstName, lastName, dayOfBirth, address,
-				jobDescription, salary,dayOfEntry, role);
+				jobDescription, salary,dayOfEntry,userName,password);
 	}
 
 }

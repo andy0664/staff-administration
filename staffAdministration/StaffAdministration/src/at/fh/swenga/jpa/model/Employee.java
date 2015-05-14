@@ -9,6 +9,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -61,8 +62,14 @@ public class Employee implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dayOfEntry;
 
-	@NotNull(message = "{0} is required")
-	private int role;
+//	@NotNull(message = "{0} is required")
+	private String role;
+	
+	private String userName;
+	private String password;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "employee", cascade=CascadeType.PERSIST)
+	private Set<UserRole> userRoles;
 	
 	@ManyToOne(cascade=CascadeType.MERGE)
 	private Department department;
@@ -78,7 +85,7 @@ public class Employee implements Serializable {
 
 	public Employee(int ssn, String firstName, String lastName,
 			Date dayOfBirth, Address address, String jobDescription,
-			float salary, Date dayOfEntry, int role, Department department) {
+			float salary, Date dayOfEntry, int role, Department department, String username) {
 		this.ssn = ssn;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -87,13 +94,14 @@ public class Employee implements Serializable {
 		this.jobDescription = jobDescription;
 		this.salary = salary;
 		this.dayOfEntry = dayOfEntry;
-		this.role = role;
+//		this.role = role;
 		this.department=department;
+		this.userName=username;
 	}
 
 	public Employee(int ssn, String firstName, String lastName,
 			Date dayOfBirth, Address address, String jobDescription,
-			float salary, Date dayOfEntry, int role) {
+			float salary, Date dayOfEntry,String username, String password) {
 		this.ssn = ssn;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -102,7 +110,9 @@ public class Employee implements Serializable {
 		this.jobDescription = jobDescription;
 		this.salary = salary;
 		this.dayOfEntry = dayOfEntry;
-		this.role = role;
+		this.userName=username;
+		this.password=password;
+//		this.role = role;
 	}
 
 
@@ -115,8 +125,6 @@ public class Employee implements Serializable {
 	public int getSsn() {
 		return ssn;
 	}
-
-
 
 	public void setSsn(int ssn) {
 		this.ssn = ssn;
@@ -134,7 +142,15 @@ public class Employee implements Serializable {
 		this.firstName = firstName;
 	}
 
+	
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public String getLastName() {
 		return lastName;
@@ -206,27 +222,54 @@ public class Employee implements Serializable {
 		this.dayOfEntry = dayOfEntry;
 	}
 
-
-
-	public int getRole() {
-		return role;
-	}
-
-
-
-	public void setRole(int role) {
-		this.role = role;
-	}
-
+//	public int getRole() {
+//		return role;
+//	}
+//
+//
+//
+//	public void setRole(int role) {
+//		this.role = role;
+//	}
 	
 	public Department getDepartment() {
 		return department;
 	}
 
+	public String getUserName() {
+		return userName;
+	}
 
+	public void setUserName(String username) {
+		this.userName = username;
+	}
 
 	public void setDepartment(Department department) {
 		this.department = department;
+	}
+	
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public Set<UserRole> getUserRole() {
+		return userRoles;
+	}
+
+	public void setUserRole(Set<UserRole> userRole) {
+		this.userRoles = userRole;
+	}
+	
+	public void addUserRole(UserRole role){
+		if(userRoles==null){
+			userRoles=new HashSet<UserRole>();
+		}
+		userRoles.add(role);
 	}
 
 	public Set<TimeRecord> getTimeRecords() {
@@ -254,6 +297,10 @@ public class Employee implements Serializable {
 		this.dayOfEntry=emp.getDayOfEntry();
 		this.salary=emp.getSalary();
 		this.role=emp.getRole();
+		this.userName=emp.getUserName();
+		if(!"".equals(emp.getPassword())){
+			this.password=emp.getPassword();
+		}
 	}
 
 	@Override
