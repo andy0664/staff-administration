@@ -18,9 +18,9 @@ import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.springframework.web.servlet.view.document.AbstractExcelView;
 
-import at.fh.swenga.jpa.constant.Constant;
 import at.fh.swenga.jpa.model.Employee;
 import at.fh.swenga.jpa.model.TimeRecord;
+import at.fh.swenga.jpa.support.Constant;
 
 public class TimeRecordExcelExport extends AbstractExcelView {
 

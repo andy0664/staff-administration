@@ -32,7 +32,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import at.fh.swenga.jpa.constant.Constant;
 import at.fh.swenga.jpa.dao.SimpleDepartmentRepository;
 import at.fh.swenga.jpa.dao.SimpleEmployeeRepository;
 import at.fh.swenga.jpa.dao.SimpleNewsRepository;
@@ -48,6 +47,8 @@ import at.fh.swenga.jpa.model.Employee;
 import at.fh.swenga.jpa.model.News;
 import at.fh.swenga.jpa.model.TimeRecord;
 import at.fh.swenga.jpa.model.UserRole;
+import at.fh.swenga.jpa.support.Constant;
+import at.fh.swenga.jpa.support.ControllerSupport;
 
 @Controller
 public class CoverPageController {
@@ -67,7 +68,9 @@ public class CoverPageController {
 	@Autowired
 	private SimpleUserRoleRepository userRoleRepository;
 	
-	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(4);
+	@Autowired
+	private ControllerSupport controllerSupport;
+	
 
 	// For Binding Date and Time
 	@InitBinder
@@ -158,7 +161,7 @@ public class CoverPageController {
 	@RequestMapping(value = { "newNews" })
 	public String newNews(@Valid @ModelAttribute News newNews,
 			BindingResult bindingResult, Model model) {
-		if (checkBinding(bindingResult, model)) {
+		if (controllerSupport.checkBinding(bindingResult, model)) {
 			return "forward:/start";
 		}
 		newsRepository.save(newNews);
@@ -177,330 +180,9 @@ public class CoverPageController {
 		return "forward:/start";
 	}
 
-	/*
-	 * ########### manageEmployees.jsp ############
-	 */
-
-	@RequestMapping(value = { "addEmployee" }, method = RequestMethod.GET)
-	public String editEmployee(Model model) {
-		model.addAttribute(Constant.KEY_DEPARTMENT_LIST,
-				departmentDao.findAll());
-		return Constant.PAGE_EDIT_EMPLOYEE;
-	}
-
-	@RequestMapping(value = { "changeEmployee" }, method = RequestMethod.GET)
-	public String changeEmployee(@RequestParam int id, Model model) {
-		try {
-			model.addAttribute(Constant.KEY_DEPARTMENT_LIST,
-					departmentDao.findAll());
-			model.addAttribute(Constant.KEY_EMPLOYEE,
-					employeeDao.findEmployeeById(id));
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return Constant.PAGE_EDIT_EMPLOYEE;
-	}
-
-	@RequestMapping(value = { "deleteEmployee" })
-	public String deleteEmployee(@RequestParam int id, Model model) {
-		try {
-//			userRoleRepository.myRemoveEntry(id);
-			employeeDao.delete(id);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			model.addAttribute(Constant.KEY_ERROR_MESSAGE,
-					"couldn't delete employee");
-		}
-
-		return "forward:manageEmployees";
-	}
-
-	// Zum füllen der Mitarbeiter Tabelle nur zum testen --> ende entfernen
-	@RequestMapping("fillEmployee")
-	@Transactional
-	public String fillData(Model model) {
-
-		DataFactory df = new DataFactory();
-
-		for (int i = 0; i < 10; i++) {
-			Address address = new Address(df.getStreetName(), df.getCity(),
-					df.getRandomWord(), 8052);
-			Employee p1 = new Employee(12345, df.getFirstName(),
-					df.getLastName(), df.getBirthDate(), address,
-					df.getRandomText(10, 20), 1234.5f, df.getBirthDate(),
-					"testUser",
-					"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC");
-			employeeDao.save(p1);
-		}
-		return Constant.REDIRECT_MANAGE_EMPLOYEES;
-	}
-
-	/*
-	 * ########### editEmployee.jsp ############
-	 */
-
-	@RequestMapping(value = { "addEmployee" }, method = RequestMethod.POST)
-	public String addEmployee(@Valid @ModelAttribute EmployeeDTO newEmployee,
-			@Valid @ModelAttribute Address newAddress,
-			@RequestParam int department, BindingResult bindingResult,
-			Model model) {
-		if (checkBinding(bindingResult, model)) {
-			return "forward:/manageEmployees";
-		}
-		newEmployee.setAddress(newAddress);
-		
-		Employee emp = newEmployee.generateEmployee();
-		emp.setPassword(encoder.encode(emp.getPassword()));
-		saveEmployee(emp, department, newEmployee.getRole());
-		return Constant.REDIRECT_MANAGE_EMPLOYEES;
-	}
-
-	@Transactional
-	@RequestMapping(value = { "changeEmployee" }, method = RequestMethod.POST)
-	public String updateEmployee(
-			@Valid @ModelAttribute EmployeeDTO newEmployee,
-			@Valid @ModelAttribute Address newAddress, @RequestParam int id,
-			@RequestParam int department, BindingResult bindingResult,
-			Model model) {
-		if (checkBinding(bindingResult, model)) {
-			return "forward:/manageEmployees";
-		}
-		Employee emp = employeeDao.findEmployeeById(id);
-		newEmployee.setAddress(newAddress);
-		emp.updateEmployee(newEmployee);
-		emp.setPassword(encoder.encode(newEmployee.getPassword()));
-		if (emp.getRole().equals(newEmployee.getRole())) {
-			saveEmployee(emp, department, "");
-		} else {
-			emp.setUserRole(new HashSet<UserRole>());
-			userRoleRepository.delete(userRoleRepository.findByEmployee(emp));
-			// userRoleRepository.removeByUsername(emp.getId());
-			saveEmployee(emp, department, emp.getRole());
-		}
-
-		return Constant.REDIRECT_MANAGE_EMPLOYEES;
-	}
-
-	/*
-	 * ########### manageDepartments.jsp ############
-	 */
-
-	@RequestMapping(value = { "deleteDepartment" })
-	public String deleteDepartment(@RequestParam int id, Model model) {
-		try {
-			departmentDao.delete(id);
-		} catch (Exception ex) {
-			model.addAttribute(Constant.KEY_ERROR_MESSAGE,
-					"couldn't delete department");
-		}
-		return "forward:manageDepartments";
-	}
-
-	@RequestMapping(value = { "changeDepartment" }, method = RequestMethod.GET)
-	public String editDepartment(@RequestParam int id, Model model) {
-		model.addAttribute(Constant.KEY_DEPARTMENT,
-				departmentDao.findDepartmentById(id));
-		model.addAttribute(Constant.KEY_EMPLOYEE_LIST,
-				employeeDao.findEmployeeByDepartmentId(id));
-		return Constant.PAGE_EDIT_DEPARTMENT;
-	}
-
-	@RequestMapping(value = { "addDepartment" }, method = RequestMethod.GET)
-	public String addDepartment(Model model) {
-		model.addAttribute(Constant.KEY_EMPLOYEE_LIST,
-				employeeDao.findEmployeeWithNoDepartment());
-		return Constant.PAGE_EDIT_DEPARTMENT;
-	}
-
-	// Zum füllen der Mitarbeiter Tabelle nur zum testen --> ende entfernen
-	@RequestMapping("fillDepartment")
-	@Transactional
-	public String fillDepartment(Model model) {
-
-		DataFactory df = new DataFactory();
-
-		for (int i = 0; i < 10; i++) {
-			Department dep1 = new Department(df.getName(), df.getRandomText(2,
-					5));
-			departmentDao.save(dep1);
-		}
-		return Constant.REDIRECT_MANAGE_DEPARTMENTS;
-	}
-
-	/*
-	 * ########### editDepartment.jsp ############
-	 */
-
-	@RequestMapping(value = { "changeDepartment" }, method = RequestMethod.POST)
-	public String updateDepartment(
-			@Valid @ModelAttribute DepartmentDTO newDepartment,
-			@RequestParam int id, @RequestParam int manager, Model model,
-			BindingResult bindingResult) {
-		if (checkBinding(bindingResult, model)) {
-			return "forward:/manageDepartments";
-		}
-		Department dep = departmentDao.findDepartmentById(id);
-		dep.updateDepartment(newDepartment);
-		if (dep.getManager().getId() != manager) {
-			dep.setManager(employeeDao.findEmployeeById(manager));
-		}
-		departmentDao.save(dep);
-		return Constant.REDIRECT_MANAGE_DEPARTMENTS;
-	}
-
-	@RequestMapping(value = { "addDepartment" }, method = RequestMethod.POST)
-	public String saveDepartment(
-			@Valid @ModelAttribute DepartmentDTO newDepartment,
-			@RequestParam int manager, BindingResult bindingResult, Model model) {
-		if (checkBinding(bindingResult, model)) {
-			return "forward:/manageDepartments";
-		}
-		Employee emp = employeeDao.findEmployeeById(manager);
-		Department dep = newDepartment.generateDepartment();
-		emp.setDepartment(dep);
-		dep.setManager(emp);
-		departmentDao.save(dep);
-		employeeDao.save(emp);
-
-		return Constant.REDIRECT_MANAGE_DEPARTMENTS;
-	}
-
-	/*
-	 * ########### editTimeRecord.jsp ############
-	 */
-
-	@RequestMapping(value = { "addTimeRecord" }, method = RequestMethod.POST)
-	public String addTimeRecord(@Valid @ModelAttribute TimeRecordDTO newRecord,
-			@RequestParam int employee, Model model, BindingResult bindingResult) {
-		if (checkBinding(bindingResult, model)) {
-			return "forward:/start";
-		}
-		Employee emp = employeeDao.findEmployeeById(employee);
-		TimeRecord record = newRecord.generateTimeRecord();
-		record.setEmployee(emp);
-		timeRecordDao.save(record);
-		return Constant.PAGE_INDEX;
-	}
-
-	/*
-	 * ########### listTimeRecords.jsp ############
-	 */
-	@RequestMapping(value = { "timeRecordEmployee" })
-	public String timeRecordManagerView(
-			@Valid @ModelAttribute TimeRecordRequestDTO request,
-			BindingResult bindingResult, Model model) {
-		if (!checkBinding(bindingResult, model)) {
-			return prepareTimeRecordManager(request, model);
-		}
-		return Constant.PAGE_LIST_TIME_RECORDS;
-	}
-
-	//
-	// @RequestMapping(value = { "deleteTimeRecord" })
-	// public String deleteTimeRecord(@RequestParam int timerecord,
-	// @Valid @ModelAttribute TimeRecordRequestDTO request,
-	// BindingResult bindingResult, Model model) {
-	// try {
-	// timeRecordDao.delete(timerecord);
-	// } catch (Exception ex) {
-	// ex.printStackTrace();
-	// model.addAttribute(Constant.KEY_ERROR_MESSAGE,
-	// "Couldn't delete timerecord");
-	// }
-	// return prepareTimeRecordManager(request, model);
-	// }
-
-	@RequestMapping(value = { "deleteTimeRecord" })
-	public String deleteTimeRecord(@RequestParam int timerecord,
-			@RequestParam int id, @RequestParam Date dateFrom,
-			@RequestParam Date dateTo, Model model) {
-		try {
-			timeRecordDao.delete(timerecord);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			model.addAttribute(Constant.KEY_ERROR_MESSAGE,
-					"Couldn't delete timerecord");
-		}
-		return prepareTimeRecordManager(new TimeRecordRequestDTO(id, dateFrom,
-				dateTo), model);
-	}
-
-	@RequestMapping(value = { "timeRecordExcelExport" })
-	public String timeRecordExcelExport(
-			@Valid @ModelAttribute TimeRecordRequestDTO request,
-			BindingResult bindingResult, Model model) {
-		if (!checkBinding(bindingResult, model)) {
-			Map<Employee, List<TimeRecord>> timeRecords = new HashedMap<Employee, List<TimeRecord>>();
-			Employee emp = employeeDao.findEmployeeById(request.getEmployee());
-			List<TimeRecord> records = timeRecordDao
-					.findRecordsByEmployeeIdAndStartDateGreaterThanEqualAndEndDateLessThanEqualOrderByStartDate(
-							request.getEmployee(), request.getDateFrom(),
-							request.getDateTo());
-			timeRecords.put(emp, records);
-			model.addAttribute(Constant.KEY_TIME_RECORD_LIST, timeRecords);
-			return Constant.CLASS_EXPORT_TIME_RECORD;
-		}
-		return Constant.PAGE_LIST_TIME_RECORDS;
-
-	}
-
 	// @ExceptionHandler(Exception.class)
 	// public String handleAllException(Exception ex) {
 	// return "showError";
 	// }
 
-	private void saveEmployee(Employee emp, int department, String role) {
-		if (department != Constant.NO_DEPARTMENT) {
-			emp.setDepartment(departmentDao.findDepartmentById(department));
-		}
-		if (Constant.ROLE_ADMINISTRATOR.equals(role)) {
-			emp.addUserRole(genereateUserRole(Constant.ROLE_ADMINISTRATOR, emp));
-			emp.addUserRole(genereateUserRole(Constant.ROLE_MANAGER, emp));
-			emp.addUserRole(genereateUserRole(Constant.ROLE_EMPLOYEE, emp));
-			emp.setRole(Constant.ROLE_ADMINISTRATOR);
-		} else if (Constant.ROLE_MANAGER.equals(role)) {
-			emp.addUserRole(genereateUserRole(Constant.ROLE_MANAGER, emp));
-			emp.addUserRole(genereateUserRole(Constant.ROLE_EMPLOYEE, emp));
-			emp.setRole(Constant.ROLE_MANAGER);
-		} else if (Constant.ROLE_EMPLOYEE.equals(role)) {
-			emp.addUserRole(genereateUserRole(Constant.ROLE_EMPLOYEE, emp));
-			emp.setRole(Constant.ROLE_EMPLOYEE);
-		}
-		employeeDao.save(emp);
-	}
-
-	private UserRole genereateUserRole(String role, Employee emp) {
-		return new UserRole(role, emp);
-	}
-
-	private String prepareTimeRecordManager(TimeRecordRequestDTO request,
-			Model model) {
-		List<TimeRecord> list = timeRecordDao
-				.findRecordsByEmployeeIdAndStartDateGreaterThanEqualAndEndDateLessThanEqualOrderByStartDate(
-						request.getEmployee(), request.getDateFrom(),
-						request.getDateTo());
-		System.out.println("Size list=" + list.size()
-				+ "##########################################################");
-		model.addAttribute(Constant.KEY_TIME_RECORD_LIST, list);
-		model.addAttribute(Constant.KEY_TIME_RECORD_DATE_FROM,
-				request.getDateFrom());
-		model.addAttribute(Constant.KEY_TIME_RECORD_DATE_TO,
-				request.getDateTo());
-		model.addAttribute(Constant.KEY_EMPLOYEE_LIST, employeeDao.findAll());
-		model.addAttribute(Constant.KEY_EMPLOYEE,
-				employeeDao.findEmployeeById(request.getEmployee()));
-		return Constant.PAGE_LIST_TIME_RECORDS;
-	}
-
-	private boolean checkBinding(BindingResult bindingResult, Model model) {
-		if (bindingResult.hasErrors()) {
-			String errorMessage = "";
-			for (FieldError error : bindingResult.getFieldErrors()) {
-				errorMessage += error.getField() + " is invalid<br>";
-			}
-			model.addAttribute(Constant.KEY_ERROR_MESSAGE, errorMessage);
-			return true;
-		}
-		return false;
-	}
 }

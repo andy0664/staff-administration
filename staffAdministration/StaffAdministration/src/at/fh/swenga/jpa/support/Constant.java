@@ -1,4 +1,4 @@
-package at.fh.swenga.jpa.constant;
+package at.fh.swenga.jpa.support;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
