@@ -214,7 +214,7 @@
 									</div>
 								</div>
 							</div>
-						</a> <a href="showTimeRecords">
+						</a> <a href="showPersonalTimeRecords">
 							<div class="panel panel-green">
 								<div class="row">
 									<div class="col-xs-3">
@@ -226,7 +226,7 @@
 									</div>
 								</div>
 							</div>
-						</a> <a href="showTimeRecords">
+						</a> <a href="showAllTimeRecords">
 							<div class="panel panel-green">
 								<div class="row">
 									<div class="col-xs-3">

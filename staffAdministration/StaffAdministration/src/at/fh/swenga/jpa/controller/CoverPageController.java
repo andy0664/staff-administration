@@ -84,11 +84,29 @@ public class CoverPageController {
 				df.getBirthDate(), address, df.getRandomText(10, 20), 1234.5f,
 				df.getBirthDate(), "admin",
 				"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC");
+		Employee p2 = new Employee(12345, df.getFirstName(), df.getLastName(),
+				df.getBirthDate(), address, df.getRandomText(10, 20), 1234.5f,
+				df.getBirthDate(), "manager",
+				"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC");
+		Employee p3 = new Employee(12345, df.getFirstName(), df.getLastName(),
+				df.getBirthDate(), address, df.getRandomText(10, 20), 1234.5f,
+				df.getBirthDate(), "employee",
+				"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC");
 		UserRole role = new UserRole(Constant.ROLE_ADMINISTRATOR,p1);
-		//UserRole role2 = new UserRole(Constant.ROLE_EMPLOYEE,p1);
+		UserRole role2 = new UserRole(Constant.ROLE_MANAGER,p1);
+		UserRole role3 = new UserRole(Constant.ROLE_EMPLOYEE,p1);
 		p1.addUserRole(role);
-		//p1.addUserRole(role2);
+		p1.addUserRole(role2);
+		p1.addUserRole(role3);
 		employeeDao.save(p1);
+		UserRole role4 = new UserRole(Constant.ROLE_MANAGER,p2);
+		UserRole role5 = new UserRole(Constant.ROLE_EMPLOYEE,p2);
+		p2.addUserRole(role4);
+		p2.addUserRole(role5);
+		employeeDao.save(p2);
+		UserRole role6 = new UserRole(Constant.ROLE_EMPLOYEE,p3);
+		p3.addUserRole(role6);
+		employeeDao.save(p3);
 		return "login";
 	}
 
@@ -126,7 +144,7 @@ public class CoverPageController {
 		return Constant.PAGE_NEW_TIME_RECORD;
 	}
 
-	@RequestMapping(value = { "showTimeRecords" })
+	@RequestMapping(value = { "showAllTimeRecords" })
 	public String showTimeRecords(Model model) {
 		model.addAttribute(Constant.KEY_EMPLOYEE_LIST, employeeDao.findAll());
 		return Constant.PAGE_LIST_TIME_RECORDS;

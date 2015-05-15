@@ -44,8 +44,8 @@
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2">
 						<form class="form-horizontal" method="post" action="${formAction}">
-							<%-- <input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token }" /> --%>
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token }" />
 							<fieldset>
 								<legend>${legend}</legend>
 								<input type="hidden" name="id" value="${department.id }" />

@@ -65,8 +65,8 @@
 						<!-- <form class="form-horizontal" method="post"
 							action="timeRecordEmployee"> -->
 						<form class="form-horizontal" method="post">
-							<%-- <input type="hidden" name="${_csrf.parameterName}"
-									value="${_csrf.token }" /> --%>
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token }" />
 							<! ----------------  Choose Employee ---------------- -->
 							<div class="form-group">
 								<label for="inputManager" class="col-md-2 control-label">Employee</label>
@@ -128,7 +128,8 @@
 
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
-						<table data-toggle="table" class="table table-striped" data-sort-order="desc"
+						<table data-toggle="table" class="table table-striped"
+							data-sort-order="desc"
 							data-url="/gh/get/response.json/wenzhixin/bootstrap-table/tree/master/docs/data/data1/">
 							<thead>
 								<tr>

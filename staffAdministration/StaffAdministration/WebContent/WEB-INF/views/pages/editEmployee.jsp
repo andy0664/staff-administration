@@ -46,8 +46,8 @@
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2">
 						<form class="form-horizontal" method="post" action="${formAction}">
-							<%-- <input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token }" /> --%>
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token }" />
 							<fieldset>
 								<legend>${legend}</legend>
 								<input type="hidden" name="id" value="${employee.id }" />
@@ -89,7 +89,7 @@
 										<input class="form_datetime" id="inputDate" placeholder="Date"
 											type="text" readonly name="dayOfBirth"
 											value="<fmt:formatDate value="${employee.dayOfBirth}" pattern="dd.MM.yyyy"/>"
-											required/> <i class="fa fa-calendar"></i>
+											required /> <i class="fa fa-calendar"></i>
 									</div>
 								</div>
 
@@ -102,7 +102,7 @@
 											value="<c:out value="${employee.address.street}"/>" required>
 									</div>
 								</div>
-								
+
 								<! ----------------  ZIP Code ---------------- -->
 								<div class="form-group">
 									<label for="inputZIP" class="col-md-2 control-label">ZIP
@@ -187,7 +187,7 @@
 										</select>
 									</div>
 								</div>
-								
+
 								<! ----------------  User Name ---------------- -->
 								<div class="form-group">
 									<label for="inputUserName" class="col-md-2 control-label">Username</label>
@@ -197,14 +197,13 @@
 											required>
 									</div>
 								</div>
-								
+
 								<! ----------------  Password ---------------- -->
 								<div class="form-group">
 									<label for="inputPassword" class="col-md-2 control-label">Password</label>
 									<div class="col-md-5">
 										<input class="form-control" id="inputPassword" type="text"
-											name="password" value=""
-											required>
+											name="password" value="" required>
 									</div>
 								</div>
 
@@ -259,7 +258,7 @@
 	<!-- JS for Bootstrap -->
 
 	<!-- Footer -->
-<%-- 	<jsp:include page="../includes/template/fixedFooter.jsp" /> --%>
+	<%-- 	<jsp:include page="../includes/template/fixedFooter.jsp" /> --%>
 
 
 	<!-- JS for Datetime picker -->
