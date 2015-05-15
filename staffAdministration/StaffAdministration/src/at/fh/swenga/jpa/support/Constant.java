@@ -14,6 +14,7 @@ public class Constant {
 	public static final String PAGE_MANAGE_DEPARTMENTS="/pages/manageDepartments";
 	public static final String PAGE_NEW_TIME_RECORD = "/pages/editTimeRecord";
 	public static final String PAGE_LIST_TIME_RECORDS = "/pages/listTimeRecords";
+	public static final String PAGE_LOGIN = "login";
 	
 	
 	//Export
@@ -44,6 +45,7 @@ public class Constant {
 	
 	public static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 	public static final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+	
 	//Methods
 	public static Date parseToDate(String date) {	
 		try {

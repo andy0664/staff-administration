@@ -116,9 +116,10 @@ public class CoverPageController {
 		p3.addUserRole(role6);
 		p3.setRole(Constant.ROLE_EMPLOYEE);
 		employeeDao.save(p3);
-		return "login";
+		return Constant.PAGE_LOGIN;
 	}
-
+	
+	
 	/*
 	 * ########### index.jsp ############
 	 */

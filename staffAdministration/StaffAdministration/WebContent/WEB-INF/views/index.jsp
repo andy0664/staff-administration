@@ -46,7 +46,6 @@
 	<%-- 	<jsp:include page="includes/template/dateTimePicker.jsp" /> --%>
 
 	<div id="wrapper">
-
 		<!--  Navbar Top ----------------------------------------------------------- -->
 		<jsp:include page="includes/template/navbarTop.jsp" />
 
