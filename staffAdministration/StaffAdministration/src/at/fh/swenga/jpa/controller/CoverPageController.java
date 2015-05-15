@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -65,6 +66,8 @@ public class CoverPageController {
 
 	@Autowired
 	private SimpleUserRoleRepository userRoleRepository;
+	
+	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(4);
 
 	// For Binding Date and Time
 	@InitBinder
@@ -98,14 +101,17 @@ public class CoverPageController {
 		p1.addUserRole(role);
 		p1.addUserRole(role2);
 		p1.addUserRole(role3);
+		p1.setRole(Constant.ROLE_ADMINISTRATOR);
 		employeeDao.save(p1);
 		UserRole role4 = new UserRole(Constant.ROLE_MANAGER,p2);
 		UserRole role5 = new UserRole(Constant.ROLE_EMPLOYEE,p2);
 		p2.addUserRole(role4);
 		p2.addUserRole(role5);
+		p2.setRole(Constant.ROLE_MANAGER);
 		employeeDao.save(p2);
 		UserRole role6 = new UserRole(Constant.ROLE_EMPLOYEE,p3);
 		p3.addUserRole(role6);
+		p3.setRole(Constant.ROLE_EMPLOYEE);
 		employeeDao.save(p3);
 		return "login";
 	}
@@ -117,8 +123,7 @@ public class CoverPageController {
 	// Cover Page
 	@RequestMapping(value = { "/", "start" })
 	public String index(Model model) {
-		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		System.out.println("Username========================"+user.getUsername());
+		//User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute(Constant.KEY_NEWS_LIST, newsRepository.findAll());
 		return Constant.PAGE_INDEX;
 	}
@@ -199,6 +204,7 @@ public class CoverPageController {
 	@RequestMapping(value = { "deleteEmployee" })
 	public String deleteEmployee(@RequestParam int id, Model model) {
 		try {
+//			userRoleRepository.myRemoveEntry(id);
 			employeeDao.delete(id);
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -242,11 +248,14 @@ public class CoverPageController {
 			return "forward:/manageEmployees";
 		}
 		newEmployee.setAddress(newAddress);
+		
 		Employee emp = newEmployee.generateEmployee();
+		emp.setPassword(encoder.encode(emp.getPassword()));
 		saveEmployee(emp, department, newEmployee.getRole());
 		return Constant.REDIRECT_MANAGE_EMPLOYEES;
 	}
 
+	@Transactional
 	@RequestMapping(value = { "changeEmployee" }, method = RequestMethod.POST)
 	public String updateEmployee(
 			@Valid @ModelAttribute EmployeeDTO newEmployee,
@@ -258,12 +267,13 @@ public class CoverPageController {
 		}
 		Employee emp = employeeDao.findEmployeeById(id);
 		newEmployee.setAddress(newAddress);
+		emp.updateEmployee(newEmployee);
+		emp.setPassword(encoder.encode(newEmployee.getPassword()));
 		if (emp.getRole().equals(newEmployee.getRole())) {
-			emp.updateEmployee(newEmployee);
 			saveEmployee(emp, department, "");
 		} else {
-			emp.updateEmployee(newEmployee);
 			emp.setUserRole(new HashSet<UserRole>());
+			userRoleRepository.delete(userRoleRepository.findByEmployee(emp));
 			// userRoleRepository.removeByUsername(emp.getId());
 			saveEmployee(emp, department, emp.getRole());
 		}

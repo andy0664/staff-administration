@@ -68,7 +68,7 @@ public class Employee implements Serializable {
 	private String userName;
 	private String password;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "employee", cascade=CascadeType.PERSIST)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "employee", cascade=CascadeType.ALL)
 	private Set<UserRole> userRoles;
 	
 	@ManyToOne(cascade=CascadeType.MERGE)

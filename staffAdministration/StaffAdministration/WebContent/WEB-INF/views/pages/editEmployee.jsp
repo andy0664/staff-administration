@@ -213,12 +213,12 @@
 									<div class="col-md-5">
 										<select class="form-control" name="role">
 											<c:choose>
-												<c:when test="${employee.role=='Role-Admin'}">
+												<c:when test="${employee.role=='ROLE_ADMIN'}">
 													<option value="ROLE_ADMIN" selected="selected">Administrator</option>
 													<option value="ROLE_MANAGER">Manager</option>
 													<option value="ROLE_EMPLOYEE">Employee</option>
 												</c:when>
-												<c:when test="${employee.role=='Role-Manager'}">
+												<c:when test="${employee.role=='ROLE_MANAGER'}">
 													<option value="ROLE_ADMIN">Administrator</option>
 													<option value="ROLE_MANAGER" selected="selected">Manager</option>
 													<option value="ROLE_EMPLOYEE">Employee</option>
