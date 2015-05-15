@@ -217,6 +217,7 @@
 						</a> <a href="showTimeRecords">
 							<div class="panel panel-green">
 								<div class="row">
+									<div class="col-xs-3">
 										<i class="fa fa-area-chart fa-5x"></i>
 									</div>
 									<div class="col-xs-9 text-right">
@@ -246,7 +247,7 @@
 
 						<!-- Calendar -->
 
-						<a href="showCalendar">
+						<a href="manageDepartments">
 							<div class="panel panel-yellow" style="height:102px">
 								<div class="row">
 									<div class="col-xs-3">

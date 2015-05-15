@@ -14,11 +14,6 @@ public class Constant {
 	public static final String PAGE_MANAGE_DEPARTMENTS="/pages/manageDepartments";
 	public static final String PAGE_NEW_TIME_RECORD = "/pages/editTimeRecord";
 	public static final String PAGE_LIST_TIME_RECORDS = "/pages/listTimeRecords";
-	public static final String CALENDAR_ARTICLE = "/calendar/article";
-	public static final String CALENDAR_CUSTOM_EDITOR = "/calendar/custom_editor";
-	public static final String CALENDAR_HEADER = "/calendar/header";
-	public static final String CALENDAR_MENU = "/calendar/menu";
-	public static final String CALENDAR_PRODUCTS = "/calendar/products";
 	
 	
 	//Export
