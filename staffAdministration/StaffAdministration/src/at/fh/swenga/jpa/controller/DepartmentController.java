@@ -1,5 +1,7 @@
 package at.fh.swenga.jpa.controller;
 
+import java.util.Date;
+
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -9,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +28,7 @@ import at.fh.swenga.jpa.model.Department;
 import at.fh.swenga.jpa.model.Employee;
 import at.fh.swenga.jpa.support.Constant;
 import at.fh.swenga.jpa.support.ControllerSupport;
+import at.fh.swenga.jpa.support.DateTimeEditor;
 
 @Controller
 public class DepartmentController {
@@ -37,6 +42,12 @@ public class DepartmentController {
 	@Autowired
 	private ControllerSupport controllerSupport;
 
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(Date.class, new DateTimeEditor());
+	}
+	
 	/*
 	 * ########### manageDepartments.jsp ############
 	 */

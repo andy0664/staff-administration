@@ -1,5 +1,7 @@
 package at.fh.swenga.jpa.support;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +22,10 @@ public class ControllerSupport {
 			return true;
 		}
 		return false;
+	}
+	
+	public User getCurrentUser(){
+		return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	}
 
 }

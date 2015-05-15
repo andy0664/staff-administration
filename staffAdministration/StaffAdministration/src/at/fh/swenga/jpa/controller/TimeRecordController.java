@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +27,7 @@ import at.fh.swenga.jpa.model.Employee;
 import at.fh.swenga.jpa.model.TimeRecord;
 import at.fh.swenga.jpa.support.Constant;
 import at.fh.swenga.jpa.support.ControllerSupport;
+import at.fh.swenga.jpa.support.DateTimeEditor;
 
 @Controller
 public class TimeRecordController {
@@ -40,6 +43,11 @@ public class TimeRecordController {
 	@Autowired
 	private ControllerSupport controllerSupport;
 
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(Date.class, new DateTimeEditor());
+	}
+	
 	/*
 	 * ########### listTimeRecords.jsp ############
 	 */
@@ -48,6 +56,17 @@ public class TimeRecordController {
 			@Valid @ModelAttribute TimeRecordRequestDTO request,
 			BindingResult bindingResult, Model model) {
 		if (!controllerSupport.checkBinding(bindingResult, model)) {
+			return prepareTimeRecordManager(request, model);
+		}
+		return Constant.PAGE_LIST_TIME_RECORDS;
+	}
+	
+	@RequestMapping(value = { "timeRecordEmployees" })
+	public String timeRecordManagerViewForAllEmployees(
+			@Valid @ModelAttribute TimeRecordRequestDTO request,
+			BindingResult bindingResult, Model model) {
+		if (!controllerSupport.checkBinding(bindingResult, model)) {
+			model.addAttribute(Constant.KEY_EMPLOYEE_LIST, employeeDao.findAll());
 			return prepareTimeRecordManager(request, model);
 		}
 		return Constant.PAGE_LIST_TIME_RECORDS;
@@ -117,7 +136,6 @@ public class TimeRecordController {
 				request.getDateFrom());
 		model.addAttribute(Constant.KEY_TIME_RECORD_DATE_TO,
 				request.getDateTo());
-		model.addAttribute(Constant.KEY_EMPLOYEE_LIST, employeeDao.findAll());
 		model.addAttribute(Constant.KEY_EMPLOYEE,
 				employeeDao.findEmployeeById(request.getEmployee()));
 		return Constant.PAGE_LIST_TIME_RECORDS;

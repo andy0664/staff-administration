@@ -67,18 +67,25 @@
 						<form class="form-horizontal" method="post">
 							<input type="hidden" name="${_csrf.parameterName}"
 								value="${_csrf.token }" />
-							<! ----------------  Choose Employee ---------------- -->
-							<div class="form-group">
-								<label for="inputManager" class="col-md-2 control-label">Employee</label>
-								<div class="col-md-7">
-									<select class="form-control" name="employee">
-										<c:forEach items="${employeeList }" var="employee">
-											<option value="${employee.id}">${ employee.firstName}
-												${employee.lastName }</option>
-										</c:forEach>
-									</select>
+							<c:if test="${not empty employeeList }">
+								<! ----------------  Choose Employee ---------------- -->
+								<div class="form-group">
+									<label for="inputManager" class="col-md-2 control-label">Employee</label>
+									<div class="col-md-7">
+										<select class="form-control" name="employee">
+											<c:forEach items="${employeeList }" var="employee">
+												<option value="${employee.id}">${ employee.firstName}
+													${employee.lastName }</option>
+											</c:forEach>
+										</select>
+									</div>
 								</div>
-							</div>
+								<c:set var="showAction">timeRecordEmployees</c:set>
+							</c:if>
+							<c:if test="${empty employeeList}">
+								<input type="hidden" name="employee" value="${employee.id }" />
+								<c:set var="showAction">timeRecordEmployee</c:set>
+							</c:if>
 
 							<! ----------------  DateFrom ---------------- -->
 							<div class="form-group">
@@ -103,7 +110,7 @@
 							<div class="form-group">
 								<div class="col-md-10 col-md-offset-2">
 									<button type="Submit" class="btn btn-primary"
-										formaction="timeRecordEmployee">Show</button>
+										formaction="${showAction}">Show</button>
 									<button type="Submit" class="btn btn-success"
 										formaction="timeRecordExcelExport">
 										<i class="fa fa-table"></i> Excel Export

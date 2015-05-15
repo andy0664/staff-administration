@@ -116,20 +116,20 @@
 									</div>
 								</div>
 							</div>
-						</a> 
-<!-- 						<a href="#"> -->
-<!-- 							<div class="panel panel-blue"> -->
-<!-- 								<div class="row"> -->
-<!-- 									<div class="col-xs-3"> -->
-<!-- 										<i class="fa fa-wrench fa-5x"></i> -->
-<!-- 									</div> -->
-<!-- 									<div class="col-xs-9 text-right"> -->
-<!-- 										<font size="5">My Account</font> -->
-<!-- 										<div>Settings for your Account</div> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 						</a> -->
+						</a>
+						<!-- 						<a href="#"> -->
+						<!-- 							<div class="panel panel-blue"> -->
+						<!-- 								<div class="row"> -->
+						<!-- 									<div class="col-xs-3"> -->
+						<!-- 										<i class="fa fa-wrench fa-5x"></i> -->
+						<!-- 									</div> -->
+						<!-- 									<div class="col-xs-9 text-right"> -->
+						<!-- 										<font size="5">My Account</font> -->
+						<!-- 										<div>Settings for your Account</div> -->
+						<!-- 									</div> -->
+						<!-- 								</div> -->
+						<!-- 							</div> -->
+						<!-- 						</a> -->
 
 						<!-- end panel -->
 
@@ -247,14 +247,17 @@
 						<!-- Calendar -->
 
 						<a href="manageDepartments">
-							<div class="panel panel-yellow" style="height:102px">
+							<div class="panel panel-yellow" style="height: 102px">
 								<div class="row">
 									<div class="col-xs-3">
 										<i class="fa fa-calendar fa-5x"></i>
 									</div>
 									<div class="col-xs-9 text-right">
 										<font size="5">Calendar</font>
-										<div>View your own Calander and<p> the Calendar of your Collegues</p></div>
+										<div>
+											View your own Calander and
+											<p>the Calendar of your Collegues</p>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -269,10 +272,10 @@
 					<div class="panel panel-news">
 						<div class="panel-heading">
 							<font size="5">News</font> <a href="#">
-								<button type="button" class="btn btn-info pull-right" id="
-									myBtn"
-									data-toggle="modal" data-target="#basicModal">New
-									entry</button>
+								<button type="button" class="btn btn-info pull-right"
+									id="
+									myBtn" data-toggle="modal"
+									data-target="#basicModal">New entry</button>
 							</a>
 						</div>
 						<div class="panel-body">
@@ -297,14 +300,14 @@
 								</div>
 							</c:forEach>
 						</div>
-<!-- 						<div class="panel-footer footer-news"> -->
-<!-- 							<a href="#"> -->
-<!-- 								<button type="button" class="btn btn-info "id=" -->
-<!-- 									myBtn" -->
-<!-- 									data-toggle="modal" data-target="#basicModal">New -->
-<!-- 									entry</button> -->
-<!-- 							</a> -->
-<!-- 						</div> -->
+						<!-- 						<div class="panel-footer footer-news"> -->
+						<!-- 							<a href="#"> -->
+						<!-- 								<button type="button" class="btn btn-info "id=" -->
+						<!-- 									myBtn" -->
+						<!-- 									data-toggle="modal" data-target="#basicModal">New -->
+						<!-- 									entry</button> -->
+						<!-- 							</a> -->
+						<!-- 						</div> -->
 					</div>
 				</div>
 				<!-- end feature -->
@@ -324,6 +327,8 @@
 					</div>
 					<div class="modal-body">
 						<form role="form" method="post" action="newNews">
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token }" />
 							<div class="form-group">
 								<label for="usr">Heading:</label> <input type="text"
 									class="form-control" id="inputTitle" name="title">

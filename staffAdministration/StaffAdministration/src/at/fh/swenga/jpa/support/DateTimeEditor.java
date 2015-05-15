@@ -1,4 +1,4 @@
-package at.fh.swenga.jpa.controller;
+package at.fh.swenga.jpa.support;
 
 import java.beans.PropertyEditorSupport;
 import java.text.SimpleDateFormat;

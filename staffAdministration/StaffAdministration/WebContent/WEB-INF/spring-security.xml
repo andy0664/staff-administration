@@ -16,7 +16,8 @@
 		<intercept-url pattern="/manageEmployees" access="hasRole('MANAGER')"/>
 		<intercept-url pattern="/changeEmployee" access="hasRole('MANAGER')"/>
 		<intercept-url pattern="/showAllTimeRecords" access="hasRole('MANAGER')"/>
-		<intercept-url pattern="/timeRecordEmployee" access="hasRole('MANAGER')"/>
+		<!-- <intercept-url pattern="/timeRecordEmployee" access="hasRole('MANAGER')"/> -->
+		<intercept-url pattern="/removeNews" access="hasRole('MANAGER')"/>
 		<intercept-url pattern="/**" access="hasRole('EMPLOYEE')"/>
 		<form-login login-page="/login" />
 		<logout logout-success-url="/login" logout-url="/logout" />

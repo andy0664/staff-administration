@@ -49,6 +49,7 @@ import at.fh.swenga.jpa.model.TimeRecord;
 import at.fh.swenga.jpa.model.UserRole;
 import at.fh.swenga.jpa.support.Constant;
 import at.fh.swenga.jpa.support.ControllerSupport;
+import at.fh.swenga.jpa.support.DateTimeEditor;
 
 @Controller
 public class CoverPageController {
@@ -127,7 +128,6 @@ public class CoverPageController {
 	// Cover Page
 	@RequestMapping(value = { "/", "start" })
 	public String index(Model model) {
-		//User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute(Constant.KEY_NEWS_LIST, newsRepository.findAll());
 		return Constant.PAGE_INDEX;
 	}
@@ -179,6 +179,13 @@ public class CoverPageController {
 					"Couldn't delete news");
 		}
 		return "forward:/start";
+	}
+	
+	@RequestMapping(value={"showPersonalTimeRecords"})
+	public String showPersonalTimeRecords(Model model){
+		User user = controllerSupport.getCurrentUser();
+		model.addAttribute(Constant.KEY_EMPLOYEE, employeeDao.findByUserName(user.getUsername()));
+		return Constant.PAGE_LIST_TIME_RECORDS;
 	}
 
 	// @ExceptionHandler(Exception.class)
