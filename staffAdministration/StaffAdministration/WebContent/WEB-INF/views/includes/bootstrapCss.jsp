@@ -6,9 +6,6 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
-<script src="../js/jquery.bootstrap.newsbox.min.js"
-	type="text/javascript"></script>
-
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.6.0/bootstrap-table.min.css">
@@ -16,15 +13,65 @@
 <link rel="stylesheet"
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
-<!-- Glyphicons CSS -->
-<link href="includes/css/bootstrap-glyphicons.css" rel="stylesheet">
-
 <style type="text/css">
-body {
-	/* 	padding-top: 10px; */
-	/* 	padding-bottom: 10px; */
-	
+
+html,body
+{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
 }
+
+/* landing page */
+.landing-page {
+	background-image:
+		url(http://ironsummitmedia.github.io/startbootstrap-landing-page/img/intro-bg.jpg);
+	height: 100%;
+	background-size: cover;
+}
+
+.landing-page>.row {
+padding-top:200px;
+}
+
+.landing-page>.row>.col-md-4{
+color: white;
+}
+
+.landing-page>.row>.col-md-4>.form-signin>.form-control{
+margin-bottom: 15px;
+background-color: white;
+}
+
+.intro-message > h1 {
+  margin-top: 30px;
+  text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+  font-size: 5em;
+}
+
+/* .top { */
+/*   width: 100%; */
+/*   max-width: 1600px; */
+/*   z-index: -10; */
+/*   position: fixed; */
+/*   height: 65px; */
+/*   top: 0; */
+/*   background-color: #ffffff; */
+/*   padding-left: 15px; */
+/*   font-family: Lato, sans-serif !important; */
+/*   padding: 20px 30px 10px 28px; */
+/* } */
+
+/* .top div { */
+/*   float: right; */
+/*   padding-top: 14px; */
+/*   letter-spacing: 4px; */
+/* } */
+
+
+/* wrapper */
 
 #wrapper {
 	width: 100%;
@@ -34,9 +81,9 @@ body {
 #page-wrapper {
 	margin: 0 0 0 260px;
 	padding: 15px 0px;
-	min-height: 919px;
+	min-height: 1800px;
 	position: relative;
-	background: #fff;
+	background: #F0F0F0;
 }
 
 #page-wrapper-subpages {
@@ -52,6 +99,34 @@ body {
 	padding-right: 25px;
 	padding-left: 25px;
 	background-color: transparent;
+}
+
+/* Login */
+.form-signin {
+	max-width: 330px;
+	padding: 15px;
+	margin: 0 auto;
+}
+
+.form-signin .checkbox {
+	font-weight: normal;
+}
+
+.logout-form {
+	display: block;
+	padding: 3px 20px;
+	clear: both;
+	font-weight: 400;
+	line-height: 1.42857143;
+	color: #333;
+	white-space: nowrap;
+}
+
+.logout-button {
+	background-color: #fff;
+	border-color: #fff;
+	color: black;
+	font-size: 14px;
 }
 
 /*----------------------------------------------
@@ -254,10 +329,9 @@ ul.nav.nav-second-level.collapse.in {
 	color: #666;
 }
 
-
 .page-header {
 	margin-bottom: 30px;
-	margin-top:0px;
+	margin-top: 0px;
 	border-bottom: 3px solid #2DAFCB;
 }
 
@@ -290,7 +364,7 @@ ul.nav.nav-second-level.collapse.in {
 .panel-violet>.panel-heading {
 	color: #fff;
 	background-color: #774177;
-	border-color: #337ab7;
+	border-color: #774177;
 	border: 0px;
 }
 
@@ -384,6 +458,17 @@ ul.nav.nav-second-level.collapse.in {
 	color: black;
 	background-color: #fff;
 }
+
+.panel-charts {
+  color: #000;
+  border-color: #FFF;
+  font-weight: bold;
+  background: #FFFFFF;
+  font-size: 16px;
+  border-color: #ECECEC;
+  margin-bottom: 27px;
+}
+
 /* Panel end */
 
 /* Fonts start */
@@ -424,16 +509,29 @@ ul.unstyled {
 }
 
 /* Footer */
-.footer-hr {
-	background: #2b2e33;
-	color: #eee;
+.footer-landing-page {
+	background: #fff;
+	color: black;
 	font-size: 11px;
+	
+	margin-top:20px;
 }
 
 .navbar-fixed-bottom {
 	background: #2b2e33;
 	color: #eee;
 	font-size: 11px;
+}
+
+.site-footer {
+  position: relative;
+  margin-top: 40px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #777;
+  border-top: 1px solid #eee;
 }
 
 /* Footer end */

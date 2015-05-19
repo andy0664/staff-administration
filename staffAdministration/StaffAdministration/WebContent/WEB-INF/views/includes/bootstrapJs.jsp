@@ -33,6 +33,21 @@
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.7.0/locale/bootstrap-table-en-US.min.js"></script>
 
+<script
+	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+
+<script src="http://code.highcharts.com/highcharts.js"></script>
+
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+<script src="includes/js/modernizr-2.6.2.min.js"></script>
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.0.0/metisMenu.js"></script>
+
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+
 <script>
 	function buildTable($el, cells, rows) {
 		var i, j, row, columns = [], data = [];
@@ -60,3 +75,4 @@
 		buildTable($('#table'), 50, 50);
 	});
 </script>
+
