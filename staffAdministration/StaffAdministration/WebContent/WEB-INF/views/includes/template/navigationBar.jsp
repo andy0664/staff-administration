@@ -40,16 +40,15 @@
 					style="">
 					<li><a href="newTimeRecord"><i class="fa fa-clock-o"></i>New
 							Time Record</a></li>
-					<li><a href="showTimeRecords"><i class="fa fa-area-chart"></i>My
-							Time Records</a></li>
-					<li><a href="showTimeRecords"><i class="fa fa-area-chart"></i>All
-							Time Records</a></li>
+					<li><a href="showPersonalTimeRecords"><i
+							class="fa fa-area-chart"></i>My Time Records</a></li>
+					<li><a href="showAllTimeRecords"><i
+							class="fa fa-area-chart"></i>All Time Records</a></li>
 				</ul></li>
-			<li data-toggle="modal" data-target="#announcementModal"><a href="#"><i class="fa fa-comments"></i> Announcements<span
+			<li data-toggle="modal" data-target="#announcementModal"><a
+				href="#"><i class="fa fa-comments"></i> Announcements<span
 					class="badge pull-right">5</span></a></li>
-			<li><a
-				href="#"><i
-					class="fa fa-calendar"></i> Calendar</a></li>
+			<li><a href="#"><i class="fa fa-calendar"></i> Calendar</a></li>
 		</ul>
 	</div>
 </nav>

@@ -14,6 +14,7 @@
 <title>Employees</title>
 <jsp:include page="../includes/bootstrapCss.jsp" />
 <jsp:include page="../includes/bootstrapJs.jsp" />
+
 </head>
 <body>
 
@@ -54,7 +55,7 @@
 
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1">
-					
+
 						<div id="toolbar" class="btn-group">
 							<a href="addDepartment">
 								<button type="button" class="btn btn-success">
@@ -69,7 +70,7 @@
 						<table data-toggle="table" class="table table-striped"
 							data-sort-name="name" data-sort-order="desc"
 							data-url="/gh/get/response.json/wenzhixin/bootstrap-table/tree/master/docs/data/data1/"
-							data-search="true" data-toolbar="#toolbar" >
+							data-search="true" data-toolbar="#toolbar">
 							<thead>
 								<tr>
 									<th data-sortable="true" class="col-md-1">Shortcut</th>
