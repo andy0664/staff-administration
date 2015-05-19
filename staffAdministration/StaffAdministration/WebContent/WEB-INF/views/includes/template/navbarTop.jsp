@@ -209,14 +209,14 @@
                     <ul class="dropdown-menu dropdown-user">
 <!--                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a> -->
 <!--                         </li> -->
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i>  Settings</a>
                         </li>
                         
                         <li class="divider"><li>
                         <c:url value="/logout" var="logoutUrl" />
-						<form action="${ logoutUrl}" method="post">
+						<form class="logout-form" action="${ logoutUrl}" method="post">
 							<input type="hidden" name="${_csrf.parameterName}"
-							value="${_csrf.token }" /> <i class="fa fa-sign-out fa-fw"> </i> <input class="btn btn-xs btn-danger"
+							value="${_csrf.token }" /> <i class="fa fa-sign-out fa-fw"> </i> <input class="btn btn-xs btn-default logout-button"
 							type="submit" value="Logout"/>
 						</form></li>
                         </li>
