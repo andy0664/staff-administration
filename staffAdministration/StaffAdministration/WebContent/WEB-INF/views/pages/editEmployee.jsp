@@ -202,8 +202,8 @@
 								<div class="form-group">
 									<label for="inputPassword" class="col-md-2 control-label">Password</label>
 									<div class="col-md-5">
-										<input class="form-control" id="inputPassword" type="text"
-											name="password" value="" required>
+										<input type="password" class="form-control" id="inputPassword" type="text"
+											name="password"  value="" required>
 									</div>
 								</div>
 

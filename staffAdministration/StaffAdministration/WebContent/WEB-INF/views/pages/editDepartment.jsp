@@ -114,7 +114,7 @@
 
 	<!-- Footer -->
 	<%-- 	<jsp:include page="../includes/template/fixedFooter.jsp" /> --%>
-
+	
 
 	<!-- JS for Bootstrap -->
 	<%@include file="../includes/bootstrapJs.jsp"%>
