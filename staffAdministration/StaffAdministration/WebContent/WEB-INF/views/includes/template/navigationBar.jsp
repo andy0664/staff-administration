@@ -5,14 +5,14 @@
 			<li><a class="" href="./"><i class="fa fa-dashboard"></i>
 					Dashboard</a></li>
 
-			<li class=""><a href="#"><i class="fa fa-user"></i> Personal
-					Area<span class="fa arrow"></span></a>
+			<li><a href="#"><i class="fa fa-user"></i> Personal Area<span
+					class="fa arrow"></span></a>
 				<ul class="nav nav-second-level collapse" aria-expanded="false"
 					style="">
 					<li><a href="#"><i class="fa fa-user"></i>My Profile</a></li>
-					<li><a href="#"><i class="fa fa-wrench"></i>My Account</a></li>
-					<li class="active"><a href="#"><i class="fa fa-user"></i>Set
-							Status<span class="fa arrow"></span></a>
+					<!-- 					<li><a href="#"><i class="fa fa-wrench"></i>My Account</a></li> -->
+					<li class="active"><a href="#"><i
+							class="fa fa-info-circle"></i>Set Status<span class="fa arrow"></span></a>
 						<ul class="nav nav-third-level collapse in" aria-expanded="true"
 							style="">
 							<li><a href="#"><i class="fa fa-check-circle"
@@ -24,7 +24,7 @@
 
 						</ul></li>
 				</ul></li>
-			<li class=""><a href="#"> <i class="fa fa-university"></i>Business
+			<li><a href="#"> <i class="fa fa-university"></i>Business
 					Area<span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level collapse" aria-expanded="false"
 					style="">
@@ -34,8 +34,8 @@
 					<li><a href="manageDepartments"><i
 							class="fa fa-university"></i>Manage Departments</a></li>
 				</ul></li>
-			<li class=""><a href="#"><i class="fa fa-clock-o"></i> Time
-					Records<span class="fa arrow"></span></a>
+			<li><a href="#"><i class="fa fa-clock-o"></i> Time Records<span
+					class="fa arrow"></span></a>
 				<ul class="nav nav-second-level collapse" aria-expanded="false"
 					style="">
 					<li><a href="newTimeRecord"><i class="fa fa-clock-o"></i>New
@@ -45,16 +45,17 @@
 					<li><a href="showTimeRecords"><i class="fa fa-area-chart"></i>All
 							Time Records</a></li>
 				</ul></li>
-			<li class=""><a href="#"><i class="fa fa-calendar"></i>
-					Business Area<span class="fa arrow"></span></a>
-				<ul class="nav nav-second-level collapse" aria-expanded="false"
-					style="">
-					<li><a href="#"><i class="fa fa-calendar"></i>My Calendar</a></li>
-				</ul></li>
+			<li data-toggle="modal" data-target="#announcementModal"><a href="#"><i class="fa fa-comments"></i> Announcements<span
+					class="badge pull-right">5</span></a></li>
+			<li><a
+				href="#"><i
+					class="fa fa-calendar"></i> Calendar</a></li>
 		</ul>
 	</div>
 </nav>
 
+<!-- Modal News-->
+<jsp:include page="../template/modalAnnouncements.jsp" />
 
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.0.0/metisMenu.js"></script>
