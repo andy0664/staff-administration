@@ -40,7 +40,7 @@
 
 <script src="http://code.highcharts.com/modules/exporting.js"></script>
 
-<script src="includes/js/modernizr-2.6.2.min.js"></script>
+<!-- <script src="includes/js/modernizr-2.6.2.min.js"></script> -->
 
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/2.0.0/metisMenu.js"></script>
