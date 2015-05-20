@@ -122,31 +122,37 @@
 								</div>
 							</div>
 						</div>
-					</a> <a href="manageEmployees">
-						<div class="panel panel-red">
-							<div class="row">
-								<div class="col-xs-3">
-									<i class="fa fa-sitemap fa-5x"></i>
-								</div>
-								<div class="col-xs-9 text-right">
-									<font size="5">Manage Employees</font>
-									<div>add, edit or remove employees</div>
-								</div>
-							</div>
-						</div>
-					</a> <a href="manageDepartments">
-						<div class="panel panel-red">
-							<div class="row">
-								<div class="col-xs-3">
-									<i class="fa fa-university fa-5x"></i>
-								</div>
-								<div class="col-xs-9 text-right">
-									<font size="5">Manage Departments</font>
-									<div>add, edit or remove departments</div>
-								</div>
-							</div>
-						</div>
 					</a>
+					<sec:authorize access="hasAnyRole('ADMIN', 'MANAGER')">
+						<a href="manageEmployees">
+							<div class="panel panel-red">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-sitemap fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<font size="5">Manage Employees</font>
+										<div>add, edit or remove employees</div>
+									</div>
+								</div>
+							</div>
+						</a>
+					</sec:authorize>
+					<sec:authorize access="hasRole('ADMIN')">
+						<a href="manageDepartments">
+							<div class="panel panel-red">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-university fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<font size="5">Manage Departments</font>
+										<div>add, edit or remove departments</div>
+									</div>
+								</div>
+							</div>
+						</a>
+					</sec:authorize>
 				</div>
 
 				<!-- end panel -->
@@ -158,22 +164,24 @@
 				<div class="col-md-4 feature">
 
 					<!-- Announcements -->
-					<a href="#">
-						<div class="panel panel-violet" data-toggle="modal"
-							data-target="#announcementModal">
-							<div class="row">
-								<div class="col-xs-3">
-									<i class="fa fa-comments fa-5x"></i>
-								</div>
-								<div class="col-xs-9 text-right">
-									<font size="6">25</font>
-									<div>
-										<font size="3">Announcements</font>
+					<sec:authorize access="hasAnyRole('ADMIN', 'MANAGER')">
+						<a href="#">
+							<div class="panel panel-violet" data-toggle="modal"
+								data-target="#announcementModal">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-comments fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<font size="6">25</font>
+										<div>
+											<font size="3">Announcements</font>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</a>
+						</a>
+					</sec:authorize>
 					<!-- 			Time Records -->
 					<a href="newTimeRecord">
 						<div class="panel panel-green">
@@ -199,19 +207,22 @@
 								</div>
 							</div>
 						</div>
-					</a> <a href="showAllTimeRecords">
-						<div class="panel panel-green">
-							<div class="row">
-								<div class="col-xs-3">
-									<i class="fa fa-area-chart fa-5x"></i>
-								</div>
-								<div class="col-xs-9 text-right">
-									<font size="5">All Time Records</font>
-									<div>get a statistic of all Time Records</div>
+					</a>
+					<sec:authorize access="hasAnyRole('ADMIN', 'MANAGER')">
+						<a href="showAllTimeRecords">
+							<div class="panel panel-green">
+								<div class="row">
+									<div class="col-xs-3">
+										<i class="fa fa-area-chart fa-5x"></i>
+									</div>
+									<div class="col-xs-9 text-right">
+										<font size="5">All Time Records</font>
+										<div>get a statistic of all Time Records</div>
+									</div>
 								</div>
 							</div>
-						</div>
-					</a>
+						</a>
+					</sec:authorize>
 
 					<!-- end panel -->
 
@@ -220,7 +231,7 @@
 
 					<!-- Calendar -->
 
-					<a href="manageDepartments">
+					<a href="#">
 						<div class="panel panel-yellow" style="height: 102px">
 							<div class="row">
 								<div class="col-xs-3">
@@ -245,11 +256,13 @@
 				<!-- News -->
 				<div class="panel panel-news">
 					<div class="panel-heading">
-						<font size="5">News</font> <a href="#">
-							<button type="button" class="btn btn-info pull-right"
-								id="
+						<font size="5">News</font> <a href="#"> <sec:authorize
+								access="hasAnyRole('ADMIN', 'MANAGER')">
+								<button type="button" class="btn btn-info pull-right"
+									id="
 									myBtn" data-toggle="modal"
-								data-target="#basicModal">New entry</button>
+									data-target="#basicModal">New entry</button>
+							</sec:authorize>
 						</a>
 					</div>
 					<div class="panel-body">
@@ -258,18 +271,18 @@
 								<div class="col-xs-12 news-item">
 									<div class="col-xs-3" style="margin-left: -15px">
 										<i class="fa fa-newspaper-o fa-5x" style="color: #708090"></i>
+										<sec:authorize access="hasAnyRole('ADMIN', 'MANAGER')">
+											<a href="removeNews?id=${news.id}">
+												<button type="button" class="btn btn-xs btn-danger">
+													<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>delete
+												</button>
+											</a>
+										</sec:authorize>
 									</div>
-									<div class="col-xs-8" style="margin-left: -15px">
+									<div class="col-xs-9">
 										<span class="pull-right text-muted"> <em>Today</em>
 										</span> <b>${news.title}</b>
 										<p>${news.message}</p>
-									</div>
-									<div class="col-xs-1">
-										<a href="removeNews?id=${news.id}">
-											<button type="button" class="btn btn-xs btn-danger">
-												<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>delete
-											</button>
-										</a>
 									</div>
 								</div>
 							</div>
@@ -287,32 +300,35 @@
 			</div>
 			<!-- end feature -->
 
-			<div class="row-fluid">
-				<div class="col-md-12">
-					<!-- Line Chart -->
-					<div class="col-md-8">
-						<div class="panel-charts">
-							<div id="lineChart" style="width: 100%; height: 400px;"></div>
+			<sec:authorize access="hasRole('ADMIN')">
+				<div class="row-fluid">
+					<div class="col-md-12">
+						<!-- Line Chart -->
+						<div class="col-md-8">
+							<div class="panel-charts">
+								<div id="lineChart" style="width: 100%; height: 400px;"></div>
+							</div>
 						</div>
-					</div>
-					<!-- Pie Chart -->
-					<div class="col-md-4">
-						<div class="panel-charts">
-							<div id="pieChart" style="width: 100%; height: 400px;"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row-fluid">
-				<div class="col-md-12">
-					<!-- Bar Chart -->
-					<div class="col-md-8">
-						<div class="panel-charts">
-							<div id="barChart" style="width: 100%; height: 400px;"></div>
+						<!-- Pie Chart -->
+						<div class="col-md-4">
+							<div class="panel-charts">
+								<div id="pieChart" style="width: 100%; height: 400px;"></div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+
+				<div class="row-fluid">
+					<div class="col-md-12">
+						<!-- Bar Chart -->
+						<div class="col-md-8">
+							<div class="panel-charts">
+								<div id="barChart" style="width: 100%; height: 400px;"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</sec:authorize>
 			<!-- 	Line Chart -->
 			<!-- <script>
 				$(function() {
