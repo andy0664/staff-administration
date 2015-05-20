@@ -27,7 +27,6 @@
 		<!--  Navbar Side ----------------------------------------------------------- -->
 		<jsp:include page="includes/template/navigationBar.jsp" />
 
-
 		<div id="page-wrapper">
 			<div class="page-header" style="margin-left: 15px">
 				<h1>
@@ -39,9 +38,9 @@
 			</c:if>
 			<!-- end featuresHeading -->
 
-			<div class="row-fluid" id="features">
+			<div class="row-fluid" id="features">			
 				<div class="col-md-4">
-
+			
 					<a href="#">
 						<div class="panel panel-blue">
 							<div class="row">

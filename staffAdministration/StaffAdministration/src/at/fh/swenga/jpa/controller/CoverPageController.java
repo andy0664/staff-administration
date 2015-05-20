@@ -135,6 +135,7 @@ public class CoverPageController {
 	@RequestMapping(value = { "/", "start" })
 	public String index(Model model) {
 		model.addAttribute(Constant.KEY_NEWS_LIST, newsRepository.findAll());
+		model.addAttribute(Constant.KEY_EMPLOYEE, employeeDao.findByUserName(controllerSupport.getCurrentUser().getUsername())); 
 		return Constant.PAGE_INDEX;
 	}
 

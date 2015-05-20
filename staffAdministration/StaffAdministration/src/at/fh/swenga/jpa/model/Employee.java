@@ -23,6 +23,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import at.fh.swenga.jpa.dto.EmployeeDTO;
+import at.fh.swenga.jpa.support.Constant;
 
 @Entity
 public class Employee implements Serializable {
@@ -65,7 +66,7 @@ public class Employee implements Serializable {
 //	@NotNull(message = "{0} is required")
 	private String role;
 	
-	private String status;
+	private String status=Constant.STATUS_AVAILABLE;
 	
 	private String userName;
 	private String password;
