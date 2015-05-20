@@ -12,4 +12,7 @@ public interface SimpleTimeRecordRepository extends
 
 	public List<TimeRecord> findRecordsByEmployeeIdAndStartDateGreaterThanEqualAndEndDateLessThanEqualOrderByStartDate(
 			int id, Date startDate, Date endDate);
+
+	public TimeRecord findTop1ByOrderByStartDate();
+	public TimeRecord findTop1ByOrderByEndDateDesc();
 }

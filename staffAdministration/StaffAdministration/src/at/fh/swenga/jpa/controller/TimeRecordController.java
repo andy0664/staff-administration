@@ -132,15 +132,22 @@ public class TimeRecordController {
 
 	private String prepareTimeRecordManager(TimeRecordRequestDTO request,
 			Model model) {
+		model.addAttribute(Constant.KEY_TIME_RECORD_DATE_FROM,
+				request.getDateFrom());
+		model.addAttribute(Constant.KEY_TIME_RECORD_DATE_TO,
+				request.getDateTo());
+		if(request.getDateFrom()==null){
+			request.setDateFrom(timeRecordDao.findTop1ByOrderByStartDate().getStartDate());
+		}
+		if(request.getDateTo()==null){
+			request.setDateTo(timeRecordDao.findTop1ByOrderByEndDateDesc().getEndDate());
+		}
 		List<TimeRecord> list = timeRecordDao
 				.findRecordsByEmployeeIdAndStartDateGreaterThanEqualAndEndDateLessThanEqualOrderByStartDate(
 						request.getEmployee(), request.getDateFrom(),
 						request.getDateTo());
 		model.addAttribute(Constant.KEY_TIME_RECORD_LIST, list);
-		model.addAttribute(Constant.KEY_TIME_RECORD_DATE_FROM,
-				request.getDateFrom());
-		model.addAttribute(Constant.KEY_TIME_RECORD_DATE_TO,
-				request.getDateTo());
+		
 		model.addAttribute(Constant.KEY_EMPLOYEE,
 				employeeDao.findEmployeeById(request.getEmployee()));
 		return Constant.PAGE_LIST_TIME_RECORDS;

@@ -2,6 +2,8 @@ package at.fh.swenga.jpa.dto;
 
 import java.util.Date;
 
+import at.fh.swenga.jpa.support.Constant;
+
 public class TimeRecordRequestDTO {
 	
 	private int employee;
@@ -18,9 +20,8 @@ public class TimeRecordRequestDTO {
 		this.dateFrom = dateFrom;
 		this.dateTo = dateTo;
 	}
-
-
-
+	
+	
 	public int getEmployee() {
 		return employee;
 	}
@@ -44,7 +45,6 @@ public class TimeRecordRequestDTO {
 	public void setDateTo(Date dateTo) {
 		this.dateTo = dateTo;
 	}
-	
 	
 
 }
