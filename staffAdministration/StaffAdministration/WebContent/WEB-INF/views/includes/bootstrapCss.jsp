@@ -14,14 +14,12 @@
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
 <style type="text/css">
-
-html,body
-{
-    width: 100%;
-    height: 100%;
-    margin: 0px;
-    padding: 0px;
-    overflow-x: hidden; 
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	overflow-x: hidden;
 }
 
 /* landing page */
@@ -33,22 +31,22 @@ html,body
 }
 
 .landing-page>.row {
-padding-top:200px;
+	padding-top: 200px;
 }
 
-.landing-page>.row>.col-md-4{
-color: white;
+.landing-page>.row>.col-md-4 {
+	color: white;
 }
 
-.landing-page>.row>.col-md-4>.form-signin>.form-control{
-margin-bottom: 15px;
-background-color: white;
+.landing-page>.row>.col-md-4>.form-signin>.form-control {
+	margin-bottom: 15px;
+	background-color: white;
 }
 
-.intro-message > h1 {
-  margin-top: 30px;
-  text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
-  font-size: 5em;
+.intro-message>h1 {
+	margin-top: 30px;
+	text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
+	font-size: 5em;
 }
 
 /* .top { */
@@ -70,9 +68,7 @@ background-color: white;
 /*   letter-spacing: 4px; */
 /* } */
 
-
 /* wrapper */
-
 #wrapper {
 	width: 100%;
 	background: #2b2e33;
@@ -81,7 +77,7 @@ background-color: white;
 #page-wrapper {
 	margin: 0 0 0 260px;
 	padding: 15px 0px;
-	min-height: 1800px;
+	min-height: 1700px;
 	position: relative;
 	background: #F0F0F0;
 }
@@ -460,13 +456,13 @@ ul.nav.nav-second-level.collapse.in {
 }
 
 .panel-charts {
-  color: #000;
-  border-color: #FFF;
-  font-weight: bold;
-  background: #FFFFFF;
-  font-size: 16px;
-  border-color: #ECECEC;
-  margin-bottom: 27px;
+	color: #000;
+	border-color: #FFF;
+	font-weight: bold;
+	background: #FFFFFF;
+	font-size: 16px;
+	border-color: #ECECEC;
+	margin-bottom: 27px;
 }
 
 /* Panel end */
@@ -513,8 +509,7 @@ ul.unstyled {
 	background: #fff;
 	color: black;
 	font-size: 11px;
-	
-	margin-top:20px;
+	margin-top: 20px;
 }
 
 .navbar-fixed-bottom {
@@ -524,14 +519,14 @@ ul.unstyled {
 }
 
 .site-footer {
-  position: relative;
-  margin-top: 40px;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  font-size: 12px;
-  line-height: 1.5;
-  color: #777;
-  border-top: 1px solid #eee;
+	position: relative;
+	margin-top: 40px;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	font-size: 12px;
+	line-height: 1.5;
+	color: #777;
+	border-top: 1px solid #eee;
 }
 
 /* Footer end */
