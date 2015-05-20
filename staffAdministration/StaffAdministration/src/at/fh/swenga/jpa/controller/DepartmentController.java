@@ -51,7 +51,8 @@ public class DepartmentController {
 	/*
 	 * ########### manageDepartments.jsp ############
 	 */
-
+	
+	@Transactional
 	@RequestMapping(value = { "deleteDepartment" })
 	public String deleteDepartment(@RequestParam int id, Model model) {
 		try {
@@ -63,6 +64,7 @@ public class DepartmentController {
 		return "forward:manageDepartments";
 	}
 
+	@Transactional
 	@RequestMapping(value = { "changeDepartment" }, method = RequestMethod.GET)
 	public String editDepartment(@RequestParam int id, Model model) {
 		model.addAttribute(Constant.KEY_DEPARTMENT,
@@ -72,6 +74,7 @@ public class DepartmentController {
 		return Constant.PAGE_EDIT_DEPARTMENT;
 	}
 
+	@Transactional
 	@RequestMapping(value = { "addDepartment" }, method = RequestMethod.GET)
 	public String addDepartment(Model model) {
 		model.addAttribute(Constant.KEY_EMPLOYEE_LIST,
@@ -98,6 +101,7 @@ public class DepartmentController {
 	 * ########### editDepartment.jsp ############
 	 */
 
+	@Transactional
 	@RequestMapping(value = { "changeDepartment" }, method = RequestMethod.POST)
 	public String updateDepartment(
 			@Valid @ModelAttribute DepartmentDTO newDepartment,
@@ -114,7 +118,8 @@ public class DepartmentController {
 		departmentDao.save(dep);
 		return Constant.REDIRECT_MANAGE_DEPARTMENTS;
 	}
-
+	
+	@Transactional
 	@RequestMapping(value = { "addDepartment" }, method = RequestMethod.POST)
 	public String saveDepartment(
 			@Valid @ModelAttribute DepartmentDTO newDepartment,

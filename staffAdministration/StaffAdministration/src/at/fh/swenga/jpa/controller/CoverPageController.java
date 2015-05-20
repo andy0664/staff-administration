@@ -68,10 +68,11 @@ public class CoverPageController {
 
 	@Autowired
 	private SimpleUserRoleRepository userRoleRepository;
-	
+
 	@Autowired
 	private ControllerSupport controllerSupport;
-	
+
+	private boolean firstStart = true;
 
 	// For Binding Date and Time
 	@InitBinder
@@ -84,43 +85,48 @@ public class CoverPageController {
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String handleLogin() {
-		DataFactory df = new DataFactory();
-		Address address = new Address(df.getStreetName(), df.getCity(),
-				df.getRandomWord(), 8052);
-		Employee p1 = new Employee(12345, df.getFirstName(), df.getLastName(),
-				df.getBirthDate(), address, df.getRandomText(10, 20), 1234.5f,
-				df.getBirthDate(), "admin",
-				"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC");
-		Employee p2 = new Employee(12345, df.getFirstName(), df.getLastName(),
-				df.getBirthDate(), address, df.getRandomText(10, 20), 1234.5f,
-				df.getBirthDate(), "manager",
-				"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC");
-		Employee p3 = new Employee(12345, df.getFirstName(), df.getLastName(),
-				df.getBirthDate(), address, df.getRandomText(10, 20), 1234.5f,
-				df.getBirthDate(), "employee",
-				"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC");
-		UserRole role = new UserRole(Constant.ROLE_ADMINISTRATOR,p1);
-		UserRole role2 = new UserRole(Constant.ROLE_MANAGER,p1);
-		UserRole role3 = new UserRole(Constant.ROLE_EMPLOYEE,p1);
-		p1.addUserRole(role);
-		p1.addUserRole(role2);
-		p1.addUserRole(role3);
-		p1.setRole(Constant.ROLE_ADMINISTRATOR);
-		employeeDao.save(p1);
-		UserRole role4 = new UserRole(Constant.ROLE_MANAGER,p2);
-		UserRole role5 = new UserRole(Constant.ROLE_EMPLOYEE,p2);
-		p2.addUserRole(role4);
-		p2.addUserRole(role5);
-		p2.setRole(Constant.ROLE_MANAGER);
-		employeeDao.save(p2);
-		UserRole role6 = new UserRole(Constant.ROLE_EMPLOYEE,p3);
-		p3.addUserRole(role6);
-		p3.setRole(Constant.ROLE_EMPLOYEE);
-		employeeDao.save(p3);
+		if (firstStart) {
+			DataFactory df = new DataFactory();
+			Address address = new Address(df.getStreetName(), df.getCity(),
+					df.getRandomWord(), 8052);
+			Employee p1 = new Employee(12345, df.getFirstName(),
+					df.getLastName(), df.getBirthDate(), address,
+					df.getRandomText(10, 20), 1234.5f, df.getBirthDate(),
+					"admin",
+					"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC");
+			Employee p2 = new Employee(12345, df.getFirstName(),
+					df.getLastName(), df.getBirthDate(), address,
+					df.getRandomText(10, 20), 1234.5f, df.getBirthDate(),
+					"manager",
+					"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC");
+			Employee p3 = new Employee(12345, df.getFirstName(),
+					df.getLastName(), df.getBirthDate(), address,
+					df.getRandomText(10, 20), 1234.5f, df.getBirthDate(),
+					"employee",
+					"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC");
+			UserRole role = new UserRole(Constant.ROLE_ADMINISTRATOR, p1);
+			UserRole role2 = new UserRole(Constant.ROLE_MANAGER, p1);
+			UserRole role3 = new UserRole(Constant.ROLE_EMPLOYEE, p1);
+			p1.addUserRole(role);
+			p1.addUserRole(role2);
+			p1.addUserRole(role3);
+			p1.setRole(Constant.ROLE_ADMINISTRATOR);
+			employeeDao.save(p1);
+			UserRole role4 = new UserRole(Constant.ROLE_MANAGER, p2);
+			UserRole role5 = new UserRole(Constant.ROLE_EMPLOYEE, p2);
+			p2.addUserRole(role4);
+			p2.addUserRole(role5);
+			p2.setRole(Constant.ROLE_MANAGER);
+			employeeDao.save(p2);
+			UserRole role6 = new UserRole(Constant.ROLE_EMPLOYEE, p3);
+			p3.addUserRole(role6);
+			p3.setRole(Constant.ROLE_EMPLOYEE);
+			employeeDao.save(p3);
+		}
+		firstStart=false;
 		return Constant.PAGE_LOGIN;
 	}
-	
-	
+
 	/*
 	 * ########### index.jsp ############
 	 */
@@ -180,12 +186,27 @@ public class CoverPageController {
 		}
 		return "forward:/start";
 	}
-	
-	@RequestMapping(value={"showPersonalTimeRecords"})
-	public String showPersonalTimeRecords(Model model){
+
+	@RequestMapping(value = { "showPersonalTimeRecords" })
+	public String showPersonalTimeRecords(Model model) {
 		User user = controllerSupport.getCurrentUser();
-		model.addAttribute(Constant.KEY_EMPLOYEE, employeeDao.findByUserName(user.getUsername()));
+		model.addAttribute(Constant.KEY_EMPLOYEE,
+				employeeDao.findByUserName(user.getUsername()));
 		return Constant.PAGE_LIST_TIME_RECORDS;
+	}
+
+	@RequestMapping(value = { "showEmployees" })
+	public String showAllEmployees(Model model) {
+		model.addAttribute(Constant.KEY_EMPLOYEE_LIST, employeeDao.findAll());
+		return Constant.PAGE_LIST_EMPLYEES;
+	}
+
+	@Transactional
+	@RequestMapping(value = { "setStatus" })
+	public String setStatus(@RequestParam String status, Model model) {
+		User user = controllerSupport.getCurrentUser();
+		employeeDao.updateEmployeeStatus(user.getUsername(), status);
+		return Constant.PAGE_INDEX;
 	}
 
 	// @ExceptionHandler(Exception.class)

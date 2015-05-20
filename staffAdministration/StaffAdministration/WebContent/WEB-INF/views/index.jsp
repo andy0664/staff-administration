@@ -67,22 +67,27 @@
 								</div>
 							</div>
 							<div class="collapse " id="collapseExample">
-								<div class="status-field">
-									<div class="row status-buttons">
-										<button type="button" class="btn btn-success"
-											style="width: 130px">
-											<i class="fa fa-check-circle"></i> Available
-										</button>
-										<button type="button" class="btn btn-warning"
-											style="width: 130px">
-											<i class="fa fa-circle-o"></i> Busy
-										</button>
-										<button type="button" class="btn btn-danger"
-											style="width: 130px">
-											<i class="fa fa-times-circle"></i> Not available
-										</button>
+								<form class="form-horizontal" method="post"
+									action="setStatus">
+									<input type="hidden" name="${_csrf.parameterName}"
+										value="${_csrf.token }" />
+									<div class="status-field">
+										<div class="row status-buttons">
+											<button type="Submit" class="btn btn-success"
+												style="width: 130px" name="status" value="Available">
+												<i class="fa fa-check-circle"></i> Available
+											</button>
+											<button type="Submit" class="btn btn-warning"
+												style="width: 130px" name="status" value="Busy">
+												<i class="fa fa-circle-o"></i> Busy
+											</button>
+											<button type="Submit" class="btn btn-danger"
+												style="width: 130px" name="status" value="Not available">
+												<i class="fa fa-times-circle"></i> Not available
+											</button>
+										</div>
 									</div>
-								</div>
+								</form>
 							</div>
 						</div>
 					</a>
@@ -105,7 +110,7 @@
 					<!-- end feature -->
 
 
-					<a href="#">
+					<a href="showEmployees">
 						<div class="panel panel-red">
 							<div class="row">
 								<div class="col-xs-3">
@@ -309,7 +314,7 @@
 				</div>
 			</div>
 			<!-- 	Line Chart -->
-			<script>
+			<!-- <script>
 				$(function() {
 					$('#lineChart').highcharts(
 							{
@@ -365,7 +370,7 @@
 				});
 			</script>
 
-			<!-- 			Pie Chart -->
+						Pie Chart
 			<script>
 				$(function() {
 
@@ -505,50 +510,50 @@
 										} ]
 									});
 				});
-			</script>
+			</script> -->
 
 		</div>
 	</div>
 	<!-- end features -->
-	
+
 	<!-- Modal News -->
-		<div class="modal fade" id="basicModal" role="dialog"
-			aria-labelledby="basicModal" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">New Entry</h4>
-					</div>
-					<div class="modal-body">
-						<form role="form" method="post" action="newNews">
-							<input type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token }" />
-							<div class="form-group">
-								<label for="usr">Heading:</label> <input type="text"
-									class="form-control" id="inputTitle" name="title">
-							</div>
-							<div class="form-group">
-								<label for="comment">Content</label>
-								<textarea class="form-control" rows="5" id="inputMessage"
-									name="message"></textarea>
-							</div>
-							<!-- <div class="form-group">
+	<div class="modal fade" id="basicModal" role="dialog"
+		aria-labelledby="basicModal" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">New Entry</h4>
+				</div>
+				<div class="modal-body">
+					<form role="form" method="post" action="newNews">
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token }" />
+						<div class="form-group">
+							<label for="usr">Heading:</label> <input type="text"
+								class="form-control" id="inputTitle" name="title">
+						</div>
+						<div class="form-group">
+							<label for="comment">Content</label>
+							<textarea class="form-control" rows="5" id="inputMessage"
+								name="message"></textarea>
+						</div>
+						<!-- <div class="form-group">
 							<label for="usr">Link:</label> <input type="text"
 								class="form-control" id="usr">
 						</div> -->
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default"
-									data-dismiss="modal">Close</button>
-								<button type="submit" class="btn btn-primary">Save
-									changes</button>
-							</div>
-						</form>
-					</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Save
+								changes</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
+	</div>
 
 	<!-- Footer -->
 	<%-- 	<jsp:include page="includes/template/footer.jsp" /> --%>

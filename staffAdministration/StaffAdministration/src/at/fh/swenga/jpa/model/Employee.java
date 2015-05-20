@@ -65,6 +65,8 @@ public class Employee implements Serializable {
 //	@NotNull(message = "{0} is required")
 	private String role;
 	
+	private String status;
+	
 	private String userName;
 	private String password;
 	
@@ -270,6 +272,14 @@ public class Employee implements Serializable {
 			userRoles=new HashSet<UserRole>();
 		}
 		userRoles.add(role);
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public Set<TimeRecord> getTimeRecords() {

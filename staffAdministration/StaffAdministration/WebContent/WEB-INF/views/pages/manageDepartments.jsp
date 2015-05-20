@@ -11,7 +11,7 @@
 <html>
 <head>
 <jsp:include page="../includes/bootstrapMeta.jsp" />
-<title>Employees</title>
+<title>Departments</title>
 <jsp:include page="../includes/bootstrapCss.jsp" />
 <jsp:include page="../includes/bootstrapJs.jsp" />
 

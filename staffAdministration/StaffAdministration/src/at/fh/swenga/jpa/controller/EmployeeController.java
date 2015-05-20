@@ -66,6 +66,7 @@ public class EmployeeController {
 	 * ########### manageEmployees.jsp ############
 	 */
 
+	@Transactional
 	@RequestMapping(value = { "addEmployee" }, method = RequestMethod.GET)
 	public String editEmployee(Model model) {
 		model.addAttribute(Constant.KEY_DEPARTMENT_LIST,
@@ -73,6 +74,7 @@ public class EmployeeController {
 		return Constant.PAGE_EDIT_EMPLOYEE;
 	}
 
+	@Transactional
 	@RequestMapping(value = { "changeEmployee" }, method = RequestMethod.GET)
 	public String changeEmployee(@RequestParam int id, Model model) {
 		try {
@@ -86,6 +88,8 @@ public class EmployeeController {
 		return Constant.PAGE_EDIT_EMPLOYEE;
 	}
 
+	
+	@Transactional
 	@RequestMapping(value = { "deleteEmployee" })
 	public String deleteEmployee(@RequestParam int id, Model model) {
 		try {
@@ -123,7 +127,7 @@ public class EmployeeController {
 	/*
 	 * ########### editEmployee.jsp ############
 	 */
-
+	@Transactional
 	@RequestMapping(value = { "addEmployee" }, method = RequestMethod.POST)
 	public String addEmployee(@Valid @ModelAttribute EmployeeDTO newEmployee,
 			@Valid @ModelAttribute Address newAddress,

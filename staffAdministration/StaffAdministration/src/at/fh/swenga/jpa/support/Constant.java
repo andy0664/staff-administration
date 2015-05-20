@@ -15,6 +15,7 @@ public class Constant {
 	public static final String PAGE_NEW_TIME_RECORD = "/pages/editTimeRecord";
 	public static final String PAGE_LIST_TIME_RECORDS = "/pages/listTimeRecords";
 	public static final String PAGE_LOGIN = "login";
+	public static final String PAGE_LIST_EMPLYEES = "/pages/listEmployees";
 	
 	
 	//Export
@@ -24,6 +25,11 @@ public class Constant {
 	public static final String ROLE_ADMINISTRATOR="ROLE_ADMIN";
 	public static final String ROLE_MANAGER="ROLE_MANAGER";
 	public static final String ROLE_EMPLOYEE="ROLE_EMPLOYEE";
+	
+	//Status
+	public static final String STATUS_AVAILABLE="Available";
+	public static final String STATUS_BUSY="Busy";
+	public static final String STATUS_NOT_AVAILABLE="Not Available";
 	
 	public static final int NO_DEPARTMENT=-1;
 	
@@ -45,6 +51,7 @@ public class Constant {
 	
 	public static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 	public static final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+	
 	
 	//Methods
 	public static Date parseToDate(String date) {	
