@@ -25,11 +25,25 @@ public class Constant {
 	public static final String ROLE_ADMINISTRATOR="ROLE_ADMIN";
 	public static final String ROLE_MANAGER="ROLE_MANAGER";
 	public static final String ROLE_EMPLOYEE="ROLE_EMPLOYEE";
+	public static final int ROLE_INT_ADMINISTRATOR=3;
+	public static final int ROLE_INT_MANAGER=2;
+	public static final int ROLE_INT_EMPLOYEE=1;
 	
 	//Status
 	public static final String STATUS_AVAILABLE="Available";
 	public static final String STATUS_BUSY="Busy";
 	public static final String STATUS_NOT_AVAILABLE="Not Available";
+	
+	public static final int DAY_OF_MONTH=1;
+	public static final int MONTH_OF_YEAR=2;
+	
+	//Subjects Announcements
+	public static final String ANNOUNCEMENT_VACATION="Request for leave";
+	public static final String ANNOUNCEMENT_BIRTHDAY="Birthday";
+	public static final String ANNOUNCEMENT_CHANGE_REQUEST="Request for data change";
+	
+	//Typ Timerecord
+	public static final String TYP_VACATION="vacation";
 	
 	public static final int NO_DEPARTMENT=-1;
 	
@@ -44,6 +58,7 @@ public class Constant {
 	public static final String KEY_NEWS_LIST="newsList";
 	public static final String KEY_TIME_RECORD_DATE_FROM="dateFrom";
 	public static final String KEY_TIME_RECORD_DATE_TO="dateTo";
+	public static final String KEY_ANNOUNCEMENT_LIST="announcementList";
 	
 	//Redirects
 	public static final String REDIRECT_MANAGE_EMPLOYEES="redirect:manageEmployees";

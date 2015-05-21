@@ -21,10 +21,13 @@ public interface SimpleEmployeeRepository extends
 	public List<Employee> findEmployeeWithNoDepartment();
 	public List<Employee> findEmployeeByOrderByDepartmentId();
 	public List<Employee> findEmployeeByDepartmentId(int depId);
-	public Employee findByUserName(String username);
+	public Employee findEmployeeByUserName(String username);
 	
 	@Modifying
 	@Query("update Employee e set e.status=:status where e.userName=:username")
 	public int updateEmployeeStatus(@Param("username") String username, @Param("status") String status);
+	
+	@Query("select e from Employee e where e.id=(Select d.manager from Department d where d.id=:employeDepartment)")
+	public Employee findManagerFromEmployee(@Param("employeDepartment")int employeDepartment);
 
 }

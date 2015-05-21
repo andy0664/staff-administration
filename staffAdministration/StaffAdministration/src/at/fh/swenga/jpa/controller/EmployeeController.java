@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import at.fh.swenga.jpa.dao.SimpleAnnouncementRepository;
 import at.fh.swenga.jpa.dao.SimpleDepartmentRepository;
 import at.fh.swenga.jpa.dao.SimpleEmployeeRepository;
 import at.fh.swenga.jpa.dao.SimpleNewsRepository;
@@ -27,6 +28,7 @@ import at.fh.swenga.jpa.dao.SimpleTimeRecordRepository;
 import at.fh.swenga.jpa.dao.SimpleUserRoleRepository;
 import at.fh.swenga.jpa.dto.EmployeeDTO;
 import at.fh.swenga.jpa.model.Address;
+import at.fh.swenga.jpa.model.Announcement;
 import at.fh.swenga.jpa.model.Employee;
 import at.fh.swenga.jpa.model.UserRole;
 import at.fh.swenga.jpa.support.Constant;
@@ -51,6 +53,9 @@ public class EmployeeController {
 	@Autowired
 	private SimpleUserRoleRepository userRoleRepository;
 	
+	@Autowired
+	private SimpleAnnouncementRepository announcementDao;
+
 	@Autowired
 	private ControllerSupport controllerSupport;
 
@@ -88,7 +93,6 @@ public class EmployeeController {
 		return Constant.PAGE_EDIT_EMPLOYEE;
 	}
 
-	
 	@Transactional
 	@RequestMapping(value = { "deleteEmployee" })
 	public String deleteEmployee(@RequestParam int id, Model model) {
@@ -137,10 +141,22 @@ public class EmployeeController {
 			return "forward:/manageEmployees";
 		}
 		newEmployee.setAddress(newAddress);
-
 		Employee emp = newEmployee.generateEmployee();
 		emp.setPassword(encoder.encode(emp.getPassword()));
 		saveEmployee(emp, department, newEmployee.getRole());
+		if (department != Constant.NO_DEPARTMENT) {
+			String message = String.format("Birthday: %s %s ",
+					emp.getFirstName(), emp.getLastName());
+			int day = controllerSupport.getDayMoth(emp.getDayOfBirth(),
+					Constant.DAY_OF_MONTH);
+			int month = controllerSupport.getDayMoth(emp.getDayOfBirth(),
+					Constant.MONTH_OF_YEAR);
+			Announcement announcement = new Announcement(
+					Constant.ANNOUNCEMENT_BIRTHDAY, message, month, day,
+					employeeDao.findManagerFromEmployee(department));
+			announcementDao.save(announcement);
+			
+		}
 		return Constant.REDIRECT_MANAGE_EMPLOYEES;
 	}
 

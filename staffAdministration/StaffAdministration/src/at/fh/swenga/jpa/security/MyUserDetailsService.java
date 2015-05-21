@@ -29,7 +29,7 @@ public class MyUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
-		Employee employee = employeeDao.findByUserName(username);
+		Employee employee = employeeDao.findEmployeeByUserName(username);
 		List<GrantedAuthority> authorities = buildUserAuthority(employee.getUserRole());
 
 		return buildUserForAuthentication(employee, authorities);

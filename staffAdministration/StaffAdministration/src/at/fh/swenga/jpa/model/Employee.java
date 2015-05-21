@@ -79,6 +79,9 @@ public class Employee implements Serializable {
 	
 	@OneToMany(mappedBy="employee")
 	private Set<TimeRecord> timeRecords;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "manager", cascade=CascadeType.REMOVE)
+	private Set<Announcement> announcements;
 
 	@Version
 	private long version;
@@ -296,6 +299,21 @@ public class Employee implements Serializable {
 			timeRecords=new HashSet<TimeRecord>();
 		}
 		timeRecords.add(record);
+	}
+	
+	public Set<Announcement> getAnnouncments() {
+		return announcements;
+	}
+
+	public void setAnnouncments(Set<Announcement> announcments) {
+		this.announcements = announcments;
+	}
+	
+	public void addAnnouncement(Announcement announcement){
+		if(announcements==null){
+			announcements = new HashSet<Announcement>();
+		}
+		announcements.add(announcement);
 	}
 
 	public void updateEmployee(EmployeeDTO emp){

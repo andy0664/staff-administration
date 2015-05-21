@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import at.fh.swenga.jpa.dao.SimpleAnnouncementRepository;
 import at.fh.swenga.jpa.dao.SimpleDepartmentRepository;
 import at.fh.swenga.jpa.dao.SimpleEmployeeRepository;
 import at.fh.swenga.jpa.dao.SimpleNewsRepository;
@@ -68,6 +69,9 @@ public class CoverPageController {
 
 	@Autowired
 	private SimpleUserRoleRepository userRoleRepository;
+	
+	@Autowired
+	private SimpleAnnouncementRepository announcementDao;
 
 	@Autowired
 	private ControllerSupport controllerSupport;
@@ -135,7 +139,14 @@ public class CoverPageController {
 	@RequestMapping(value = { "/", "start" })
 	public String index(Model model) {
 		model.addAttribute(Constant.KEY_NEWS_LIST, newsRepository.findAll());
-		model.addAttribute(Constant.KEY_EMPLOYEE, employeeDao.findByUserName(controllerSupport.getCurrentUser().getUsername())); 
+		User user = controllerSupport.getCurrentUser();
+		Employee emp = employeeDao.findEmployeeByUserName(user.getUsername());
+		model.addAttribute(Constant.KEY_EMPLOYEE, emp); 
+		if(user.getAuthorities().size()==Constant.ROLE_INT_MANAGER){
+			int day = controllerSupport.getDayMoth(new Date(), Constant.DAY_OF_MONTH);
+			int month = controllerSupport.getDayMoth(new Date(), Constant.MONTH_OF_YEAR);
+			model.addAttribute(Constant.KEY_ANNOUNCEMENT_LIST, announcementDao.findAnnouncementByManagerAndNotReadGreaterThanOrMonthIsAndDayIs(emp,0,month,day));
+		}
 		return Constant.PAGE_INDEX;
 	}
 
@@ -192,7 +203,7 @@ public class CoverPageController {
 	public String showPersonalTimeRecords(Model model) {
 		User user = controllerSupport.getCurrentUser();
 		model.addAttribute(Constant.KEY_EMPLOYEE,
-				employeeDao.findByUserName(user.getUsername()));
+				employeeDao.findEmployeeByUserName(user.getUsername()));
 		return Constant.PAGE_LIST_TIME_RECORDS;
 	}
 

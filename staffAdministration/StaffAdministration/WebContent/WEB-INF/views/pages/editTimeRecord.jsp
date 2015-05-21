@@ -118,7 +118,7 @@
 									</div>
 								</div>
 
-								<! ----------------  Employee For testing Remove ---------------- -->
+								<%-- <! ----------------  Employee For testing Remove ---------------- -->
 								<div class="form-group">
 									<label for="inputManager" class="col-md-2 control-label">Employee</label>
 									<div class="col-md-5">
@@ -129,13 +129,13 @@
 											</c:forEach>
 										</select>
 									</div>
-								</div>
+								</div> --%>
 
 								<! ----------------  buttons ---------------- -->
 								<div class="form-group">
 									<div class="col-md-10 col-md-offset-2">
 										<button type="Submit" class="btn btn-primary">Submit</button>
-										<a href="manageEmployees">
+										<a href="start">
 											<button type="button" class="btn btn-default">Cancel</button>
 										</a>
 									</div>

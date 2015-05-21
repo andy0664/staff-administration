@@ -1,3 +1,6 @@
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+
 <div class="modal fade" id="announcementModal" role="dialog"
 	aria-labelledby="announcementModal" aria-hidden="true">
 	<div class="modal-dialog">
@@ -8,30 +11,34 @@
 				<h4 class="modal-title" id="myModalLabel">Announcements</h4>
 			</div>
 			<div class="modal-body">
-				<div class="panel panel-anncouncement">
-					<div class="panel-heading">
-						<div class="row" style="margin-right: 0px; margin-left: 0px">
-							<font size="5">Karin Steinberger</font>
-							<button type="button" class="btn pull-right btn-danger"
-								style="width: 80px">Deny</button>
-							<button type="button" class="btn pull-right btn-success"
-								style="margin-right: 15px; width: 80px">Accept</button>
-						</div>
-						<p>Vacation Request</p>
-					</div>
-					<div class="panel-body">
-						<h3>
-							<i class="fa fa-arrow-circle-o-right"
-								style="margin-right: 5px; color: grey"></i>25.04.2015
-						</h3>
-						<h3>
-							06.05.2015<i class="fa fa-arrow-circle-o-left"
-								style="margin-left: 5px; color: grey"></i>
-						</h3>
-					</div>
-				</div>
+				<c:forEach items="${announcementList }" var="announcement">
+					<div class="panel panel-anncouncement">
+						<div class="panel-heading">
+							<div class="row" style="margin-right: 0px; margin-left: 0px">
+								<!-- <font size="5">Karin Steinberger</font> -->
+								<c:choose>
+									<c:when test="${announcement.subject=='Request for leave'}">
+										<button type="button" class="btn pull-right btn-danger"
+											style="width: 80px">Deny</button>
+										<button type="button" class="btn pull-right btn-success"
+											style="margin-right: 15px; width: 80px">Accept</button>
+									</c:when>
+									<c:otherwise>
+										<button type="button" class="btn pull-right btn-success"
+											style="margin-right: 15px; width: 80px">Accept</button>
+									</c:otherwise>
+								</c:choose>
 
-				<div class="panel panel-anncouncement">
+							</div>
+							<h3><p>${announcement.subject}</p></h3>
+						</div>
+						<div class="panel-body">
+							<h4>${announcement.message}</h4>
+						</div>
+					</div>
+				</c:forEach>
+
+				<!-- <div class="panel panel-anncouncement">
 					<div class="panel-heading">
 						<div class="row" style="margin-right: 0px; margin-left: 0px">
 							<font size="5"><i class="fa fa-birthday-cake"
@@ -45,7 +52,7 @@
 					<div class="panel-body">
 						<h3>Markus Oberhauser</h3>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

@@ -1,3 +1,7 @@
+<%@taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <nav class="navbar-default navbar-side" role="navigation">
 	<div class="sidebar-collapse">
 		<ul class="nav" id="main-menu">
@@ -21,7 +25,6 @@
 									style="color: yellow"></i>Busy</a></li>
 							<li><a href="#"><i class="fa fa-times-circle"
 									style="color: #d9534f"></i>Not available</a></li>
-
 						</ul></li>
 				</ul></li>
 			<li><a href="#"> <i class="fa fa-university"></i>Business
@@ -45,9 +48,11 @@
 					<li><a href="showAllTimeRecords"><i
 							class="fa fa-area-chart"></i>All Time Records</a></li>
 				</ul></li>
+			<sec:authorize access="hasRole('MANAGER')">
 			<li data-toggle="modal" data-target="#announcementModal"><a
 				href="#"><i class="fa fa-comments"></i> Announcements<span
-					class="badge pull-right">5</span></a></li>
+					class="badge pull-right">${fn:length(announcementList)}</span></a></li>
+			</sec:authorize>
 			<li><a href="#"><i class="fa fa-calendar"></i> Calendar</a></li>
 		</ul>
 	</div>
