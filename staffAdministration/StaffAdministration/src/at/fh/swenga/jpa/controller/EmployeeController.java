@@ -6,6 +6,8 @@ import java.util.HashSet;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.time.DateUtils;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -147,12 +149,13 @@ public class EmployeeController {
 		if (department != Constant.NO_DEPARTMENT) {
 			String message = String.format("Birthday: %s %s ",
 					emp.getFirstName(), emp.getLastName());
-			int day = controllerSupport.getDayMoth(emp.getDayOfBirth(),
-					Constant.DAY_OF_MONTH);
-			int month = controllerSupport.getDayMoth(emp.getDayOfBirth(),
-					Constant.MONTH_OF_YEAR);
+			Date announcementDay=controllerSupport.getBirthdayCurYear(newEmployee.getDayOfBirth());
+			System.out.println(Constant.parseDateToString(announcementDay)+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			if(announcementDay.before(new Date()) && !DateUtils.isSameDay(announcementDay, new Date())){
+				announcementDay = controllerSupport.updateAnnouncementYear(announcementDay,1);
+			}
 			Announcement announcement = new Announcement(
-					Constant.ANNOUNCEMENT_BIRTHDAY, message, month, day,
+					Constant.ANNOUNCEMENT_BIRTHDAY, message, announcementDay,
 					employeeDao.findManagerFromEmployee(department));
 			announcementDao.save(announcement);
 			

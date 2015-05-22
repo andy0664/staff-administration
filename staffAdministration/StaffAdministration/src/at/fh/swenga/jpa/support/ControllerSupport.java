@@ -30,14 +30,17 @@ public class ControllerSupport {
 				.getPrincipal();
 	}
 
-	public int getDayMoth(Date date, int choice) {
+	public Date updateAnnouncementYear(Date date, int addYear) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		switch (choice) {
-		case Constant.DAY_OF_MONTH:
-			return cal.get(Calendar.DAY_OF_MONTH);
-		default:
-			return cal.get(Calendar.MONTH) + 1;
-		}
+		cal.add(Calendar.YEAR, addYear);
+		return cal.getTime();
+	}
+	
+	public Date getBirthdayCurYear(Date date){
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		cal.set(Calendar.YEAR, Calendar.getInstance().get(Calendar.YEAR));
+		return cal.getTime();
 	}
 }

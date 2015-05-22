@@ -167,13 +167,19 @@ public class TimeRecordController {
 	}
 
 	private void checkDateNull(TimeRecordRequestDTO request) {
-		if (request.getDateFrom() == null) {
-			request.setDateFrom(timeRecordDao.findTop1ByOrderByStartDate()
-					.getStartDate());
+		try{
+			if (request.getDateFrom() == null) {
+				request.setDateFrom(timeRecordDao.findTop1ByOrderByStartDate()
+						.getStartDate());
+			}
+			if (request.getDateTo() == null) {
+				request.setDateTo(timeRecordDao.findTop1ByOrderByEndDateDesc()
+						.getEndDate());
+			}
+		}catch(NullPointerException ex){
+			request.setDateFrom(new Date());
+			request.setDateTo(new Date());
 		}
-		if (request.getDateTo() == null) {
-			request.setDateTo(timeRecordDao.findTop1ByOrderByEndDateDesc()
-					.getEndDate());
-		}
+		
 	}
 }

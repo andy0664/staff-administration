@@ -12,30 +12,41 @@
 			</div>
 			<div class="modal-body">
 				<c:forEach items="${announcementList }" var="announcement">
-					<div class="panel panel-anncouncement">
-						<div class="panel-heading">
-							<div class="row" style="margin-right: 0px; margin-left: 0px">
-								<!-- <font size="5">Karin Steinberger</font> -->
-								<c:choose>
-									<c:when test="${announcement.subject=='Request for leave'}">
-										<button type="button" class="btn pull-right btn-danger"
-											style="width: 80px">Deny</button>
-										<button type="button" class="btn pull-right btn-success"
-											style="margin-right: 15px; width: 80px">Accept</button>
-									</c:when>
-									<c:otherwise>
-										<button type="button" class="btn pull-right btn-success"
-											style="margin-right: 15px; width: 80px">Accept</button>
-									</c:otherwise>
-								</c:choose>
+					<form class="form-horizontal" method="post">
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token }" />
+						<div class="panel panel-anncouncement">
+							<div class="panel-heading">
+								<div class="row" style="margin-right: 0px; margin-left: 0px">
+									<!-- <font size="5">Karin Steinberger</font> -->
+									<c:choose>
+										<c:when test="${announcement.subject=='Request for leave'}">
+											<button type="Submit" class="btn pull-right btn-danger"
+												style="width: 80px" formaction="denyVacation"
+												value="${announcement.id}" name="announcement">Deny</button>
+											<button type="Submit" class="btn pull-right btn-success"
+												style="margin-right: 15px; width: 80px"
+												formaction="acceptVacation" value="${announcement.id}"
+												name="announcement">Accept</button>
+										</c:when>
+										<c:otherwise>
+											<button type="Submit" class="btn pull-right btn-success"
+												style="margin-right: 15px; width: 80px"
+												formaction="acceptBirthday" value="${announcement.id}"
+												name="announcement">Accept</button>
+										</c:otherwise>
+									</c:choose>
 
+								</div>
+								<h3>
+									<p>${announcement.subject}</p>
+								</h3>
 							</div>
-							<h3><p>${announcement.subject}</p></h3>
+							<div class="panel-body">
+								<h4>${announcement.message}</h4>
+							</div>
 						</div>
-						<div class="panel-body">
-							<h4>${announcement.message}</h4>
-						</div>
-					</div>
+					</form>
 				</c:forEach>
 
 				<!-- <div class="panel panel-anncouncement">

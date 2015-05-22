@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
 @Entity
@@ -21,8 +23,9 @@ public class Announcement {
 	private String subject;
 	private String message;
 	private int notRead;
-	private int month;
-	private int day;
+	
+	@Temporal(TemporalType.DATE)
+	private Date day;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="managerId", nullable=false)
@@ -35,21 +38,20 @@ public class Announcement {
 	}
 	
 	//Constructor for every year Announcments
-	public Announcement(String subject, String message, int month, int day,
+	public Announcement(String subject, String message,int notRead,
 			Employee manager) {
 		this.subject = subject;
 		this.message = message;
-		this.month = month;
-		this.day = day;
+		this.notRead=notRead;
 		this.manager = manager;
 	}
 	
 	//Constructor for only once Announcments
-	public Announcement(String subject, String message, int notRead,
+	public Announcement(String subject, String message,Date date,
 			Employee manager) {
 		this.subject = subject;
 		this.message = message;
-		this.notRead = notRead;
+		this.day=date;
 		this.manager = manager;
 	}
 
@@ -77,18 +79,16 @@ public class Announcement {
 	public void setManager(Employee manager) {
 		this.manager = manager;
 	}
-	public int getMonth() {
-		return month;
-	}
-	public void setMonth(int month) {
-		this.month = month;
-	}
-	public int getDay() {
+
+	public Date getDay() {
 		return day;
 	}
-	public void setDay(int day) {
+
+	public void setDay(Date day) {
 		this.day = day;
 	}
-	
-	
+
+	public int getId() {
+		return id;
+	}	
 }
