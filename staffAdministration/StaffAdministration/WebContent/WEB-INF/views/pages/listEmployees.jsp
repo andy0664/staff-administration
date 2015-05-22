@@ -54,9 +54,7 @@
 							data-sort-name="name" data-sort-order="desc"
 							data-url="/gh/get/response.json/wenzhixin/bootstrap-table/tree/master/docs/data/data1/"
 							data-show-columns="true" data-search="true"
-							data-toolbar="#toolbar"
-							data-height="755"
-							data-show-toggle="true">
+							data-toolbar="#toolbar" data-height="755">
 							<thead>
 								<tr>
 									<th data-sortable="true">First Name</th>
@@ -75,11 +73,20 @@
 										<td>${employee.lastName}</td>
 										<td>${employee.department.name}</td>
 										<td>${employee.jobDescription}</td>
-										<td>${employee.status}</td>
-										<td></a> <a href="showEmployeeCalendar?id=${employee.id}">
-												<button type="button" class="btn btn-xs btn-success">
-													<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-													Calendar
+										<td><c:choose>
+												<c:when test="${employee.status=='Available'}">
+													<div style="color: #449D44"><i class="fa fa-check-circle" style="margin-right:5px"></i>${employee.status}</div>
+												</c:when>
+												<c:when test="${employee.status=='Busy'}">
+													<div style="color: #F0AD4E"><i class="fa fa-circle-o" style="margin-right:5px"></i>${employee.status}</div>
+												</c:when>
+												<c:when test="${employee.status=='Not available'}">
+													<div style="color: #C9302C"><i class="fa fa-times-circle" style="margin-right:5px"></i>${employee.status}</div>
+												</c:when>
+											</c:choose></td>
+										<td><a href="showEmployeeCalendar?id=${employee.id}">
+												<button type="button" class="btn btn-xs btn-primary">
+													<i class="fa fa-calendar" style="margin-right:5px"></i> View Calendar
 												</button>
 										</a></td>
 									</tr>

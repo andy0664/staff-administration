@@ -50,25 +50,24 @@
 
 				<div class="row">
 					<div class="col-md-12">
-
-						<div id="toolbar" class="btn-group">
-							<a href="addEmployee">
-								<button type="button" class="btn btn-success">
-									<i class="fa fa-user-plus"></i> Add Employee
-								</button>
-							</a> <a href="fillEmployee">
-								<button type="button" class="btn btn-success">Test:
-									Fill</button>
-							</a>
-						</div>
+						<sec:authorize access="hasRole('ADMIN')">
+							<div id="toolbar" class="btn-group">
+								<a href="addEmployee">
+									<button type="button" class="btn btn-success">
+										<i class="fa fa-user-plus"></i> Add Employee
+									</button>
+								</a> <a href="fillEmployee">
+									<button type="button" class="btn btn-success">Test:
+										Fill</button>
+								</a>
+							</div>
+						</sec:authorize>
 
 						<table data-toggle="table" class="table table-striped"
 							data-sort-name="name" data-sort-order="desc"
 							data-url="/gh/get/response.json/wenzhixin/bootstrap-table/tree/master/docs/data/data1/"
 							data-show-columns="true" data-search="true"
-							data-toolbar="#toolbar"
-							data-height="755"
-							data-show-toggle="true">
+							data-toolbar="#toolbar" data-height="755" data-show-toggle="true">
 							<thead>
 								<tr>
 									<th data-sortable="true">SSN</th>
@@ -135,7 +134,7 @@
 
 	<!-- Footer -->
 	<%-- 	<jsp:include page="../includes/template/footer.jsp" /> --%>
-	
+
 
 
 </body>

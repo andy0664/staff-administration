@@ -40,7 +40,7 @@
 						<c:set var="formAction">changeTimeRecord</c:set>
 					</c:when>
 					<c:otherwise>
-						<c:set var="legend">New Timerecord</c:set>
+						<c:set var="legend">New Timerecord ${employee.firstName} ${employee.lastName}</c:set>
 						<c:set var="formAction">addTimeRecord</c:set>
 					</c:otherwise>
 				</c:choose>

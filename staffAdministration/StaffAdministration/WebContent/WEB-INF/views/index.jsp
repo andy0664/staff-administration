@@ -10,10 +10,9 @@
 <html>
 <head>
 <jsp:include page="includes/bootstrapMeta.jsp" />
-<title>Staff Administration</title>
 <jsp:include page="includes/bootstrapCss.jsp" />
-<jsp:include page="includes/bootstrapJs.jsp" />
 
+<title>Staff Administration</title>
 </head>
 <body>
 
@@ -58,7 +57,23 @@
 							data-target="#collapseExample">
 							<div class="row">
 								<div class="col-xs-3">
-									<i class="fa fa-info-circle fa-5x"></i>
+
+										<c:choose>
+											<c:when test="${employee.status=='Available'}">
+													<i class="fa fa-info-circle fa-5x"></i>
+											</c:when>
+											<c:when test="${employee.status=='Busy'}">
+													<i class="fa fa-info-circle fa-5x"></i>
+											</c:when>
+											<c:when test="${employee.status=='Not available'}">
+													<i class="fa fa-info-circle fa-5x"></i>
+											</c:when>
+										</c:choose>
+
+
+
+
+
 								</div>
 								<div class="col-xs-9 text-right">
 									<font size="5">Set Status</font>
@@ -66,8 +81,7 @@
 								</div>
 							</div>
 							<div class="collapse " id="collapseExample">
-								<form class="form-horizontal" method="post"
-									action="setStatus">
+								<form class="form-horizontal" method="post" action="setStatus">
 									<input type="hidden" name="${_csrf.parameterName}"
 										value="${_csrf.token }" />
 									<div class="status-field">
@@ -329,7 +343,7 @@
 				</div>
 			</sec:authorize>
 			<!-- 	Line Chart -->
-			<!-- <script>
+			<script>
 				$(function() {
 					$('#lineChart').highcharts(
 							{
@@ -385,7 +399,7 @@
 				});
 			</script>
 
-						Pie Chart
+			<!-- 						Pie Chart -->
 			<script>
 				$(function() {
 
@@ -525,7 +539,7 @@
 										} ]
 									});
 				});
-			</script> -->
+			</script>
 
 		</div>
 	</div>
@@ -572,16 +586,9 @@
 
 	<!-- Footer -->
 	<%-- 	<jsp:include page="includes/template/footer.jsp" /> --%>
+	
+	<jsp:include page="includes/bootstrapJs.jsp" />
 
-	<script>
-		$(document).ready(function() {
-			$("#myBtn").click(function() {
-				$("#basicModal").modal({
-					backdrop : "static"
-				});
-			});
-		});
-	</script>
 
 </body>
 </html>
