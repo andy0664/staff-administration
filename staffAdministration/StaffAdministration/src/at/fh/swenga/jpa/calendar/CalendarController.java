@@ -66,7 +66,7 @@ public class CalendarController {
 	private Date today = cal.getTime();
 	private static String departmentWideEvents = "Adding events for the department";
 	private static String privateEvents = "Adding personal events";
-	private String testUser = "admin";
+	private String testUser;
 	private String calendarNote = "\n\nIn the grid view, you can sort events by clicking on the text field or a date field on the top of the view\n" + 
 	"By clicking on the Adobe Acrobat logo, you can export your calendar view as PDF document. ";
     
@@ -95,6 +95,10 @@ public class CalendarController {
     	if (testUser == null || testUser == "null") {
     		testUser = "admin";
     	}
+    	System.out.println("testUser: " + testUser);
+    	String name = employeeDao.findEmployeeByUserName(testUser).getFirstName();
+    	String surname = employeeDao.findEmployeeByUserName(testUser).getLastName();
+    	
     	DHXPlanner s = new DHXPlanner("../codebase/", DHXSkin.TERRACE);
     	//s.setInitialDate(2013, 1, 7);
     	
@@ -149,7 +153,7 @@ public class CalendarController {
     	//ModelAndView mnv = new ModelAndView(Constant.CALENDAR_ARTICLE);
     	ModelAndView mnv = new ModelAndView(Constant.CALENDAR_ARTICLE_READ_ONLY);
     	mnv.addObject("title", "Protected Calendar View");
-    	mnv.addObject("sample_name", "Calendar of " + testUser);
+    	mnv.addObject("sample_name", "Calendar of " + name + " " + surname);
     	mnv.addObject("sample_dsc", "This page lets you view all personal events of a selected employee. This view is read only, so no changes can be made. ");
     	//following line renders the Calendar/Planner object
 		mnv.addObject("body", s.render());
@@ -417,11 +421,15 @@ public class CalendarController {
     @RequestMapping("/calendar/events_read_only")
     @ResponseBody public String eventsReadOnly(HttpServletRequest request) {
     	System.out.println("events_read_only called");
-    	System.out.println("parameter username:   " + request.getParameter("username"));
+    	System.out.println("parameter username:   " + request.getParameter("username")); //requestParameter username not available anymore in the next request. 
+    	/*
     	testUser = request.getParameter("username");
     	if (testUser == null || testUser == "null") {
     		testUser = "admin";
     	}
+    	*/
+    	System.out.println("testUser_events_read_only: " + testUser);
+    	
     	CustomEventsManagerV2 evs = new CustomEventsManagerV2(request, testUser);
     	//following line handles the security - must be logged in as user to perform database changes?
     	evs.security.deny(DHXStatus.UPDATE);
