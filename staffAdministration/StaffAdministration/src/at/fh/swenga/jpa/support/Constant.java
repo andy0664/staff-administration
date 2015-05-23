@@ -16,6 +16,7 @@ public class Constant {
 	public static final String PAGE_LIST_TIME_RECORDS = "/pages/listTimeRecords";
 	public static final String PAGE_LOGIN = "login";
 	public static final String PAGE_LIST_EMPLYEES = "/pages/listEmployees";
+	public static final String PAGE_PROFILE = "pages/profile";
 	
 	
 	//Export
@@ -43,13 +44,13 @@ public class Constant {
 	public static final String STATUS_BUSY="Busy";
 	public static final String STATUS_NOT_AVAILABLE="Not Available";
 	
-	public static final int DAY_OF_MONTH=1;
-	public static final int MONTH_OF_YEAR=2;
 	
 	//Subjects Announcements
 	public static final String ANNOUNCEMENT_VACATION="Request for leave";
 	public static final String ANNOUNCEMENT_BIRTHDAY="Birthday";
 	public static final String ANNOUNCEMENT_CHANGE_REQUEST="Request for data change";
+	
+	public static final int ANNOUNCEMENT_NOT_READ=1;
 	
 	//Typ Timerecord
 	public static final String TYP_VACATION="vacation";

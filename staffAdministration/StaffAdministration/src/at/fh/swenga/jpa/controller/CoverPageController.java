@@ -69,7 +69,7 @@ public class CoverPageController {
 
 	@Autowired
 	private SimpleUserRoleRepository userRoleRepository;
-	
+
 	@Autowired
 	private SimpleAnnouncementRepository announcementDao;
 
@@ -89,45 +89,45 @@ public class CoverPageController {
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String handleLogin() {
-//		if (firstStart) {
-//			DataFactory df = new DataFactory();
-//			Address address = new Address(df.getStreetName(), df.getCity(),
-//					df.getRandomWord(), 8052);
-//			Employee p1 = new Employee(12345, df.getFirstName(),
-//					df.getLastName(), df.getBirthDate(), address,
-//					df.getRandomText(10, 20), 1234.5f, df.getBirthDate(),
-//					"admin",
-//					"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC");
-//			Employee p2 = new Employee(12345, df.getFirstName(),
-//					df.getLastName(), df.getBirthDate(), address,
-//					df.getRandomText(10, 20), 1234.5f, df.getBirthDate(),
-//					"manager",
-//					"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC");
-//			Employee p3 = new Employee(12345, df.getFirstName(),
-//					df.getLastName(), df.getBirthDate(), address,
-//					df.getRandomText(10, 20), 1234.5f, df.getBirthDate(),
-//					"employee",
-//					"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC");
-//			UserRole role = new UserRole(Constant.ROLE_ADMINISTRATOR, p1);
-//			UserRole role2 = new UserRole(Constant.ROLE_MANAGER, p1);
-//			UserRole role3 = new UserRole(Constant.ROLE_EMPLOYEE, p1);
-//			p1.addUserRole(role);
-//			p1.addUserRole(role2);
-//			p1.addUserRole(role3);
-//			p1.setRole(Constant.ROLE_ADMINISTRATOR);
-//			employeeDao.save(p1);
-//			UserRole role4 = new UserRole(Constant.ROLE_MANAGER, p2);
-//			UserRole role5 = new UserRole(Constant.ROLE_EMPLOYEE, p2);
-//			p2.addUserRole(role4);
-//			p2.addUserRole(role5);
-//			p2.setRole(Constant.ROLE_MANAGER);
-//			employeeDao.save(p2);
-//			UserRole role6 = new UserRole(Constant.ROLE_EMPLOYEE, p3);
-//			p3.addUserRole(role6);
-//			p3.setRole(Constant.ROLE_EMPLOYEE);
-//			employeeDao.save(p3);
-//		}
-		firstStart=false;
+		 if (firstStart) {
+		 DataFactory df = new DataFactory();
+		 Address address = new Address(df.getStreetName(), df.getCity(),
+		 df.getRandomWord(), 8052);
+		 Employee p1 = new Employee(12345, df.getFirstName(),
+		 df.getLastName(), df.getBirthDate(), address,
+		 df.getRandomText(10, 20), 1234.5f, df.getBirthDate(),
+		 "admin",
+		 "$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC");
+		 Employee p2 = new Employee(12345, df.getFirstName(),
+		 df.getLastName(), df.getBirthDate(), address,
+		 df.getRandomText(10, 20), 1234.5f, df.getBirthDate(),
+		 "manager",
+		 "$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC");
+		 Employee p3 = new Employee(12345, df.getFirstName(),
+		 df.getLastName(), df.getBirthDate(), address,
+		 df.getRandomText(10, 20), 1234.5f, df.getBirthDate(),
+		 "employee",
+		 "$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC");
+		 UserRole role = new UserRole(Constant.ROLE_ADMINISTRATOR, p1);
+		 UserRole role2 = new UserRole(Constant.ROLE_MANAGER, p1);
+		 UserRole role3 = new UserRole(Constant.ROLE_EMPLOYEE, p1);
+		 p1.addUserRole(role);
+		 p1.addUserRole(role2);
+		 p1.addUserRole(role3);
+		 p1.setRole(Constant.ROLE_ADMINISTRATOR);
+		 employeeDao.save(p1);
+		 UserRole role4 = new UserRole(Constant.ROLE_MANAGER, p2);
+		 UserRole role5 = new UserRole(Constant.ROLE_EMPLOYEE, p2);
+		 p2.addUserRole(role4);
+		 p2.addUserRole(role5);
+		 p2.setRole(Constant.ROLE_MANAGER);
+		 employeeDao.save(p2);
+		 UserRole role6 = new UserRole(Constant.ROLE_EMPLOYEE, p3);
+		 p3.addUserRole(role6);
+		 p3.setRole(Constant.ROLE_EMPLOYEE);
+		 employeeDao.save(p3);
+		 }
+		firstStart = false;
 		return Constant.PAGE_LOGIN;
 	}
 
@@ -141,9 +141,13 @@ public class CoverPageController {
 		model.addAttribute(Constant.KEY_NEWS_LIST, newsRepository.findAll());
 		User user = controllerSupport.getCurrentUser();
 		Employee emp = employeeDao.findEmployeeByUserName(user.getUsername());
-		model.addAttribute(Constant.KEY_EMPLOYEE, emp); 
-		if(user.getAuthorities().size()==Constant.ROLE_INT_MANAGER){
-			model.addAttribute(Constant.KEY_ANNOUNCEMENT_LIST, announcementDao.findAnnouncementByManagerAndNotReadGreaterThanOrDayIs(emp,0,new Date()));
+		model.addAttribute(Constant.KEY_EMPLOYEE, emp);
+		if (user.getAuthorities().size() == Constant.ROLE_INT_MANAGER) {
+			model.addAttribute(
+					Constant.KEY_ANNOUNCEMENT_LIST,
+					announcementDao
+							.findAnnouncementByManagerAndEnabledTrueAndNotReadGreaterThanOrDayIs(
+									emp.getId(), 0, new Date()));
 		}
 		return Constant.PAGE_INDEX;
 	}
@@ -151,8 +155,15 @@ public class CoverPageController {
 	// From index.jsp manageEmployees
 	@RequestMapping(value = { "manageEmployees" })
 	public String listAllEmployee(Model model) {
-		model.addAttribute(Constant.KEY_EMPLOYEE_LIST,
-				employeeDao.findEmployeeByOrderByDepartmentId());
+		User user = controllerSupport.getCurrentUser();
+		if (user.getAuthorities().size() == Constant.ROLE_INT_MANAGER) {
+			model.addAttribute(Constant.KEY_EMPLOYEE_LIST,
+					employeeDao.findEmployeeFromManager(user.getUsername()));
+		} else {
+			model.addAttribute(Constant.KEY_EMPLOYEE_LIST,
+					employeeDao.findEmployeeByOrderByDepartmentId());
+		}
+
 		return Constant.PAGE_MANAGE_EMPLOYEES;
 	}
 
@@ -217,6 +228,14 @@ public class CoverPageController {
 		User user = controllerSupport.getCurrentUser();
 		employeeDao.updateEmployeeStatus(user.getUsername(), status);
 		return Constant.PAGE_INDEX;
+	}
+
+	@RequestMapping(value = { "showProfile" })
+	public String showProfile(Model model) {
+		model.addAttribute(Constant.KEY_EMPLOYEE, employeeDao
+				.findEmployeeByUserName(controllerSupport.getCurrentUser()
+						.getUsername()));
+		return Constant.PAGE_PROFILE;
 	}
 
 	// @ExceptionHandler(Exception.class)

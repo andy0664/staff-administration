@@ -84,7 +84,7 @@
 													<div style="color: #C9302C"><i class="fa fa-times-circle" style="margin-right:5px"></i>${employee.status}</div>
 												</c:when>
 											</c:choose></td>
-										<td><a href="showEmployeeCalendar?id=${employee.id}">
+										<td><a href="calendar/showCalendarReadOnly?username=${employee.userName}">
 												<button type="button" class="btn btn-xs btn-primary">
 													<i class="fa fa-calendar" style="margin-right:5px"></i> View Calendar
 												</button>

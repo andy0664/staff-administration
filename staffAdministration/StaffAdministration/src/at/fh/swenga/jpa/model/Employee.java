@@ -77,14 +77,19 @@ public class Employee implements Serializable {
 	@ManyToOne(cascade=CascadeType.MERGE)
 	private Department department;
 	
-	@OneToMany(mappedBy="employee")
+	@OneToMany(mappedBy="employee", cascade=CascadeType.REMOVE)
 	private Set<TimeRecord> timeRecords;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "manager", cascade=CascadeType.REMOVE)
-	private Set<Announcement> announcements;
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "manager")
+//	private Set<Announcement> announcementsManager;
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "employee", cascade=CascadeType.ALL)
+	private Set<Announcement> announcementsEmployee;
+	
 	@Version
 	private long version;
+
+	
 
 	public Employee() {
 	}
@@ -301,20 +306,35 @@ public class Employee implements Serializable {
 		timeRecords.add(record);
 	}
 	
-	public Set<Announcement> getAnnouncments() {
-		return announcements;
+	public Set<Announcement> getAnnouncmentsEmployee() {
+		return announcementsEmployee;
 	}
 
-	public void setAnnouncments(Set<Announcement> announcments) {
-		this.announcements = announcments;
+	public void setAnnouncmentsEmployee(Set<Announcement> announcments) {
+		this.announcementsEmployee = announcments;
 	}
 	
-	public void addAnnouncement(Announcement announcement){
-		if(announcements==null){
-			announcements = new HashSet<Announcement>();
+	public void addAnnouncementEmployee(Announcement announcement){
+		if(announcementsEmployee==null){
+			announcementsEmployee = new HashSet<Announcement>();
 		}
-		announcements.add(announcement);
+		announcementsEmployee.add(announcement);
 	}
+	
+//	public Set<Announcement> getAnnouncmentsManager() {
+//		return announcementsManager;
+//	}
+//
+//	public void setAnnouncmentsManager(Set<Announcement> announcments) {
+//		this.announcementsManager = announcments;
+//	}
+//	
+//	public void addAnnouncementManager(Announcement announcement){
+//		if(announcementsManager==null){
+//			announcementsManager = new HashSet<Announcement>();
+//		}
+//		announcementsManager.add(announcement);
+//	}
 
 	public void updateEmployee(EmployeeDTO emp){
 		this.ssn=emp.getSsn();
@@ -336,7 +356,8 @@ public class Employee implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ssn;
+		result = prime * result
+				+ ((userName == null) ? 0 : userName.hashCode());
 		return result;
 	}
 
@@ -349,10 +370,11 @@ public class Employee implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Employee other = (Employee) obj;
-		if (ssn != other.ssn)
+		if (userName == null) {
+			if (other.userName != null)
+				return false;
+		} else if (!userName.equals(other.userName))
 			return false;
 		return true;
 	}
-	
-	
 }

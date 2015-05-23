@@ -95,7 +95,6 @@ public class CalendarController {
     	if (testUser == null || testUser == "null") {
     		testUser = "admin";
     	}
-		
     	DHXPlanner s = new DHXPlanner("../codebase/", DHXSkin.TERRACE);
     	//s.setInitialDate(2013, 1, 7);
     	
@@ -154,7 +153,8 @@ public class CalendarController {
     	mnv.addObject("sample_dsc", "This page lets you view all personal events of a selected employee. This view is read only, so no changes can be made. ");
     	//following line renders the Calendar/Planner object
 		mnv.addObject("body", s.render());
-
+		
+		
         return mnv;
     }
 	
@@ -351,7 +351,7 @@ public class CalendarController {
     	mnv.addObject("sample_name", "Personal Events");
     	mnv.addObject("sample_dsc", "In this page you can view, add, edit and delete personal events. Those events will be stored for later use." + calendarNote);
 		mnv.addObject("body", s.render());
-
+		mnv.addObject("username", testUser);
         return mnv;
     }
 

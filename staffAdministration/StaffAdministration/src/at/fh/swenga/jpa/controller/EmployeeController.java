@@ -54,7 +54,7 @@ public class EmployeeController {
 
 	@Autowired
 	private SimpleUserRoleRepository userRoleRepository;
-	
+
 	@Autowired
 	private SimpleAnnouncementRepository announcementDao;
 
@@ -99,7 +99,7 @@ public class EmployeeController {
 	@RequestMapping(value = { "deleteEmployee" })
 	public String deleteEmployee(@RequestParam int id, Model model) {
 		try {
-			// userRoleRepository.myRemoveEntry(id);
+			//announcementDao.changeEnableStateAnnouncement(false, employeeDao.findEmployeeById(id));
 			employeeDao.delete(id);
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -149,16 +149,18 @@ public class EmployeeController {
 		if (department != Constant.NO_DEPARTMENT) {
 			String message = String.format("Birthday: %s %s ",
 					emp.getFirstName(), emp.getLastName());
-			Date announcementDay=controllerSupport.getBirthdayCurYear(newEmployee.getDayOfBirth());
-			System.out.println(Constant.parseDateToString(announcementDay)+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-			if(announcementDay.before(new Date()) && !DateUtils.isSameDay(announcementDay, new Date())){
-				announcementDay = controllerSupport.updateAnnouncementYear(announcementDay,1);
+			Date announcementDay = controllerSupport
+					.getBirthdayCurYear(newEmployee.getDayOfBirth());
+			if (announcementDay.before(new Date())
+					&& !DateUtils.isSameDay(announcementDay, new Date())) {
+				announcementDay = controllerSupport.updateAnnouncementYear(
+						announcementDay, 1);
 			}
 			Announcement announcement = new Announcement(
 					Constant.ANNOUNCEMENT_BIRTHDAY, message, announcementDay,
-					employeeDao.findManagerFromEmployee(department));
+					employeeDao.findManagerFromEmployee(department).getId(), emp);
 			announcementDao.save(announcement);
-			
+
 		}
 		return Constant.REDIRECT_MANAGE_EMPLOYEES;
 	}
@@ -187,6 +189,25 @@ public class EmployeeController {
 		}
 
 		return Constant.REDIRECT_MANAGE_EMPLOYEES;
+	}
+
+	/*
+	 * ########### profile.jsp ############
+	 */
+	@Transactional
+	@RequestMapping(value = { "changeRequest" }, method = RequestMethod.POST)
+	public String employeeChangeRequest(String userName, String changeRequest,
+			Model model) {
+		Employee emp = employeeDao.findEmployeeByUserName(userName);
+		Employee manager = employeeDao.findManagerFromEmployee(emp
+				.getDepartment().getId());
+		String message = String.format("%s %s: %s", emp.getFirstName(),
+				emp.getLastName(), changeRequest);
+		Announcement annouce = new Announcement(
+				Constant.ANNOUNCEMENT_CHANGE_REQUEST, message,
+				Constant.ANNOUNCEMENT_NOT_READ, manager.getId(), emp);
+		announcementDao.save(annouce);
+		return "forward:start";
 	}
 
 	private void saveEmployee(Employee emp, int department, String role) {

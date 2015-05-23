@@ -112,12 +112,15 @@
 													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 													Edit
 												</button>
+										<sec:authorize access="hasRole('ADMIN')">
 										</a> <a href="deleteEmployee?id=${employee.id}">
 												<button type="button" class="btn btn-xs btn-danger">
 													<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 													Delete
 												</button>
-										</a></td>
+										</a>
+										</sec:authorize>
+										</td>
 									</tr>
 								</c:forEach>
 								<!--  list all employees ----------------------------------------------------------- -->

@@ -14,6 +14,9 @@
 <title>Edit TimeRecord</title>
 <jsp:include page="../includes/bootstrapCss.jsp" />
 <jsp:include page="../includes/bootstrapJs.jsp" />
+<link
+	href="http://www.malot.fr/bootstrap-datetimepicker/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"
+	rel="stylesheet">
 </head>
 <body>
 
@@ -45,8 +48,8 @@
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2">
 						<form class="form-horizontal" method="post" action="${formAction}">
-						<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token }" /> 
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token }" />
 							<fieldset>
 								<legend>${legend}</legend>
 								<%-- 		<input type="hidden" name="id" value="${employee.id }" /> --%>
@@ -95,8 +98,8 @@
 										to</label>
 									<div class="col-md-5">
 										<input class="form-control" id="inputEndTime" type="text"
-											name="endTime" placeholder="hh:mm" value="<c:out value="${timeRecord.endTime}"/>"
-											required>
+											name="endTime" placeholder="hh:mm"
+											value="<c:out value="${timeRecord.endTime}"/>" required>
 									</div>
 								</div>
 
@@ -147,7 +150,22 @@
 	<!--  End of container -->
 
 	<!-- Footer -->
-<%-- 	<jsp:include page="../includes/template/fixedFooter.jsp" /> --%>
+	<%-- 	<jsp:include page="../includes/template/fixedFooter.jsp" /> --%>
+
+	<script type="text/javascript"
+		src="http://www.malot.fr/bootstrap-datetimepicker/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+
+	<script>
+		$(function() {
+			$(".form_datetime").datetimepicker({
+				format : "dd.mm.yyyy",
+				autoclose : true,
+				todayBtn : true,
+				pickerPosition : "bottom-left",
+				minView : 2
+			});
+		});
+	</script>
 
 </body>
 </html>

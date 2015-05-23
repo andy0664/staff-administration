@@ -29,6 +29,12 @@
 												formaction="acceptVacation" value="${announcement.id}"
 												name="announcement">Accept</button>
 										</c:when>
+										<c:when test="${announcement.subject=='Request for data change'}">
+											<button type="Submit" class="btn pull-right btn-success"
+												style="margin-right: 15px; width: 80px"
+												formaction="acceptChangeRequest" value="${announcement.id}"
+												name="announcement">Accept</button>
+										</c:when>
 										<c:otherwise>
 											<button type="Submit" class="btn pull-right btn-success"
 												style="margin-right: 15px; width: 80px"

@@ -29,5 +29,8 @@ public interface SimpleEmployeeRepository extends
 	
 	@Query("select e from Employee e where e.id=(Select d.manager from Department d where d.id=:employeDepartment)")
 	public Employee findManagerFromEmployee(@Param("employeDepartment")int employeDepartment);
+	
+	@Query("select e from Employee e where e.department=(Select ie.department from Employee ie where ie.userName=:managerUserName)")
+	public List<Employee> findEmployeeFromManager(@Param("managerUserName") String userName);
 
 }

@@ -142,7 +142,7 @@ public class TimeRecordController {
 					emp.getFirstName(), emp.getLastName(),
 					Constant.parseDateToString(newRecord.getStartDate()),
 					Constant.parseDateToString(newRecord.getEndDate()));
-			Announcement announcement = new Announcement(Constant.ANNOUNCEMENT_VACATION,message,rec.getId(),manager);
+			Announcement announcement = new Announcement(Constant.ANNOUNCEMENT_VACATION,message,rec.getId(),manager.getId(),emp);
 			announcementDao.save(announcement);
 		}
 		return Constant.PAGE_INDEX;

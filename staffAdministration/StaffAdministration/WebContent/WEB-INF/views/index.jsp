@@ -5,6 +5,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -40,7 +41,7 @@
 			<div class="row-fluid" id="features">
 				<div class="col-md-4">
 
-					<a href="#">
+					<a href="showProfile">
 						<div class="panel panel-blue">
 							<div class="row">
 								<div class="col-xs-3">
@@ -170,7 +171,7 @@
 										<i class="fa fa-comments fa-5x"></i>
 									</div>
 									<div class="col-xs-9 text-right">
-										<font size="6">25</font>
+										<font size="6">${fn:length(announcementList)}</font>
 										<div>
 											<font size="3">Announcements</font>
 										</div>
@@ -327,7 +328,7 @@
 				</div>
 			</sec:authorize>
 			<!-- 	Line Chart -->
-			<script>
+			<!-- <script>
 				$(function() {
 					$('#lineChart').highcharts(
 							{
@@ -383,7 +384,7 @@
 				});
 			</script>
 
-			<!-- 						Pie Chart -->
+									Pie Chart
 			<script>
 				$(function() {
 
@@ -526,53 +527,51 @@
 			</script>
 
 		</div>
-	</div>
-	<!-- end features -->
+	</div> -->
+			<!-- end features -->
 
-	<!-- Modal News -->
-	<div class="modal fade" id="basicModal" role="dialog"
-		aria-labelledby="basicModal" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">New Entry</h4>
-				</div>
-				<div class="modal-body">
-					<form role="form" method="post" action="newNews">
-						<input type="hidden" name="${_csrf.parameterName}"
-							value="${_csrf.token }" />
-						<div class="form-group">
-							<label for="usr">Heading:</label> <input type="text"
-								class="form-control" id="inputTitle" name="title">
+			<!-- Modal News -->
+			<div class="modal fade" id="basicModal" role="dialog"
+				aria-labelledby="basicModal" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">New Entry</h4>
 						</div>
-						<div class="form-group">
-							<label for="comment">Content</label>
-							<textarea class="form-control" rows="5" id="inputMessage"
-								name="message"></textarea>
-						</div>
-						<!-- <div class="form-group">
+						<div class="modal-body">
+							<form role="form" method="post" action="newNews">
+								<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token }" />
+								<div class="form-group">
+									<label for="usr">Heading:</label> <input type="text"
+										class="form-control" id="inputTitle" name="title">
+								</div>
+								<div class="form-group">
+									<label for="comment">Content</label>
+									<textarea class="form-control" rows="5" id="inputMessage"
+										name="message"></textarea>
+								</div>
+								<!-- <div class="form-group">
 							<label for="usr">Link:</label> <input type="text"
 								class="form-control" id="usr">
 						</div> -->
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
-							<button type="submit" class="btn btn-primary">Save
-								changes</button>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-primary">Save
+										changes</button>
+								</div>
+							</form>
 						</div>
-					</form>
+					</div>
 				</div>
 			</div>
-		</div>
-	</div>
 
-	<!-- Footer -->
-	<%-- 	<jsp:include page="includes/template/footer.jsp" /> --%>
+			<!-- Footer -->
+			<%-- 	<jsp:include page="includes/template/footer.jsp" /> --%>
 
-	<jsp:include page="includes/bootstrapJs.jsp" />
-
-
+			<jsp:include page="includes/bootstrapJs.jsp" />
 </body>
 </html>

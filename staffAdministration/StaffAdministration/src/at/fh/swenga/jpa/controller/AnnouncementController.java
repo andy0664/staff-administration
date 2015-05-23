@@ -65,13 +65,20 @@ public class AnnouncementController {
 	@Transactional
 	@RequestMapping(value={"acceptVacation"})
 	public String acceptVacation(@RequestParam int announcement, Model model){
-		Announcement announce = announcementDao.getOne(announcement);
-		announce.setNotRead(0);
-		announcementDao.save(announce);
+		setRead(announcement);
 		return "forward:start";
 	}
 	
+	@Transactional
+	@RequestMapping(value={"acceptChangeRequest"})
+	public String acceptChangeRequest(@RequestParam int announcement, Model model){
+		setRead(announcement);
+		return "forward:start";
+	}
 	
-
-
+	private void setRead(int announcement){
+		Announcement announce = announcementDao.getOne(announcement);
+		announce.setNotRead(0);
+		announcementDao.save(announce);
+	}
 }
