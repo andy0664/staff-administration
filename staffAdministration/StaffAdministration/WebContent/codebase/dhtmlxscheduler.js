@@ -3369,9 +3369,21 @@ scheduler.init_templates=function(){
 		event_text:function(start,end,ev){
 			return ev.text;
 		},
+		/*
 		event_class:function(start,end,ev){
 			return "";
 		},
+		*/
+		event_class:function(start,end,ev){
+			try{
+			if (ev.department_visibility == false) return ""; //or return "normal_event";
+	           return "priority_event"; 
+			} catch (Exception) {
+				print("Error in scheduler.templates.event_class, dhtmlxscheduler.js Line 3379-3380")
+				return "";
+			}
+		},
+		
 		month_date_class:function(d){
 			return "";
 		},
@@ -3414,6 +3426,9 @@ scheduler.addEvent = function(start_date, end_date, text, id, extra_data) {
 		ev.end_date = end_date;
 		ev.text = text;
 		ev.id = id;
+		ev.user_id = user_id;
+		//ev.department = department;
+		//ev.department_visibility = department_visiblility;
 	}
 	ev.id = ev.id || scheduler.uid();
 	ev.text = ev.text || "";
@@ -3628,8 +3643,15 @@ scheduler._recalculate_timed = function(id){
 	if(!ev) return;
 	ev._timed = scheduler.isOneDayEvent(ev);
 };
+
+
 scheduler.attachEvent("onEventChanged", scheduler._recalculate_timed);
 scheduler.attachEvent("onEventAdded", scheduler._recalculate_timed);
+
+//scheduler.attachEvent("onAfterUpdate", function(sid, action, tid, tag) {
+//    var color = tag.getAttribute("color");    
+//});
+
 
 scheduler.render_data = function(evs, hold) {
 	evs = this._pre_render_events(evs, hold);
@@ -5520,6 +5542,9 @@ scheduler._dp_init=function(dp){
 		this.obj.setUserData(id, this.action_param, "true_deleted");
 		this.obj.deleteEvent(id);
 	});
+	//dp.attachEvent("onAfterUpdate", function(sid, action, tid, tag) {
+	//    var color = tag.getAttribute("color");
+	 //});
 		
 };
 

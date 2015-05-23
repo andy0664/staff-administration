@@ -244,7 +244,7 @@
 
 					<!-- Calendar -->
 
-					<a href="#">
+					<a href="calendar/showCalendarPersonal">
 						<div class="panel panel-yellow" style="height: 102px">
 							<div class="row">
 								<div class="col-xs-3">

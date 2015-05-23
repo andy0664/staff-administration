@@ -29,6 +29,15 @@ public class Constant {
 	public static final int ROLE_INT_MANAGER=2;
 	public static final int ROLE_INT_EMPLOYEE=1;
 	
+	//Calendar JSP file paths:
+	public static final String CALENDAR_ARTICLE_READ_ONLY = "/calendar/article_read_only";
+	public static final String CALENDAR_ARTICLE = "/calendar/article";
+	public static final String CALENDAR_CUSTOM_EDITOR = "/calendar/custom_editor";
+	public static final String CALENDAR_HEADER = "/calendar/header";
+	public static final String CALENDAR_MENU = "/calendar/menu";
+	public static final String CALENDAR_PRODUCTS = "/calendar/products";
+	
+	
 	//Status
 	public static final String STATUS_AVAILABLE="Available";
 	public static final String STATUS_BUSY="Busy";
