@@ -179,28 +179,8 @@
 	</div>
 	<!--  End of container -->
 
-
-
-
-
 	<!-- Footer -->
 	<%-- 	<jsp:include page="../includes/template/fixedFooter.jsp" /> --%>
 
-	<jsp:include page="../includes/bootstrapJs.jsp" />
-
-	<script type="text/javascript"
-		src="http://www.malot.fr/bootstrap-datetimepicker/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
-
-	<script>
-		$(function() {
-			$(".form_datetime").datetimepicker({
-				format : "dd.mm.yyyy",
-				autoclose : true,
-				todayBtn : true,
-				pickerPosition : "bottom-left",
-				minView : 2
-			});
-		});
-	</script>
 </body>
 </html>

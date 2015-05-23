@@ -14,10 +14,6 @@
 <title>Edit TimeRecord</title>
 <jsp:include page="../includes/bootstrapCss.jsp" />
 <jsp:include page="../includes/bootstrapJs.jsp" />
-<link
-	href="http://www.malot.fr/bootstrap-datetimepicker/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"
-	rel="stylesheet">
-
 </head>
 <body>
 
@@ -150,30 +146,8 @@
 	</div>
 	<!--  End of container -->
 
-
-	<!-- JS for Bootstrap -->
-	<%@include file="../includes/bootstrapJs.jsp"%>
-	<!-- JS for Bootstrap -->
-
 	<!-- Footer -->
 <%-- 	<jsp:include page="../includes/template/fixedFooter.jsp" /> --%>
 
-
-	<!-- JS for Datetime picker -->
-
-	<script type="text/javascript"
-		src="http://www.malot.fr/bootstrap-datetimepicker/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
-
-	<script>
-		$(function() {
-			$(".form_datetime").datetimepicker({
-				format : "dd.mm.yyyy",
-				autoclose : true,
-				todayBtn : true,
-				pickerPosition : "bottom-left",
-				minView : 2
-			});
-		});
-	</script>
 </body>
 </html>
