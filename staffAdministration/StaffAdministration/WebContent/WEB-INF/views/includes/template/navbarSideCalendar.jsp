@@ -6,7 +6,7 @@
 	<div class="sidebar-collapse">
 		<ul class="nav" id="main-menu">
 
-			<li><a class="" href="./"><i class="fa fa-dashboard"></i>
+			<li><a class="" href="../"><i class="fa fa-dashboard"></i>
 					Dashboard</a></li>
 
 			<li><a href="#"><i class="fa fa-user"></i> Personal Area<span
@@ -32,28 +32,27 @@
 				<ul class="nav nav-second-level collapse" aria-expanded="false"
 					style="">
 					<li><a href="#"><i class="fa fa-users"></i>All Employees</a></li>
-					<li><a href="manageEmployees"><i class="fa fa-sitemap"></i>Manage
+					<li><a href="../manageEmployees"><i class="fa fa-sitemap"></i>Manage
 							Employees</a></li>
-					<li><a href="manageDepartments"><i
+					<li><a href="../manageDepartments"><i
 							class="fa fa-university"></i>Manage Departments</a></li>
 				</ul></li>
 			<li><a href="#"><i class="fa fa-clock-o"></i> Time Records<span
 					class="fa arrow"></span></a>
 				<ul class="nav nav-second-level collapse" aria-expanded="false"
 					style="">
-					<li><a href="newTimeRecord"><i class="fa fa-clock-o"></i>New
+					<li><a href="../newTimeRecord"><i class="fa fa-clock-o"></i>New
 							Time Record</a></li>
-					<li><a href="showPersonalTimeRecords"><i
+					<li><a href="../showPersonalTimeRecords"><i
 							class="fa fa-area-chart"></i>My Time Records</a></li>
-					<li><a href="showAllTimeRecords"><i
+					<li><a href="../showAllTimeRecords"><i
 							class="fa fa-area-chart"></i>All Time Records</a></li>
 				</ul></li>
-			<sec:authorize access="hasAnyRole('Admin','MANAGER')">
 			<li data-toggle="modal" data-target="#announcementModal"><a
 				href="#"><i class="fa fa-comments"></i> Announcements<span
 					class="badge pull-right">${fn:length(announcementList)}</span></a></li>
-			</sec:authorize>
-			<li><a href="calendar/showCalendarPersonal"><i class="fa fa-calendar"></i> Calendar</a></li>
+			<li><a href="/StaffAdministration/calendar/showCalendarPersonal"><i class="fa fa-calendar"></i> Personal Calendar</a></li>
+			<li><a href="/StaffAdministration/calendar/showCalendarDepartment"><i class="fa fa-calendar"></i> Department Calendar</a></li>
 		</ul>
 	</div>
 </nav>
