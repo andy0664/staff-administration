@@ -37,9 +37,9 @@
 			</c:if>
 			<!-- end featuresHeading -->
 
-			<div class="row-fluid" id="features">			
+			<div class="row-fluid" id="features">
 				<div class="col-md-4">
-			
+
 					<a href="#">
 						<div class="panel panel-blue">
 							<div class="row">
@@ -57,23 +57,7 @@
 							data-target="#collapseExample">
 							<div class="row">
 								<div class="col-xs-3">
-
-										<c:choose>
-											<c:when test="${employee.status=='Available'}">
-													<i class="fa fa-info-circle fa-5x"></i>
-											</c:when>
-											<c:when test="${employee.status=='Busy'}">
-													<i class="fa fa-info-circle fa-5x"></i>
-											</c:when>
-											<c:when test="${employee.status=='Not available'}">
-													<i class="fa fa-info-circle fa-5x"></i>
-											</c:when>
-										</c:choose>
-
-
-
-
-
+									<i class="fa fa-info-circle fa-5x"></i>
 								</div>
 								<div class="col-xs-9 text-right">
 									<font size="5">Set Status</font>
@@ -586,7 +570,7 @@
 
 	<!-- Footer -->
 	<%-- 	<jsp:include page="includes/template/footer.jsp" /> --%>
-	
+
 	<jsp:include page="includes/bootstrapJs.jsp" />
 
 
