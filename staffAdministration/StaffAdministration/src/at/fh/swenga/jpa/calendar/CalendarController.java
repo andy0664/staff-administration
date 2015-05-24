@@ -65,7 +65,7 @@ public class CalendarController {
 	//DateFormat dateFormat = new SimpleDateFormat("yyyy,mm,dd");
 	private Calendar cal = Calendar.getInstance();
 	private Date today = cal.getTime();
-	private String testUser;
+	//private String testUser;
 	private String calendarNote = "\n\nIn the grid view, you can sort events by clicking on the text field or a date field on the top of the view. \n" + 
 	"By clicking on the Adobe Acrobat logo, you can export your calendar view as PDF document. ";
     
@@ -90,10 +90,11 @@ public class CalendarController {
 	
 	@RequestMapping("calendar/showCalendarReadOnly")
 	public ModelAndView calendarReadOnly(HttpServletRequest request) throws Exception {
-		testUser = request.getParameter("username");
+		String testUser = request.getParameter("username");
     	if (testUser == null || testUser == "null") {
     		testUser = "admin";
     	}
+    	//request.setAttribute("username", testUser);
     	System.out.println("testUser: " + testUser);
     	String name = employeeDao.findEmployeeByUserName(testUser).getFirstName();
     	String surname = employeeDao.findEmployeeByUserName(testUser).getLastName();
@@ -120,8 +121,8 @@ public class CalendarController {
     	
     	//s.load("events_read_only", DHXDataFormat.JSON);
     	//s.data.dataprocessor.setURL("events_read_only");
-    	s.load("events_read_only", DHXDataFormat.JSON);
-    	s.data.dataprocessor.setURL("events_read_only");
+    	s.load("events_read_only?username=" + testUser, DHXDataFormat.JSON);
+    	s.data.dataprocessor.setURL("events_read_only?username=" + testUser);
     	
     	
     	//s.views.add(new DHXAgendaView());
@@ -343,7 +344,7 @@ public class CalendarController {
     	mnv.addObject("sample_name", "Personal Events");
     	mnv.addObject("sample_dsc", "In this page you can view, add, edit and delete personal events. Those events will be stored for later use." + calendarNote);
 		mnv.addObject("body", s.render());
-		mnv.addObject("username", testUser);
+		//mnv.addObject("username", testUser);
         return mnv;
     }
 
@@ -419,16 +420,25 @@ public class CalendarController {
     
     @RequestMapping("/calendar/events_read_only")
     @ResponseBody public String eventsReadOnly(HttpServletRequest request) {
+    	//if this function throws an error, a anonym user, that is not logged in is trying to access the webpage, since that page is not secured by spring security.
+    	try {
+    		User currentUser = getCurrentUser(request);
+    	} catch (Exception e) {
+    		//if there is no one logged in, return nothing, so for anonymous viewers of the site, nothing will get displayed if they are not logged in. 
+    		return "";
+    	}
     	System.out.println("events_read_only called");
     	System.out.println("events_read_only_request_parameter username:   " + request.getParameter("username")); //requestParameter username not available anymore in the next request. 
     	//the following code is not working here, because a set requestParameter is only retrievable at the direct server side machine. if this server sends a new request to another
     	//computer, the parameter is lost. so we write the user parameter for the read only view in a document global variable - testUser
-    	/*
-    	testUser = request.getParameter("username");
-    	if (testUser == null || testUser == "null") {
+    	
+    	String testUser = request.getParameter("username");
+    	if (testUser == null) {
+    		//view admin calendar by default if there is something wrong. 
     		testUser = "admin";
     	}
-    	*/
+    	
+    	//String testUser = (String) request.getAttribute("username"); //Returns an object, therefore we have to convert it to a String
     	System.out.println("testUser_events_read_only: " + testUser);
     	
     	CustomEventsManagerV2 evs = new CustomEventsManagerV2(request, testUser);
