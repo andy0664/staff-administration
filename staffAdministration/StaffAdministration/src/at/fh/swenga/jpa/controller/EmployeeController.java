@@ -158,7 +158,7 @@ public class EmployeeController {
 			}
 			Announcement announcement = new Announcement(
 					Constant.ANNOUNCEMENT_BIRTHDAY, message, announcementDay,
-					employeeDao.findManagerFromEmployee(department).getId(), emp);
+					employeeDao.findManagerFromEmployee(department), emp);
 			announcementDao.save(announcement);
 
 		}
@@ -205,7 +205,7 @@ public class EmployeeController {
 				emp.getLastName(), changeRequest);
 		Announcement annouce = new Announcement(
 				Constant.ANNOUNCEMENT_CHANGE_REQUEST, message,
-				Constant.ANNOUNCEMENT_NOT_READ, manager.getId(), emp);
+				Constant.ANNOUNCEMENT_NOT_READ, manager, emp);
 		announcementDao.save(annouce);
 		return "forward:start";
 	}

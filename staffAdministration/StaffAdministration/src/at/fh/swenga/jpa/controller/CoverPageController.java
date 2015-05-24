@@ -147,7 +147,7 @@ public class CoverPageController {
 					Constant.KEY_ANNOUNCEMENT_LIST,
 					announcementDao
 							.findAnnouncementByManagerAndEnabledTrueAndNotReadGreaterThanOrDayIs(
-									emp.getId(), 0, new Date()));
+									emp, 0, new Date()));
 		}
 		return Constant.PAGE_INDEX;
 	}

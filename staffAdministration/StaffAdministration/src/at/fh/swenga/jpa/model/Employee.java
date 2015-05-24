@@ -80,8 +80,8 @@ public class Employee implements Serializable {
 	@OneToMany(mappedBy="employee", cascade=CascadeType.REMOVE)
 	private Set<TimeRecord> timeRecords;
 	
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "manager")
-//	private Set<Announcement> announcementsManager;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "manager")
+	private Set<Announcement> announcementsManager;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "employee", cascade=CascadeType.ALL)
 	private Set<Announcement> announcementsEmployee;
@@ -321,20 +321,20 @@ public class Employee implements Serializable {
 		announcementsEmployee.add(announcement);
 	}
 	
-//	public Set<Announcement> getAnnouncmentsManager() {
-//		return announcementsManager;
-//	}
-//
-//	public void setAnnouncmentsManager(Set<Announcement> announcments) {
-//		this.announcementsManager = announcments;
-//	}
-//	
-//	public void addAnnouncementManager(Announcement announcement){
-//		if(announcementsManager==null){
-//			announcementsManager = new HashSet<Announcement>();
-//		}
-//		announcementsManager.add(announcement);
-//	}
+	public Set<Announcement> getAnnouncmentsManager() {
+		return announcementsManager;
+	}
+
+	public void setAnnouncmentsManager(Set<Announcement> announcments) {
+		this.announcementsManager = announcments;
+	}
+	
+	public void addAnnouncementManager(Announcement announcement){
+		if(announcementsManager==null){
+			announcementsManager = new HashSet<Announcement>();
+		}
+		announcementsManager.add(announcement);
+	}
 
 	public void updateEmployee(EmployeeDTO emp){
 		this.ssn=emp.getSsn();

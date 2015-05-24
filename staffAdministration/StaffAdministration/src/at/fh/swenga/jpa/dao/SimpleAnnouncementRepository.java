@@ -15,7 +15,7 @@ public interface SimpleAnnouncementRepository extends
 		JpaRepository<Announcement, Integer> {
 
 	public List<Announcement> findAnnouncementByManagerAndEnabledTrueAndNotReadGreaterThanOrDayIs(
-			int manager, int notRead, Date day);
+			Employee manager, int notRead, Date day);
 	
 	
 	@Modifying

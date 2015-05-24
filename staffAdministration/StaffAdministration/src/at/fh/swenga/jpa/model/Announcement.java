@@ -27,9 +27,9 @@ public class Announcement {
 	@Temporal(TemporalType.DATE)
 	private Date day;
 
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "managerId", nullable = false)
-	private int manager;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "managerId", nullable = false)
+	private Employee manager;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employeeId", nullable = false)
@@ -45,7 +45,7 @@ public class Announcement {
 
 	// Constructor for every year Announcments
 	public Announcement(String subject, String message, int notRead,
-			int manager, Employee employee) {
+			Employee manager, Employee employee) {
 		this.subject = subject;
 		this.message = message;
 		this.notRead = notRead;
@@ -55,7 +55,7 @@ public class Announcement {
 
 	// Constructor for only once Announcments
 	public Announcement(String subject, String message, Date date,
-			int manager, Employee employee) {
+			Employee manager, Employee employee) {
 		this.subject = subject;
 		this.message = message;
 		this.day = date;
@@ -87,11 +87,11 @@ public class Announcement {
 		this.notRead = notRead;
 	}
 
-	public int getManager() {
+	public Employee getManager() {
 		return manager;
 	}
 
-	public void setManager(int manager) {
+	public void setManager(Employee manager) {
 		this.manager = manager;
 	}
 
