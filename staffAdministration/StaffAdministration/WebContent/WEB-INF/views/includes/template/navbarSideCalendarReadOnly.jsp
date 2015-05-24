@@ -51,7 +51,8 @@
 			<li data-toggle="modal" data-target="#announcementModal"><a
 				href="#"><i class="fa fa-comments"></i> Announcements<span
 					class="badge pull-right">${fn:length(announcementList)}</span></a></li>
-			<li><a href="./showCalendarPersonal"><i class="fa fa-calendar"></i>Calendar</a></li>
+			<li><a href="./showCalendarPersonal"><i class="fa fa-calendar"></i>Personal Calendar</a></li>
+			<li><a href=""><i class="fa fa-calendar"></i>Calendar of Employee</a></li>
 		</ul>
 	</div>
 </nav>
