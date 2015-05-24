@@ -1,4 +1,5 @@
 <%@ include file="header_read_only.jsp" %>
+	<%@ include file="menu_read_only.jsp" %>
 	<div class="content" id="content">
 		<div class="sample">
 			<div class="name">${sample_name}</div>
