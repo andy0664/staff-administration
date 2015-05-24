@@ -52,6 +52,7 @@ import com.dhtmlx.planner.extensions.DHXExtension;
 public class CalendarController {
 	
 	
+	
 	@Autowired
 	private SimpleEmployeeRepository employeeDao;
 	
@@ -60,7 +61,7 @@ public class CalendarController {
 		binder.registerCustomEditor(Date.class, new DateTimeEditor());
 	}
 	
-	
+
 	//DateFormat dateFormat = new SimpleDateFormat("yyyy,mm,dd");
 	private Calendar cal = Calendar.getInstance();
 	private Date today = cal.getTime();
@@ -350,7 +351,13 @@ public class CalendarController {
     
     @RequestMapping("/calendar/department_events")
     @ResponseBody public String departmentEvents(HttpServletRequest request) {
-    	User currentUser = getCurrentUser(request);
+    	User currentUser;
+    	//if this function throws an error, a anonym user, that is not logged in is trying to access the webpage, since that page is not secured by spring security. 
+    	try {
+    		currentUser = getCurrentUser(request);
+    	} catch (Exception e) {
+    		return "";
+    	}
     	
     	Employee currentEmployee = employeeDao.findEmployeeByUserName(currentUser.getUsername());
     	//Employee currentEmployee = (Employee) employeeDao.findEmployeeByUserName(currentUser.getUsername());
@@ -382,7 +389,13 @@ public class CalendarController {
     
     @RequestMapping("/calendar/calendar_events")
     @ResponseBody public String calendarEvents(HttpServletRequest request) {
-    	User currentUser = getCurrentUser(request);
+    	User currentUser;
+    	//if this function throws an error, a anonym user, that is not logged in is trying to access the webpage, since that page is not secured by spring security.
+    	try {
+    		currentUser = getCurrentUser(request);
+    	} catch (Exception e) {
+    		return "";
+    	}
     	
     	Employee currentEmployee = employeeDao.findEmployeeByUserName(currentUser.getUsername());
     	//Employee currentEmployee = (Employee) employeeDao.findEmployeeByUserName(currentUser.getUsername());

@@ -9,7 +9,7 @@
     <http pattern="/calendar/calendar_events" security="none"/>
     <http pattern="/calendar/department_events" security="none"/>
 	<http>
-		<csrf />
+		<csrf /> 
 		<intercept-url pattern="/login" access="permitAll" />
 		<intercept-url pattern="/addEmployee" access="hasRole('ADMIN')"/>
 		<intercept-url pattern="/deleteEmployee" access="hasRole('ADMIN')"/>
