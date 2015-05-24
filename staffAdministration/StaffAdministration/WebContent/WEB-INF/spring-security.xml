@@ -4,9 +4,12 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
-    <http pattern="/calendar/**" security="none"/>
+    <!-- <http pattern="/calendar/**" security="none"/>  -->
+    <http pattern="/calendar/events_read_only" security="none"/>
+    <http pattern="/calendar/calendar_events" security="none"/>
+    <http pattern="/calendar/department_events" security="none"/>
 	<http>
-		<csrf />
+		<csrf /> 
 		<intercept-url pattern="/login" access="permitAll" />
 		<intercept-url pattern="/addEmployee" access="hasRole('ADMIN')"/>
 		<intercept-url pattern="/deleteEmployee" access="hasRole('ADMIN')"/>

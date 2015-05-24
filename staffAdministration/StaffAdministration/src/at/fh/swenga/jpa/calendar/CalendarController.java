@@ -52,6 +52,7 @@ import com.dhtmlx.planner.extensions.DHXExtension;
 public class CalendarController {
 	
 	
+	
 	@Autowired
 	private SimpleEmployeeRepository employeeDao;
 	
@@ -60,14 +61,12 @@ public class CalendarController {
 		binder.registerCustomEditor(Date.class, new DateTimeEditor());
 	}
 	
-	
+
 	//DateFormat dateFormat = new SimpleDateFormat("yyyy,mm,dd");
 	private Calendar cal = Calendar.getInstance();
 	private Date today = cal.getTime();
-	private static String departmentWideEvents = "Adding events for the department";
-	private static String privateEvents = "Adding personal events";
-	private String testUser = "admin";
-	private String calendarNote = "\n\nIn the grid view, you can sort events by clicking on the text field or a date field on the top of the view\n" + 
+	private String testUser;
+	private String calendarNote = "\n\nIn the grid view, you can sort events by clicking on the text field or a date field on the top of the view. \n" + 
 	"By clicking on the Adobe Acrobat logo, you can export your calendar view as PDF document. ";
     
     private User getCurrentUser(HttpServletRequest request){
@@ -95,6 +94,10 @@ public class CalendarController {
     	if (testUser == null || testUser == "null") {
     		testUser = "admin";
     	}
+    	System.out.println("testUser: " + testUser);
+    	String name = employeeDao.findEmployeeByUserName(testUser).getFirstName();
+    	String surname = employeeDao.findEmployeeByUserName(testUser).getLastName();
+    	
     	DHXPlanner s = new DHXPlanner("../codebase/", DHXSkin.TERRACE);
     	//s.setInitialDate(2013, 1, 7);
     	
@@ -149,7 +152,7 @@ public class CalendarController {
     	//ModelAndView mnv = new ModelAndView(Constant.CALENDAR_ARTICLE);
     	ModelAndView mnv = new ModelAndView(Constant.CALENDAR_ARTICLE_READ_ONLY);
     	mnv.addObject("title", "Protected Calendar View");
-    	mnv.addObject("sample_name", "Calendar of " + testUser);
+    	mnv.addObject("sample_name", "Calendar of " + name + " " + surname);
     	mnv.addObject("sample_dsc", "This page lets you view all personal events of a selected employee. This view is read only, so no changes can be made. ");
     	//following line renders the Calendar/Planner object
 		mnv.addObject("body", s.render());
@@ -192,15 +195,7 @@ public class CalendarController {
     	//	return planner.date.date_to_str(planner.config.hour_date);
     	//};
     	s.lightbox.get("description").setHeight(30);
-    	
-    	
-    	//DHXAgendaView viewAgenda = new DHXAgendaView();
-    	//s.views.getView(3).setTabPosition(50);
-    	//viewAgenda.setTabWidth(42);
-    	//s.views.add(new DHXAgendaView());
-    	//s.views.add(viewAgenda);
-    	//s.setInitialView("agenda");
-    	//s.setInitialView("agenda");
+  
     	
     	
     	//TO DO: if WeekAgendaView isnt appropriate, uncomment the following line again. 
@@ -221,10 +216,7 @@ public class CalendarController {
     	//agenda.setEndDate(cal.YEAR+1, cal.MONTH+1, cal.DAY_OF_MONTH);
     	//s.views.add(agenda);
     	
-    	//s.calendars.attachMiniCalendar();
-    	//s.lightbox.add(new DHXLightboxMiniCalendar("cal", "Time period"));
 
-    	
     	
     	DHXGridView view = new DHXGridView();
     	view.setTabWidth(30);
@@ -244,6 +236,8 @@ public class CalendarController {
     	view.setFrom(cal.YEAR, cal.MONTH+1, cal.DAY_OF_MONTH);
     	s.views.add(view);
     	
+    	//following line would attach the miniCalendar to the HDXPlanner, but I could not figure out how to adjust the planner position
+    	//by default, this position would be next to the month view, on the same spot as the week agenda view, since it would overlap, I have not implemented it yet. 
     	//s.calendars.attachMiniCalendar();
     	s.lightbox.add(new DHXLightboxMiniCalendar("cal", "Time period"));
     	
@@ -280,9 +274,7 @@ public class CalendarController {
     	//TO DO:
     	//Now, the standard event_class was edited in the dhtmlxscheduler.js: events are either blue or red, depends on whether the department_visibility of the event is true or false
     	
-    	
-    	//s.load("calendar_events", DHXDataFormat.JSON);
-    	//s.data.dataprocessor.setURL("calendar_events");
+    
     	s.load("calendar_events", DHXDataFormat.JSON);
     	s.data.dataprocessor.setURL("calendar_events");
     	s.config.setDetailsOnCreate(true);
@@ -359,7 +351,13 @@ public class CalendarController {
     
     @RequestMapping("/calendar/department_events")
     @ResponseBody public String departmentEvents(HttpServletRequest request) {
-    	User currentUser = getCurrentUser(request);
+    	User currentUser;
+    	//if this function throws an error, a anonym user, that is not logged in is trying to access the webpage, since that page is not secured by spring security. 
+    	try {
+    		currentUser = getCurrentUser(request);
+    	} catch (Exception e) {
+    		return "";
+    	}
     	
     	Employee currentEmployee = employeeDao.findEmployeeByUserName(currentUser.getUsername());
     	//Employee currentEmployee = (Employee) employeeDao.findEmployeeByUserName(currentUser.getUsername());
@@ -374,15 +372,14 @@ public class CalendarController {
     	
     	//String currentDepartment = "default department";
     	boolean managerRole = hasRole(currentUser, Constant.ROLE_MANAGER);
-    	boolean setDepartmentEvents = false;;
-    	if (managerRole){
-	    	setDepartmentEvents  = true;
-    	}
+    	//if the managerRole == true, the user creates department wide events in that view
+    	//boolean setDepartmentEvents = false;
+    	//if (managerRole) {	setDepartmentEvents  = true;}
     	System.out.println("department: ----  " + currentDepartment);
     	System.out.println("hasManagerRole: ----  " + managerRole);
-    	System.out.println("createPublicDepartmentEvent: ----  " + setDepartmentEvents);
+    	System.out.println("createPublicDepartmentEvent: ----  " + managerRole);
     	//CustomEventsManagerV2 evs = new CustomEventsManagerV2(request);
-    	CustomDepartmentWideEventsManager evs = new CustomDepartmentWideEventsManager(request, setDepartmentEvents, currentDepartment);
+    	CustomDepartmentWideEventsManager evs = new CustomDepartmentWideEventsManager(request, managerRole, currentDepartment);
     	//following line handles the security - must be logged in as user to perform database changes?
     	evs.security.can(DHXStatus.UPDATE);
     	evs.security.can(DHXStatus.INSERT);
@@ -392,7 +389,13 @@ public class CalendarController {
     
     @RequestMapping("/calendar/calendar_events")
     @ResponseBody public String calendarEvents(HttpServletRequest request) {
-    	User currentUser = getCurrentUser(request);
+    	User currentUser;
+    	//if this function throws an error, a anonym user, that is not logged in is trying to access the webpage, since that page is not secured by spring security.
+    	try {
+    		currentUser = getCurrentUser(request);
+    	} catch (Exception e) {
+    		return "";
+    	}
     	
     	Employee currentEmployee = employeeDao.findEmployeeByUserName(currentUser.getUsername());
     	//Employee currentEmployee = (Employee) employeeDao.findEmployeeByUserName(currentUser.getUsername());
@@ -417,11 +420,17 @@ public class CalendarController {
     @RequestMapping("/calendar/events_read_only")
     @ResponseBody public String eventsReadOnly(HttpServletRequest request) {
     	System.out.println("events_read_only called");
-    	System.out.println("parameter username:   " + request.getParameter("username"));
+    	System.out.println("events_read_only_request_parameter username:   " + request.getParameter("username")); //requestParameter username not available anymore in the next request. 
+    	//the following code is not working here, because a set requestParameter is only retrievable at the direct server side machine. if this server sends a new request to another
+    	//computer, the parameter is lost. so we write the user parameter for the read only view in a document global variable - testUser
+    	/*
     	testUser = request.getParameter("username");
     	if (testUser == null || testUser == "null") {
     		testUser = "admin";
     	}
+    	*/
+    	System.out.println("testUser_events_read_only: " + testUser);
+    	
     	CustomEventsManagerV2 evs = new CustomEventsManagerV2(request, testUser);
     	//following line handles the security - must be logged in as user to perform database changes?
     	evs.security.deny(DHXStatus.UPDATE);
