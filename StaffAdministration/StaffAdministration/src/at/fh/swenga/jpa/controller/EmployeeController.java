@@ -2,6 +2,7 @@ package at.fh.swenga.jpa.controller;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -183,7 +184,9 @@ public class EmployeeController {
 			saveEmployee(emp, department, "");
 		} else {
 			emp.setUserRole(new HashSet<UserRole>());
-			userRoleRepository.delete(userRoleRepository.findByEmployee(emp));
+			emp.setRole(newEmployee.getRole());
+			List<UserRole> list = userRoleRepository.findByEmployee(emp);
+			userRoleRepository.delete(list);
 			// userRoleRepository.removeByUsername(emp.getId());
 			saveEmployee(emp, department, emp.getRole());
 		}
