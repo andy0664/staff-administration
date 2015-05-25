@@ -17,6 +17,7 @@ public class Constant {
 	public static final String PAGE_LOGIN = "login";
 	public static final String PAGE_LIST_EMPLYEES = "/pages/listEmployees";
 	public static final String PAGE_PROFILE = "pages/profile";
+	public static final String PAGE_NEW_PASSWORD="pages/newPassword";
 	
 	
 	//Export

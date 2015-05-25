@@ -167,13 +167,14 @@
 									</div>
 								</div>
 
+
 								<! ---------------  Department ---------------- -->
 								<div class="form-group">
 									<label for="inputDepartment" class="col-md-2 control-label">Department</label>
 									<div class="col-md-5">
 										<select class="form-control" name="department">
 											<option value="-1" selected="selected">No Department</option>
-											<c:forEach items="${departmentList }" var="department">
+											<c:forEach items="${departmentList }" var="department" >
 												<c:choose>
 													<c:when test="${employee.department.name==department.name}">
 														<option value="${department.id}" selected="selected">${department.name}</option>
@@ -187,52 +188,53 @@
 										</select>
 									</div>
 								</div>
-
-								<! ----------------  User Name ---------------- -->
-								<div class="form-group">
-									<label for="inputUserName" class="col-md-2 control-label">Username</label>
-									<div class="col-md-5">
-										<input class="form-control" id="inputUserName" type="text"
-											name="userName" value="<c:out value="${employee.userName}"/>"
-											required>
+								<sec:authorize access="hasRole('ADMIN')">
+									<! ----------------  User Name ---------------- -->
+									<div class="form-group">
+										<label for="inputUserName" class="col-md-2 control-label">Username</label>
+										<div class="col-md-5">
+											<input class="form-control" id="inputUserName" type="text"
+												name="userName"
+												value="<c:out value="${employee.userName}"/>" required>
+										</div>
 									</div>
-								</div>
 
-								<! ----------------  Password ---------------- -->
-								<div class="form-group">
-									<label for="inputPassword" class="col-md-2 control-label">Password</label>
-									<div class="col-md-5">
-										<input type="password" class="form-control" id="inputPassword" type="text"
-											name="password"  value="" required>
+									<! ----------------  Password ---------------- -->
+									<div class="form-group">
+										<label for="inputPassword" class="col-md-2 control-label">Password</label>
+										<div class="col-md-5">
+											<input type="password" class="form-control"
+												id="inputPassword" type="text" name="password"
+												value="<c:out value="${employee.password}"/>" required>
+										</div>
 									</div>
-								</div>
 
-								<! ---------------  Role ---------------- -->
-								<div class="form-group">
-									<label for="inputRole" class="col-md-2 control-label">Role</label>
-									<div class="col-md-5">
-										<select class="form-control" name="role">
-											<c:choose>
-												<c:when test="${employee.role=='ROLE_ADMIN'}">
-													<option value="ROLE_ADMIN" selected="selected">Administrator</option>
-													<option value="ROLE_MANAGER">Manager</option>
-													<option value="ROLE_EMPLOYEE">Employee</option>
-												</c:when>
-												<c:when test="${employee.role=='ROLE_MANAGER'}">
-													<option value="ROLE_ADMIN">Administrator</option>
-													<option value="ROLE_MANAGER" selected="selected">Manager</option>
-													<option value="ROLE_EMPLOYEE">Employee</option>
-												</c:when>
-												<c:otherwise>
-													<option value="ROLE_ADMIN">Administrator</option>
-													<option value="ROLE_MANAGER">Manager</option>
-													<option value="ROLE_EMPLOYEE" selected="selected">Employee</option>
-												</c:otherwise>
-											</c:choose>
-										</select>
+									<! ---------------  Role ---------------- -->
+									<div class="form-group">
+										<label for="inputRole" class="col-md-2 control-label">Role</label>
+										<div class="col-md-5">
+											<select class="form-control" name="role">
+												<c:choose>
+													<c:when test="${employee.role=='ROLE_ADMIN'}">
+														<option value="ROLE_ADMIN" selected="selected">Administrator</option>
+														<option value="ROLE_MANAGER">Manager</option>
+														<option value="ROLE_EMPLOYEE">Employee</option>
+													</c:when>
+													<c:when test="${employee.role=='ROLE_MANAGER'}">
+														<option value="ROLE_ADMIN">Administrator</option>
+														<option value="ROLE_MANAGER" selected="selected">Manager</option>
+														<option value="ROLE_EMPLOYEE">Employee</option>
+													</c:when>
+													<c:otherwise>
+														<option value="ROLE_ADMIN">Administrator</option>
+														<option value="ROLE_MANAGER">Manager</option>
+														<option value="ROLE_EMPLOYEE" selected="selected">Employee</option>
+													</c:otherwise>
+												</c:choose>
+											</select>
+										</div>
 									</div>
-								</div>
-
+								</sec:authorize>
 								<! ----------------  buttons ---------------- -->
 								<div class="form-group">
 									<div class="col-md-10 col-md-offset-2">

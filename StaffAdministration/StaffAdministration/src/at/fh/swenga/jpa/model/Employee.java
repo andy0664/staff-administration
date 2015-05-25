@@ -346,10 +346,12 @@ public class Employee implements Serializable {
 		this.dayOfEntry=emp.getDayOfEntry();
 		this.salary=emp.getSalary();
 //		this.role=emp.getRole();
-		this.userName=emp.getUserName();
-		if(!"".equals(emp.getPassword())){
-			this.password=emp.getPassword();
+		if(emp.getUserName()!=null){
+			this.userName=emp.getUserName();
 		}
+//		if(!"".equals(emp.getPassword())){
+//			this.password=emp.getPassword();
+//		}
 	}
 
 	@Override

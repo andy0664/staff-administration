@@ -179,8 +179,10 @@ public class EmployeeController {
 		Employee emp = employeeDao.findEmployeeById(id);
 		newEmployee.setAddress(newAddress);
 		emp.updateEmployee(newEmployee);
-		emp.setPassword(encoder.encode(newEmployee.getPassword()));
-		if (emp.getRole().equals(newEmployee.getRole())) {
+		if(newEmployee.getPassword()!=null && !emp.getPassword().equals(newEmployee.getPassword())){
+			emp.setPassword(encoder.encode(newEmployee.getPassword()));
+		}
+		if (newEmployee.getRole()==null || emp.getRole().equals(newEmployee.getRole())) {
 			saveEmployee(emp, department, "");
 		} else {
 			emp.setUserRole(new HashSet<UserRole>());
