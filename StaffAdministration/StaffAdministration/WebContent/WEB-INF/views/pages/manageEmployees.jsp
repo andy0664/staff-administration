@@ -112,15 +112,19 @@
 													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 													Edit
 												</button>
-										<sec:authorize access="hasRole('ADMIN')">
-										</a> <a href="deleteEmployee?id=${employee.id}">
-												<button type="button" class="btn btn-xs btn-danger">
-													<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-													Delete
+										</a> <a href="ExportEmployeePdf?id=${employee.id}">
+												<button type="button" class="btn btn-xs btn-success">
+													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+													PDF
 												</button>
-										</a>
-										</sec:authorize>
-										</td>
+										</a> <sec:authorize access="hasRole('ADMIN')">
+												<a href="deleteEmployee?id=${employee.id}">
+													<button type="button" class="btn btn-xs btn-danger">
+														<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+														Delete
+													</button>
+												</a>
+											</sec:authorize></td>
 									</tr>
 								</c:forEach>
 								<!--  list all employees ----------------------------------------------------------- -->

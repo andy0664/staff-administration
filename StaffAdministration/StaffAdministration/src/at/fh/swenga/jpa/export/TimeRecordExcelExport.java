@@ -36,9 +36,8 @@ public class TimeRecordExcelExport extends AbstractExcelView {
 		CellStyle nameStyle = workbook.createCellStyle();
 		CellStyle headerStyle = workbook.createCellStyle();
 		CellStyle recordStyle = workbook.createCellStyle();
-		Font font = workbook.createFont();
-		font.setFontName(HSSFFont.FONT_ARIAL);
-		titleStyle.setFont(formatFont(font,(short)50,true));
+		
+		titleStyle.setFont(formatFont(workbook,(short)25,true));
 		HSSFRow titleRow = sheet.createRow(0);
 		HSSFCell cell = titleRow.createCell(0);
 		cell.setCellStyle(titleStyle);
@@ -50,13 +49,13 @@ public class TimeRecordExcelExport extends AbstractExcelView {
 		while(iter.hasNext()){
 			
 			//Name Cell
-			nameStyle.setFont(formatFont(font,(short)30,true));
+			nameStyle.setFont(formatFont(workbook,(short)15,true));
 			HSSFRow nameRow = sheet.createRow(rowCount++);
 			Employee emp = iter.next();
 			createStyledCell(nameStyle,nameRow,0,sheet).setCellValue(emp.getFirstName()+emp.getLastName());
 			
 			//Header Cells
-			headerStyle.setFont(formatFont(font,(short)20,true));
+			headerStyle.setFont(formatFont(workbook,(short)12,true));
 			HSSFRow header = sheet.createRow(rowCount++);
 			createStyledCell(headerStyle,header,0,sheet).setCellValue("Date from");
 			createStyledCell(headerStyle,header,1,sheet).setCellValue("Date to");
@@ -64,7 +63,7 @@ public class TimeRecordExcelExport extends AbstractExcelView {
 			createStyledCell(headerStyle,header,3,sheet).setCellValue("Time to");
 			createStyledCell(headerStyle,header,4,sheet).setCellValue("Reason");
 			
-			recordStyle.setFont(formatFont(font,(short)12,false));
+			recordStyle.setFont(formatFont(workbook,(short)10,false));
 			
 			//Formt Timerecord Cells
 			for(TimeRecord record:iter.getValue()){
@@ -77,11 +76,20 @@ public class TimeRecordExcelExport extends AbstractExcelView {
 			}
 		}
 		// header.createCell(3).setCellValue("Lastname");
+		//To autoSize each Column
+		for(int i=0;i<5;i++){
+			sheet.autoSizeColumn(i);
+		}
+		
 
 	}
 	
-	private Font formatFont(Font font, short size, boolean bold){
-		font.setBold(bold);
+	private Font formatFont(HSSFWorkbook workbook, short size, boolean bold){
+		Font font = workbook.createFont();
+		font.setFontName(HSSFFont.FONT_ARIAL);
+		if(bold){
+			font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+		}
 		font.setFontHeightInPoints(size);
 		return font;
 	}
@@ -89,7 +97,6 @@ public class TimeRecordExcelExport extends AbstractExcelView {
 	private HSSFCell createStyledCell(CellStyle style, HSSFRow row,int count,HSSFSheet sheet){
 		HSSFCell cell = row.createCell(count);
 		cell.setCellStyle(style);
-		sheet.autoSizeColumn(count);
 		return cell;
 	}
 	

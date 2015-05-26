@@ -111,7 +111,7 @@ public class EmployeeController {
 		return "forward:manageEmployees";
 	}
 
-	// Zum füllen der Mitarbeiter Tabelle nur zum testen --> ende entfernen
+	// Zum fÃ¼llen der Mitarbeiter Tabelle nur zum testen --> ende entfernen
 	@RequestMapping("fillEmployee")
 	@Transactional
 	public String fillData(Model model) {
@@ -129,6 +129,12 @@ public class EmployeeController {
 			employeeDao.save(p1);
 		}
 		return Constant.REDIRECT_MANAGE_EMPLOYEES;
+	}
+	
+	@RequestMapping(value={"ExportEmployeePdf"})
+	public String exportEmployeePdf(int id, Model model){
+		model.addAttribute(Constant.KEY_EMPLOYEE, employeeDao.findEmployeeById(id));
+		return Constant.CLASS_EXPORT_EMPLOYEE_PDF;
 	}
 
 	/*

@@ -22,6 +22,7 @@ public class Constant {
 	
 	//Export
 	public static final String CLASS_EXPORT_TIME_RECORD="timeRecordExcelExport";
+	public static final String CLASS_EXPORT_EMPLOYEE_PDF="EmployeePdfExport";
 	
 	//Roles
 	public static final String ROLE_ADMINISTRATOR="ROLE_ADMIN";

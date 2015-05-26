@@ -4,6 +4,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 	
-	<b:bean id="timeRecordExcelExport" class="at.fh.swenga.jpa.export.TimeRecordExcelExport">
-	</b:bean>
+	<b:bean id="timeRecordExcelExport" class="at.fh.swenga.jpa.export.TimeRecordExcelExport"/>
+	<b:bean id="EmployeePdfExport" class="at.fh.swenga.jpa.export.EmployeePdfExport"/>
 </b:beans>

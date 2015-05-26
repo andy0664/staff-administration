@@ -118,6 +118,11 @@
 			<version>4.0</version>
 		</dependency>
 		<dependency>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+			<version>4.2.1</version>
+		</dependency>
+		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.5</version>
@@ -133,11 +138,8 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.7.5</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>com.dhtmlx</groupId>
-			<artifactId>javaplanner</artifactId>
-			<version>1.5</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>com.dhtmlx</groupId> <artifactId>javaplanner</artifactId> 
+			<version>1.5</version> </dependency> -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
