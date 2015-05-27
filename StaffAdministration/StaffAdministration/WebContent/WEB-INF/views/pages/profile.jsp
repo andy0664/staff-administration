@@ -25,8 +25,12 @@
 
 		<div id="page-wrapper-subpages">
 			<div id="page-inner-subpages">
-				<div class="row">
+							<div class="page-header">
+					<h1>${employee.firstName} ${employee.lastName}</h1>
+				</div>
+				<div class="row-fluid">
 					<div class="col-md-8 col-md-offset-2">
+					<form class="form-horizontal">
 						<! ----------------  ssn ---------------- -->
 						<div class="form-group">
 							<label for="inputSSN" class="col-md-2 control-label">SSN</label>
@@ -62,10 +66,10 @@
 							<label for="inputDate" class="col-md-2 control-label">Day
 								of Birth</label>
 							<div class="col-md-5">
-								<input class="form_datetime" id="inputDate" placeholder="Date"
+								<input class="form_datetime form-control" id="inputDate" placeholder="Date"
 									type="text" readonly name="dayOfBirth"
 									value="<fmt:formatDate value="${employee.dayOfBirth}" pattern="dd.MM.yyyy"/>"
-									readonly /> <i class="fa fa-calendar"></i>
+									readonly /> 
 							</div>
 						</div>
 
@@ -88,6 +92,7 @@
 									value="<c:out value="${employee.address.zip}"/>" readonly>
 							</div>
 						</div>
+						
 
 						<! ----------------  City ---------------- -->
 						<div class="form-group">
@@ -125,7 +130,7 @@
 							<label for="inputDate" class="col-md-2 control-label">Day
 								of Entry</label>
 							<div class="col-md-5">
-								<input class="form_datetime" id="inputDate" placeholder="Date"
+								<input class="form_datetime form-control" id="inputDate" placeholder="Date"
 									type="text" readonly name="dayOfEntry"
 									value="<fmt:formatDate value="${employee.dayOfEntry}" pattern="dd.MM.yyyy"/>"
 									readonly /> <i class="fa fa-calendar"></i>
@@ -162,6 +167,7 @@
 										Request</button>
 								</div>
 							</div>
+						</form>
 						</form>
 					</div>
 				</div>

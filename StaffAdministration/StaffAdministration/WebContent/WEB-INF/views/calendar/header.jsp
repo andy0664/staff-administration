@@ -33,10 +33,11 @@ html, body {
 	width: 100%;
 	background-color: #faf7f0;
 	overflow: hidden;
+	box-sizing: content-box;
 }
 
 .menu {
-	width: 234px;
+	width: 260px;
 	height: 100%;
 	float: left;
 	background-color: #f0ede7;
@@ -93,13 +94,13 @@ html, body {
 }
 
 .content {
-	background-color: #faf7f0;
+	background-color: #F0F0F0;
 	float: left;
 	height: 100%;
 	width: 100%;
 	position: absolute;
-	top: 45px;
-	left: 234px;
+	top: 60px;
+	left: 260px;
 	webkit-border-radius: 5px 0px 0px 0px;
 	border-radius: 5px 0px 0px 0px;
 	-webkit-box-shadow: -3px 0px 14px rgba(50, 50, 50, 0.1);
@@ -109,7 +110,7 @@ html, body {
 	padding-bottom: 20px;
 	padding-right: 20px;
 	padding-left: 40px;
-	box-sizing: border-box;
+	box-sizing: content-box;
 }
 
 .sample {
@@ -147,6 +148,10 @@ html, body {
 
 .scheduler>div {
 	border: 1px solid #cecece;
+}
+
+* {
+    box-sizing: content-box;
 }
 </style>
 </head>

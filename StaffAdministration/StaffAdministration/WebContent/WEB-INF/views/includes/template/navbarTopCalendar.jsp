@@ -7,7 +7,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../"><b>HR</b>INSIDE</a>
+                <a class="navbar-brand" style="width:230px" href="../"><b>HR</b>INSIDE</a>
             </div>
  
             <ul class="nav navbar-top-links pull-right">
