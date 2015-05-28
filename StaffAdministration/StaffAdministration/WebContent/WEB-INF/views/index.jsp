@@ -328,7 +328,7 @@
 				</div>
 			</sec:authorize>
 			<!-- 	Line Chart -->
-			<!-- <script>
+			<script>
 				$(function() {
 					$('#lineChart').highcharts(
 							{
@@ -384,7 +384,7 @@
 				});
 			</script>
 
-									Pie Chart
+<!-- 									Pie Chart -->
 			<script>
 				$(function() {
 
@@ -527,7 +527,7 @@
 			</script>
 
 		</div>
-	</div> -->
+	</div>
 			<!-- end features -->
 
 			<!-- Modal News -->
