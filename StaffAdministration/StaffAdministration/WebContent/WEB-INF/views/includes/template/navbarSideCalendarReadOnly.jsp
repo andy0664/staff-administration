@@ -1,6 +1,6 @@
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <nav class="navbar-default navbar-side" role="navigation">
 	<div class="sidebar-collapse">
@@ -32,12 +32,14 @@
 				<ul class="nav nav-second-level collapse" aria-expanded="false"
 					style="">
 					<li><a href="#"><i class="fa fa-users"></i>All Employees</a></li>
-					<li><a href="../manageEmployees"><i class="fa fa-sitemap"></i>Manage
-							Employees</a></li>
-					<li><a href="../manageDepartments"><i
-							class="fa fa-university"></i>Manage Departments</a></li>
+					<sec:authorize access="hasAnyRole('ADMIN','MANAGER')">
+						<li><a href="../manageEmployees"><i class="fa fa-sitemap"></i>Manage
+								Employees</a></li>
+						<li><a href="../manageDepartments"><i
+								class="fa fa-university"></i>Manage Departments</a></li>
+					</sec:authorize>
 				</ul></li>
-			<li><a href="#"><i class="fa fa-clock-o"></i> Time Records<span
+			<li><a href="../showEmployees"><i class="fa fa-clock-o"></i> Time Records<span
 					class="fa arrow"></span></a>
 				<ul class="nav nav-second-level collapse" aria-expanded="false"
 					style="">
@@ -45,14 +47,20 @@
 							Time Record</a></li>
 					<li><a href="../showPersonalTimeRecords"><i
 							class="fa fa-area-chart"></i>My Time Records</a></li>
-					<li><a href="../showAllTimeRecords"><i
-							class="fa fa-area-chart"></i>All Time Records</a></li>
+					<sec:authorize access="hasAnyRole('ADMIN','MANAGER')">
+						<li><a href="../showAllTimeRecords"><i
+								class="fa fa-area-chart"></i>All Time Records</a></li>
+					</sec:authorize>
 				</ul></li>
-			<li data-toggle="modal" data-target="#announcementModal"><a
-				href="#"><i class="fa fa-comments"></i> Announcements<span
-					class="badge pull-right">${fn:length(announcementList)}</span></a></li>
-			<li><a href="./showCalendarPersonal"><i class="fa fa-calendar"></i>Personal Calendar</a></li>
-			<li><a href=""><i class="fa fa-calendar"></i>Calendar of Employee</a></li>
+			<sec:authorize access="hasAnyRole('ADMIN','MANAGER')">
+				<li data-toggle="modal" data-target="#announcementModal"><a
+					href="#"><i class="fa fa-comments"></i> Announcements<span
+						class="badge pull-right">${fn:length(announcementList)}</span></a></li>
+			</sec:authorize>
+			<li><a href="./showCalendarPersonal"><i
+					class="fa fa-calendar"></i>Personal Calendar</a></li>
+			<li><a href=""><i class="fa fa-calendar"></i>Calendar of
+					Employee</a></li>
 		</ul>
 	</div>
 </nav>

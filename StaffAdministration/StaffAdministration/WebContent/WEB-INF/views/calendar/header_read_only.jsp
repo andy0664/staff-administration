@@ -36,7 +36,7 @@ html, body {
 }
 
 .menu_read_only {
-	width: 234px;
+	width: 260px;
 	height: 100%;
 	float: left;
 	background-color: #f0ede7;
@@ -99,7 +99,7 @@ html, body {
 	width: 100%;
 	position: absolute;
 	top: 45px;
-	left: 234px;
+	left: 260px;
 	webkit-border-radius: 5px 0px 0px 0px;
 	border-radius: 5px 0px 0px 0px;
 	-webkit-box-shadow: -3px 0px 14px rgba(50, 50, 50, 0.1);
@@ -147,6 +147,10 @@ html, body {
 
 .scheduler>div {
 	border: 1px solid #cecece;
+}
+
+* {
+    box-sizing: content-box;
 }
 </style>
 </head>
