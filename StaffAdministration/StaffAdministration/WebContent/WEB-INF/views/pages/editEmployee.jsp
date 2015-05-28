@@ -134,6 +134,24 @@
 									</div>
 								</div>
 
+								<! ----------------  Mail ---------------- -->
+								<div class="form-group">
+									<label for="inputMail" class="col-md-2 control-label">Mail</label>
+									<div class="col-md-5">
+										<input class="form-control" id="inputMail" type="text"
+											name="eMail" value="<c:out value="${employee.eMail}"/>">
+									</div>
+								</div>
+
+								<! ----------------  Telefon ---------------- -->
+								<div class="form-group">
+									<label for="inputTelefon" class="col-md-2 control-label">Telefon</label>
+									<div class="col-md-5">
+										<input class="form-control" id="inputTelefon" type="text"
+											name="telefon" value="<c:out value="${employee.telefon}"/>">
+									</div>
+								</div>
+
 								<! ----------------  Berufsbezeichnung ---------------- -->
 								<div class="form-group">
 									<label for="inputDescription" class="col-md-2 control-label">Job
@@ -174,7 +192,7 @@
 									<div class="col-md-5">
 										<select class="form-control" name="department">
 											<option value="-1" selected="selected">No Department</option>
-											<c:forEach items="${departmentList }" var="department" >
+											<c:forEach items="${departmentList }" var="department">
 												<c:choose>
 													<c:when test="${employee.department.name==department.name}">
 														<option value="${department.id}" selected="selected">${department.name}</option>

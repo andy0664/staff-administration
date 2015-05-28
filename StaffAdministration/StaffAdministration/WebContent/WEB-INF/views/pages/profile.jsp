@@ -114,13 +114,33 @@
 							</div>
 						</div>
 
+						<! ----------------  Mail ---------------- -->
+						<div class="form-group">
+							<label for="inputMail" class="col-md-2 control-label">Mail</label>
+							<div class="col-md-5">
+								<input class="form-control" id="inputMail"
+									type="text" name="mail"
+									value="<c:out value="${employee.eMail}"/>" readonly>
+							</div>
+						</div>
+						
+						<! ----------------  Telefon ---------------- -->
+						<div class="form-group">
+							<label for="inputTelefon" class="col-md-2 control-label">Telefon</label>
+							<div class="col-md-5">
+								<input class="form-control" id="inputTelefon"
+									type="text" name="telefon"
+									value="<c:out value="${employee.telefon}"/>" readonly>
+							</div>
+						</div>
+						
 						<! ----------------  Berufsbezeichnung ---------------- -->
 						<div class="form-group">
 							<label for="inputDescription" class="col-md-2 control-label">Job
 								Description</label>
 							<div class="col-md-5">
 								<input class="form-control" id="inputDescription"
-									type="jobDescription" name="jobDescription"
+									type="text" name="jobDescription"
 									value="<c:out value="${employee.jobDescription}"/>" readonly>
 							</div>
 						</div>

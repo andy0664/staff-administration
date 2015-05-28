@@ -125,7 +125,7 @@ public class EmployeeController {
 					df.getLastName(), df.getBirthDate(), address,
 					df.getRandomText(10, 20), 1234.5f, df.getBirthDate(),
 					"testUser",
-					"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC");
+					"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC","admin@gmx.at","+43 1234567");
 			employeeDao.save(p1);
 		}
 		return Constant.REDIRECT_MANAGE_EMPLOYEES;

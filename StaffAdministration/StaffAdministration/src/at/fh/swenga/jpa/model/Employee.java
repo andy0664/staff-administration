@@ -57,6 +57,10 @@ public class Employee implements Serializable {
 
 	@NotNull(message = "{0} is required")
 	private float salary;
+	
+	private String eMail;
+	
+	private String telefon;
 
 	@NotNull(message = "{0} is required")
 //	@Past(message = "{0} must be in the past")
@@ -112,7 +116,7 @@ public class Employee implements Serializable {
 
 	public Employee(int ssn, String firstName, String lastName,
 			Date dayOfBirth, Address address, String jobDescription,
-			float salary, Date dayOfEntry,String username, String password) {
+			float salary, Date dayOfEntry,String username, String password,String eMail, String telefon) {
 		this.ssn = ssn;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -123,6 +127,8 @@ public class Employee implements Serializable {
 		this.dayOfEntry = dayOfEntry;
 		this.userName=username;
 		this.password=password;
+		this.eMail=eMail;
+		this.telefon=telefon;
 //		this.role = role;
 	}
 
@@ -306,6 +312,24 @@ public class Employee implements Serializable {
 		timeRecords.add(record);
 	}
 	
+	
+	
+	public String geteMail() {
+		return eMail;
+	}
+
+	public void seteMail(String eMail) {
+		this.eMail = eMail;
+	}
+
+	public String getTelefon() {
+		return telefon;
+	}
+
+	public void setTelefon(String telefon) {
+		this.telefon = telefon;
+	}
+
 	public Set<Announcement> getAnnouncmentsEmployee() {
 		return announcementsEmployee;
 	}
@@ -349,6 +373,8 @@ public class Employee implements Serializable {
 		if(emp.getUserName()!=null){
 			this.userName=emp.getUserName();
 		}
+		this.eMail=emp.geteMail();
+		this.telefon=emp.getTelefon();
 //		if(!"".equals(emp.getPassword())){
 //			this.password=emp.getPassword();
 //		}

@@ -97,17 +97,17 @@ public class CoverPageController {
 		 df.getLastName(), df.getBirthDate(), address,
 		 df.getRandomText(10, 20), 1234.5f, df.getBirthDate(),
 		 "admin",
-		 "$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC");
+		 "$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC","admin@gmx.at","+43 1234567");
 		 Employee p2 = new Employee(12345, df.getFirstName(),
 		 df.getLastName(), df.getBirthDate(), address,
 		 df.getRandomText(10, 20), 1234.5f, df.getBirthDate(),
 		 "manager",
-		 "$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC");
+		 "$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC","manager@gmx.at","+43 1234567");
 		 Employee p3 = new Employee(12345, df.getFirstName(),
 		 df.getLastName(), df.getBirthDate(), address,
 		 df.getRandomText(10, 20), 1234.5f, df.getBirthDate(),
 		 "employee",
-		 "$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC");
+		 "$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC","employee@gmx.at","+43 1234567");
 		 UserRole role = new UserRole(Constant.ROLE_ADMINISTRATOR, p1);
 		 UserRole role2 = new UserRole(Constant.ROLE_MANAGER, p1);
 		 UserRole role3 = new UserRole(Constant.ROLE_EMPLOYEE, p1);

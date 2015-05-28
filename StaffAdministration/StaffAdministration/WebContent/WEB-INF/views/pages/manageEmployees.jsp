@@ -80,6 +80,8 @@
 									<th data-sortable="true">Street</th>
 									<th data-sortable="true">ZIP</th>
 									<th data-sortable="true">City</th>
+									<th data-sortable="true">E-Mail</th>
+									<th data-sortable="true">Telefon</th>
 									<th data-sortable="true">Job Description</th>
 									<th data-sortable="true">Salary</th>
 									<th data-sortable="true">Day of Entry</th>
@@ -102,6 +104,8 @@
 										<td>${employee.address.street}</td>
 										<td>${employee.address.zip}</td>
 										<td>${employee.address.city}</td>
+										<td>${employee.eMail}</td>
+										<td>${employee.telefon}</td>
 										<td>${employee.jobDescription}</td>
 										<td>${employee.salary}</td>
 										<td><fmt:formatDate value="${employee.dayOfEntry}"
