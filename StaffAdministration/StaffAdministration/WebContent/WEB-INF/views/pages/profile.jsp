@@ -176,8 +176,8 @@
 								<label for="inputChangeMessage" class="col-md-2 control-label">Change
 									Request</label>
 								<div class="col-md-5">
-									<input class="form-control" id="inputChangeMessage" type="text"
-										name="changeRequest">
+									<textarea class="form-control" id="inputChangeMessage"  rows="5" 
+										name="changeRequest"></textarea>
 								</div>
 							</div>
 							<! ----------------  buttons ---------------- -->
