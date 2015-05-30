@@ -1,10 +1,10 @@
-<%@page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -115,6 +115,10 @@
 										formaction="timeRecordExcelExport">
 										<i class="fa fa-table"></i> Excel Export
 									</button>
+									<button type="Submit" class="btn btn-success"
+										formaction="timeRecordPdfExport">
+										<i class="fa fa-table"></i> PDF Export
+									</button>
 								</div>
 							</div>
 							</a>
@@ -180,7 +184,20 @@
 	<!--  End of container -->
 
 	<!-- Footer -->
-	<%-- 	<jsp:include page="../includes/template/fixedFooter.jsp" /> --%>
+	 <%-- 	<jsp:include page="../includes/template/fixedFooter.jsp" /> --%>
+	<script type="text/javascript"
+		src="http://www.malot.fr/bootstrap-datetimepicker/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
 
+	<script>
+		$(function() {
+			$(".form_datetime").datetimepicker({
+				format : "dd.mm.yyyy",
+				autoclose : true,
+				todayBtn : true,
+				pickerPosition : "bottom-left",
+				minView : 2
+			});
+		});
+	</script>
 </body>
 </html>

@@ -56,9 +56,8 @@
 									<button type="button" class="btn btn-success">
 										<i class="fa fa-user-plus"></i> Add Employee
 									</button>
-								</a> <a href="fillEmployee">
-									<button type="button" class="btn btn-success">Test:
-										Fill</button>
+								</a> <a href="ExportEmployeesPdf">
+									<button type="button" class="btn btn-success">Export Employees</button>
 								</a>
 							</div>
 						</sec:authorize>
@@ -104,8 +103,8 @@
 										<td>${employee.address.street}</td>
 										<td>${employee.address.zip}</td>
 										<td>${employee.address.city}</td>
-										<td>${employee.eMail}</td>
-										<td>${employee.telefon}</td>
+										<td>${employee.mail}</td>
+										<td>${employee.phone}</td>
 										<td>${employee.jobDescription}</td>
 										<td>${employee.salary}</td>
 										<td><fmt:formatDate value="${employee.dayOfEntry}"

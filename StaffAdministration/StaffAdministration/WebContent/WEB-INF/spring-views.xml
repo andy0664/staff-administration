@@ -6,4 +6,6 @@
 	
 	<b:bean id="timeRecordExcelExport" class="at.fh.swenga.jpa.export.TimeRecordExcelExport"/>
 	<b:bean id="EmployeePdfExport" class="at.fh.swenga.jpa.export.EmployeePdfExport"/>
+	<b:bean id="timeRecordPdfExport" class="at.fh.swenga.jpa.export.TimeRecordPdfExport"/>
+	
 </b:beans>

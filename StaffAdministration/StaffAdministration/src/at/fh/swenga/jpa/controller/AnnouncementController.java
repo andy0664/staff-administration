@@ -45,7 +45,7 @@ public class AnnouncementController {
 	@Transactional
 	@RequestMapping(value={"acceptBirthday"})
 	public String acceptBirthday(@RequestParam int announcement, Model model){
-		Announcement announce = announcementDao.getOne(announcement);
+		Announcement announce = announcementDao.findOne(announcement);
 		announce.setDay(controllerSupport.updateAnnouncementYear(announce.getDay(), 1));
 		announcementDao.save(announce);
 		return "forward:start";
@@ -54,7 +54,7 @@ public class AnnouncementController {
 	@Transactional
 	@RequestMapping(value={"denyVacation"})
 	public String denyVacation(@RequestParam int announcement, Model model){
-		Announcement announce = announcementDao.getOne(announcement);
+		Announcement announce = announcementDao.findOne(announcement);
 		int timeRecord = announce.getNotRead();
 		timeRecordDao.delete(timeRecord);
 		announce.setNotRead(0);
@@ -77,7 +77,7 @@ public class AnnouncementController {
 	}
 	
 	private void setRead(int announcement){
-		Announcement announce = announcementDao.getOne(announcement);
+		Announcement announce = announcementDao.findOne(announcement);
 		announce.setNotRead(0);
 		announcementDao.save(announce);
 	}

@@ -82,7 +82,7 @@ public class DepartmentController {
 		return Constant.PAGE_EDIT_DEPARTMENT;
 	}
 
-	// Zum füllen der Mitarbeiter Tabelle nur zum testen --> ende entfernen
+	// Zum fï¿½llen der Mitarbeiter Tabelle nur zum testen --> ende entfernen
 	@RequestMapping("fillDepartment")
 	@Transactional
 	public String fillDepartment(Model model) {
@@ -113,7 +113,7 @@ public class DepartmentController {
 		Department dep = departmentDao.findDepartmentById(id);
 		dep.updateDepartment(newDepartment);
 		if (dep.getManager().getId() != manager) {
-			dep.setManager(employeeDao.findEmployeeById(manager));
+			dep.setManager(employeeDao.findOne(manager));
 		}
 		departmentDao.save(dep);
 		return Constant.REDIRECT_MANAGE_DEPARTMENTS;
@@ -127,7 +127,7 @@ public class DepartmentController {
 		if (controllerSupport.checkBinding(bindingResult, model)) {
 			return "forward:/manageDepartments";
 		}
-		Employee emp = employeeDao.findEmployeeById(manager);
+		Employee emp = employeeDao.findOne(manager);
 		Department dep = newDepartment.generateDepartment();
 		emp.setDepartment(dep);
 		dep.setManager(emp);

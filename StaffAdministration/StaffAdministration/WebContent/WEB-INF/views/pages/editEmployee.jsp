@@ -136,10 +136,10 @@
 
 								<! ----------------  Mail ---------------- -->
 								<div class="form-group">
-									<label for="inputMail" class="col-md-2 control-label">Mail</label>
+									<label for="inputMail" class="col-md-2 control-label">E-Mail</label>
 									<div class="col-md-5">
 										<input class="form-control" id="inputMail" type="text"
-											name="eMail" value="<c:out value="${employee.eMail}"/>">
+											name="mail" value="<c:out value="${employee.mail}"/>">
 									</div>
 								</div>
 
@@ -148,7 +148,7 @@
 									<label for="inputTelefon" class="col-md-2 control-label">Telefon</label>
 									<div class="col-md-5">
 										<input class="form-control" id="inputTelefon" type="text"
-											name="telefon" value="<c:out value="${employee.telefon}"/>">
+											name="phone" value="<c:out value="${employee.phone}"/>">
 									</div>
 								</div>
 

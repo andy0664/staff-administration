@@ -11,6 +11,7 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.fluttercode.datafactory.impl.DataFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -89,7 +90,7 @@ public class EmployeeController {
 			model.addAttribute(Constant.KEY_DEPARTMENT_LIST,
 					departmentDao.findAll());
 			model.addAttribute(Constant.KEY_EMPLOYEE,
-					employeeDao.findEmployeeById(id));
+					employeeDao.findOne(id));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -112,28 +113,41 @@ public class EmployeeController {
 	}
 
 	// Zum füllen der Mitarbeiter Tabelle nur zum testen --> ende entfernen
-	@RequestMapping("fillEmployee")
-	@Transactional
-	public String fillData(Model model) {
-
-		DataFactory df = new DataFactory();
-
-		for (int i = 0; i < 10; i++) {
-			Address address = new Address(df.getStreetName(), df.getCity(),
-					df.getRandomWord(), 8052);
-			Employee p1 = new Employee(12345, df.getFirstName(),
-					df.getLastName(), df.getBirthDate(), address,
-					df.getRandomText(10, 20), 1234.5f, df.getBirthDate(),
-					"testUser",
-					"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC","admin@gmx.at","+43 1234567");
-			employeeDao.save(p1);
-		}
-		return Constant.REDIRECT_MANAGE_EMPLOYEES;
-	}
+//	@RequestMapping("fillEmployee")
+//	@Transactional
+//	public String fillData(Model model) {
+//
+//		DataFactory df = new DataFactory();
+//
+//		for (int i = 0; i < 10; i++) {
+//			Address address = new Address(df.getStreetName(), df.getCity(),
+//					df.getRandomWord(), 8052);
+//			Employee p1 = new Employee(12345, df.getFirstName(),
+//					df.getLastName(), df.getBirthDate(), address,
+//					df.getRandomText(10, 20), 1234.5f, df.getBirthDate(),
+//					"testUser",
+//					"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC","admin@gmx.at","+43 1234567");
+//			employeeDao.save(p1);
+//		}
+//		return Constant.REDIRECT_MANAGE_EMPLOYEES;
+//	}
 	
 	@RequestMapping(value={"ExportEmployeePdf"})
 	public String exportEmployeePdf(int id, Model model){
-		model.addAttribute(Constant.KEY_EMPLOYEE, employeeDao.findEmployeeById(id));
+		model.addAttribute(Constant.KEY_EMPLOYEE_LIST, employeeDao.findEmployeeById(id));
+		return Constant.CLASS_EXPORT_EMPLOYEE_PDF;
+	}
+	
+	@RequestMapping(value={"ExportEmployeesPdf"})
+	public String exportEmployeesPdf(Model model){
+		User user = controllerSupport.getCurrentUser();
+		if (user.getAuthorities().size() == Constant.ROLE_INT_MANAGER) {
+			model.addAttribute(Constant.KEY_EMPLOYEE_LIST,
+					employeeDao.findEmployeeFromManager(user.getUsername()));
+		} else {
+			model.addAttribute(Constant.KEY_EMPLOYEE_LIST,
+					employeeDao.findAll());
+		}
 		return Constant.CLASS_EXPORT_EMPLOYEE_PDF;
 	}
 
@@ -182,7 +196,7 @@ public class EmployeeController {
 		if (controllerSupport.checkBinding(bindingResult, model)) {
 			return "forward:/manageEmployees";
 		}
-		Employee emp = employeeDao.findEmployeeById(id);
+		Employee emp = employeeDao.findOne(id);
 		newEmployee.setAddress(newAddress);
 		emp.updateEmployee(newEmployee);
 		if(newEmployee.getPassword()!=null && !emp.getPassword().equals(newEmployee.getPassword())){

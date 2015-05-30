@@ -7,9 +7,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections4.MapIterator;
+import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.web.servlet.view.document.AbstractPdfView;
 
 import at.fh.swenga.jpa.model.Employee;
+import at.fh.swenga.jpa.model.TimeRecord;
 import at.fh.swenga.jpa.support.Constant;
 
 import com.lowagie.text.Document;
@@ -22,37 +25,32 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
-public class EmployeePdfExport extends AbstractPdfView {
+public class TimeRecordPdfExport extends AbstractPdfView {
 
 	@Override
 	protected void buildPdfDocument(Map<String, Object> model,
 			Document document, PdfWriter writer, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		List<Employee> employees = (List<Employee>) model
-				.get(Constant.KEY_EMPLOYEE_LIST);
-		document.add(new Paragraph("Employee Data"));
-
-		for (Employee employee : employees) {
-			document.add(generateTable(employee));
+		HashedMap<Employee, List<TimeRecord>> timeRecords = (HashedMap<Employee, List<TimeRecord>>) model
+				.get(Constant.KEY_TIME_RECORD_LIST);
+		MapIterator<Employee, List<TimeRecord>> iter = timeRecords
+				.mapIterator();
+		while (iter.hasNext()) {
+			Employee employee = iter.next();
+			document.add(new Paragraph("Employee: " + employee.getFirstName()
+					+ " " + employee.getLastName()));
+				document.add(generateTable(iter.getValue()));
 		}
 	}
 
-	private PdfPTable generateTable(Employee employee) throws DocumentException {
-		String[] headers = { "First Name:", "Last Name:", "SSN:", "Birthday:",
-				"Country:", "City:", "Street", "ZIP", "Phone", "E-Mail" };
-		String[] values = { employee.getFirstName(), employee.getLastName(),
-				employee.getSsn() + "",
-				Constant.parseDateToString(employee.getDayOfBirth()),
-				employee.getAddress().getCountry(),
-				employee.getAddress().getCity(),
-				employee.getAddress().getStreet(),
-				employee.getAddress().getZip() + "", employee.getPhone(),
-				employee.getMail() };
+	private PdfPTable generateTable(List<TimeRecord> records) throws DocumentException {
+		String[] headers = { "Date from", "Date to", "Time from", "Time to",
+				"Reason" };
 
-		PdfPTable table = new PdfPTable(2);
+		PdfPTable table = new PdfPTable(5);
 		table.setWidthPercentage(100.0f);
-		table.setWidths(new float[] { 3.0f, 7.0f });
+		table.setWidths(new float[] { 1.75f,1.75f,1.75f,1.75f,3.0f });
 		table.setSpacingBefore(10);
 
 		// define font for table header row
@@ -67,9 +65,17 @@ public class EmployeePdfExport extends AbstractPdfView {
 		for (int i = 0; i < headers.length; i++) {
 			cell.setPhrase(new Phrase(headers[i], font));
 			table.addCell(cell);
-			table.addCell(values[i]);
-
 		}
+		
+		for(TimeRecord record:records){
+			table.addCell(Constant.parseDateToString(record.getStartDate()));
+			table.addCell(Constant.parseDateToString(record.getEndDate()));
+			table.addCell(Constant.parseTimeToString(record.getStartTime()));
+			table.addCell(Constant.parseTimeToString(record.getEndTime()));
+			table.addCell(record.getTyp());
+		}
+		
 		return table;
 	}
+
 }

@@ -14,7 +14,7 @@ public interface SimpleEmployeeRepository extends
 		JpaRepository<Employee, Integer> {
 	
 	
-	public Employee findEmployeeById(int id);
+	public List<Employee> findEmployeeById(int id);
 	
 	//@Query("select new at.fh.swenga.jpa.dto.EmployeeDTO(e.id, e.firstname,e.lastname) from Employee e where e.department is null")
 	@Query("select e from Employee e where e.department is null")

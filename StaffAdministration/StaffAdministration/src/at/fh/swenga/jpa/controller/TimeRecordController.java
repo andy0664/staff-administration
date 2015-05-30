@@ -102,17 +102,21 @@ public class TimeRecordController {
 			@Valid @ModelAttribute TimeRecordRequestDTO request,
 			BindingResult bindingResult, Model model) {
 		if (!controllerSupport.checkBinding(bindingResult, model)) {
-			Map<Employee, List<TimeRecord>> timeRecords = new HashedMap<Employee, List<TimeRecord>>();
-			Employee emp = employeeDao.findEmployeeByUserName(controllerSupport
-					.getCurrentUser().getUsername());
-			checkDateNull(request);
-			List<TimeRecord> records = timeRecordDao
-					.findRecordsByEmployeeIdAndStartDateGreaterThanEqualAndEndDateLessThanEqualOrderByStartDate(
-							request.getEmployee(), request.getDateFrom(),
-							request.getDateTo());
-			timeRecords.put(emp, records);
-			model.addAttribute(Constant.KEY_TIME_RECORD_LIST, timeRecords);
-			return Constant.CLASS_EXPORT_TIME_RECORD;
+			prepareExport(request,model);
+			return Constant.CLASS_EXPORT_TIME_RECORD_EXCEL;
+		}
+		return Constant.PAGE_LIST_TIME_RECORDS;
+
+	}
+	
+	@Transactional
+	@RequestMapping(value = { "timeRecordPdfExport" })
+	public String timeRecordPdfExport(
+			@Valid @ModelAttribute TimeRecordRequestDTO request,
+			BindingResult bindingResult, Model model) {
+		if (!controllerSupport.checkBinding(bindingResult, model)) {
+			prepareExport(request,model);
+			return Constant.CLASS_EXPORT_TIME_RECORD_PDF;
 		}
 		return Constant.PAGE_LIST_TIME_RECORDS;
 
@@ -147,7 +151,8 @@ public class TimeRecordController {
 		}
 		return Constant.PAGE_INDEX;
 	}
-
+	
+	@Transactional
 	private String prepareTimeRecordManager(TimeRecordRequestDTO request,
 			Model model) {
 		model.addAttribute(Constant.KEY_TIME_RECORD_DATE_FROM,
@@ -162,7 +167,7 @@ public class TimeRecordController {
 		model.addAttribute(Constant.KEY_TIME_RECORD_LIST, list);
 
 		model.addAttribute(Constant.KEY_EMPLOYEE,
-				employeeDao.findEmployeeById(request.getEmployee()));
+				employeeDao.findOne(request.getEmployee()));
 		return Constant.PAGE_LIST_TIME_RECORDS;
 	}
 
@@ -181,5 +186,18 @@ public class TimeRecordController {
 			request.setDateTo(new Date());
 		}
 		
+	}
+	
+	private void prepareExport(TimeRecordRequestDTO request, Model model){
+		Map<Employee, List<TimeRecord>> timeRecords = new HashedMap<Employee, List<TimeRecord>>();
+		Employee emp = employeeDao.findEmployeeByUserName(controllerSupport
+				.getCurrentUser().getUsername());
+		checkDateNull(request);
+		List<TimeRecord> records = timeRecordDao
+				.findRecordsByEmployeeIdAndStartDateGreaterThanEqualAndEndDateLessThanEqualOrderByStartDate(
+						request.getEmployee(), request.getDateFrom(),
+						request.getDateTo());
+		timeRecords.put(emp, records);
+		model.addAttribute(Constant.KEY_TIME_RECORD_LIST, timeRecords);
 	}
 }
