@@ -61,6 +61,8 @@
 									<th data-sortable="true">Last Name</th>
 									<th data-sortable="true">Department</th>
 									<th data-sortable="true">Job Description</th>
+									<th data-sortable="true">E-Mail</th>
+									<th data-sortable="true">"Tel. Nr</th>
 									<th data-sortable="true">Status</th>
 									<th>Calendar</th>
 								</tr>
@@ -73,20 +75,27 @@
 										<td>${employee.lastName}</td>
 										<td>${employee.department.name}</td>
 										<td>${employee.jobDescription}</td>
+										<td>${employee.eMail}</td>
+										<td>${employee.telefon}</td>
 										<td><c:choose>
 												<c:when test="${employee.status=='Available'}">
-													<div style="color: #449D44"><i class="fa fa-check-circle" style="margin-right:5px"></i>${employee.status}</div>
+													<div style="color: #449D44">
+														<i class="fa fa-check-circle" style="margin-right: 5px"></i>${employee.status}</div>
 												</c:when>
 												<c:when test="${employee.status=='Busy'}">
-													<div style="color: #F0AD4E"><i class="fa fa-circle-o" style="margin-right:5px"></i>${employee.status}</div>
+													<div style="color: #F0AD4E">
+														<i class="fa fa-circle-o" style="margin-right: 5px"></i>${employee.status}</div>
 												</c:when>
 												<c:when test="${employee.status=='Not available'}">
-													<div style="color: #C9302C"><i class="fa fa-times-circle" style="margin-right:5px"></i>${employee.status}</div>
+													<div style="color: #C9302C">
+														<i class="fa fa-times-circle" style="margin-right: 5px"></i>${employee.status}</div>
 												</c:when>
 											</c:choose></td>
-										<td><a href="calendar/showCalendarReadOnly?username=${employee.userName}">
+										<td><a
+											href="calendar/showCalendarReadOnly?username=${employee.userName}">
 												<button type="button" class="btn btn-xs btn-primary">
-													<i class="fa fa-calendar" style="margin-right:5px"></i> View Calendar
+													<i class="fa fa-calendar" style="margin-right: 5px"></i>
+													View Calendar
 												</button>
 										</a></td>
 									</tr>
