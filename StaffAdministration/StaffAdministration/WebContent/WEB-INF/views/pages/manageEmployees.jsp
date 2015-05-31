@@ -74,13 +74,13 @@
 									<th data-sortable="true">Last Name</th>
 									<th data-sortable="true">Day of birth</th>
 									<th data-sortable="true">Department</th>
-									<th data-sortable="true">Username</th>
+<!-- 									<th data-sortable="true">Username</th> -->
 									<th data-sortable="true">Country</th>
 									<th data-sortable="true">Street</th>
 									<th data-sortable="true">ZIP</th>
 									<th data-sortable="true">City</th>
 									<th data-sortable="true">E-Mail</th>
-									<th data-sortable="true">Telefon</th>
+									<th data-sortable="true">"Tel. Nr</th>
 									<th data-sortable="true">Job Description</th>
 									<th data-sortable="true">Salary</th>
 									<th data-sortable="true">Day of Entry</th>
@@ -98,7 +98,7 @@
 										<td><fmt:formatDate value="${employee.dayOfBirth}"
 												pattern="dd.MM.yyyy" /></td>
 										<td>${employee.department.name}</td>
-										<td>${employee.userName}</td>
+<%-- 										<td>${employee.userName}</td> --%>
 										<td>${employee.address.country}</td>
 										<td>${employee.address.street}</td>
 										<td>${employee.address.zip}</td>
