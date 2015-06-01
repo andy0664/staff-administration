@@ -9,29 +9,14 @@
 			<li><a class="" href="../"><i class="fa fa-dashboard"></i>
 					Dashboard</a></li>
 
-			<li><a href="#"><i class="fa fa-user"></i> Personal Area<span
-					class="fa arrow"></span></a>
-				<ul class="nav nav-second-level collapse" aria-expanded="false"
-					style="">
-					<li><a href="#"><i class="fa fa-user"></i>My Profile</a></li>
-					<!-- 					<li><a href="#"><i class="fa fa-wrench"></i>My Account</a></li> -->
-					<li class="active"><a href="#"><i
-							class="fa fa-info-circle"></i>Set Status<span class="fa arrow"></span></a>
-						<ul class="nav nav-third-level collapse in" aria-expanded="true"
-							style="">
-							<li><a href="#"><i class="fa fa-check-circle"
-									style="color: green"></i>Available</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"
-									style="color: yellow"></i>Busy</a></li>
-							<li><a href="#"><i class="fa fa-times-circle"
-									style="color: #d9534f"></i>Not available</a></li>
-						</ul></li>
-				</ul></li>
-			<li><a href="#"> <i class="fa fa-university"></i>Business
+			<li><a href="showProfile"><i class="fa fa-user"></i> My
+					Profile</a></li>
+			<li><a href="#"> <i class="fa fa-building-o"></i>Business
 					Area<span class="fa arrow"></span></a>
 				<ul class="nav nav-second-level collapse" aria-expanded="false"
 					style="">
-					<li><a href="../showEmployees"><i class="fa fa-users"></i>All Employees</a></li>
+					<li><a href="../showEmployees"><i class="fa fa-users"></i>All
+							Employees</a></li>
 					<sec:authorize access="hasAnyRole('ADMIN','MANAGER')">
 						<li><a href="../manageEmployees"><i class="fa fa-sitemap"></i>Manage
 								Employees</a></li>
@@ -46,10 +31,10 @@
 					<li><a href="../newTimeRecord"><i class="fa fa-clock-o"></i>New
 							Time Record</a></li>
 					<li><a href="../showPersonalTimeRecords"><i
-							class="fa fa-area-chart"></i>My Time Records</a></li>
+							class="fa fa-list-ul"></i>My Time Records</a></li>
 					<sec:authorize access="hasAnyRole('ADMIN','MANAGER')">
 						<li><a href="../showAllTimeRecords"><i
-								class="fa fa-area-chart"></i>All Time Records</a></li>
+								class="fa fa-database"></i>All Time Records</a></li>
 					</sec:authorize>
 				</ul></li>
 			<sec:authorize access="hasAnyRole('ADMIN','MANAGER')">

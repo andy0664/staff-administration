@@ -77,7 +77,7 @@ html, body {
 #page-wrapper {
 	margin: 0 0 0 260px;
 	padding: 15px 0px;
-	min-height: 1700px;
+	min-height: 919px;
 	position: relative;
 	background: #F0F0F0;
 }
@@ -180,7 +180,6 @@ html, body {
 }
 
 .top-navbar .dropdown-menu {
-	min-width: 230px;
 	border-radius: 0 0 4px 4px;
 }
 
