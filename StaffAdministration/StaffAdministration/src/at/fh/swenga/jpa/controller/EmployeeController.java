@@ -167,6 +167,11 @@ public class EmployeeController {
 		newEmployee.setAddress(newAddress);
 		Employee emp = newEmployee.generateEmployee();
 		emp.setPassword(encoder.encode(emp.getPassword()));
+		String uniqueError=checkUniqueKeys(emp);
+		if(!Constant.NO_ERROR.equals(uniqueError)){
+			model.addAttribute(Constant.KEY_ERROR_MESSAGE, uniqueError);
+			return Constant.PAGE_EDIT_EMPLOYEE;
+		}
 		saveEmployee(emp, department, newEmployee.getRole());
 		if (department != Constant.NO_DEPARTMENT) {
 			String message = String.format("Birthday: %s %s ",
@@ -263,6 +268,22 @@ public class EmployeeController {
 
 	private UserRole genereateUserRole(String role, Employee emp) {
 		return new UserRole(role, emp);
+	}
+	
+	private String checkUniqueKeys(Employee emp){
+		if(employeeDao.checkUniqueSSN(emp.getSsn(),emp.getId())!=null){
+			return "Employee with SSN already exists";
+		}
+		if(employeeDao.checkUniqueMail(emp.getMail(),emp.getId())!=null){
+			return "Employee with E-Mail already exists";
+		}
+		if(employeeDao.checkUniquePhone(emp.getPhone(),emp.getId())!=null){
+			return "Employee with Phone already exists";
+		}
+		if(employeeDao.checkUniqueUserName(emp.getUserName(),emp.getId())!=null){
+			return "Employee with Username already exists";
+		}
+		return Constant.NO_ERROR;
 	}
 
 }

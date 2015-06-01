@@ -108,7 +108,7 @@ public class CoverPageController {
 						"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC",
 						"admin@gmx.at", "+43 1234567");
 				Employee p2 = new Employee(
-						12345,
+						123456,
 						df.getFirstName(),
 						df.getLastName(),
 						df.getBirthDate(),
@@ -118,9 +118,9 @@ public class CoverPageController {
 						df.getBirthDate(),
 						"manager",
 						"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC",
-						"manager@gmx.at", "+43 1234567");
+						"manager@gmx.at", "+43 12345678");
 				Employee p3 = new Employee(
-						12345,
+						1234567,
 						df.getFirstName(),
 						df.getLastName(),
 						df.getBirthDate(),
@@ -130,7 +130,7 @@ public class CoverPageController {
 						df.getBirthDate(),
 						"employee",
 						"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC",
-						"employee@gmx.at", "+43 1234567");
+						"employee@gmx.at", "+43 123456789");
 				UserRole role = new UserRole(Constant.ROLE_ADMINISTRATOR, p1);
 				UserRole role2 = new UserRole(Constant.ROLE_MANAGER, p1);
 				UserRole role3 = new UserRole(Constant.ROLE_EMPLOYEE, p1);

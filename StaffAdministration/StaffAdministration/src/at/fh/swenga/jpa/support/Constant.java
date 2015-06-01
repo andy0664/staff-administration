@@ -54,6 +54,7 @@ public class Constant {
 	public static final String ANNOUNCEMENT_CHANGE_REQUEST="Request for data change";
 	
 	public static final int ANNOUNCEMENT_NOT_READ=1;
+	public static final String NO_ERROR="no error";
 	
 	//Typ Timerecord
 	public static final String TYP_VACATION="vacation";

@@ -27,9 +27,15 @@
 		<jsp:include page="../includes/template/navigationBar.jsp" />
 
 
+
+
 		<div id="page-wrapper-subpages">
 			<div id="page-inner-subpages">
-
+				<!--  Error message ----------------------------------------------------------- -->
+				<c:if test="${not empty errorMessage}">
+					<div class="alert alert-danger" role="alert">${errorMessage}</div>
+				</c:if>
+				<!--  Error message ----------------------------------------------------------- -->
 				<!--  add or edit?  ----------------------------------------------------------- -->
 				<c:choose>
 					<c:when test="${not empty employee}">

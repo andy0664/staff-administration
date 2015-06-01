@@ -17,12 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
-
-import org.jboss.logging.annotations.Message;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import at.fh.swenga.jpa.dto.EmployeeDTO;
 import at.fh.swenga.jpa.support.Constant;
@@ -37,8 +33,8 @@ public class Employee implements Serializable {
 	private int id;
 
 	//add unique=true
-	@Column(nullable=false)
-	//@Column(nullable=false, unique=true)
+//	@Column(nullable=false)
+	@Column(nullable=false, unique=true)
 	private int ssn;
 
 	 @Column(nullable=false)
@@ -61,10 +57,10 @@ public class Employee implements Serializable {
 	@NotNull(message = "{0} is required")
 	private float salary;
 	
-	//@Column(unique=true)
+	@Column(unique=true)
 	private String mail;
 	
-	//@Column(unique=true)
+	@Column(unique=true)
 	private String phone;
 
 	@NotNull(message = "{0} is required")
@@ -76,7 +72,7 @@ public class Employee implements Serializable {
 	
 	private String status=Constant.STATUS_AVAILABLE;
 	
-	//@Column(unique=true)
+	@Column(unique=true)
 	private String userName;
 	
 	private String password;
@@ -379,8 +375,8 @@ public class Employee implements Serializable {
 		if(emp.getUserName()!=null){
 			this.userName=emp.getUserName();
 		}
-		this.mail=emp.geteMail();
-		this.phone=emp.getTelefon();
+		this.mail=emp.getMail();
+		this.phone=emp.getPhone();
 //		if(!"".equals(emp.getPassword())){
 //			this.password=emp.getPassword();
 //		}

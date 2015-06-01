@@ -23,6 +23,18 @@ public interface SimpleEmployeeRepository extends
 	public List<Employee> findEmployeeByDepartmentId(int depId);
 	public Employee findEmployeeByUserName(String username);
 	
+	@Query("select e from Employee e where e.ssn =:ssn and e.id !=:id")
+	public Employee checkUniqueSSN(@Param("ssn") int ssn, @Param("id") int id);
+	
+	@Query("select e from Employee e where e.mail =:mail and e.id !=:id")
+	public Employee checkUniqueMail(@Param("mail") String mail, @Param("id") int id);
+	
+	@Query("select e from Employee e where e.phone =:phone and e.id !=:id")
+	public Employee checkUniquePhone(@Param("phone") String phone, @Param("id") int id);
+	
+	@Query("select e from Employee e where e.userName =:username and e.id !=:id")
+	public Employee checkUniqueUserName(@Param("username") String username, @Param("id") int id );
+	
 	@Modifying
 	@Query("update Employee e set e.status=:status where e.userName=:username")
 	public int updateEmployeeStatus(@Param("username") String username, @Param("status") String status);

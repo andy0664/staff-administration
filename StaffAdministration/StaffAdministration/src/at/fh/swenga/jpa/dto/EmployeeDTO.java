@@ -23,15 +23,15 @@ public class EmployeeDTO {
 	private String role;
 	private int department;
 	private String password;
-	private String eMail;
-	private String telefon;
+	private String mail;
+	private String phone;
 
 	public EmployeeDTO() {
 	}
 
 	public EmployeeDTO(int ssn, String firstName, String lastName,
 			Date dayOfBirth, Address address, String jobDescription,
-			float salary, Date dayOfEntry, String role, int department, String eMail, String telefon) {
+			float salary, Date dayOfEntry, String role, int department, String mail, String phone) {
 		this.ssn = ssn;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -42,8 +42,8 @@ public class EmployeeDTO {
 		this.dayOfEntry = dayOfEntry;
 		this.role = role;
 		this.department = department;
-		this.eMail=eMail;
-		this.telefon=telefon;
+		this.mail=mail;
+		this.phone=phone;
 	}
 
 	public EmployeeDTO(int ssn, String firstName, String lastName,
@@ -171,25 +171,25 @@ public class EmployeeDTO {
 	
 	
 
-	public String geteMail() {
-		return eMail;
+	public String getMail() {
+		return mail;
 	}
 
-	public void seteMail(String eMail) {
-		this.eMail = eMail;
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
-	public String getTelefon() {
-		return telefon;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setTelefon(String telefon) {
-		this.telefon = telefon;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public Employee generateEmployee() {
 		return new Employee(ssn, firstName, lastName, dayOfBirth, address,
-				jobDescription, salary,dayOfEntry,userName,password,eMail,telefon);
+				jobDescription, salary,dayOfEntry,userName,password,mail,phone);
 	}
 
 }
