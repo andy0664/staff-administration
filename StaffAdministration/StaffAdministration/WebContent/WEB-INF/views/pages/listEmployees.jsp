@@ -75,8 +75,8 @@
 										<td>${employee.lastName}</td>
 										<td>${employee.department.name}</td>
 										<td>${employee.jobDescription}</td>
-										<td>${employee.eMail}</td>
-										<td>${employee.telefon}</td>
+										<td>${employee.mail}</td>
+										<td>${employee.phone}</td>
 										<td><c:choose>
 												<c:when test="${employee.status=='Available'}">
 													<div style="color: #449D44">

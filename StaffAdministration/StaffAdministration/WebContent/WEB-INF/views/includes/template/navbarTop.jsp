@@ -1,4 +1,5 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%-- <%@ page session="true" %> --%>
 <nav class="navbar navbar-default top-navbar" role="navigation">
 	<div class="navbar-header">
 		<button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -12,19 +13,19 @@
 	<ul class="nav navbar-top-links pull-right">
 		<li class="dropdown"><a class="dropdown-toggle"
 			data-toggle="dropdown" href="#" aria-expanded="false"> <c:choose>
-					<c:when test="${employee.status=='Available'}">
+					<c:when test="${sessionScope.status=='Available'}">
 						<div style="color: #449D44">
 							<i class="fa fa-check-circle" style="margin-right: 5px"></i><i
 								class="fa fa-caret-down"></i>
 						</div>
 					</c:when>
-					<c:when test="${employee.status=='Busy'}">
+					<c:when test="${sessionScope.status=='Busy'}">
 						<div style="color: #F0AD4E">
 							<i class="fa fa-circle-o" style="margin-right: 5px"></i><i
 								class="fa fa-caret-down"></i>
 						</div>
 					</c:when>
-					<c:when test="${employee.status=='Not available'}">
+					<c:when test="${sessionScope.status=='Not available'}">
 						<div style="color: #C9302C">
 							<i class="fa fa-times-circle" style="margin-right: 5px"></i><i
 								class="fa fa-caret-down"></i>

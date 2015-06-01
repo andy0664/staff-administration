@@ -129,20 +129,23 @@
 							</div>
 						</div>
 					</div>
-
-					<div class="col-xs-8 form-group">
-						<div class="row">
-							<div class="col-xs-8">
-								<label for="inputChangeMessage">Change Request</label>
-								<textarea class="form-control" id="inputChangeMessage" rows="3"
-									name="changeRequest"></textarea>
+					<form class="form-horizontal" method="post" action="changeRequest">
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token }" />
+						<div class="col-xs-8 form-group">
+							<div class="row">
+								<div class="col-xs-8">
+									<label for="inputChangeMessage">Change Request</label>
+									<textarea class="form-control" id="inputChangeMessage" rows="3"
+										name="changeRequest"></textarea>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-xs-8 form-group">
-						<button type="Submit" class="btn btn-primary">Send
-							Request</button>
-					</div>
+						<div class="col-xs-8 form-group">
+							<button type="Submit" class="btn btn-primary">Send
+								Request</button>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>

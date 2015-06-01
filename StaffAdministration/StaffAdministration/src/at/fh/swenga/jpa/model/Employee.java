@@ -17,9 +17,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
+import org.jboss.logging.annotations.Message;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import at.fh.swenga.jpa.dto.EmployeeDTO;
@@ -35,13 +37,14 @@ public class Employee implements Serializable {
 	private int id;
 
 	//add unique=true
-	 @Column(nullable=false)
+	@Column(nullable=false)
+	//@Column(nullable=false, unique=true)
 	private int ssn;
 
-	 @Column(nullable=false, length=250)
+	 @Column(nullable=false)
 	private String firstName;
 
-	 @Column(nullable=false, length=250)
+	 @Column(nullable=false)
 	private String lastName;
 
 	@NotNull(message = "{0} is required")
@@ -52,14 +55,16 @@ public class Employee implements Serializable {
 	@Embedded
 	private Address address;
 
-	@Column(nullable=false, length=250)
+	@Column(nullable=false)
 	private String jobDescription;
 
 	@NotNull(message = "{0} is required")
 	private float salary;
 	
+	//@Column(unique=true)
 	private String mail;
 	
+	//@Column(unique=true)
 	private String phone;
 
 	@NotNull(message = "{0} is required")
@@ -67,18 +72,19 @@ public class Employee implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dayOfEntry;
 
-//	@NotNull(message = "{0} is required")
 	private String role;
 	
 	private String status=Constant.STATUS_AVAILABLE;
 	
+	//@Column(unique=true)
 	private String userName;
+	
 	private String password;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "employee", cascade=CascadeType.ALL)
 	private Set<UserRole> userRoles;
 	
-	@ManyToOne(cascade=CascadeType.MERGE)
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Department department;
 	
 	@OneToMany(mappedBy="employee", cascade=CascadeType.REMOVE)

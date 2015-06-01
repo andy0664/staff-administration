@@ -72,6 +72,8 @@ public class Constant {
 	public static final String KEY_TIME_RECORD_DATE_FROM="dateFrom";
 	public static final String KEY_TIME_RECORD_DATE_TO="dateTo";
 	public static final String KEY_ANNOUNCEMENT_LIST="announcementList";
+	public static final String KEY_STATUS="status";
+	
 	
 	//Redirects
 	public static final String REDIRECT_MANAGE_EMPLOYEES="redirect:manageEmployees";

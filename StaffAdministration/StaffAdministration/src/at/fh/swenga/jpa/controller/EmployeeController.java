@@ -89,8 +89,7 @@ public class EmployeeController {
 		try {
 			model.addAttribute(Constant.KEY_DEPARTMENT_LIST,
 					departmentDao.findAll());
-			model.addAttribute(Constant.KEY_EMPLOYEE,
-					employeeDao.findOne(id));
+			model.addAttribute(Constant.KEY_EMPLOYEE, employeeDao.findOne(id));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -101,7 +100,8 @@ public class EmployeeController {
 	@RequestMapping(value = { "deleteEmployee" })
 	public String deleteEmployee(@RequestParam int id, Model model) {
 		try {
-			//announcementDao.changeEnableStateAnnouncement(false, employeeDao.findEmployeeById(id));
+			// announcementDao.changeEnableStateAnnouncement(false,
+			// employeeDao.findEmployeeById(id));
 			employeeDao.delete(id);
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -113,33 +113,34 @@ public class EmployeeController {
 	}
 
 	// Zum füllen der Mitarbeiter Tabelle nur zum testen --> ende entfernen
-//	@RequestMapping("fillEmployee")
-//	@Transactional
-//	public String fillData(Model model) {
-//
-//		DataFactory df = new DataFactory();
-//
-//		for (int i = 0; i < 10; i++) {
-//			Address address = new Address(df.getStreetName(), df.getCity(),
-//					df.getRandomWord(), 8052);
-//			Employee p1 = new Employee(12345, df.getFirstName(),
-//					df.getLastName(), df.getBirthDate(), address,
-//					df.getRandomText(10, 20), 1234.5f, df.getBirthDate(),
-//					"testUser",
-//					"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC","admin@gmx.at","+43 1234567");
-//			employeeDao.save(p1);
-//		}
-//		return Constant.REDIRECT_MANAGE_EMPLOYEES;
-//	}
-	
-	@RequestMapping(value={"ExportEmployeePdf"})
-	public String exportEmployeePdf(int id, Model model){
-		model.addAttribute(Constant.KEY_EMPLOYEE_LIST, employeeDao.findEmployeeById(id));
+	// @RequestMapping("fillEmployee")
+	// @Transactional
+	// public String fillData(Model model) {
+	//
+	// DataFactory df = new DataFactory();
+	//
+	// for (int i = 0; i < 10; i++) {
+	// Address address = new Address(df.getStreetName(), df.getCity(),
+	// df.getRandomWord(), 8052);
+	// Employee p1 = new Employee(12345, df.getFirstName(),
+	// df.getLastName(), df.getBirthDate(), address,
+	// df.getRandomText(10, 20), 1234.5f, df.getBirthDate(),
+	// "testUser",
+	// "$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC","admin@gmx.at","+43 1234567");
+	// employeeDao.save(p1);
+	// }
+	// return Constant.REDIRECT_MANAGE_EMPLOYEES;
+	// }
+
+	@RequestMapping(value = { "ExportEmployeePdf" })
+	public String exportEmployeePdf(int id, Model model) {
+		model.addAttribute(Constant.KEY_EMPLOYEE_LIST,
+				employeeDao.findEmployeeById(id));
 		return Constant.CLASS_EXPORT_EMPLOYEE_PDF;
 	}
-	
-	@RequestMapping(value={"ExportEmployeesPdf"})
-	public String exportEmployeesPdf(Model model){
+
+	@RequestMapping(value = { "ExportEmployeesPdf" })
+	public String exportEmployeesPdf(Model model) {
 		User user = controllerSupport.getCurrentUser();
 		if (user.getAuthorities().size() == Constant.ROLE_INT_MANAGER) {
 			model.addAttribute(Constant.KEY_EMPLOYEE_LIST,
@@ -199,10 +200,12 @@ public class EmployeeController {
 		Employee emp = employeeDao.findOne(id);
 		newEmployee.setAddress(newAddress);
 		emp.updateEmployee(newEmployee);
-		if(newEmployee.getPassword()!=null && !emp.getPassword().equals(newEmployee.getPassword())){
+		if (newEmployee.getPassword() != null
+				&& !emp.getPassword().equals(newEmployee.getPassword())) {
 			emp.setPassword(encoder.encode(newEmployee.getPassword()));
 		}
-		if (newEmployee.getRole()==null || emp.getRole().equals(newEmployee.getRole())) {
+		if (newEmployee.getRole() == null
+				|| emp.getRole().equals(newEmployee.getRole())) {
 			saveEmployee(emp, department, "");
 		} else {
 			emp.setUserRole(new HashSet<UserRole>());
@@ -221,17 +224,20 @@ public class EmployeeController {
 	 */
 	@Transactional
 	@RequestMapping(value = { "changeRequest" }, method = RequestMethod.POST)
-	public String employeeChangeRequest(String userName, String changeRequest,
+	public String employeeChangeRequest(String changeRequest,
 			Model model) {
-		Employee emp = employeeDao.findEmployeeByUserName(userName);
-		Employee manager = employeeDao.findManagerFromEmployee(emp
-				.getDepartment().getId());
-		String message = String.format("%s %s: %s", emp.getFirstName(),
-				emp.getLastName(), changeRequest);
-		Announcement annouce = new Announcement(
-				Constant.ANNOUNCEMENT_CHANGE_REQUEST, message,
-				Constant.ANNOUNCEMENT_NOT_READ, manager, emp);
-		announcementDao.save(annouce);
+		User user = controllerSupport.getCurrentUser();
+		if (user.getAuthorities().size() == Constant.ROLE_INT_EMPLOYEE) {
+			Employee emp = employeeDao.findEmployeeByUserName(user.getUsername());
+			Employee manager = employeeDao.findManagerFromEmployee(emp
+					.getDepartment().getId());
+			String message = String.format("%s %s: %s", emp.getFirstName(),
+					emp.getLastName(), changeRequest);
+			Announcement annouce = new Announcement(
+					Constant.ANNOUNCEMENT_CHANGE_REQUEST, message,
+					Constant.ANNOUNCEMENT_NOT_READ, manager, emp);
+			announcementDao.save(annouce);
+		}
 		return "forward:start";
 	}
 
