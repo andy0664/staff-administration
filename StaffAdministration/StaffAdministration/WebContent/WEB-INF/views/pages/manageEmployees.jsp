@@ -57,7 +57,7 @@
 										<i class="fa fa-user-plus"></i> Add Employee
 									</button>
 								</a> <a href="ExportEmployeesPdf">
-									<button type="button" class="btn btn-success">Export Employees</button>
+									<button type="button" class="btn btn-success"><i class="fa fa-file-pdf-o" style="margin-right:5px"></i>Export all as PDF</button>
 								</a>
 							</div>
 						</sec:authorize>
@@ -117,7 +117,7 @@
 												</button>
 										</a> <a href="ExportEmployeePdf?id=${employee.id}">
 												<button type="button" class="btn btn-xs btn-success">
-													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+													<i class="fa fa-file-pdf-o" style="margin-right:5px"></i>
 													PDF
 												</button>
 										</a> <sec:authorize access="hasRole('ADMIN')">

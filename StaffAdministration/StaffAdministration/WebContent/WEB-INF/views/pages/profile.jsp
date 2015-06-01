@@ -25,176 +25,129 @@
 
 		<div id="page-wrapper-subpages">
 			<div id="page-inner-subpages">
-							<div class="page-header">
-					<h1>${employee.firstName} ${employee.lastName}</h1>
+				<div class="page-header">
+					<h1>${employee.firstName}${employee.lastName}</h1>
 				</div>
-				<div class="row-fluid">
-					<div class="col-md-8 col-md-offset-2">
-					<form class="form-horizontal">
-						<! ----------------  ssn ---------------- -->
-						<div class="form-group">
-							<label for="inputSSN" class="col-md-2 control-label">SSN</label>
-							<div class="col-md-5">
-								<input class="form-control" id="inputSSN" type="text" name="ssn"
-									value="<c:out value="${employee.ssn}" />" readonly>
-							</div>
-						</div>
 
-						<! ----------------  first Name ---------------- -->
-						<div class="form-group">
-							<label for="inputFirstName" class="col-md-2 control-label">First
-								Name</label>
-							<div class="col-md-5">
-								<input class="form-control" id="inputFirstName" type="text"
+				<div class="row">
+					<div class="col-xs-6">
+						<div class="row">
+							<div class="col-xs-12 col-sm-6">
+								<label for="inputFirstName">Firstname</label> <input
+									class="form-control" id="inputFirstName" type="text"
 									name="firstName" value="<c:out value="${employee.firstName}"/>"
 									readonly>
 							</div>
-						</div>
-						<! ----------------  last Name ---------------- -->
-						<div class="form-group">
-							<label for="inputLastName" class="col-md-2 control-label">Last
-								Name</label>
-							<div class="col-md-5">
-								<input class="form-control" id="inputLastName" type="text"
+							<div class="col-xs-12 col-sm-6">
+								<label for="inputLastName">Lastname</label> <input
+									class="form-control" id="inputLastName" type="text"
 									name="lastName" value="<c:out value="${employee.lastName}"/>"
 									readonly>
 							</div>
-						</div>
 
-						<! ----------------  dayOfBirth ---------------- -->
-						<div class="form-group">
-							<label for="inputDate" class="col-md-2 control-label">Day
-								of Birth</label>
-							<div class="col-md-5">
-								<input class="form_datetime form-control" id="inputDate" placeholder="Date"
-									type="text" readonly name="dayOfBirth"
+						</div>
+					</div>
+					<div class="col-xs-4 form-group">
+						<div class="row">
+							<div class="col-xs-3">
+								<label for="inputSSN">SSN</label> <input class="form-control"
+									id="inputSSN" type="text" name="ssn"
+									value="<c:out value="${employee.ssn}" />" readonly>
+							</div>
+							<div class="col-xs-4">
+								<label for="inputDate">Day of birth</label> <input
+									class="form_datetime form-control" id="inputDate"
+									placeholder="Date" type="text" readonly name="dayOfBirth"
 									value="<fmt:formatDate value="${employee.dayOfBirth}" pattern="dd.MM.yyyy"/>"
-									readonly /> 
+									readonly />
 							</div>
 						</div>
+					</div>
 
-						<! ----------------  Street ---------------- -->
-						<div class="form-group">
-							<label for="inputStreet" class="col-md-2 control-label">Street</label>
-							<div class="col-md-5">
-								<input class="form-control" id="inputStreet" type="text"
-									name="street"
-									value="<c:out value="${employee.address.street}"/>" readonly>
-							</div>
-						</div>
-
-						<! ----------------  ZIP Code ---------------- -->
-						<div class="form-group">
-							<label for="inputZIP" class="col-md-2 control-label">ZIP
-								Code</label>
-							<div class="col-md-5">
-								<input class="form-control" id="inputZIP" type="text" name="zip"
+					<div class="col-xs-10 form-group">
+						<div class="row">
+							<div class="col-xs-2">
+								<label for="inputZIP">ZIP Code</label> <input
+									class="form-control" id="inputZIP" type="text" name="zip"
 									value="<c:out value="${employee.address.zip}"/>" readonly>
 							</div>
-						</div>
-						
-
-						<! ----------------  City ---------------- -->
-						<div class="form-group">
-							<label for="inputCity" class="col-md-2 control-label">City</label>
-							<div class="col-md-5">
-								<input class="form-control" id="inputCity" type="text"
-									name="city" value="<c:out value="${employee.address.city}"/>"
-									readonly>
+							<div class="col-xs-3">
+								<label for="inputCity">City</label> <input class="form-control"
+									id="inputCity" type="text" name="city"
+									value="<c:out value="${employee.address.city}"/>" readonly>
 							</div>
-						</div>
-
-						<! ----------------  Country ---------------- -->
-						<div class="form-group">
-							<label for="inputCountry" class="col-md-2 control-label">Country</label>
-							<div class="col-md-5">
-								<input class="form-control" id="inputCountry" type="text"
+							<div class="col-xs-3">
+								<label for="inputStreet">Street</label> <input
+									class="form-control" id="inputStreet" type="text" name="street"
+									value="<c:out value="${employee.address.street}"/>" readonly>
+							</div>
+							<div class="col-xs-2">
+								<label for="inputCountry">Country</label> <input
+									class="form-control" id="inputCountry" type="text"
 									name="country"
 									value="<c:out value="${employee.address.country}"/>" readonly>
 							</div>
 						</div>
+					</div>
 
-						<! ----------------  Mail ---------------- -->
-						<div class="form-group">
-							<label for="inputMail" class="col-md-2 control-label">E-Mail</label>
-							<div class="col-md-5">
-								<input class="form-control" id="inputMail"
-									type="text" name="mail"
-									value="<c:out value="${employee.mail}"/>" readonly>
-							</div>
-						</div>
-						
-						<! ----------------  Telefon ---------------- -->
-						<div class="form-group">
-							<label for="inputTelefon" class="col-md-2 control-label">Telefon</label>
-							<div class="col-md-5">
-								<input class="form-control" id="inputTelefon"
-									type="text" name="telefon"
-									value="<c:out value="${employee.phone}"/>" readonly>
-							</div>
-						</div>
-						
-						<! ----------------  Berufsbezeichnung ---------------- -->
-						<div class="form-group">
-							<label for="inputDescription" class="col-md-2 control-label">Job
-								Description</label>
-							<div class="col-md-5">
-								<input class="form-control" id="inputDescription"
-									type="text" name="jobDescription"
+					<div class="col-xs-10 form-group">
+						<div class="row">
+							<div class="col-xs-4">
+								<label for="inputDescription">Job Description</label> <input
+									class="form-control" id="inputDescription" type="text"
+									name="jobDescription"
 									value="<c:out value="${employee.jobDescription}"/>" readonly>
 							</div>
-						</div>
-
-						<! ----------------  EntryDate ---------------- -->
-						<div class="form-group">
-							<label for="inputDate" class="col-md-2 control-label">Day
-								of Entry</label>
-							<div class="col-md-5">
-								<input class="form_datetime form-control" id="inputDate" placeholder="Date"
-									type="text" readonly name="dayOfEntry"
-									value="<fmt:formatDate value="${employee.dayOfEntry}" pattern="dd.MM.yyyy"/>"
-									readonly /> <i class="fa fa-calendar"></i>
-							</div>
-						</div>
-
-						<! ---------------  Department ---------------- -->
-						<div class="form-group">
-							<label for="inputDepartment" class="col-md-2 control-label">Department</label>
-							<div class="col-md-5">
-								<input class="form-control" id="inputDepartment" type="text"
+							<div class="col-xs-3">
+								<label for="inputDepartment">Department</label> <input
+									class="form-control" id="inputDepartment" type="text"
 									name="department"
 									value="<c:out value="${employee.department.name}"/>" readonly>
 							</div>
+							<div class="col-xs-3">
+								<label for="inputDate">Day of Entry</label> <input
+									class="form_datetime form-control" id="inputDate"
+									placeholder="Date" type="text" readonly name="dayOfEntry"
+									value="<fmt:formatDate value="${employee.dayOfEntry}" pattern="dd.MM.yyyy"/>"
+									readonly />
+							</div>
 						</div>
-						<form class="form-horizontal" method="post" action="changeRequest">
-							<input type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token }" /> <input type="hidden" name="userName"
-								value="${employee.userName}" />
-								
-							<! ---------------  Change Request ---------------- -->
-							<div class="form-group">
-								<label for="inputChangeMessage" class="col-md-2 control-label">Change
-									Request</label>
-								<div class="col-md-5">
-									<textarea class="form-control" id="inputChangeMessage"  rows="5" 
-										name="changeRequest"></textarea>
-								</div>
+					</div>
+
+					<div class="col-xs-8 form-group">
+						<div class="row">
+							<div class="col-xs-3">
+								<label for="inputTelefon">Telephone</label> <input
+									class="form-control" id="inputTelefon" type="text"
+									name="telefon" value="<c:out value="${employee.phone}"/>"
+									readonly>
 							</div>
-							<! ----------------  buttons ---------------- -->
-							<div class="form-group">
-								<div class="col-md-10 col-md-offset-2">
-									<button type="Submit" class="btn btn-primary">Send
-										Request</button>
-								</div>
+							<div class="col-xs-5">
+								<label for="inputMail">Email</label> <input class="form-control"
+									id="inputMail" type="text" name="mail"
+									value="<c:out value="${employee.mail}"/>" readonly>
 							</div>
-						</form>
-						</form>
+						</div>
+					</div>
+
+					<div class="col-xs-8 form-group">
+						<div class="row">
+							<div class="col-xs-8">
+								<label for="inputChangeMessage">Change Request</label>
+								<textarea class="form-control" id="inputChangeMessage" rows="3"
+									name="changeRequest"></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-8 form-group">
+						<button type="Submit" class="btn btn-primary">Send
+							Request</button>
 					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
+
 	<!--  End of container -->
 
 

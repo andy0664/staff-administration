@@ -197,7 +197,7 @@
 						<div class="panel panel-green">
 							<div class="row">
 								<div class="col-xs-3">
-									<i class="fa fa-area-chart fa-5x"></i>
+									<i class="fa fa-list-ul fa-5x"></i>
 								</div>
 								<div class="col-xs-9 text-right">
 									<font size="5">My Time Records</font>
@@ -211,7 +211,7 @@
 							<div class="panel panel-green">
 								<div class="row">
 									<div class="col-xs-3">
-										<i class="fa fa-area-chart fa-5x"></i>
+										<i class="fa fa-database fa-5x"></i>
 									</div>
 									<div class="col-xs-9 text-right">
 										<font size="5">All Time Records</font>
@@ -269,17 +269,17 @@
 								<div class="col-xs-12 news-item">
 									<div class="col-xs-3" style="margin-left: -15px">
 										<i class="fa fa-newspaper-o fa-5x" style="color: #708090"></i>
-										<sec:authorize access="hasAnyRole('ADMIN', 'MANAGER')">
-											<a href="removeNews?id=${news.id}">
-												<button type="button" class="btn btn-xs btn-danger">
-													<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>delete
-												</button>
-											</a>
-										</sec:authorize>
+
 									</div>
 									<div class="col-xs-9">
 										<span class="pull-right text-muted"> <em>Today</em>
-										</span> <b>${news.title}</b>
+										</span> <b>${news.title}										<sec:authorize access="hasAnyRole('ADMIN', 'MANAGER')">
+												<a href="removeNews?id=${news.id}">
+													<button type="button" class="btn btn-xs btn-danger">
+														<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>delete
+													</button>
+												</a>
+										</sec:authorize></b>
 										<p>${news.message}</p>
 									</div>
 								</div>
@@ -298,16 +298,14 @@
 			</div>
 			<!-- end feature -->
 
-			<sec:authorize access="hasRole('ADMIN')">
+			<!--<sec:authorize access="hasRole('ADMIN')">
 				<div class="row-fluid">
 					<div class="col-md-12">
-						<!-- Line Chart -->
 						<div class="col-md-8">
 							<div class="panel-charts">
 								<div id="lineChart" style="width: 100%; height: 400px;"></div>
 							</div>
 						</div>
-						<!-- Pie Chart -->
 						<div class="col-md-4">
 							<div class="panel-charts">
 								<div id="pieChart" style="width: 100%; height: 400px;"></div>
@@ -318,7 +316,6 @@
 
 				<div class="row-fluid">
 					<div class="col-md-12">
-						<!-- Bar Chart -->
 						<div class="col-md-8">
 							<div class="panel-charts">
 								<div id="barChart" style="width: 100%; height: 400px;"></div>
@@ -326,9 +323,9 @@
 						</div>
 					</div>
 				</div>
-			</sec:authorize>
+			</sec:authorize> -->
 			<!-- 	Line Chart -->
-			<script>
+			<!--<script>
 				$(function() {
 					$('#lineChart').highcharts(
 							{
@@ -384,7 +381,6 @@
 				});
 			</script>
 
-<!-- 									Pie Chart -->
 			<script>
 				$(function() {
 
@@ -524,54 +520,54 @@
 										} ]
 									});
 				});
-			</script>
+			</script>-->
 
 		</div>
 	</div>
-			<!-- end features -->
+	<!-- end features -->
 
-			<!-- Modal News -->
-			<div class="modal fade" id="basicModal" role="dialog"
-				aria-labelledby="basicModal" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-hidden="true">&times;</button>
-							<h4 class="modal-title" id="myModalLabel">New Entry</h4>
+	<!-- Modal News -->
+	<div class="modal fade" id="basicModal" role="dialog"
+		aria-labelledby="basicModal" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">New Entry</h4>
+				</div>
+				<div class="modal-body">
+					<form role="form" method="post" action="newNews">
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token }" />
+						<div class="form-group">
+							<label for="usr">Heading:</label> <input type="text"
+								class="form-control" id="inputTitle" name="title">
 						</div>
-						<div class="modal-body">
-							<form role="form" method="post" action="newNews">
-								<input type="hidden" name="${_csrf.parameterName}"
-									value="${_csrf.token }" />
-								<div class="form-group">
-									<label for="usr">Heading:</label> <input type="text"
-										class="form-control" id="inputTitle" name="title">
-								</div>
-								<div class="form-group">
-									<label for="comment">Content</label>
-									<textarea class="form-control" rows="5" id="inputMessage"
-										name="message"></textarea>
-								</div>
-								<!-- <div class="form-group">
+						<div class="form-group">
+							<label for="comment">Content</label>
+							<textarea class="form-control" rows="5" id="inputMessage"
+								name="message"></textarea>
+						</div>
+						<!-- <div class="form-group">
 							<label for="usr">Link:</label> <input type="text"
 								class="form-control" id="usr">
 						</div> -->
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default"
-										data-dismiss="modal">Close</button>
-									<button type="submit" class="btn btn-primary">Save
-										changes</button>
-								</div>
-							</form>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Save
+								changes</button>
 						</div>
-					</div>
+					</form>
 				</div>
 			</div>
+		</div>
+	</div>
 
-			<!-- Footer -->
-			<%-- 	<jsp:include page="includes/template/footer.jsp" /> --%>
+	<!-- Footer -->
+	<%-- 	<jsp:include page="includes/template/footer.jsp" /> --%>
 
-			<jsp:include page="includes/bootstrapJs.jsp" />
+	<jsp:include page="includes/bootstrapJs.jsp" />
 </body>
 </html>

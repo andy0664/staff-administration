@@ -55,12 +55,12 @@
 
 				<div class="row">
 					<div class="col-md-4 col-md-offset-1">
-						<p>
-							<a href="newTimeRecord">
-								<button type="button" class="btn btn-success">Add new
-									Timerecord</button>
-							</a>
-						</p>
+<!-- 						<p> -->
+<!-- 							<a href="newTimeRecord"> -->
+<!-- 								<button type="button" class="btn btn-success">Add new -->
+<!-- 									Timerecord</button> -->
+<!-- 							</a> -->
+<!-- 						</p> -->
 
 						<!-- <form class="form-horizontal" method="post"
 							action="timeRecordEmployee"> -->
@@ -110,14 +110,14 @@
 							<div class="form-group">
 								<div class="col-md-10 col-md-offset-2">
 									<button type="Submit" class="btn btn-primary"
-										formaction="${showAction}">Show</button>
+										formaction="${showAction}" data-toggle="tooltip" title="Get a list of all Records">Show</button>
 									<button type="Submit" class="btn btn-success"
 										formaction="timeRecordExcelExport">
-										<i class="fa fa-table"></i> Excel Export
+										<i class="fa fa-table"></i> Excel
 									</button>
-									<button type="Submit" class="btn btn-success"
-										formaction="timeRecordPdfExport">
-										<i class="fa fa-table"></i> PDF Export
+									<button type="Submit" class="btn btn-danger"
+										formaction="timeRecordPdfExport" data-toggle="tooltip" title="Export all Records as PDF">
+										<i class="fa fa-file-pdf-o"></i> PDF
 									</button>
 								</div>
 							</div>
