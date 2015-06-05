@@ -153,7 +153,9 @@ public class CoverPageController {
 			firstStart = false;
 			return Constant.PAGE_LOGIN;
 		} catch (Exception ex) {
-			System.out.println("Location: "+ex.getLocalizedMessage()+"\nCouse: "+ex.getCause()+"\nMessage: "+ex.getMessage());
+			System.out.println("Location: " + ex.getLocalizedMessage()
+					+ "\nCouse: " + ex.getCause() + "\nMessage: "
+					+ ex.getMessage());
 		}
 		return null;
 
@@ -177,8 +179,9 @@ public class CoverPageController {
 							.findAnnouncementByManagerAndEnabledTrueAndNotReadGreaterThanOrDayIs(
 									emp, 0, new Date()));
 		}
-		if(request.getSession().getAttribute(Constant.KEY_STATUS)==null){
-			request.getSession().setAttribute(Constant.KEY_STATUS, emp.getStatus());
+		if (request.getSession().getAttribute(Constant.KEY_STATUS) == null) {
+			request.getSession().setAttribute(Constant.KEY_STATUS,
+					emp.getStatus());
 		}
 		return Constant.PAGE_INDEX;
 	}
@@ -253,12 +256,15 @@ public class CoverPageController {
 		return Constant.PAGE_LIST_EMPLYEES;
 	}
 
-	@Transactional
+	
 	@RequestMapping(value = { "setStatus" })
-	public String setStatus(@RequestParam String status, Model model) {
+	public String setStatus(@RequestParam String status, Model model,
+			HttpServletRequest request) {
 		User user = controllerSupport.getCurrentUser();
 		employeeDao.updateEmployeeStatus(user.getUsername(), status);
-		return Constant.PAGE_INDEX;
+		request.getSession().setAttribute(Constant.KEY_STATUS, status);
+		String page = ((String) request.getSession().getAttribute(Constant.KEY_CURRENT_PAGE));
+		return page;
 	}
 
 	@RequestMapping(value = { "showProfile" })

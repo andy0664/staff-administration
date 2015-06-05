@@ -42,7 +42,7 @@ public class AnnouncementController {
 	@Autowired
 	private ControllerSupport controllerSupport;
 	
-	@Transactional
+	
 	@RequestMapping(value={"acceptBirthday"})
 	public String acceptBirthday(@RequestParam int announcement, Model model){
 		Announcement announce = announcementDao.findOne(announcement);
@@ -51,7 +51,7 @@ public class AnnouncementController {
 		return "forward:start";
 	}
 	
-	@Transactional
+	
 	@RequestMapping(value={"denyVacation"})
 	public String denyVacation(@RequestParam int announcement, Model model){
 		Announcement announce = announcementDao.findOne(announcement);
@@ -62,14 +62,14 @@ public class AnnouncementController {
 		return "forward:start";
 	}
 	
-	@Transactional
+	
 	@RequestMapping(value={"acceptVacation"})
 	public String acceptVacation(@RequestParam int announcement, Model model){
 		setRead(announcement);
 		return "forward:start";
 	}
 	
-	@Transactional
+	
 	@RequestMapping(value={"acceptChangeRequest"})
 	public String acceptChangeRequest(@RequestParam int announcement, Model model){
 		setRead(announcement);

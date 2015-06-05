@@ -15,11 +15,11 @@ public class ControllerSupport {
 
 	public boolean checkBinding(BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
-			String errorMessage = "";
-			for (FieldError error : bindingResult.getFieldErrors()) {
-				errorMessage += error.getField() + " is invalid<br>";
-			}
-			model.addAttribute(Constant.KEY_ERROR_MESSAGE, errorMessage);
+//			String errorMessage = "";
+//			for (FieldError error : bindingResult.getFieldErrors()) {
+//				errorMessage += error.getField() + " is invalid<br>";
+//			}
+			model.addAttribute(Constant.KEY_ERROR_MESSAGE, Constant.ERROR_MESSAGE_ADD_EMPLOYEE);
 			return true;
 		}
 		return false;

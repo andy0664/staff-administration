@@ -61,8 +61,10 @@
 								<div class="form-group">
 									<label for="inputSSN" class="col-md-2 control-label">SSN</label>
 									<div class="col-md-5">
-										<input class="form-control" id="inputSSN" type="text"
-											name="ssn" value="<c:out value="${employee.ssn}"/>" required>
+										<input class="form-control" id="inputSSN" type="number"
+											name="ssn"
+											value="<c:out value="${employee.ssn}"/><c:out value="${tmpEmployee.ssn}"/>"
+											required>
 									</div>
 								</div>
 
@@ -73,7 +75,8 @@
 									<div class="col-md-5">
 										<input class="form-control" id="inputFirstName" type="text"
 											name="firstName"
-											value="<c:out value="${employee.firstName}"/>" required>
+											value="<c:out value="${employee.firstName}"/><c:out value="${tmpEmployee.firstName}"/>"
+											required>
 									</div>
 								</div>
 								<! ----------------  last Name ---------------- -->
@@ -82,7 +85,8 @@
 										Name</label>
 									<div class="col-md-5">
 										<input class="form-control" id="inputLastName" type="text"
-											name="lastName" value="<c:out value="${employee.lastName}"/>"
+											name="lastName"
+											value="<c:out value="${employee.lastName}"/><c:out value="${tmpEmployee.lastName}"/>"
 											required>
 									</div>
 								</div>
@@ -94,7 +98,7 @@
 									<div class="col-md-5">
 										<input class="form_datetime" id="inputDate" placeholder="Date"
 											type="text" readonly name="dayOfBirth"
-											value="<fmt:formatDate value="${employee.dayOfBirth}" pattern="dd.MM.yyyy"/>"
+											value="<fmt:formatDate value="${employee.dayOfBirth}" pattern="dd.MM.yyyy"/><fmt:formatDate value="${tmpEmployee.dayOfBirth}" pattern="dd.MM.yyyy"/>"
 											required /> <i class="fa fa-calendar"></i>
 									</div>
 								</div>
@@ -105,7 +109,8 @@
 									<div class="col-md-5">
 										<input class="form-control" id="inputStreet" type="text"
 											name="street"
-											value="<c:out value="${employee.address.street}"/>" required>
+											value="<c:out value="${employee.address.street}"/><c:out value="${address.street}"/>"
+											required>
 									</div>
 								</div>
 
@@ -114,8 +119,9 @@
 									<label for="inputZIP" class="col-md-2 control-label">ZIP
 										Code</label>
 									<div class="col-md-5">
-										<input class="form-control" id="inputZIP" type="text"
-											name="zip" value="<c:out value="${employee.address.zip}"/>"
+										<input class="form-control" id="inputZIP" type="number"
+											name="zip"
+											value="<c:out value="${employee.address.zip}"/><c:out value="${address.zip}"/>"
 											required>
 									</div>
 								</div>
@@ -125,7 +131,8 @@
 									<label for="inputCity" class="col-md-2 control-label">City</label>
 									<div class="col-md-5">
 										<input class="form-control" id="inputCity" type="text"
-											name="city" value="<c:out value="${employee.address.city}"/>"
+											name="city"
+											value="<c:out value="${employee.address.city}"/><c:out value="${address.city}"/>"
 											required>
 									</div>
 								</div>
@@ -136,7 +143,8 @@
 									<div class="col-md-5">
 										<input class="form-control" id="inputCountry" type="text"
 											name="country"
-											value="<c:out value="${employee.address.country}"/>" required>
+											value="<c:out value="${employee.address.country}"/><c:out value="${address.country}"/>"
+											required>
 									</div>
 								</div>
 
@@ -145,7 +153,8 @@
 									<label for="inputMail" class="col-md-2 control-label">E-Mail</label>
 									<div class="col-md-5">
 										<input class="form-control" id="inputMail" type="text"
-											name="mail" value="<c:out value="${employee.mail}"/>">
+											name="mail"
+											value="<c:out value="${employee.mail}"/><c:out value="${tmpEmployee.mail}"/>">
 									</div>
 								</div>
 
@@ -154,7 +163,8 @@
 									<label for="inputTelefon" class="col-md-2 control-label">Telefon</label>
 									<div class="col-md-5">
 										<input class="form-control" id="inputTelefon" type="text"
-											name="phone" value="<c:out value="${employee.phone}"/>">
+											name="phone"
+											value="<c:out value="${employee.phone}"/><c:out value="${tmpEmployee.phone}"/>">
 									</div>
 								</div>
 
@@ -165,7 +175,8 @@
 									<div class="col-md-5">
 										<input class="form-control" id="inputDescription"
 											type="jobDescription" name="jobDescription"
-											value="<c:out value="${employee.jobDescription}"/>" required>
+											value="<c:out value="${employee.jobDescription}"/><c:out value="${tmpEmployee.jobDescription}"/>"
+											required>
 									</div>
 								</div>
 
@@ -174,7 +185,8 @@
 									<label for="inputSalary" class="col-md-2 control-label">Salary</label>
 									<div class="col-md-5">
 										<input class="form-control" id="inputSalary" type="text"
-											name="salary" value="<c:out value="${employee.salary}"/>"
+											name="salary"
+											value="<c:out value="${employee.salary}"/><c:out value="${tmpEmployee.salary}"/>"
 											required>
 									</div>
 								</div>
@@ -186,7 +198,7 @@
 									<div class="col-md-5">
 										<input class="form_datetime" id="inputDate" placeholder="Date"
 											type="text" readonly name="dayOfEntry"
-											value="<fmt:formatDate value="${employee.dayOfEntry}" pattern="dd.MM.yyyy"/>"
+											value="<fmt:formatDate value="${employee.dayOfEntry}" pattern="dd.MM.yyyy"/><fmt:formatDate value="${tmpEmployee.dayOfEntry}" pattern="dd.MM.yyyy"/>"
 											/required> <i class="fa fa-calendar"></i>
 									</div>
 								</div>
@@ -219,7 +231,8 @@
 										<div class="col-md-5">
 											<input class="form-control" id="inputUserName" type="text"
 												name="userName"
-												value="<c:out value="${employee.userName}"/>" required>
+												value="<c:out value="${employee.userName}"/><c:out value="${tmpEmployee.ssn}"/>"
+												required>
 										</div>
 									</div>
 

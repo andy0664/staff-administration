@@ -56,7 +56,7 @@ public class TimeRecordController {
 	/*
 	 * ########### listTimeRecords.jsp ############
 	 */
-	@Transactional
+	
 	@RequestMapping(value = { "timeRecordEmployee" })
 	public String timeRecordManagerView(
 			@Valid @ModelAttribute TimeRecordRequestDTO request,
@@ -67,7 +67,7 @@ public class TimeRecordController {
 		return Constant.PAGE_LIST_TIME_RECORDS;
 	}
 
-	@Transactional
+	
 	@RequestMapping(value = { "timeRecordEmployees" })
 	public String timeRecordManagerViewForAllEmployees(
 			@Valid @ModelAttribute TimeRecordRequestDTO request,
@@ -80,7 +80,7 @@ public class TimeRecordController {
 		return Constant.PAGE_LIST_TIME_RECORDS;
 	}
 
-	@Transactional
+	
 	@RequestMapping(value = { "deleteTimeRecord" })
 	public String deleteTimeRecord(@RequestParam int timerecord,
 			@RequestParam int id, @RequestParam Date dateFrom,
@@ -96,7 +96,7 @@ public class TimeRecordController {
 				dateTo), model);
 	}
 
-	@Transactional
+	
 	@RequestMapping(value = { "timeRecordExcelExport" })
 	public String timeRecordExcelExport(
 			@Valid @ModelAttribute TimeRecordRequestDTO request,
@@ -109,7 +109,7 @@ public class TimeRecordController {
 
 	}
 	
-	@Transactional
+	
 	@RequestMapping(value = { "timeRecordPdfExport" })
 	public String timeRecordPdfExport(
 			@Valid @ModelAttribute TimeRecordRequestDTO request,
@@ -126,7 +126,7 @@ public class TimeRecordController {
 	 * ########### editTimeRecord.jsp ############
 	 */
 
-	@Transactional
+	
 	@RequestMapping(value = { "addTimeRecord" }, method = RequestMethod.POST)
 	public String addTimeRecord(@Valid @ModelAttribute TimeRecordDTO newRecord,
 			Model model, BindingResult bindingResult) {
@@ -152,7 +152,7 @@ public class TimeRecordController {
 		return Constant.PAGE_INDEX;
 	}
 	
-	@Transactional
+	
 	private String prepareTimeRecordManager(TimeRecordRequestDTO request,
 			Model model) {
 		model.addAttribute(Constant.KEY_TIME_RECORD_DATE_FROM,

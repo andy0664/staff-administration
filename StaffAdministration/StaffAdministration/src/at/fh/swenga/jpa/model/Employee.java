@@ -19,6 +19,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import at.fh.swenga.jpa.dto.EmployeeDTO;
 import at.fh.swenga.jpa.support.Constant;
@@ -44,7 +45,7 @@ public class Employee implements Serializable {
 	private String lastName;
 
 	@NotNull(message = "{0} is required")
-//	@Past(message = "{0} must be in the past")
+	@Past(message = "{0} must be in the past")
 	@Temporal(TemporalType.DATE)
 	private Date dayOfBirth;
 
@@ -64,7 +65,6 @@ public class Employee implements Serializable {
 	private String phone;
 
 	@NotNull(message = "{0} is required")
-//	@Past(message = "{0} must be in the past")
 	@Temporal(TemporalType.DATE)
 	private Date dayOfEntry;
 

@@ -1,4 +1,5 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%-- <%@ page session="true" %> --%>
 <nav class="navbar navbar-default top-navbar" role="navigation">
 	<div class="navbar-header">
@@ -40,32 +41,39 @@
 				</c:choose>
 		</a>
 			<ul class="dropdown-menu dropdown-alerts">
-				<li><a href="#">
+				<form class="form-horizontal" method="post" action="setStatus">
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token }" />
+					<c:set var="currentPage"
+						value="${fn:substringBefore(fn:substringAfter(pageContext.request.servletPath,'views'),'.jsp')}"
+						scope="session" />
+					<li>
 						<div>
 							<button type="Submit" class="btn btn-success"
 								style="width: 130px" name="status" value="Available">
 								<i class="fa fa-check-circle"></i> Available
 							</button>
-						</div>
-				</a></li>
-				<li class="divider"></li>
-				<li><a href="#">
+						</div> </a>
+					</li>
+					<li class="divider"></li>
+					<li>
 						<div>
 							<button type="Submit" class="btn btn-warning"
 								style="width: 130px" name="status" value="Busy">
 								<i class="fa fa-circle-o"></i> Busy
 							</button>
-						</div>
-				</a></li>
-				<li class="divider"></li>
-				<li><a href="#">
+						</div> </a>
+					</li>
+					<li class="divider"></li>
+					<li>
 						<div>
 							<button type="Submit" class="btn btn-danger" style="width: 130px"
 								name="status" value="Not available">
 								<i class="fa fa-times-circle"></i> Not available
 							</button>
-						</div>
-				</a></li>
+						</div> </a>
+					</li>
+				</form>
 			</ul> <!-- /.dropdown-alerts --></li>
 		<!-- /.dropdown -->
 		<li class="dropdown"><a class="dropdown-toggle"

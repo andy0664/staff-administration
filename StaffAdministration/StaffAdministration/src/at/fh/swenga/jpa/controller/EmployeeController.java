@@ -75,7 +75,6 @@ public class EmployeeController {
 	 * ########### manageEmployees.jsp ############
 	 */
 
-	@Transactional
 	@RequestMapping(value = { "addEmployee" }, method = RequestMethod.GET)
 	public String editEmployee(Model model) {
 		model.addAttribute(Constant.KEY_DEPARTMENT_LIST,
@@ -83,7 +82,6 @@ public class EmployeeController {
 		return Constant.PAGE_EDIT_EMPLOYEE;
 	}
 
-	@Transactional
 	@RequestMapping(value = { "changeEmployee" }, method = RequestMethod.GET)
 	public String changeEmployee(@RequestParam int id, Model model) {
 		try {
@@ -96,7 +94,6 @@ public class EmployeeController {
 		return Constant.PAGE_EDIT_EMPLOYEE;
 	}
 
-	@Transactional
 	@RequestMapping(value = { "deleteEmployee" })
 	public String deleteEmployee(@RequestParam int id, Model model) {
 		try {
@@ -114,7 +111,7 @@ public class EmployeeController {
 
 	// Zum füllen der Mitarbeiter Tabelle nur zum testen --> ende entfernen
 	// @RequestMapping("fillEmployee")
-	// @Transactional
+	//
 	// public String fillData(Model model) {
 	//
 	// DataFactory df = new DataFactory();
@@ -155,85 +152,102 @@ public class EmployeeController {
 	/*
 	 * ########### editEmployee.jsp ############
 	 */
-	@Transactional
 	@RequestMapping(value = { "addEmployee" }, method = RequestMethod.POST)
 	public String addEmployee(@Valid @ModelAttribute EmployeeDTO newEmployee,
+			BindingResult bindingResultEmployee,
 			@Valid @ModelAttribute Address newAddress,
-			@RequestParam int department, BindingResult bindingResult,
+			BindingResult bindingResultAddress, @RequestParam int department,
 			Model model) {
-		if (controllerSupport.checkBinding(bindingResult, model)) {
-			return "forward:/manageEmployees";
+		if (controllerSupport.checkBinding(bindingResultEmployee, model)
+				|| controllerSupport.checkBinding(bindingResultAddress, model)) {
+			return cancelAddEmployee(model, newEmployee, newAddress);
 		}
 		newEmployee.setAddress(newAddress);
 		Employee emp = newEmployee.generateEmployee();
 		emp.setPassword(encoder.encode(emp.getPassword()));
-		String uniqueError=checkUniqueKeys(emp);
-		if(!Constant.NO_ERROR.equals(uniqueError)){
+		String uniqueError = checkEmployee(emp);
+		if (!Constant.NO_ERROR.equals(uniqueError)) {
 			model.addAttribute(Constant.KEY_ERROR_MESSAGE, uniqueError);
-			return Constant.PAGE_EDIT_EMPLOYEE;
+			return cancelAddEmployee(model, newEmployee, newAddress);
 		}
-		saveEmployee(emp, department, newEmployee.getRole());
-		if (department != Constant.NO_DEPARTMENT) {
-			String message = String.format("Birthday: %s %s ",
-					emp.getFirstName(), emp.getLastName());
-			Date announcementDay = controllerSupport
-					.getBirthdayCurYear(newEmployee.getDayOfBirth());
-			if (announcementDay.before(new Date())
-					&& !DateUtils.isSameDay(announcementDay, new Date())) {
-				announcementDay = controllerSupport.updateAnnouncementYear(
-						announcementDay, 1);
-			}
-			Announcement announcement = new Announcement(
-					Constant.ANNOUNCEMENT_BIRTHDAY, message, announcementDay,
-					employeeDao.findManagerFromEmployee(department), emp);
-			announcementDao.save(announcement);
+		try {
+			saveEmployee(emp, department, newEmployee.getRole());
+			if (department != Constant.NO_DEPARTMENT) {
+				String message = String.format("Birthday: %s %s ",
+						emp.getFirstName(), emp.getLastName());
+				Date announcementDay = controllerSupport
+						.getBirthdayCurYear(newEmployee.getDayOfBirth());
+				if (announcementDay.before(new Date())
+						&& !DateUtils.isSameDay(announcementDay, new Date())) {
+					announcementDay = controllerSupport.updateAnnouncementYear(
+							announcementDay, 1);
+				}
+				Announcement announcement = new Announcement(
+						Constant.ANNOUNCEMENT_BIRTHDAY, message,
+						announcementDay,
+						employeeDao.findManagerFromEmployee(department), emp);
 
+				announcementDao.save(announcement);
+			}
+		} catch (Exception ex) {
+			model.addAttribute(Constant.KEY_ERROR_MESSAGE,
+					Constant.ERROR_MESSAGE_ADD_EMPLOYEE);
+			return cancelAddEmployee(model, newEmployee, newAddress);
 		}
 		return Constant.REDIRECT_MANAGE_EMPLOYEES;
 	}
 
-	@Transactional
 	@RequestMapping(value = { "changeEmployee" }, method = RequestMethod.POST)
 	public String updateEmployee(
 			@Valid @ModelAttribute EmployeeDTO newEmployee,
-			@Valid @ModelAttribute Address newAddress, @RequestParam int id,
-			@RequestParam int department, BindingResult bindingResult,
-			Model model) {
-		if (controllerSupport.checkBinding(bindingResult, model)) {
-			return "forward:/manageEmployees";
-		}
+			BindingResult bindingResultEmployee,
+			@Valid @ModelAttribute Address newAddress,
+			BindingResult bindingResultAddress, @RequestParam int id,
+			@RequestParam int department, Model model) {
 		Employee emp = employeeDao.findOne(id);
+		if (controllerSupport.checkBinding(bindingResultEmployee, model)
+				|| controllerSupport.checkBinding(bindingResultAddress, model)) {
+			return cancelChangeEmployee(model, emp,
+					Constant.ERROR_MESSAGE_UPDATE_EMPLOYEE);
+		}
 		newEmployee.setAddress(newAddress);
 		emp.updateEmployee(newEmployee);
+		String uniqueError = checkEmployee(emp);
+		if (!Constant.NO_ERROR.equals(uniqueError)) {
+			return cancelChangeEmployee(model, emp, uniqueError);
+		}
 		if (newEmployee.getPassword() != null
 				&& !emp.getPassword().equals(newEmployee.getPassword())) {
 			emp.setPassword(encoder.encode(newEmployee.getPassword()));
 		}
-		if (newEmployee.getRole() == null
-				|| emp.getRole().equals(newEmployee.getRole())) {
-			saveEmployee(emp, department, "");
-		} else {
-			emp.setUserRole(new HashSet<UserRole>());
-			emp.setRole(newEmployee.getRole());
-			List<UserRole> list = userRoleRepository.findByEmployee(emp);
-			userRoleRepository.delete(list);
-			// userRoleRepository.removeByUsername(emp.getId());
-			saveEmployee(emp, department, emp.getRole());
+		try {
+			if (newEmployee.getRole() == null
+					|| emp.getRole().equals(newEmployee.getRole())) {
+				saveEmployee(emp, department, "");
+			} else {
+				emp.setUserRole(new HashSet<UserRole>());
+				emp.setRole(newEmployee.getRole());
+				List<UserRole> list = userRoleRepository.findByEmployee(emp);
+				userRoleRepository.delete(list);
+				// userRoleRepository.removeByUsername(emp.getId());
+				saveEmployee(emp, department, emp.getRole());
+			}
+		} catch (Exception ex) {
+			return cancelChangeEmployee(model, emp,
+					Constant.ERROR_MESSAGE_UPDATE_EMPLOYEE);
 		}
-
 		return Constant.REDIRECT_MANAGE_EMPLOYEES;
 	}
 
 	/*
 	 * ########### profile.jsp ############
 	 */
-	@Transactional
 	@RequestMapping(value = { "changeRequest" }, method = RequestMethod.POST)
-	public String employeeChangeRequest(String changeRequest,
-			Model model) {
+	public String employeeChangeRequest(String changeRequest, Model model) {
 		User user = controllerSupport.getCurrentUser();
 		if (user.getAuthorities().size() == Constant.ROLE_INT_EMPLOYEE) {
-			Employee emp = employeeDao.findEmployeeByUserName(user.getUsername());
+			Employee emp = employeeDao.findEmployeeByUserName(user
+					.getUsername());
 			Employee manager = employeeDao.findManagerFromEmployee(emp
 					.getDepartment().getId());
 			String message = String.format("%s %s: %s", emp.getFirstName(),
@@ -246,44 +260,57 @@ public class EmployeeController {
 		return "forward:start";
 	}
 
-	private void saveEmployee(Employee emp, int department, String role) {
+	private void saveEmployee(Employee emp, int department, String role)
+			throws Exception {
 		if (department != Constant.NO_DEPARTMENT) {
 			emp.setDepartment(departmentDao.findDepartmentById(department));
 		}
 		if (Constant.ROLE_ADMINISTRATOR.equals(role)) {
 			emp.addUserRole(genereateUserRole(Constant.ROLE_ADMINISTRATOR, emp));
 			emp.addUserRole(genereateUserRole(Constant.ROLE_MANAGER, emp));
-			emp.addUserRole(genereateUserRole(Constant.ROLE_EMPLOYEE, emp));
 			emp.setRole(Constant.ROLE_ADMINISTRATOR);
 		} else if (Constant.ROLE_MANAGER.equals(role)) {
 			emp.addUserRole(genereateUserRole(Constant.ROLE_MANAGER, emp));
-			emp.addUserRole(genereateUserRole(Constant.ROLE_EMPLOYEE, emp));
 			emp.setRole(Constant.ROLE_MANAGER);
 		} else if (Constant.ROLE_EMPLOYEE.equals(role)) {
-			emp.addUserRole(genereateUserRole(Constant.ROLE_EMPLOYEE, emp));
 			emp.setRole(Constant.ROLE_EMPLOYEE);
 		}
+		emp.addUserRole(genereateUserRole(Constant.ROLE_EMPLOYEE, emp));
 		employeeDao.save(emp);
 	}
 
 	private UserRole genereateUserRole(String role, Employee emp) {
 		return new UserRole(role, emp);
 	}
-	
-	private String checkUniqueKeys(Employee emp){
-		if(employeeDao.checkUniqueSSN(emp.getSsn(),emp.getId())!=null){
+
+	private String checkEmployee(Employee emp) {
+		if (employeeDao.checkUniqueSSN(emp.getSsn(), emp.getId()) != null) {
 			return "Employee with SSN already exists";
 		}
-		if(employeeDao.checkUniqueMail(emp.getMail(),emp.getId())!=null){
+		if (employeeDao.checkUniqueMail(emp.getMail(), emp.getId()) != null) {
 			return "Employee with E-Mail already exists";
 		}
-		if(employeeDao.checkUniquePhone(emp.getPhone(),emp.getId())!=null){
+		if (employeeDao.checkUniquePhone(emp.getPhone(), emp.getId()) != null) {
 			return "Employee with Phone already exists";
 		}
-		if(employeeDao.checkUniqueUserName(emp.getUserName(),emp.getId())!=null){
+		if (employeeDao.checkUniqueUserName(emp.getUserName(), emp.getId()) != null) {
 			return "Employee with Username already exists";
 		}
 		return Constant.NO_ERROR;
+	}
+
+	private String cancelAddEmployee(Model model, EmployeeDTO newEmployee,
+			Address newAddress) {
+		model.addAttribute(Constant.KEY_TMP_EMPLOYEE, newEmployee);
+		model.addAttribute(Constant.KEY_ADDRESS, newAddress);
+		return Constant.PAGE_EDIT_EMPLOYEE;
+	}
+
+	private String cancelChangeEmployee(Model model, Employee emp,
+			String message) {
+		model.addAttribute(Constant.KEY_EMPLOYEE, emp);
+		model.addAttribute(Constant.KEY_ERROR_MESSAGE, message);
+		return Constant.PAGE_EDIT_EMPLOYEE;
 	}
 
 }
