@@ -28,11 +28,11 @@ public class Department implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
-	@Column(nullable=false, length=200)
+	@Column(nullable=false)
 	private String name;
 	
 	//add unique=true
-	@Column(nullable=false,length=5)
+	@Column(nullable=false,unique=true, length=5)
 	private String shortcut;
 	
 	@OneToMany(mappedBy="department")

@@ -38,25 +38,26 @@ public class DepartmentController {
 
 	@Autowired
 	private SimpleDepartmentRepository departmentDao;
-	
+
 	@Autowired
 	private ControllerSupport controllerSupport;
 
-	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(Date.class, new DateTimeEditor());
 	}
-	
+
 	/*
 	 * ########### manageDepartments.jsp ############
 	 */
-	
-	
+
 	@RequestMapping(value = { "deleteDepartment" })
 	public String deleteDepartment(@RequestParam int id, Model model) {
 		try {
 			departmentDao.delete(id);
+			if(departmentDao.exists(id)){
+				throw new Exception();
+			}
 		} catch (Exception ex) {
 			model.addAttribute(Constant.KEY_ERROR_MESSAGE,
 					"couldn't delete department");
@@ -64,7 +65,6 @@ public class DepartmentController {
 		return "forward:manageDepartments";
 	}
 
-	
 	@RequestMapping(value = { "changeDepartment" }, method = RequestMethod.GET)
 	public String editDepartment(@RequestParam int id, Model model) {
 		model.addAttribute(Constant.KEY_DEPARTMENT,
@@ -74,7 +74,6 @@ public class DepartmentController {
 		return Constant.PAGE_EDIT_DEPARTMENT;
 	}
 
-	
 	@RequestMapping(value = { "addDepartment" }, method = RequestMethod.GET)
 	public String addDepartment(Model model) {
 		model.addAttribute(Constant.KEY_EMPLOYEE_LIST,
@@ -82,59 +81,83 @@ public class DepartmentController {
 		return Constant.PAGE_EDIT_DEPARTMENT;
 	}
 
-	// Zum f�llen der Mitarbeiter Tabelle nur zum testen --> ende entfernen
-	@RequestMapping("fillDepartment")
-	
-	public String fillDepartment(Model model) {
-
-		DataFactory df = new DataFactory();
-
-		for (int i = 0; i < 10; i++) {
-			Department dep1 = new Department(df.getName(), df.getRandomText(2,
-					5));
-			departmentDao.save(dep1);
-		}
-		return Constant.REDIRECT_MANAGE_DEPARTMENTS;
-	}
-
 	/*
 	 * ########### editDepartment.jsp ############
 	 */
 
-	
 	@RequestMapping(value = { "changeDepartment" }, method = RequestMethod.POST)
 	public String updateDepartment(
-			@Valid @ModelAttribute DepartmentDTO newDepartment,
-			@RequestParam int id, @RequestParam int manager, Model model,
-			BindingResult bindingResult) {
-		if (controllerSupport.checkBinding(bindingResult, model)) {
-			return "forward:/manageDepartments";
-		}
+			@Valid @ModelAttribute DepartmentDTO newDepartment,BindingResult bindingResult,
+			@RequestParam int id, @RequestParam int manager, Model model) {
+		
 		Department dep = departmentDao.findDepartmentById(id);
-		dep.updateDepartment(newDepartment);
-		if (dep.getManager().getId() != manager) {
-			dep.setManager(employeeDao.findOne(manager));
+		if (controllerSupport.checkBinding(bindingResult, model)) {
+			return prepareCancelUpdate(model, Constant.ERROR_MESSAGE_UPDATE_DEPARTMENT, dep);
 		}
-		departmentDao.save(dep);
+		dep.updateDepartment(newDepartment);
+		String uniqueError = checkUniqueKey(dep);
+		if(!uniqueError.equals(Constant.NO_ERROR)){
+			return prepareCancelUpdate(model, uniqueError, dep);
+		}
+		try{
+			if (dep.getManager().getId() != manager) {
+				dep.setManager(employeeDao.findOne(manager));
+			}
+			departmentDao.save(dep);
+		}catch(Exception ex){
+			return prepareCancelUpdate(model, Constant.ERROR_MESSAGE_UPDATE_DEPARTMENT, dep);
+		}
+		
 		return Constant.REDIRECT_MANAGE_DEPARTMENTS;
 	}
-	
-	
+
 	@RequestMapping(value = { "addDepartment" }, method = RequestMethod.POST)
 	public String saveDepartment(
 			@Valid @ModelAttribute DepartmentDTO newDepartment,
-			@RequestParam int manager, BindingResult bindingResult, Model model) {
+			BindingResult bindingResult, @RequestParam int manager, Model model) {
 		if (controllerSupport.checkBinding(bindingResult, model)) {
-			return "forward:/manageDepartments";
+			return prepareCancelAdd(model, Constant.ERROR_MESSAGE_ADD_DEPARTMENT, newDepartment);
 		}
 		Employee emp = employeeDao.findOne(manager);
 		Department dep = newDepartment.generateDepartment();
-		emp.setDepartment(dep);
-		dep.setManager(emp);
-		departmentDao.save(dep);
-		employeeDao.save(emp);
-
+		String uniqueError = checkUniqueKey(dep);
+		if(!uniqueError.equals(Constant.NO_ERROR)){
+			return prepareCancelAdd(model,uniqueError,newDepartment);
+			
+		}
+		try{
+			emp.setDepartment(dep);
+			dep.setManager(emp);
+			departmentDao.save(dep);
+			employeeDao.save(emp);
+		}catch(Exception ex){
+			return prepareCancelAdd(model, Constant.ERROR_MESSAGE_ADD_DEPARTMENT, newDepartment);
+		}
 		return Constant.REDIRECT_MANAGE_DEPARTMENTS;
 	}
+
+	private String checkUniqueKey(Department department) {
+		if (departmentDao.checkUniqueShortcut(department.getShortcut(),
+				department.getId()) != null) {
+			return "Shortcut already used";
+		}
+		return Constant.NO_ERROR;
+	}
 	
+	private String prepareCancelAdd(Model model, String message, DepartmentDTO dep){
+		model.addAttribute(Constant.KEY_ERROR_MESSAGE, message);
+		model.addAttribute(Constant.KEY_TMP_DEPARTMENT, dep);
+		model.addAttribute(Constant.KEY_EMPLOYEE_LIST,
+				employeeDao.findEmployeeWithNoDepartment());
+		return Constant.PAGE_EDIT_DEPARTMENT;
+	}
+	
+	private String prepareCancelUpdate(Model model, String message, Department dep){
+		model.addAttribute(Constant.KEY_ERROR_MESSAGE, message);
+		model.addAttribute(Constant.KEY_TMP_DEPARTMENT, dep);
+		model.addAttribute(Constant.KEY_EMPLOYEE_LIST,
+				employeeDao.findEmployeeByDepartmentId(dep.getId()));
+		return Constant.PAGE_EDIT_DEPARTMENT;
+	}
+
 }

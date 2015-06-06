@@ -57,6 +57,9 @@ public class Constant {
 	public static final String NO_ERROR="no error";
 	public static final String ERROR_MESSAGE_ADD_EMPLOYEE="Wrong Input - Couldn't add Employee";
 	public static final String ERROR_MESSAGE_UPDATE_EMPLOYEE="Wrong Input - Couldn't update Employee";
+	public static final String ERROR_MESSAGE_ADD_DEPARTMENT="Wrong Input - Couldn't add Department";
+	public static final String ERROR_MESSAGE_UPDATE_DEPARTMENT="Wrong Input - Couldn't update Department";
+	public static final String ERROR_MESSAGE_ADD_TIME_RECORD="Wrong Input - Couldn't add Timerecord";
 	
 	//Typ Timerecord
 	public static final String TYP_VACATION="vacation";
@@ -69,6 +72,7 @@ public class Constant {
 	public static final String KEY_TMP_EMPLOYEE="tmpEmployee";
 	public static final String KEY_DEPARTMENT_LIST="departmentList";
 	public static final String KEY_DEPARTMENT="department";
+	public static final String KEY_TMP_DEPARTMENT="tmpDepartment";
 	public static final String KEY_TIME_RECORD_LIST="timeRecordList";
 	public static final String KEY_ERROR_MESSAGE="errorMessage";
 	public static final String KEY_UPDATE_EMPLOYEE_MESSAGE="updateEmployeeMessage";

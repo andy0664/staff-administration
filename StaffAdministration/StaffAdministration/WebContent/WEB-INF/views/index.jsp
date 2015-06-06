@@ -542,12 +542,12 @@
 							value="${_csrf.token }" />
 						<div class="form-group">
 							<label for="usr">Heading:</label> <input type="text"
-								class="form-control" id="inputTitle" name="title">
+								class="form-control" id="inputTitle" name="title" required>
 						</div>
 						<div class="form-group">
 							<label for="comment">Content</label>
 							<textarea class="form-control" rows="5" id="inputMessage"
-								name="message"></textarea>
+								name="message" maxlength="150" required></textarea>
 						</div>
 						<!-- <div class="form-group">
 							<label for="usr">Link:</label> <input type="text"

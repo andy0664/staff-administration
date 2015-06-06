@@ -8,12 +8,12 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.apache.commons.collections4.map.HashedMap;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -56,7 +56,7 @@ public class TimeRecordController {
 	/*
 	 * ########### listTimeRecords.jsp ############
 	 */
-	
+
 	@RequestMapping(value = { "timeRecordEmployee" })
 	public String timeRecordManagerView(
 			@Valid @ModelAttribute TimeRecordRequestDTO request,
@@ -67,7 +67,6 @@ public class TimeRecordController {
 		return Constant.PAGE_LIST_TIME_RECORDS;
 	}
 
-	
 	@RequestMapping(value = { "timeRecordEmployees" })
 	public String timeRecordManagerViewForAllEmployees(
 			@Valid @ModelAttribute TimeRecordRequestDTO request,
@@ -80,7 +79,6 @@ public class TimeRecordController {
 		return Constant.PAGE_LIST_TIME_RECORDS;
 	}
 
-	
 	@RequestMapping(value = { "deleteTimeRecord" })
 	public String deleteTimeRecord(@RequestParam int timerecord,
 			@RequestParam int id, @RequestParam Date dateFrom,
@@ -96,26 +94,24 @@ public class TimeRecordController {
 				dateTo), model);
 	}
 
-	
 	@RequestMapping(value = { "timeRecordExcelExport" })
 	public String timeRecordExcelExport(
 			@Valid @ModelAttribute TimeRecordRequestDTO request,
 			BindingResult bindingResult, Model model) {
 		if (!controllerSupport.checkBinding(bindingResult, model)) {
-			prepareExport(request,model);
+			prepareExport(request, model);
 			return Constant.CLASS_EXPORT_TIME_RECORD_EXCEL;
 		}
 		return Constant.PAGE_LIST_TIME_RECORDS;
 
 	}
-	
-	
+
 	@RequestMapping(value = { "timeRecordPdfExport" })
 	public String timeRecordPdfExport(
 			@Valid @ModelAttribute TimeRecordRequestDTO request,
 			BindingResult bindingResult, Model model) {
 		if (!controllerSupport.checkBinding(bindingResult, model)) {
-			prepareExport(request,model);
+			prepareExport(request, model);
 			return Constant.CLASS_EXPORT_TIME_RECORD_PDF;
 		}
 		return Constant.PAGE_LIST_TIME_RECORDS;
@@ -126,33 +122,40 @@ public class TimeRecordController {
 	 * ########### editTimeRecord.jsp ############
 	 */
 
-	
 	@RequestMapping(value = { "addTimeRecord" }, method = RequestMethod.POST)
 	public String addTimeRecord(@Valid @ModelAttribute TimeRecordDTO newRecord,
 			Model model, BindingResult bindingResult) {
 		if (controllerSupport.checkBinding(bindingResult, model)) {
-			return "forward:/start";
+			return prepareCancelAdd(model,Constant.ERROR_MESSAGE_ADD_TIME_RECORD);
 		}
 		User user = controllerSupport.getCurrentUser();
 		Employee emp = employeeDao.findEmployeeByUserName(user.getUsername());
 		TimeRecord record = newRecord.generateTimeRecord();
-		record.setEmployee(emp);
-		TimeRecord rec=timeRecordDao.save(record);
-		if (newRecord.getTyp().equals(Constant.TYP_VACATION) && user.getAuthorities().size()==Constant.ROLE_INT_EMPLOYEE
-				&& emp.getDepartment() != null) {
-			Employee manager = employeeDao.findManagerFromEmployee(emp
-					.getDepartment().getId());
-			String message = String.format("%s %s from %s to %s",
-					emp.getFirstName(), emp.getLastName(),
-					Constant.parseDateToString(newRecord.getStartDate()),
-					Constant.parseDateToString(newRecord.getEndDate()));
-			Announcement announcement = new Announcement(Constant.ANNOUNCEMENT_VACATION,message,rec.getId(),manager,emp);
-			announcementDao.save(announcement);
+		String errorMessage=checkDateInput(record);
+		if(!errorMessage.equals(Constant.NO_ERROR)){
+			return prepareCancelAdd(model,errorMessage);
 		}
+		record.setEmployee(emp);
+		try{
+			TimeRecord rec=timeRecordDao.save(record);
+			if (newRecord.getTyp().equals(Constant.TYP_VACATION) && user.getAuthorities().size()==Constant.ROLE_INT_EMPLOYEE
+					&& emp.getDepartment() != null) {
+				Employee manager = employeeDao.findManagerFromEmployee(emp
+						.getDepartment().getId());
+				String message = String.format("%s %s from %s to %s",
+						emp.getFirstName(), emp.getLastName(),
+						Constant.parseDateToString(newRecord.getStartDate()),
+						Constant.parseDateToString(newRecord.getEndDate()));
+				Announcement announcement = new Announcement(Constant.ANNOUNCEMENT_VACATION,message,rec.getId(),manager,emp);
+				announcementDao.save(announcement);
+			}
+		}catch(Exception ex){
+			return prepareCancelAdd(model,Constant.ERROR_MESSAGE_ADD_TIME_RECORD);
+		}
+		
 		return Constant.PAGE_INDEX;
 	}
-	
-	
+
 	private String prepareTimeRecordManager(TimeRecordRequestDTO request,
 			Model model) {
 		model.addAttribute(Constant.KEY_TIME_RECORD_DATE_FROM,
@@ -172,7 +175,7 @@ public class TimeRecordController {
 	}
 
 	private void checkDateNull(TimeRecordRequestDTO request) {
-		try{
+		try {
 			if (request.getDateFrom() == null) {
 				request.setDateFrom(timeRecordDao.findTop1ByOrderByStartDate()
 						.getStartDate());
@@ -181,14 +184,14 @@ public class TimeRecordController {
 				request.setDateTo(timeRecordDao.findTop1ByOrderByEndDateDesc()
 						.getEndDate());
 			}
-		}catch(NullPointerException ex){
+		} catch (NullPointerException ex) {
 			request.setDateFrom(new Date());
 			request.setDateTo(new Date());
 		}
-		
+
 	}
-	
-	private void prepareExport(TimeRecordRequestDTO request, Model model){
+
+	private void prepareExport(TimeRecordRequestDTO request, Model model) {
 		Map<Employee, List<TimeRecord>> timeRecords = new HashedMap<Employee, List<TimeRecord>>();
 		Employee emp = employeeDao.findEmployeeByUserName(controllerSupport
 				.getCurrentUser().getUsername());
@@ -199,5 +202,24 @@ public class TimeRecordController {
 						request.getDateTo());
 		timeRecords.put(emp, records);
 		model.addAttribute(Constant.KEY_TIME_RECORD_LIST, timeRecords);
+	}
+
+	private String checkDateInput(TimeRecord rec) {
+		if (rec.getEndDate().before(rec.getStartDate())) {
+			return "EndDate can't be before StartDate";
+		}
+		if (!rec.getTyp().equals(Constant.TYP_VACATION)
+				&& rec.getEndDate().after(new Date())) {
+			return "Future Timerecords are only allowed for Vacation";
+		}
+		if (timeRecordDao.checkDate(rec.getStartDate(), rec.getEndDate()).size()>0) {
+			return "Timerecord for this interval already exists";
+		}
+		return Constant.NO_ERROR;
+	}
+
+	private String prepareCancelAdd(Model model, String message) {
+		model.addAttribute(Constant.KEY_ERROR_MESSAGE, message);
+		return Constant.PAGE_NEW_TIME_RECORD;
 	}
 }

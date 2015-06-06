@@ -37,7 +37,7 @@ public class TimeRecord {
 	@NotNull(message = "{0} is required")
 	private Date endTime;
 	
-	@Column(nullable=false, length=100)
+	@Column(nullable=false)
 	private String typ;
 	
 	@ManyToOne(cascade=CascadeType.MERGE)

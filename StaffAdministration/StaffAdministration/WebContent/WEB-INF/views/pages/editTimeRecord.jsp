@@ -31,7 +31,9 @@
 
 		<div id="page-wrapper-subpages">
 			<div id="page-inner-subpages">
-
+				<c:if test="${not empty errorMessage}">
+					<div class="alert alert-danger" role="alert">${errorMessage}</div>
+				</c:if>
 				<!--  add or edit?  ----------------------------------------------------------- -->
 				<c:choose>
 					<c:when test="${not empty timeRecord}">

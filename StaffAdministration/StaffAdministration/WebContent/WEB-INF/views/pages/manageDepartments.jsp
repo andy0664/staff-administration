@@ -31,12 +31,12 @@
 				<div class="page-header">
 					<h1>Manage Departments</h1>
 				</div>
-
-
-				<!--  Error message ----------------------------------------------------------- -->
 				<c:if test="${not empty errorMessage}">
 					<div class="alert alert-danger" role="alert">${errorMessage}</div>
 				</c:if>
+
+				<!--  Error message ----------------------------------------------------------- -->
+
 				<!--  Error message ----------------------------------------------------------- -->
 
 				<!--  Warning message ----------------------------------------------------------- -->

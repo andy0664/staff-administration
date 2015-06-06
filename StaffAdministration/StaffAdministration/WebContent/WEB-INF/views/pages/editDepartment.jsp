@@ -27,6 +27,9 @@
 
 		<div id="page-wrapper">
 			<div id="page-inner-subpages">
+				<c:if test="${not empty errorMessage}">
+					<div class="alert alert-danger" role="alert">${errorMessage}</div>
+				</c:if>
 
 				<!--  add or edit?  ----------------------------------------------------------- -->
 				<c:choose>
@@ -48,14 +51,15 @@
 								value="${_csrf.token }" />
 							<fieldset>
 								<legend>${legend}</legend>
-								<input type="hidden" name="id" value="${department.id }" />
+								<input type="hidden" name="id" value="${department.id}" />
 
 								<! ----------------  name ---------------- -->
 								<div class="form-group">
 									<label for="inputName" class="col-md-2 control-label">Name</label>
 									<div class="col-md-10">
 										<input class="form-control" id="inputName" type="text"
-											name="name" value="<c:out value="${department.name}"/>"
+											name="name"
+											value="<c:out value="${department.name}"/><c:out value="${tmpDepartment.name}"/>"
 											required>
 									</div>
 								</div>
@@ -66,7 +70,8 @@
 									<div class="col-md-10">
 										<input class="form-control" id="inputShortcut" type="text"
 											maxlength="5" name="shortcut"
-											value="<c:out value="${department.shortcut}"/>" required>
+											value="<c:out value="${department.shortcut}"/><c:out value="${tmpDepartment.shortcut}"/>"
+											required>
 									</div>
 								</div>
 
@@ -77,7 +82,7 @@
 										<select class="form-control" name="manager">
 											<c:forEach items="${employeeList }" var="employee">
 												<c:choose>
-													<c:when test="${employee.id == department.manager.id }">
+													<c:when test="${employee.id == department.manager.id}">
 														<option value="${employee.id}" selected="selected">${ employee.firstName}
 															${employee.lastName }</option>
 													</c:when>
@@ -114,7 +119,7 @@
 
 	<!-- Footer -->
 	<%-- 	<jsp:include page="../includes/template/fixedFooter.jsp" /> --%>
-	
+
 
 	<!-- JS for Bootstrap -->
 	<%@include file="../includes/bootstrapJs.jsp"%>
