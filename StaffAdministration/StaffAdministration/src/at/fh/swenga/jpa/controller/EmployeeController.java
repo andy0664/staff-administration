@@ -109,26 +109,6 @@ public class EmployeeController {
 		return "forward:manageEmployees";
 	}
 
-	// Zum füllen der Mitarbeiter Tabelle nur zum testen --> ende entfernen
-	// @RequestMapping("fillEmployee")
-	//
-	// public String fillData(Model model) {
-	//
-	// DataFactory df = new DataFactory();
-	//
-	// for (int i = 0; i < 10; i++) {
-	// Address address = new Address(df.getStreetName(), df.getCity(),
-	// df.getRandomWord(), 8052);
-	// Employee p1 = new Employee(12345, df.getFirstName(),
-	// df.getLastName(), df.getBirthDate(), address,
-	// df.getRandomText(10, 20), 1234.5f, df.getBirthDate(),
-	// "testUser",
-	// "$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC","admin@gmx.at","+43 1234567");
-	// employeeDao.save(p1);
-	// }
-	// return Constant.REDIRECT_MANAGE_EMPLOYEES;
-	// }
-
 	@RequestMapping(value = { "ExportEmployeePdf" })
 	public String exportEmployeePdf(int id, Model model) {
 		model.addAttribute(Constant.KEY_EMPLOYEE_LIST,
@@ -268,14 +248,16 @@ public class EmployeeController {
 		if (Constant.ROLE_ADMINISTRATOR.equals(role)) {
 			emp.addUserRole(genereateUserRole(Constant.ROLE_ADMINISTRATOR, emp));
 			emp.addUserRole(genereateUserRole(Constant.ROLE_MANAGER, emp));
+			emp.addUserRole(genereateUserRole(Constant.ROLE_EMPLOYEE, emp));
 			emp.setRole(Constant.ROLE_ADMINISTRATOR);
 		} else if (Constant.ROLE_MANAGER.equals(role)) {
 			emp.addUserRole(genereateUserRole(Constant.ROLE_MANAGER, emp));
+			emp.addUserRole(genereateUserRole(Constant.ROLE_EMPLOYEE, emp));
 			emp.setRole(Constant.ROLE_MANAGER);
 		} else if (Constant.ROLE_EMPLOYEE.equals(role)) {
 			emp.setRole(Constant.ROLE_EMPLOYEE);
+			emp.addUserRole(genereateUserRole(Constant.ROLE_EMPLOYEE, emp));
 		}
-		emp.addUserRole(genereateUserRole(Constant.ROLE_EMPLOYEE, emp));
 		employeeDao.save(emp);
 	}
 

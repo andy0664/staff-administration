@@ -83,7 +83,7 @@
 								<c:set var="showAction">timeRecordEmployees</c:set>
 							</c:if>
 							<c:if test="${empty employeeList}">
-								<input type="hidden" name="employee" value="${employee.id }" />
+								<input type="hidden" name="employee" value="${employee.id}" />
 								<c:set var="showAction">timeRecordEmployee</c:set>
 							</c:if>
 

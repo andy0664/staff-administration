@@ -126,19 +126,22 @@ public class TimeRecordController {
 	public String addTimeRecord(@Valid @ModelAttribute TimeRecordDTO newRecord,
 			Model model, BindingResult bindingResult) {
 		if (controllerSupport.checkBinding(bindingResult, model)) {
-			return prepareCancelAdd(model,Constant.ERROR_MESSAGE_ADD_TIME_RECORD);
+			return prepareCancelAdd(model,
+					Constant.ERROR_MESSAGE_ADD_TIME_RECORD);
 		}
 		User user = controllerSupport.getCurrentUser();
 		Employee emp = employeeDao.findEmployeeByUserName(user.getUsername());
 		TimeRecord record = newRecord.generateTimeRecord();
-		String errorMessage=checkDateInput(record);
-		if(!errorMessage.equals(Constant.NO_ERROR)){
-			return prepareCancelAdd(model,errorMessage);
-		}
-		record.setEmployee(emp);
-		try{
-			TimeRecord rec=timeRecordDao.save(record);
-			if (newRecord.getTyp().equals(Constant.TYP_VACATION) && user.getAuthorities().size()==Constant.ROLE_INT_EMPLOYEE
+		try {
+			String errorMessage = checkDateInput(record);
+			if (!errorMessage.equals(Constant.NO_ERROR)) {
+				return prepareCancelAdd(model, errorMessage);
+			}
+			record.setEmployee(emp);
+
+			TimeRecord rec = timeRecordDao.save(record);
+			if (newRecord.getTyp().equals(Constant.TYP_VACATION)
+					&& user.getAuthorities().size() == Constant.ROLE_INT_EMPLOYEE
 					&& emp.getDepartment() != null) {
 				Employee manager = employeeDao.findManagerFromEmployee(emp
 						.getDepartment().getId());
@@ -146,13 +149,16 @@ public class TimeRecordController {
 						emp.getFirstName(), emp.getLastName(),
 						Constant.parseDateToString(newRecord.getStartDate()),
 						Constant.parseDateToString(newRecord.getEndDate()));
-				Announcement announcement = new Announcement(Constant.ANNOUNCEMENT_VACATION,message,rec.getId(),manager,emp);
+				Announcement announcement = new Announcement(
+						Constant.ANNOUNCEMENT_VACATION, message, rec.getId(),
+						manager, emp);
 				announcementDao.save(announcement);
 			}
-		}catch(Exception ex){
-			return prepareCancelAdd(model,Constant.ERROR_MESSAGE_ADD_TIME_RECORD);
+		} catch (Exception ex) {
+			return prepareCancelAdd(model,
+					Constant.ERROR_MESSAGE_ADD_TIME_RECORD);
 		}
-		
+
 		return Constant.PAGE_INDEX;
 	}
 
@@ -193,8 +199,9 @@ public class TimeRecordController {
 
 	private void prepareExport(TimeRecordRequestDTO request, Model model) {
 		Map<Employee, List<TimeRecord>> timeRecords = new HashedMap<Employee, List<TimeRecord>>();
-		Employee emp = employeeDao.findEmployeeByUserName(controllerSupport
-				.getCurrentUser().getUsername());
+		// Employee emp = employeeDao.findEmployeeByUserName(controllerSupport
+		// .getCurrentUser().getUsername());
+		Employee emp = employeeDao.findOne(request.getEmployee());
 		checkDateNull(request);
 		List<TimeRecord> records = timeRecordDao
 				.findRecordsByEmployeeIdAndStartDateGreaterThanEqualAndEndDateLessThanEqualOrderByStartDate(
@@ -206,14 +213,19 @@ public class TimeRecordController {
 
 	private String checkDateInput(TimeRecord rec) {
 		if (rec.getEndDate().before(rec.getStartDate())) {
-			return "EndDate can't be before StartDate";
+			return "End date can't be before start date";
 		}
 		if (!rec.getTyp().equals(Constant.TYP_VACATION)
 				&& rec.getEndDate().after(new Date())) {
-			return "Future Timerecords are only allowed for Vacation";
+			return "Future timerecords are only allowed for vacation";
 		}
-		if (timeRecordDao.checkDate(rec.getStartDate(), rec.getEndDate()).size()>0) {
+		if (timeRecordDao.checkDate(rec.getStartDate(), rec.getEndDate())
+				.size() > 0) {
 			return "Timerecord for this interval already exists";
+		}
+		if (rec.getEndTime().before(rec.getStartTime())
+				|| rec.getEndTime().equals(rec.getStartTime())) {
+			return "Stat time muss be before end time";
 		}
 		return Constant.NO_ERROR;
 	}

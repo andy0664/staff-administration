@@ -52,7 +52,7 @@ public class TimeRecordExcelExport extends AbstractExcelView {
 			nameStyle.setFont(formatFont(workbook,(short)15,true));
 			HSSFRow nameRow = sheet.createRow(rowCount++);
 			Employee emp = iter.next();
-			createStyledCell(nameStyle,nameRow,0,sheet).setCellValue(emp.getFirstName()+emp.getLastName());
+			createStyledCell(nameStyle,nameRow,0,sheet).setCellValue(emp.getFirstName()+" "+emp.getLastName());
 			
 			//Header Cells
 			headerStyle.setFont(formatFont(workbook,(short)12,true));
