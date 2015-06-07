@@ -1,7 +1,7 @@
 <!--  Navbar Side ----------------------------------------------------------- -->
 <jsp:include page="../includes/template/navbarSideCalendarReadOnly.jsp"/>
 
-<div class="menu_read_only" id="menu_read_only" style="background-color: #32323A">
+<div class="menu_read_only" id="menu_read_only" style="background-color: #2b2e33">
 	<ul>
 <!--  		<li><a href="/StaffAdministration/calendar/showCalendarPersonal" style="margin-top:400px; background: #32323A">01 - Personal Calendar</a></li> -->
 <!-- 		<li><a href="/StaffAdministration/calendar/showCalendarDepartment">02 - Department Calendar</a></li> -->

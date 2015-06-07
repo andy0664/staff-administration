@@ -26,7 +26,7 @@
 		<div id="page-wrapper-subpages">
 			<div id="page-inner-subpages">
 				<div class="page-header">
-					<h1>${employee.firstName}${employee.lastName}</h1>
+					<h1>${employee.firstName} ${employee.lastName}</h1>
 				</div>
 
 				<div class="row">
@@ -129,6 +129,7 @@
 							</div>
 						</div>
 					</div>
+					<div class="col-xs-10 form-group">
 					<form class="form-horizontal" method="post" action="changeRequest">
 						<input type="hidden" name="${_csrf.parameterName}"
 							value="${_csrf.token }" />
@@ -146,6 +147,7 @@
 								Request</button>
 						</div>
 					</form>
+					</div>
 				</div>
 			</div>
 		</div>
