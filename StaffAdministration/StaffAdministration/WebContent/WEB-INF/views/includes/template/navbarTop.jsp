@@ -12,6 +12,7 @@
 	</div>
 
 	<ul class="nav navbar-top-links pull-right">
+		<a href="showProfile"><c:out value="${sessionScope.userName}"></c:out></a>
 		<li class="dropdown"><a class="dropdown-toggle"
 			data-toggle="dropdown" href="#" aria-expanded="false"> <c:choose>
 					<c:when test="${sessionScope.status=='Available'}">
@@ -40,7 +41,7 @@
 					</c:otherwise>
 				</c:choose>
 		</a>
-			<ul class="dropdown-menu dropdown-alerts">
+			<%-- <ul class="dropdown-menu dropdown-alerts">
 				<form class="form-horizontal" method="post" action="setStatus">
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token }" />
@@ -74,7 +75,7 @@
 						</div> </a>
 					</li>
 				</form>
-			</ul> <!-- /.dropdown-alerts --></li>
+			</ul> --%> <!-- /.dropdown-alerts --></li>
 		<!-- /.dropdown -->
 		<li class="dropdown"><a class="dropdown-toggle"
 			data-toggle="dropdown" href="#" aria-expanded="false"> <i

@@ -6,25 +6,26 @@
 			<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span>
 			<span class="icon-bar"></span> <span class="icon-bar"></span>
 		</button>
-		<a class="navbar-brand" href="../" style="width:230px;height:30px"><b>HR</b>INSIDE</a>
+		<a class="navbar-brand" href="../" style="width: 230px; height: 30px"><b>HR</b>INSIDE</a>
 	</div>
 
 	<ul class="nav navbar-top-links pull-right">
+		<a href="showProfile"><c:out value="${sessionScope.userName}"></c:out></a>
 		<li class="dropdown"><a class="dropdown-toggle"
 			data-toggle="dropdown" href="#" aria-expanded="false"> <c:choose>
-					<c:when test="${employee.status=='Available'}">
+					<c:when test="${sessionScope.status=='Available'}">
 						<div style="color: #449D44">
 							<i class="fa fa-check-circle" style="margin-right: 5px"></i><i
 								class="fa fa-caret-down"></i>
 						</div>
 					</c:when>
-					<c:when test="${employee.status=='Busy'}">
+					<c:when test="${sessionScope.status=='Busy'}">
 						<div style="color: #F0AD4E">
 							<i class="fa fa-circle-o" style="margin-right: 5px"></i><i
 								class="fa fa-caret-down"></i>
 						</div>
 					</c:when>
-					<c:when test="${employee.status=='Not available'}">
+					<c:when test="${sessionScope.status=='Not available'}">
 						<div style="color: #C9302C">
 							<i class="fa fa-times-circle" style="margin-right: 5px"></i><i
 								class="fa fa-caret-down"></i>
@@ -37,8 +38,7 @@
 						</div>
 					</c:otherwise>
 				</c:choose>
-		</a>
-			<ul class="dropdown-menu dropdown-alerts">
+		</a> <!-- <ul class="dropdown-menu dropdown-alerts">
 				<li><a href="#">
 						<div>
 							<button type="Submit" class="btn btn-success"
@@ -65,7 +65,7 @@
 							</button>
 						</div>
 				</a></li>
-			</ul> <!-- /.dropdown-alerts --></li>
+			</ul> --> <!-- /.dropdown-alerts --></li>
 		<!-- /.dropdown -->
 		<li class="dropdown"><a class="dropdown-toggle"
 			data-toggle="dropdown" href="#" aria-expanded="false"> <i

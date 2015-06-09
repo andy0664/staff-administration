@@ -182,6 +182,7 @@ public class CoverPageController {
 		if (request.getSession().getAttribute(Constant.KEY_STATUS) == null) {
 			request.getSession().setAttribute(Constant.KEY_STATUS,
 					emp.getStatus());
+			request.getSession().setAttribute(Constant.KEY_USER_NAME, emp.getUserName());
 		}
 		return Constant.PAGE_INDEX;
 	}
@@ -263,8 +264,7 @@ public class CoverPageController {
 		User user = controllerSupport.getCurrentUser();
 		employeeDao.updateEmployeeStatus(user.getUsername(), status);
 		request.getSession().setAttribute(Constant.KEY_STATUS, status);
-		String page = ((String) request.getSession().getAttribute(Constant.KEY_CURRENT_PAGE));
-		return page;
+		return Constant.PAGE_INDEX;
 	}
 
 	@RequestMapping(value = { "showProfile" })
