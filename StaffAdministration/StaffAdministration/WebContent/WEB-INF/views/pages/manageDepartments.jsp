@@ -87,17 +87,25 @@
 										<td>${department.name}</td>
 										<td>${department.manager.firstName}
 											${department.manager.lastName}</td>
-										<td><a href="changeDepartment?id=${department.id}">
-												<button type="button" class="btn btn-xs btn-success">
+										<td>
+											<form class="form-horizontal" method="post">
+												<input type="hidden" name="${_csrf.parameterName}"
+													value="${_csrf.token }" />
+												<button type="submit" class="btn btn-xs btn-success"
+													name="id" value="${department.id}"
+													formaction="editDepartment">
 													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 													Edit
 												</button>
-										</a> <a href="deleteDepartment?id=${department.id}">
-												<button type="button" class="btn btn-xs btn-danger">
+												<button type="submit" class="btn btn-xs btn-danger"
+													name="id" value="${department.id}"
+													formaction="deleteDepartment">
 													<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 													Delete
 												</button>
-										</a></td>
+											</form>
+										</td>
+
 									</tr>
 								</c:forEach>
 								<!--  list all employees ----------------------------------------------------------- -->

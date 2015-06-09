@@ -17,26 +17,22 @@
 			data-toggle="dropdown" href="#" aria-expanded="false"> <c:choose>
 					<c:when test="${sessionScope.status=='Available'}">
 						<div style="color: #449D44">
-							<i class="fa fa-check-circle" style="margin-right: 5px"></i><i
-								class="fa fa-caret-down"></i>
+							<i class="fa fa-check-circle" style="margin-right: 5px"></i>
 						</div>
 					</c:when>
 					<c:when test="${sessionScope.status=='Busy'}">
 						<div style="color: #F0AD4E">
-							<i class="fa fa-circle-o" style="margin-right: 5px"></i><i
-								class="fa fa-caret-down"></i>
+							<i class="fa fa-circle-o" style="margin-right: 5px"></i>
 						</div>
 					</c:when>
 					<c:when test="${sessionScope.status=='Not available'}">
 						<div style="color: #C9302C">
-							<i class="fa fa-times-circle" style="margin-right: 5px"></i><i
-								class="fa fa-caret-down"></i>
+							<i class="fa fa-times-circle" style="margin-right: 5px"></i>
 						</div>
 					</c:when>
 					<c:otherwise>
 						<div style="color: #449D44">
-							<i class="fa fa-check-circle" style="margin-right: 5px"></i><i
-								class="fa fa-caret-down"></i>
+							<i class="fa fa-check-circle" style="margin-right: 5px"></i>
 						</div>
 					</c:otherwise>
 				</c:choose>

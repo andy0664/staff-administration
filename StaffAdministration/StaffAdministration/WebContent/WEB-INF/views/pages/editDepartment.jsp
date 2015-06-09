@@ -79,7 +79,7 @@
 								<div class="form-group">
 									<label for="inputManager" class="col-md-2 control-label">Manager</label>
 									<div class="col-md-10">
-										<select class="form-control" name="manager">
+										<select class="form-control" name="manager" required>
 											<c:forEach items="${employeeList }" var="employee">
 												<c:choose>
 													<c:when test="${employee.id == department.manager.id}">

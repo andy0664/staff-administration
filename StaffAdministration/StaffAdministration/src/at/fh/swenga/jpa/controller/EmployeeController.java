@@ -82,7 +82,7 @@ public class EmployeeController {
 		return Constant.PAGE_EDIT_EMPLOYEE;
 	}
 
-	@RequestMapping(value = { "changeEmployee" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "editEmployee" })
 	public String changeEmployee(@RequestParam int id, Model model) {
 		try {
 			model.addAttribute(Constant.KEY_DEPARTMENT_LIST,

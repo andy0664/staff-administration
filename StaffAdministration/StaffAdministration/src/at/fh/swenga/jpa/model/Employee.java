@@ -77,7 +77,7 @@ public class Employee implements Serializable {
 	
 	private String password;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "employee", cascade=CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "employee", cascade=CascadeType.ALL)
 	private Set<UserRole> userRoles;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
@@ -283,6 +283,7 @@ public class Employee implements Serializable {
 	public void setUserRole(Set<UserRole> userRole) {
 		this.userRoles = userRole;
 	}
+	
 	
 	public void addUserRole(UserRole role){
 		if(userRoles==null){

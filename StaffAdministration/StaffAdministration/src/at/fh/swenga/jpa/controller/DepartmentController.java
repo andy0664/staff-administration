@@ -26,6 +26,7 @@ import at.fh.swenga.jpa.dao.SimpleUserRoleRepository;
 import at.fh.swenga.jpa.dto.DepartmentDTO;
 import at.fh.swenga.jpa.model.Department;
 import at.fh.swenga.jpa.model.Employee;
+import at.fh.swenga.jpa.model.UserRole;
 import at.fh.swenga.jpa.support.Constant;
 import at.fh.swenga.jpa.support.ControllerSupport;
 import at.fh.swenga.jpa.support.DateTimeEditor;
@@ -56,7 +57,8 @@ public class DepartmentController {
 		try {
 			departmentDao.delete(id);
 			if(departmentDao.exists(id)){
-				throw new Exception();
+				model.addAttribute(Constant.KEY_ERROR_MESSAGE,
+						"couldn't delete department - Department has employees");
 			}
 		} catch (Exception ex) {
 			model.addAttribute(Constant.KEY_ERROR_MESSAGE,
@@ -65,7 +67,7 @@ public class DepartmentController {
 		return "forward:manageDepartments";
 	}
 
-	@RequestMapping(value = { "changeDepartment" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "editDepartment" })
 	public String editDepartment(@RequestParam int id, Model model) {
 		model.addAttribute(Constant.KEY_DEPARTMENT,
 				departmentDao.findDepartmentById(id));
@@ -101,7 +103,14 @@ public class DepartmentController {
 		}
 		try{
 			if (dep.getManager().getId() != manager) {
-				dep.setManager(employeeDao.findOne(manager));
+				Employee newManager = employeeDao.findOne(manager);
+				if(newManager.getRole().equals(Constant.ROLE_EMPLOYEE)){
+					UserRole role = new UserRole(Constant.ROLE_MANAGER, newManager);
+					newManager.addUserRole(role);
+					newManager.setRole(Constant.ROLE_MANAGER);
+					employeeDao.save(newManager);
+				}
+				dep.setManager(newManager);
 			}
 			departmentDao.save(dep);
 		}catch(Exception ex){
@@ -126,6 +135,11 @@ public class DepartmentController {
 			
 		}
 		try{
+			if(emp.getRole().equals(Constant.ROLE_EMPLOYEE)){
+				UserRole role = new UserRole(Constant.ROLE_MANAGER, emp);
+				emp.addUserRole(role);
+				emp.setRole(Constant.ROLE_MANAGER);
+			}
 			emp.setDepartment(dep);
 			dep.setManager(emp);
 			departmentDao.save(dep);

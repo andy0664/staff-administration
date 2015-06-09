@@ -57,7 +57,10 @@
 										<i class="fa fa-user-plus"></i> Add Employee
 									</button>
 								</a> <a href="ExportEmployeesPdf">
-									<button type="button" class="btn btn-success"><i class="fa fa-file-pdf-o" style="margin-right:5px"></i>Export all as PDF</button>
+									<button type="button" class="btn btn-success">
+										<i class="fa fa-file-pdf-o" style="margin-right: 5px"></i>Export
+										all as PDF
+									</button>
 								</a>
 							</div>
 						</sec:authorize>
@@ -74,7 +77,7 @@
 									<th data-sortable="true">Last Name</th>
 									<th data-sortable="true">Day of birth</th>
 									<th data-sortable="true">Department</th>
-<!-- 									<th data-sortable="true">Username</th> -->
+									<!-- 									<th data-sortable="true">Username</th> -->
 									<th data-sortable="true">Country</th>
 									<th data-sortable="true">Street</th>
 									<th data-sortable="true">ZIP</th>
@@ -98,7 +101,7 @@
 										<td><fmt:formatDate value="${employee.dayOfBirth}"
 												pattern="dd.MM.yyyy" /></td>
 										<td>${employee.department.name}</td>
-<%-- 										<td>${employee.userName}</td> --%>
+										<%-- 										<td>${employee.userName}</td> --%>
 										<td>${employee.address.country}</td>
 										<td>${employee.address.street}</td>
 										<td>${employee.address.zip}</td>
@@ -110,14 +113,40 @@
 										<td><fmt:formatDate value="${employee.dayOfEntry}"
 												pattern="dd.MM.yyyy" /></td>
 										<td>${employee.role}</td>
-										<td><a href="changeEmployee?id=${employee.id}">
+										<td>
+											<form class="form-horizontal" method="post">
+												<input type="hidden" name="${_csrf.parameterName}"
+													value="${_csrf.token }" />
+												<button type="submit" class="btn btn-xs btn-success"
+													name="id" value="${employee.id}"
+													formaction="editEmployee">
+													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+													Edit
+												</button>
+												<button type="submit" class="btn btn-xs btn-success"
+													name="id" value="${employee.id}"
+													formaction="ExportEmployeePdf">
+													<i class="fa fa-file-pdf-o" style="margin-right: 5px"></i>
+													PDF
+												</button>
+												<sec:authorize access="hasRole('ADMIN')">
+													<button type="submit" class="btn btn-xs btn-danger"
+														name="id" value="${employee.id}"
+														formaction="deleteEmployee">
+														<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+														Delete
+													</button>
+												</sec:authorize>
+											</form>
+										</td>
+										<%-- <td><a href="changeEmployee?id=${employee.id}">
 												<button type="button" class="btn btn-xs btn-success">
 													<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 													Edit
 												</button>
 										</a> <a href="ExportEmployeePdf?id=${employee.id}">
 												<button type="button" class="btn btn-xs btn-success">
-													<i class="fa fa-file-pdf-o" style="margin-right:5px"></i>
+													<i class="fa fa-file-pdf-o" style="margin-right: 5px"></i>
 													PDF
 												</button>
 										</a> <sec:authorize access="hasRole('ADMIN')">
@@ -127,7 +156,7 @@
 														Delete
 													</button>
 												</a>
-											</sec:authorize></td>
+											</sec:authorize></td> --%>
 									</tr>
 								</c:forEach>
 								<!--  list all employees ----------------------------------------------------------- -->
