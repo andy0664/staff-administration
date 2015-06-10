@@ -18,7 +18,7 @@
 						<div class="panel panel-anncouncement">
 							<div class="panel-heading">
 								<div class="row" style="margin-right: 0px; margin-left: 0px">
-																		<font size="5">${announcement.subject}</font>
+									<font size="5">${announcement.subject}</font>
 									<c:choose>
 										<c:when test="${announcement.subject=='Request for leave'}">
 											<button type="Submit" class="btn pull-right btn-danger"

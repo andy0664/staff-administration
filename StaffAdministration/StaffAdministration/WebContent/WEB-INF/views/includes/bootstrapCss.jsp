@@ -150,7 +150,7 @@ html, body {
 	font-weight: 700;
 	text-transform: uppercase;
 	line-height: 30px;
-	background: #32323a;
+	background: #2B2E33;
 	position: fixed;
 }
 

@@ -19,13 +19,13 @@ html, body {
 .menu ul {
 	padding: 10px 0px;
 	margin: 0px;
-	background-color: #32323A;
+	background-color: #2B2E33;
 }
 
 .menu li {
 	list-style-type: none;
 	height: 30px;
-	background-color: #32323A;
+	background-color: #2B2E33;
 	border-bottom: 1px solid #cdcdcd;
 }
 
