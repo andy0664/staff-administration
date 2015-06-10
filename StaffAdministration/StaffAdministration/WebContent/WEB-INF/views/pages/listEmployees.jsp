@@ -62,7 +62,7 @@
 									<th data-sortable="true">Department</th>
 									<th data-sortable="true">Job Description</th>
 									<th data-sortable="true">E-Mail</th>
-									<th data-sortable="true">"Tel. Nr</th>
+									<th data-sortable="true">Telephone</th>
 									<th data-sortable="true">Status</th>
 									<th>Calendar</th>
 								</tr>

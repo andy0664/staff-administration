@@ -71,7 +71,7 @@
 								<! ----------------  Choose Employee ---------------- -->
 								<div class="form-group">
 									<label for="inputManager" class="col-md-2 control-label">Employee</label>
-									<div class="col-md-7">
+									<div class="col-md-6">
 										<select class="form-control" name="employee">
 											<c:forEach items="${employeeList }" var="employee">
 												<option value="${employee.id}">${ employee.firstName}
@@ -90,7 +90,7 @@
 							<! ----------------  DateFrom ---------------- -->
 							<div class="form-group">
 								<label for="inputDate" class="col-md-2 control-label">From</label>
-								<div class="col-md-7">
+								<div class="col-md-6">
 									<input class="form_datetime form-control" id="inputDateFrom"
 										placeholder="Date" type="text" readonly name="dateFrom"
 										value="<fmt:formatDate value="${dateFrom}" pattern="dd.MM.yyyy"/>" />
@@ -100,7 +100,7 @@
 							<! ----------------  DateTo ---------------- -->
 							<div class="form-group">
 								<label for="inputDate" class="col-md-2 control-label">To</label>
-								<div class="col-md-7">
+								<div class="col-md-6">
 									<input class="form_datetime form-control" id="inputDateFrom"
 										placeholder="Date" type="text" readonly name="dateTo"
 										value="<fmt:formatDate value="${dateTo}" pattern="dd.MM.yyyy"/>" />

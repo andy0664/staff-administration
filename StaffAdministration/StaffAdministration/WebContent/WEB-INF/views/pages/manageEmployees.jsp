@@ -83,7 +83,7 @@
 									<th data-sortable="true">ZIP</th>
 									<th data-sortable="true">City</th>
 									<th data-sortable="true">E-Mail</th>
-									<th data-sortable="true">"Tel. Nr</th>
+									<th data-sortable="true">Telephone</th>
 									<th data-sortable="true">Job Description</th>
 									<th data-sortable="true">Salary</th>
 									<th data-sortable="true">Day of Entry</th>
@@ -112,7 +112,19 @@
 										<td>${employee.salary}</td>
 										<td><fmt:formatDate value="${employee.dayOfEntry}"
 												pattern="dd.MM.yyyy" /></td>
-										<td>${employee.role}</td>
+										<c:choose>
+											<c:when test="${employee.role=='ROLE_ADMIN'}">
+												<td>Admin</td>
+											</c:when>
+											<c:when test="${employee.role=='ROLE_MANAGER'}">
+												<td>Manager</td>
+											</c:when>
+											<c:otherwise>
+												<td>Employee</td>
+											</c:otherwise>
+										</c:choose>
+
+
 										<td>
 											<form class="form-horizontal" method="post">
 												<input type="hidden" name="${_csrf.parameterName}"
