@@ -83,7 +83,7 @@ public class Constant {
 	public static final String KEY_STATUS="status";
 	public static final String KEY_CURRENT_PAGE="currentPage";	
 	public static final String KEY_ADDRESS="address";
-	public static final String KEY_USER_NAME="userName";
+	public static final String KEY_USER_NAV_BAR_TOP="userNavBarTop";
 	
 	//Redirects
 	public static final String REDIRECT_MANAGE_EMPLOYEES="redirect:manageEmployees";

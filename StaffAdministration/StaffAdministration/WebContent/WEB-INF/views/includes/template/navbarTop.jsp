@@ -12,7 +12,7 @@
 	</div>
 
 	<ul class="nav navbar-top-links pull-right">
-		<a href="showProfile"><c:out value="${sessionScope.userName}"></c:out></a>
+		<a href="showProfile"><c:out value="${sessionScope.userNavBarTop}"></c:out></a>
 		<li class="dropdown"><a class="dropdown-toggle"
 			data-toggle="dropdown" href="#" aria-expanded="false"> <c:choose>
 					<c:when test="${sessionScope.status=='Available'}">

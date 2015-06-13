@@ -182,7 +182,7 @@ public class CoverPageController {
 		if (request.getSession().getAttribute(Constant.KEY_STATUS) == null) {
 			request.getSession().setAttribute(Constant.KEY_STATUS,
 					emp.getStatus());
-			request.getSession().setAttribute(Constant.KEY_USER_NAME, emp.getUserName());
+			request.getSession().setAttribute(Constant.KEY_USER_NAV_BAR_TOP, emp.getFirstName()+" "+emp.getLastName());
 		}
 		return Constant.PAGE_INDEX;
 	}
