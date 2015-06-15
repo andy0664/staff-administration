@@ -92,63 +92,7 @@ public class CoverPageController {
 	public String handleLogin() {
 		try {
 			if (firstStart) {
-				DataFactory df = new DataFactory();
-				Address address = new Address(df.getStreetName(), df.getCity(),
-						df.getRandomWord(), 8052);
-				Employee p1 = new Employee(
-						12345,
-						df.getFirstName(),
-						df.getLastName(),
-						df.getBirthDate(),
-						address,
-						df.getRandomText(10, 20),
-						1234.5f,
-						df.getBirthDate(),
-						"admin",
-						"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC",
-						"admin@gmx.at", "+43 1234567");
-				Employee p2 = new Employee(
-						123456,
-						df.getFirstName(),
-						df.getLastName(),
-						df.getBirthDate(),
-						address,
-						df.getRandomText(10, 20),
-						1234.5f,
-						df.getBirthDate(),
-						"manager",
-						"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC",
-						"manager@gmx.at", "+43 12345678");
-				Employee p3 = new Employee(
-						1234567,
-						df.getFirstName(),
-						df.getLastName(),
-						df.getBirthDate(),
-						address,
-						df.getRandomText(10, 20),
-						1234.5f,
-						df.getBirthDate(),
-						"employee",
-						"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC",
-						"employee@gmx.at", "+43 123456789");
-				UserRole role = new UserRole(Constant.ROLE_ADMINISTRATOR, p1);
-				UserRole role2 = new UserRole(Constant.ROLE_MANAGER, p1);
-				UserRole role3 = new UserRole(Constant.ROLE_EMPLOYEE, p1);
-				p1.addUserRole(role);
-				p1.addUserRole(role2);
-				p1.addUserRole(role3);
-				p1.setRole(Constant.ROLE_ADMINISTRATOR);
-				employeeDao.save(p1);
-				UserRole role4 = new UserRole(Constant.ROLE_MANAGER, p2);
-				UserRole role5 = new UserRole(Constant.ROLE_EMPLOYEE, p2);
-				p2.addUserRole(role4);
-				p2.addUserRole(role5);
-				p2.setRole(Constant.ROLE_MANAGER);
-				employeeDao.save(p2);
-				UserRole role6 = new UserRole(Constant.ROLE_EMPLOYEE, p3);
-				p3.addUserRole(role6);
-				p3.setRole(Constant.ROLE_EMPLOYEE);
-				employeeDao.save(p3);
+				initUser();
 			}
 			firstStart = false;
 			return Constant.PAGE_LOGIN;
@@ -182,7 +126,8 @@ public class CoverPageController {
 		if (request.getSession().getAttribute(Constant.KEY_STATUS) == null) {
 			request.getSession().setAttribute(Constant.KEY_STATUS,
 					emp.getStatus());
-			request.getSession().setAttribute(Constant.KEY_USER_NAV_BAR_TOP, emp.getFirstName()+" "+emp.getLastName());
+			request.getSession().setAttribute(Constant.KEY_USER_NAV_BAR_TOP,
+					emp.getFirstName() + " " + emp.getLastName());
 		}
 		return Constant.PAGE_INDEX;
 	}
@@ -257,7 +202,6 @@ public class CoverPageController {
 		return Constant.PAGE_LIST_EMPLYEES;
 	}
 
-	
 	@RequestMapping(value = { "setStatus" })
 	public String setStatus(@RequestParam String status, Model model,
 			HttpServletRequest request) {
@@ -273,6 +217,46 @@ public class CoverPageController {
 				.findEmployeeByUserName(controllerSupport.getCurrentUser()
 						.getUsername()));
 		return Constant.PAGE_PROFILE;
+	}
+
+	private void initUser() {
+		Employee p1 = genereateUser(12345,"admin",
+				"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC",
+				"admin@gmx.at", "+43 1234567");
+		Employee p2 = genereateUser(54321,"manager",
+				"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC",
+				"manager@gmx.at", "+43 12345678");
+		Employee p3 = genereateUser(12543,"employee",
+				"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC",
+				"employee@gmx.at", "+43 123456789");
+		UserRole role = new UserRole(Constant.ROLE_ADMINISTRATOR, p1);
+		UserRole role2 = new UserRole(Constant.ROLE_MANAGER, p1);
+		UserRole role3 = new UserRole(Constant.ROLE_EMPLOYEE, p1);
+		p1.addUserRole(role);
+		p1.addUserRole(role2);
+		p1.addUserRole(role3);
+		p1.setRole(Constant.ROLE_ADMINISTRATOR);
+		employeeDao.save(p1);
+		UserRole role4 = new UserRole(Constant.ROLE_MANAGER, p2);
+		UserRole role5 = new UserRole(Constant.ROLE_EMPLOYEE, p2);
+		p2.addUserRole(role4);
+		p2.addUserRole(role5);
+		p2.setRole(Constant.ROLE_MANAGER);
+		employeeDao.save(p2);
+		UserRole role6 = new UserRole(Constant.ROLE_EMPLOYEE, p3);
+		p3.addUserRole(role6);
+		p3.setRole(Constant.ROLE_EMPLOYEE);
+		employeeDao.save(p3);
+	}
+
+	private Employee genereateUser(int ssn,String userName, String passwd, String mail,
+			String phone) {
+		DataFactory df = new DataFactory();
+		Address address = new Address(df.getStreetName(), df.getCity(),
+				df.getRandomWord(), 8020);
+		return new Employee(ssn, df.getFirstName(), df.getLastName(),
+				df.getBirthDate(), address, df.getRandomText(10, 20), 1234.5f,
+				df.getBirthDate(), userName, passwd, mail, phone);
 	}
 
 	// @ExceptionHandler(Exception.class)
