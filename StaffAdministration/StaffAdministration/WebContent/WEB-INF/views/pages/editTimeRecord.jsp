@@ -89,7 +89,7 @@
 										from</label>
 									<div class="col-md-5">
 										<input class="form-control" id="inputStartTime" type="text"
-											name="startTime" placeholder="hh:mm"
+											name="startTime" pattern="[0-9]{2}:[0-9]{2}" title="Format: hh:mm" placeholder="hh:mm"
 											value="<c:out value="${timeRecord.startTime}"/>" required>
 									</div>
 								</div>
@@ -100,7 +100,7 @@
 										to</label>
 									<div class="col-md-5">
 										<input class="form-control" id="inputEndTime" type="text"
-											name="endTime" placeholder="hh:mm"
+											name="endTime" pattern="[0-9]{2}:[0-9]{2}" title="Format: hh:mm" placeholder="hh:mm"
 											value="<c:out value="${timeRecord.endTime}"/>" required>
 									</div>
 								</div>

@@ -279,5 +279,4 @@ public class CoverPageController {
 	// public String handleAllException(Exception ex) {
 	// return "showError";
 	// }
-
 }
