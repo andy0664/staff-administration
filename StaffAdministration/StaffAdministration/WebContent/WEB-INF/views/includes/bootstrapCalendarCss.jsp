@@ -9,6 +9,18 @@ html, body {
 	box-sizing: content-box;
 }
 
+.content-cal {
+    background-color: #F0F0F0;
+    float: left;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    left: 260px;
+    padding: 20px 20px 20px 40px;
+    box-sizing: content-box;
+}
+
 .menu {
 	width: 260px;
 	height: 100%;

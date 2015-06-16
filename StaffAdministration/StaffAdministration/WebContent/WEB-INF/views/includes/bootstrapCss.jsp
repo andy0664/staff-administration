@@ -77,7 +77,7 @@ html, body {
 #page-wrapper {
 	margin: 0 0 0 260px;
 	padding: 15px 0px;
-	min-height: 919px;
+	min-height: 909px;
 	position: relative;
 	background: #F0F0F0;
 }
@@ -85,7 +85,7 @@ html, body {
 #page-wrapper-subpages {
 	margin: 0 0 0 260px;
 	padding: 15px 0px;
-	min-height: 919px;
+	min-height: 909px;
 	position: relative;
 	background: #fff;
 }
@@ -128,6 +128,11 @@ html, body {
 /*----------------------------------------------
     MENU STYLES    
 ------------------------------------------------*/
+
+.navbar {
+    border-radius: 0px;
+}
+
 .top-navbar {
 	margin: 0px;
 	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
