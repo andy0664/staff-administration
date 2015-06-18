@@ -1,5 +1,8 @@
 package at.fh.swenga.jpa.dto;
 
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
+
 import at.fh.swenga.jpa.model.Department;
 
 public class DepartmentDTO {
@@ -31,7 +34,13 @@ public class DepartmentDTO {
 		this.shortcut = shortcut;
 	}
 	
+	public void sanitize() {
+		this.name=Jsoup.clean(this.name,Whitelist.simpleText());
+		this.shortcut=Jsoup.clean(this.shortcut,Whitelist.simpleText());
+	}
+	
 	public Department generateDepartment(){
+		sanitize();
 		return new Department(this.name,this.shortcut);
 	}
 	

@@ -2,6 +2,10 @@ package at.fh.swenga.jpa.model;
 
 import javax.persistence.Embeddable;
 
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
+
+
 @Embeddable
 public class Address {
 	
@@ -51,6 +55,12 @@ public class Address {
 
 	public void setZip(int zip) {
 		this.zip = zip;
+	}
+
+	public void sanitize() {
+		this.street=Jsoup.clean(this.street,Whitelist.simpleText());
+		this.country=Jsoup.clean(this.country,Whitelist.simpleText());
+		this.city=Jsoup.clean(this.city,Whitelist.simpleText());
 	}
 
 

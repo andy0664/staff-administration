@@ -20,6 +20,10 @@ import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 
 import at.fh.swenga.jpa.dto.EmployeeDTO;
 import at.fh.swenga.jpa.support.Constant;
@@ -95,7 +99,7 @@ public class Employee implements Serializable {
 	@Version
 	private long version;
 
-	
+
 
 	public Employee() {
 	}
@@ -364,6 +368,7 @@ public class Employee implements Serializable {
 	}
 
 	public void updateEmployee(EmployeeDTO emp){
+		emp.sanitize();
 		this.ssn=emp.getSsn();
 		this.firstName=emp.getFirstName();
 		this.lastName=emp.getLastName();
@@ -382,6 +387,7 @@ public class Employee implements Serializable {
 //			this.password=emp.getPassword();
 //		}
 	}
+	
 
 	@Override
 	public int hashCode() {
