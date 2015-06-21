@@ -51,9 +51,19 @@ public class EventV3 extends DHXEvent {
 		this.end_date = end_date;
 		this.user_id = user_id;
 		this.department = department;
-		this.department_visibility = department_visibility;
-		
+		this.department_visibility = department_visibility;	
 	}
+	
+	public EventV3(Date start_date, Date end_date, String event_name, String user_id, String department, Boolean department_visibility) {
+		this.text = event_name;
+		this.start_date = start_date;
+		this.end_date = end_date;
+		this.user_id = user_id;
+		this.department = department;
+		this.department_visibility = department_visibility;	
+	}
+	
+	
 	
 	
 	public EventV3(String user_id) {
