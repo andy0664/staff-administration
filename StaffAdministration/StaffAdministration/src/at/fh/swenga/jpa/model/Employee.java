@@ -368,7 +368,7 @@ public class Employee implements Serializable {
 	}
 
 	public void updateEmployee(EmployeeDTO emp){
-		emp.sanitize();
+//		emp.sanitize();
 		this.ssn=emp.getSsn();
 		this.firstName=emp.getFirstName();
 		this.lastName=emp.getLastName();

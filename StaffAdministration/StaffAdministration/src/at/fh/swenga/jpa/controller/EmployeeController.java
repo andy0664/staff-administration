@@ -142,7 +142,7 @@ public class EmployeeController {
 				|| controllerSupport.checkBinding(bindingResultAddress, model)) {
 			return cancelAddEmployee(model, newEmployee, newAddress);
 		}
-		newAddress.sanitize();
+//		newAddress.sanitize();
 		newEmployee.setAddress(newAddress);
 		Employee emp = newEmployee.generateEmployee();
 		emp.setPassword(encoder.encode(emp.getPassword()));
@@ -191,7 +191,7 @@ public class EmployeeController {
 			return cancelChangeEmployee(model, emp,
 					Constant.ERROR_MESSAGE_UPDATE_EMPLOYEE);
 		}
-		newAddress.sanitize();
+//		newAddress.sanitize();
 		newEmployee.setAddress(newAddress);
 		emp.updateEmployee(newEmployee);
 		String uniqueError = checkEmployee(emp);

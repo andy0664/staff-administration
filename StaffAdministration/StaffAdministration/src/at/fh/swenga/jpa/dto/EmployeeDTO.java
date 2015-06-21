@@ -190,17 +190,17 @@ public class EmployeeDTO {
 		this.phone = phone;
 	}
 	
-	public void sanitize() {
-		this.firstName=Jsoup.clean(this.firstName,Whitelist.simpleText());
-		this.lastName=Jsoup.clean(this.lastName,Whitelist.simpleText());
-		this.jobDescription=Jsoup.clean(this.jobDescription,Whitelist.simpleText());
-		this.mail=Jsoup.clean(this.mail,Whitelist.simpleText());
-		this.phone=Jsoup.clean(this.phone,Whitelist.simpleText());
-		this.userName=Jsoup.clean(this.userName,Whitelist.simpleText());
-	}
+//	public void sanitize() {
+//		this.firstName=Jsoup.clean(this.firstName,Whitelist.simpleText());
+//		this.lastName=Jsoup.clean(this.lastName,Whitelist.simpleText());
+//		this.jobDescription=Jsoup.clean(this.jobDescription,Whitelist.simpleText());
+//		this.mail=Jsoup.clean(this.mail,Whitelist.simpleText());
+//		this.phone=Jsoup.clean(this.phone,Whitelist.simpleText());
+//		this.userName=Jsoup.clean(this.userName,Whitelist.simpleText());
+//	}
 
 	public Employee generateEmployee() {
-		sanitize();
+//		sanitize();
 		return new Employee(ssn, firstName, lastName, dayOfBirth, address,
 				jobDescription, salary,dayOfEntry,userName,password,mail,phone);
 	}

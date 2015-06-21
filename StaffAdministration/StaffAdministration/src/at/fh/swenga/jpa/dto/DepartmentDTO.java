@@ -34,13 +34,13 @@ public class DepartmentDTO {
 		this.shortcut = shortcut;
 	}
 	
-	public void sanitize() {
-		this.name=Jsoup.clean(this.name,Whitelist.simpleText());
-		this.shortcut=Jsoup.clean(this.shortcut,Whitelist.simpleText());
-	}
+//	public void sanitize() {
+//		this.name=Jsoup.clean(this.name,Whitelist.simpleText());
+//		this.shortcut=Jsoup.clean(this.shortcut,Whitelist.basic());
+//	}
 	
 	public Department generateDepartment(){
-		sanitize();
+//		sanitize();
 		return new Department(this.name,this.shortcut);
 	}
 	
