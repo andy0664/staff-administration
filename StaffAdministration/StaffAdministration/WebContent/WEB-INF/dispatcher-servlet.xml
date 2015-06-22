@@ -35,7 +35,8 @@
 
 
 
-	<mvc:annotation-driven /> <!-- <bean class="org.springframework.data.web.config.SpringDataWebConfiguration" 
+	<mvc:annotation-driven>
+	</mvc:annotation-driven> <!-- <bean class="org.springframework.data.web.config.SpringDataWebConfiguration" 
 		/> -->
 
 

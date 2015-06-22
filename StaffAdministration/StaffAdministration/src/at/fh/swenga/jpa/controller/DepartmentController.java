@@ -30,6 +30,7 @@ import at.fh.swenga.jpa.model.UserRole;
 import at.fh.swenga.jpa.support.Constant;
 import at.fh.swenga.jpa.support.ControllerSupport;
 import at.fh.swenga.jpa.support.DateTimeEditor;
+import at.fh.swenga.jpa.support.SanitizeString;
 
 @Controller
 public class DepartmentController {
@@ -46,6 +47,7 @@ public class DepartmentController {
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(Date.class, new DateTimeEditor());
+		binder.registerCustomEditor(String.class, new SanitizeString());
 	}
 
 	/*

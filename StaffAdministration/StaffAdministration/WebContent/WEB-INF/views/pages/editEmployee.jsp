@@ -231,7 +231,7 @@
 										<div class="col-md-5">
 											<input class="form-control" id="inputUserName" type="text"
 												name="userName"
-												value="<c:out value="${employee.userName}"/><c:out value="${tmpEmployee.ssn}"/>"
+												value="<c:out value="${employee.userName}"/><c:out value="${tmpEmployee.userName}"/>"
 												required>
 										</div>
 									</div>

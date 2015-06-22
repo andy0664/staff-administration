@@ -368,7 +368,6 @@ public class Employee implements Serializable {
 	}
 
 	public void updateEmployee(EmployeeDTO emp){
-//		emp.sanitize();
 		this.ssn=emp.getSsn();
 		this.firstName=emp.getFirstName();
 		this.lastName=emp.getLastName();
@@ -377,15 +376,12 @@ public class Employee implements Serializable {
 		this.jobDescription=emp.getJobDescription();
 		this.dayOfEntry=emp.getDayOfEntry();
 		this.salary=emp.getSalary();
-//		this.role=emp.getRole();
 		if(emp.getUserName()!=null){
 			this.userName=emp.getUserName();
 		}
 		this.mail=emp.getMail();
 		this.phone=emp.getPhone();
-//		if(!"".equals(emp.getPassword())){
-//			this.password=emp.getPassword();
-//		}
+
 	}
 	
 

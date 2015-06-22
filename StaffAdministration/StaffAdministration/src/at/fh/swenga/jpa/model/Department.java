@@ -104,7 +104,6 @@ public class Department implements Serializable{
 	}
 
 	public void updateDepartment(DepartmentDTO dep){
-//		dep.sanitize();
 		this.name=dep.getName();
 		this.shortcut=dep.getShortcut();
 	}

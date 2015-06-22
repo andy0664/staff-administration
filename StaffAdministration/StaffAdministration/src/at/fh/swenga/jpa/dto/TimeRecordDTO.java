@@ -1,7 +1,5 @@
 package at.fh.swenga.jpa.dto;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import at.fh.swenga.jpa.model.TimeRecord;
 
