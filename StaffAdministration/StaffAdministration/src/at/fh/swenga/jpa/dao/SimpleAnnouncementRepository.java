@@ -22,8 +22,13 @@ public interface SimpleAnnouncementRepository extends
 	public List<Announcement> findAnnouncementByManagerAndEnabledTrueAndNotReadGreaterThanOrDayIs(
 			Employee manager, int notRead, Date day);
 	
+	public Announcement findAnnouncementByEmployeeAndSubjectIs(Employee emp, String subject);
+	
 	@Modifying
 	@Query("update Announcement a set a.enabled=:enabled where a.employee=:employeeId")
 	public void changeEnableStateAnnouncement(@Param("enabled")boolean enabled,@Param("employeeId")Employee emp);
+	
+	@Modifying
+	public void deleteAnnouncementByEmployeeAndSubjectIs(Employee emp,String subject);
 	
 }

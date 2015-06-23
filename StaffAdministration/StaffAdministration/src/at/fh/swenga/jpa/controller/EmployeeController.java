@@ -144,7 +144,7 @@ public class EmployeeController {
 				|| controllerSupport.checkBinding(bindingResultAddress, model)) {
 			return cancelAddEmployee(model, newEmployee, newAddress);
 		}
-//		newAddress.sanitize();
+		// newAddress.sanitize();
 		newEmployee.setAddress(newAddress);
 		Employee emp = newEmployee.generateEmployee();
 		emp.setPassword(encoder.encode(emp.getPassword()));
@@ -154,25 +154,28 @@ public class EmployeeController {
 			return cancelAddEmployee(model, newEmployee, newAddress);
 		}
 		try {
-			saveEmployee(emp, department, newEmployee.getRole());
+			saveEmployee(employeeDao.save(emp), department,
+					newEmployee.getRole());
 			if (department != Constant.NO_DEPARTMENT) {
-				String message = String.format("Birthday: %s %s ",
-						emp.getFirstName(), emp.getLastName());
-				Date announcementDay = controllerSupport
-						.getBirthdayCurYear(newEmployee.getDayOfBirth());
-				if (announcementDay.before(new Date())
-						&& !DateUtils.isSameDay(announcementDay, new Date())) {
-					announcementDay = controllerSupport.updateAnnouncementYear(
-							announcementDay, 1);
-				}
-				Announcement announcement = new Announcement(
-						Constant.ANNOUNCEMENT_BIRTHDAY, message,
-						announcementDay,
-						employeeDao.findManagerFromEmployee(department), emp);
+				// String message = String.format("Birthday: %s %s ",
+				// emp.getFirstName(), emp.getLastName());
+				// Date announcementDay = controllerSupport
+				// .getBirthdayCurYear(newEmployee.getDayOfBirth());
+				// if (announcementDay.before(new Date())
+				// && !DateUtils.isSameDay(announcementDay, new Date())) {
+				// announcementDay = controllerSupport.updateAnnouncementYear(
+				// announcementDay, 1);
+				// }
+				// Announcement announcement = new Announcement(
+				// Constant.ANNOUNCEMENT_BIRTHDAY, message,
+				// announcementDay,
+				// employeeDao.findManagerFromEmployee(department), emp);
 
-				announcementDao.save(announcement);
+				announcementDao.save(createBirthdayAnnouncement(emp,
+						newEmployee, department));
 			}
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			model.addAttribute(Constant.KEY_ERROR_MESSAGE,
 					Constant.ERROR_MESSAGE_ADD_EMPLOYEE);
 			return cancelAddEmployee(model, newEmployee, newAddress);
@@ -193,7 +196,7 @@ public class EmployeeController {
 			return cancelChangeEmployee(model, emp,
 					Constant.ERROR_MESSAGE_UPDATE_EMPLOYEE);
 		}
-//		newAddress.sanitize();
+		// newAddress.sanitize();
 		newEmployee.setAddress(newAddress);
 		emp.updateEmployee(newEmployee);
 		String uniqueError = checkEmployee(emp);
@@ -205,6 +208,23 @@ public class EmployeeController {
 			emp.setPassword(encoder.encode(newEmployee.getPassword()));
 		}
 		try {
+			if (emp.getRole().equals(Constant.ROLE_EMPLOYEE)
+					&& !Constant.ROLE_EMPLOYEE.equals(newEmployee.getRole())) {
+				announcementDao.deleteAnnouncementByEmployeeAndSubjectIs(emp, Constant.ANNOUNCEMENT_BIRTHDAY);
+			}
+			if (emp.getDepartment() == null
+					|| (!emp.getRole().equals(Constant.ROLE_EMPLOYEE) && Constant.ROLE_EMPLOYEE
+							.equals(newEmployee.getRole()))) {
+				announcementDao.save(createBirthdayAnnouncement(emp,
+						newEmployee, department));
+			} else if (emp.getDepartment().getId() != department) {
+				Announcement announcement = announcementDao
+						.findAnnouncementByEmployeeAndSubjectIs(emp,
+								Constant.ANNOUNCEMENT_BIRTHDAY);
+				announcement.setManager(employeeDao
+						.findManagerFromEmployee(department));
+				announcementDao.save(announcement);
+			}
 			if (newEmployee.getRole() == null
 					|| emp.getRole().equals(newEmployee.getRole())) {
 				saveEmployee(emp, department, "");
@@ -246,9 +266,6 @@ public class EmployeeController {
 
 	private void saveEmployee(Employee emp, int department, String role)
 			throws Exception {
-		if (department != Constant.NO_DEPARTMENT) {
-			emp.setDepartment(departmentDao.findDepartmentById(department));
-		}
 		if (Constant.ROLE_ADMINISTRATOR.equals(role)) {
 			emp.addUserRole(genereateUserRole(Constant.ROLE_ADMINISTRATOR, emp));
 			emp.addUserRole(genereateUserRole(Constant.ROLE_MANAGER, emp));
@@ -261,6 +278,9 @@ public class EmployeeController {
 		} else if (Constant.ROLE_EMPLOYEE.equals(role)) {
 			emp.setRole(Constant.ROLE_EMPLOYEE);
 			emp.addUserRole(genereateUserRole(Constant.ROLE_EMPLOYEE, emp));
+		}
+		if (department != Constant.NO_DEPARTMENT) {
+			emp.setDepartment(departmentDao.findOne(department));
 		}
 		employeeDao.save(emp);
 	}
@@ -287,6 +307,8 @@ public class EmployeeController {
 
 	private String cancelAddEmployee(Model model, EmployeeDTO newEmployee,
 			Address newAddress) {
+		model.addAttribute(Constant.KEY_DEPARTMENT_LIST,
+				departmentDao.findAll());
 		model.addAttribute(Constant.KEY_TMP_EMPLOYEE, newEmployee);
 		model.addAttribute(Constant.KEY_ADDRESS, newAddress);
 		return Constant.PAGE_EDIT_EMPLOYEE;
@@ -294,9 +316,27 @@ public class EmployeeController {
 
 	private String cancelChangeEmployee(Model model, Employee emp,
 			String message) {
+		model.addAttribute(Constant.KEY_DEPARTMENT_LIST,
+				departmentDao.findAll());
 		model.addAttribute(Constant.KEY_EMPLOYEE, emp);
 		model.addAttribute(Constant.KEY_ERROR_MESSAGE, message);
 		return Constant.PAGE_EDIT_EMPLOYEE;
+	}
+
+	private Announcement createBirthdayAnnouncement(Employee emp,
+			EmployeeDTO newEmployee, int department) {
+		String message = String.format("Birthday: %s %s ", emp.getFirstName(),
+				emp.getLastName());
+		Date announcementDay = controllerSupport.getBirthdayCurYear(newEmployee
+				.getDayOfBirth());
+		if (announcementDay.before(new Date())
+				&& !DateUtils.isSameDay(announcementDay, new Date())) {
+			announcementDay = controllerSupport.updateAnnouncementYear(
+					announcementDay, 1);
+		}
+		return new Announcement(Constant.ANNOUNCEMENT_BIRTHDAY, message,
+				announcementDay,
+				employeeDao.findManagerFromEmployee(department), emp);
 	}
 
 }
