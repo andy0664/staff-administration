@@ -223,7 +223,7 @@ public class CoverPageController {
 
 	private void initUser() {
 		Employee p1 = genereateUser(12345,"admin",
-				"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC",
+				"$2a$04$iPApf3wYPXmuW6zUaZvTJuCUeW9a9HH7cwc2tXIbBh9F.AVLev29m",
 				"admin@hrinside.at", "+43 1234567");
 //		Employee p2 = genereateUser(54321,"manager",
 //				"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC",
