@@ -27,6 +27,7 @@ public interface SimpleEmployeeRepository extends
 	public List<Employee> findEmployeeByOrderByDepartmentId();
 	public List<Employee> findEmployeeByDepartmentId(int depId);
 	public Employee findEmployeeByUserName(String username);
+	public Employee findEmployeeByRole(String role);
 	
 	@Query("select e from Employee e where e.ssn =:ssn and e.id !=:id")
 	public Employee checkUniqueSSN(@Param("ssn") int ssn, @Param("id") int id);

@@ -144,7 +144,6 @@ public class EmployeeController {
 				|| controllerSupport.checkBinding(bindingResultAddress, model)) {
 			return cancelAddEmployee(model, newEmployee, newAddress);
 		}
-		// newAddress.sanitize();
 		newEmployee.setAddress(newAddress);
 		Employee emp = newEmployee.generateEmployee();
 		emp.setPassword(encoder.encode(emp.getPassword()));
@@ -157,20 +156,6 @@ public class EmployeeController {
 			saveEmployee(employeeDao.save(emp), department,
 					newEmployee.getRole());
 			if (department != Constant.NO_DEPARTMENT) {
-				// String message = String.format("Birthday: %s %s ",
-				// emp.getFirstName(), emp.getLastName());
-				// Date announcementDay = controllerSupport
-				// .getBirthdayCurYear(newEmployee.getDayOfBirth());
-				// if (announcementDay.before(new Date())
-				// && !DateUtils.isSameDay(announcementDay, new Date())) {
-				// announcementDay = controllerSupport.updateAnnouncementYear(
-				// announcementDay, 1);
-				// }
-				// Announcement announcement = new Announcement(
-				// Constant.ANNOUNCEMENT_BIRTHDAY, message,
-				// announcementDay,
-				// employeeDao.findManagerFromEmployee(department), emp);
-
 				announcementDao.save(createBirthdayAnnouncement(emp,
 						newEmployee, department));
 			}
@@ -196,7 +181,6 @@ public class EmployeeController {
 			return cancelChangeEmployee(model, emp,
 					Constant.ERROR_MESSAGE_UPDATE_EMPLOYEE);
 		}
-		// newAddress.sanitize();
 		newEmployee.setAddress(newAddress);
 		emp.updateEmployee(newEmployee);
 		String uniqueError = checkEmployee(emp);

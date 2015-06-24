@@ -109,7 +109,7 @@
 									<div class="col-md-5">
 										<input class="form-control" id="inputStreet" type="text"
 											name="street"
-											value="<c:out value="${employee.address.street}"/><c:out value="${address.street}"/>"
+											value="<c:out value="${employee.address.street}"/><c:out value="${addressTmp.street}"/>"
 											required>
 									</div>
 								</div>
@@ -121,7 +121,7 @@
 									<div class="col-md-5">
 										<input class="form-control" id="inputZIP" type="number"
 											name="zip"
-											value="<c:out value="${employee.address.zip}"/><c:out value="${address.zip}"/>"
+											value="<c:out value="${employee.address.zip}"/><c:out value="${addressTmp.zip}"/>"
 											required>
 									</div>
 								</div>
@@ -132,7 +132,7 @@
 									<div class="col-md-5">
 										<input class="form-control" id="inputCity" type="text"
 											name="city"
-											value="<c:out value="${employee.address.city}"/><c:out value="${address.city}"/>"
+											value="<c:out value="${employee.address.city}"/><c:out value="${addressTmp.city}"/>"
 											required>
 									</div>
 								</div>
@@ -143,7 +143,7 @@
 									<div class="col-md-5">
 										<input class="form-control" id="inputCountry" type="text"
 											name="country"
-											value="<c:out value="${employee.address.country}"/><c:out value="${address.country}"/>"
+											value="<c:out value="${employee.address.country}"/><c:out value="${addressTmp.country}"/>"
 											required>
 									</div>
 								</div>

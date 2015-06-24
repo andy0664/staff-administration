@@ -94,7 +94,9 @@ public class CoverPageController {
 	public String handleLogin() {
 		try {
 			if (firstStart) {
-				initUser();
+				if(employeeDao.findEmployeeByRole(Constant.ROLE_ADMINISTRATOR)==null){
+					initAdmin();
+				}
 			}
 			firstStart = false;
 			return Constant.PAGE_LOGIN;
@@ -221,16 +223,11 @@ public class CoverPageController {
 		return Constant.PAGE_PROFILE;
 	}
 
-	private void initUser() {
+	private void initAdmin() {
 		Employee p1 = genereateUser(12345,"admin",
 				"$2a$04$iPApf3wYPXmuW6zUaZvTJuCUeW9a9HH7cwc2tXIbBh9F.AVLev29m",
 				"admin@hrinside.at", "+43 1234567");
-//		Employee p2 = genereateUser(54321,"manager",
-//				"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC",
-//				"manager@gmx.at", "+43 12345678");
-//		Employee p3 = genereateUser(12543,"employee",
-//				"$2a$04$vr5j3pjvADh5r0zX0zfIreLKVP7.Xbq1JhHozBhlGnBeHg.RdE/fC",
-//				"employee@gmx.at", "+43 123456789");
+
 		UserRole role = new UserRole(Constant.ROLE_ADMINISTRATOR, p1);
 		UserRole role2 = new UserRole(Constant.ROLE_MANAGER, p1);
 		UserRole role3 = new UserRole(Constant.ROLE_EMPLOYEE, p1);
@@ -239,16 +236,6 @@ public class CoverPageController {
 		p1.addUserRole(role3);
 		p1.setRole(Constant.ROLE_ADMINISTRATOR);
 		employeeDao.save(p1);
-//		UserRole role4 = new UserRole(Constant.ROLE_MANAGER, p2);
-//		UserRole role5 = new UserRole(Constant.ROLE_EMPLOYEE, p2);
-//		p2.addUserRole(role4);
-//		p2.addUserRole(role5);
-//		p2.setRole(Constant.ROLE_MANAGER);
-//		employeeDao.save(p2);
-//		UserRole role6 = new UserRole(Constant.ROLE_EMPLOYEE, p3);
-//		p3.addUserRole(role6);
-//		p3.setRole(Constant.ROLE_EMPLOYEE);
-//		employeeDao.save(p3);
 	}
 
 	private Employee genereateUser(int ssn,String userName, String passwd, String mail,
